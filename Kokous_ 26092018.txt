@@ -1,0 +1,22 @@
+Paikalla:
+* Eetu Pihamäki
+* Jan Parttimaa (kirjuri)
+* Markus Nissinen
+
+Aika:
+26.9.2018 kello 13.30 - 14.05
+
+Luokka:
+Elisa-luokka
+
+Päätökset:
+* Arvostelu perustuu kokonaisarvosteluun. Jos ei löydetä yritystä, ei se ole maailman loppu. On ollut olemassa semmoisia projekteja, jotka on löytänyt pilotointifirman muttei ole saanut arvosanaksi 5.
+* Omat kontaktiverkostot ovat hyviä pilotointiyrityksen hakuun. Katsokaa esimerkiksi OpenERP -projektin sivulta, kuinka he löysivät pilotointiyrityksen. Kaikenlaisissa tapahtumissa pyöriminen on hyvä verkostoitumiskeino!
+* Kurssiarvosanaksi tulee hylätty riippuu siitä kuinka pahasti projekti epäonnistuu. Tero on matkan aikana hylännyt projekteja vaikka he eivät vielä ole varsinaisesti valmiita...
+* Vertailkaa Google Trendsissä käppyröitä päällekkäin yhdeltä kuvalta. Vertailusta kannattaa tehdä yksityiskohtaisesti asiaa projektin verkkosivulle. Halutaan nähdä tuloksia ja mielipiteitä!
+* Kaikki, mikä ei ole salaista kannattaa laittaa GitHubiin.
+* Konsultoinneista kannattaa haastatella julkisesti blogiin. Jatkossa siis näin!
+* Kannattaa heti laittaa vertailua blogiin!
+* Jokainen kirjoittaa oman postauksen.
+* Jatkossa: Pitää näkyä kaikkien viime viikon tunnit!
+* Raakileita GitHubiin ja valmiimpia blogiin.
