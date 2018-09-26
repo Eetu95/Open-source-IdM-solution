@@ -1,3 +1,5 @@
+# IdM-ehdokkaat
+
 * Apache Syncope - https://syncope.apache.org/
  
 * MidPoint - https://evolveum.com/midpoint/ 
@@ -26,7 +28,7 @@
 
 * Grouper - https://www.internet2.edu/products-services/trust-identity/grouper/#service-overview 
 
-## Dokumentaatiot
+# Dokumentaatiot
 
 * Apache Syncope: https://syncope.apache.org/docs/ 
 
