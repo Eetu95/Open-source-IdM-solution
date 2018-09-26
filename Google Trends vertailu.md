@@ -4,24 +4,24 @@ Seuraavaksi vertailtiin IdM-järjestelmiä Google Trendsin avulla. Kriiterit oli
 Osien hakutulosten kanssa jouduttiin hieman muuttamaan haettavaa termiä, koska muuten hakutulosten suosio olisi virheellinen, sillä osa hakusanoista sisältää muutakin aiheita kuin pelkästään IdM-järjestelmiä. Esimerkiksi midPoint haun sijaan kannatti käyttää sen sijaan hakusanaa Evolveum, joka on kyseisen IdM-järjestelmän kehittäjä.
 
 Google Trendissä pystyi vertailla vain viittä hakusanaa kerrallaan, joten vertailtiin IdM-järjestelmiä kolmessa eri ryhmässä, joista suosituimmat vertaillaan vielä kerran keskenään.
-1. ryhmä: Apache Syncope, midPoint (Evolveum), OpenIDM, Soffid ja Keycloak
-2. ryhmä: OpenIAM, Unity, Shibboleth, WSO2 Identity Server ja Gluu Server
-3. ryhmä: Josso, FreeIPA, Aerobase ja Grouper
+### 1. ryhmä: Apache Syncope, midPoint (Evolveum), OpenIDM, Soffid ja Keycloak
+### 2. ryhmä: OpenIAM, Unity, Shibboleth, WSO2 Identity Server ja Gluu Server
+### 3. ryhmä: Josso, FreeIPA, Aerobase ja Grouper
 
 Lisätiedot ryhmistä Google Trendsin haussa.
-### 1. ryhmä
+#### 1. ryhmä
 
 Kaksi viimeistä vuotta: [https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=apache%20syncope,evolveum,openidm,soffid,keycloak](https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=apache%20syncope,evolveum,openidm,soffid,keycloak)
 
 Kokoaika: [https://trends.google.fi/trends/explore?date=all&q=apache%20syncope,evolveum,openidm,soffid,keycloak](https://trends.google.fi/trends/explore?date=all&q=apache%20syncope,evolveum,openidm,soffid,keycloak)
 
-### 2. ryhmä
+#### 2. ryhmä
 
 Kaksi viimeistä vuotta: [https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=openiam,unity%20idm,shibboleth%20identity,wso2%20identity%20server,gluu%20server](https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=openiam,unity%20idm,shibboleth%20identity,wso2%20identity%20server,gluu%20server)
 
 Kokoaika: [https://trends.google.fi/trends/explore?date=all&q=openiam,unity%20idm,shibboleth%20identity,wso2%20identity%20server,gluu%20server](https://trends.google.fi/trends/explore?date=all&q=openiam,unity%20idm,shibboleth%20identity,wso2%20identity%20server,gluu%20server)
 
-### 3. ryhmä
+#### 3. ryhmä
 
 Kaksi viimeistä vuotta: [https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=josso,freeipa,aerobase%20-%20group,grouper%20idm](https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=josso,freeipa,aerobase%20-%20group,grouper%20idm)
 
