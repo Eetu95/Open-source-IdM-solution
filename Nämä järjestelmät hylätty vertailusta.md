@@ -11,7 +11,8 @@
 |Forefront Idnetity Manager|[https://en.wikipedia.org/wiki/Forefront_Identity_Manager](https://en.wikipedia.org/wiki/Forefront_Identity_Manager)|Maksullinen ja suljetun lähdekoodin järjestelmä|
 |Web Active Directory|[https://webactivedirectory.com/](https://webactivedirectory.com/)|Maksullinen ja suljetun lähdekoodin järjestelmä |
 |Efecte IdM|[https://www.efecte.com/solutions-for-identity-access-management](https://www.efecte.com/solutions-for-identity-access-management)|Maksullinen ja suljetun lähdekoodin järjestelmä |
-
+ 
+ 
 [https://uk.pcmag.com/cloud-services/71363/guide/the-best-identity-management-solutions-of-2018](https://uk.pcmag.com/cloud-services/71363/guide/the-best-identity-management-solutions-of-2018)
 [https://www.capterra.com/identity-management-software/](https://www.capterra.com/identity-management-software/)
 Filtteröinnissä käyttäjien lukumääräksi 1000+ ja lajittelu ylimmästä arvostelusta alaspäin. Haetut järjestelmät löytyivät suurimmalta osin täältä.
