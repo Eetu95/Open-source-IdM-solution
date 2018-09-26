@@ -1,0 +1,18 @@
+Kirjoitin WordPressiin IdM-j‰rjestelmien vaatimuksia (30min). Seuraavaksi l‰hdin etsim‰‰n IdM-j‰rjestelmien vaatimusten perusteella kyseisi‰ ominaisuuksia, jotka listasin WordPressiin. Lopuksi vertailin saatujen ominaisuuksien perusteella eri IdM-j‰rjestelmi‰ vaatimusten pohjalta.
+
+Kunkin vertailun URL-osoitteet Google Trendsiss‰.
+Vertaillut hakusanat Google Trendsiss‰:
+https://trends.google.fi/trends/explore?date=all&q=josso,freeipa,aerobase%20-%20group,grouper%20idm
+https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=josso,freeipa,aerobase%20-%20group,grouper%20idm
+
+https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=apache%20syncope,evolveum,openidm,soffid,keycloak
+https://trends.google.fi/trends/explore?date=all&q=apache%20syncope,evolveum,openidm,soffid,keycloak
+
+https://trends.google.fi/trends/explore?date=all&q=openiam,unity%20idm,shibboleth%20identity,wso2%20identity%20server,gluu%20server
+https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=openiam,unity%20idm,shibboleth%20identity,wso2%20identity%20server,gluu%20server
+
+Suosituimmat j‰rjestelm‰t:
+https://trends.google.fi/trends/explore?date=2016-09-01%202018-09-01&q=keycloak,josso,wso2%20identity%20server,gluu%20server,freeipa
+https://trends.google.fi/trends/explore?date=all&q=keycloak,josso,wso2%20identity%20server,gluu%20server,freeipa
+
+Lis‰sin Google Trendsin vertailun tulokset WordPressiin ja GitHubiin suosituimpien IdM-j‰rjestelmien osalta.
