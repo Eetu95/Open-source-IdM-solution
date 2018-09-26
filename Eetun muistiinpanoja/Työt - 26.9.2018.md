@@ -3,7 +3,7 @@
 - Pöytäkirja(26.9.2018) tehty löytyy GitHub:sta projektimme reposta. Lähetimme sen myös moodleen.
 - Kaikki projektiin liittyvät tiedostot siirretty OneDrive:stä GitHubiin.
 
-#Hakumahdollisuudet järjestelmissä:
+# Hakumahdollisuudet järjestelmissä:
 
 ### Apache Syncope
 
