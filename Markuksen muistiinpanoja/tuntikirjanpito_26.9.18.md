@@ -31,5 +31,5 @@ Tehtäväni oli vertailla kyseisiä vaatimuksia eri IdM-järjestelmissä:
 * Tapahtumien kirjaus lokeihin, jäljitettävyys on mahdollista
 * Vaarallisten työyhdistelmien ## Vertailu vaatimusten mukaan
 
-Loin aluksi taulukkomallin GitHubiin, johon voimme loppuvaiheessa kirjata vaatimukset taulukkomuotoon.
+Loin aluksi taulukkomallin [GitHubiimme](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/github%20taulukkomalli.md), johon voimme loppuvaiheessa kirjata vaatimukset taulukkomuotoon.
 Seuraavaksi lähdin etsimään IdM-järjestelmien vaatimusten perusteella kyseisiä ominaisuuksia, jotka listasin aluksi WordPressiin. Lopuksi vertailin saatujen ominaisuuksien perusteella eri IdM-järjestelmiä vaatimusten pohjalta.
