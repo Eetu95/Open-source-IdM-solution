@@ -15,5 +15,6 @@
  
 [https://uk.pcmag.com/cloud-services/71363/guide/the-best-identity-management-solutions-of-2018](https://uk.pcmag.com/cloud-services/71363/guide/the-best-identity-management-solutions-of-2018)
 [https://www.capterra.com/identity-management-software/](https://www.capterra.com/identity-management-software/)
+ 
 Filtteröinnissä käyttäjien lukumääräksi 1000+ ja lajittelu ylimmästä arvostelusta alaspäin. Haetut järjestelmät löytyivät suurimmalta osin täältä.
 [http://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf;jsessionid=518FFA9FFB78BBF7408CA99F85B9C879?sequence=1](http://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf;jsessionid=518FFA9FFB78BBF7408CA99F85B9C879?sequence=1)
