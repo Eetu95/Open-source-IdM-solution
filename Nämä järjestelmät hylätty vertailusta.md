@@ -1,6 +1,6 @@
 # Nämä järjestelmät hylätty vertailusta
 
-|IdM-järjestelmä||URL||Syy ja lisätietoja|
+|IdM-järjestelmä|URL|Syy ja lisätietoja|
 |---|---|---|
 |[Oracle Identity Management](https://www.oracle.com/middleware/identity-management/index.html)|[https://www.capterra.com/p/131418/Oracle-Identity-Management/](https://www.capterra.com/p/131418/Oracle-Identity-Management/)|Maksullinen ja suljetun lähdekoodin järjestelmä|
 |[SAP Identity Management](https://www.sap.com/products/identity-management.html)|[https://www.sap.com/products/identity-management.html](https://www.sap.com/products/identity-management.html)|Maksullinen ja suljetun lähdekoodin järjestelmä|
