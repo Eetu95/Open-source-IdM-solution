@@ -33,9 +33,9 @@ Suosituimpia IdM-järjestelmiä Google Trendsin mukaan olivat: Keycloak, Josso, 
 
 ### Kaavio kahden vuoden ajalta:
 
-![Google Trends kahden vuoden haut](https://user-images.githubusercontent.com/15429934/46081040-2a1ad900-c1a4-11e8-98cc-6b7faec59c31.PNG)
+![Google Trends haut kahden vuoden ajalta] (https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/trends_2v_vertailu_SUOSITUIMMAT_keycloak_josso_wso2identityserver_gluuserver_freeipa.PNG)
 
 ### Kaavio koko ajalta:
 
-![Googlehttps://user-images.githubusercontent.com/15429934/46081060-343cd780-c1a4-11e8-9fb6-db3a00831bdd.PNG Trends 2004- haut](https://user-images.githubusercontent.com/15429934/46081060-343cd780-c1a4-11e8-9fb6-db3a00831bdd.PNG)
+![Google Trends 2004- haut] (https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/trends_kokoaika_vertailu_SUOSITUIMMAT_keycloak_josso_wso2identityserver_gluuserver_freeipa.PNG)
 
