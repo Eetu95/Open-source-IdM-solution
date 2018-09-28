@@ -15,9 +15,10 @@ Viimeiset 2v: 101 tulosta
 Kaikki tulokset: 1270 tulosta 
 
 
-### Hyödyllinen opinnäytetyö: 
+### Opinnäytetyöt: 
 
 https://www.theseus.fi/bitstream/handle/10024/92040/Viitanen_Samu.pdf?sequence=1 
+http://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf;jsessionid=C1CA85CFE1906647D491ED9FDD6DDBBE?sequence=1
 
  
 
@@ -91,9 +92,10 @@ Viimeiset 2v: 126 (paljon tuloksia muista aiheista kuin IdM-järjestelmästä)�
 Kaikki tulokset: 948 (paljon tuloksia muista aiheista kuin IdM-järjestelmästä)  
 
 
-### Hyödyllinen opinnäytetyö
+### Opinnäytetyöt
 
-https://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf?sequence=1 
+https://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf?sequence=1
+http://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf;jsessionid=C1CA85CFE1906647D491ED9FDD6DDBBE?sequence=1
 
 
 ### Google Trends 
@@ -724,6 +726,8 @@ Tieto lisenssistä: https://www.internet2.edu/products-services/trust-identity/g
 Viimeiset 2v: 17 tulosta 
 
 Kaikki tulokset: 227 tulosta 
+
+### Hyödyllinen opinnäytetyö: http://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf;jsessionid=C1CA85CFE1906647D491ED9FDD6DDBBE?sequence=1
 
  
 ### Google Trends 
