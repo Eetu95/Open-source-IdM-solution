@@ -727,7 +727,8 @@ Viimeiset 2v: 17 tulosta
 
 Kaikki tulokset: 227 tulosta 
 
-### Hyödyllinen opinnäytetyö: http://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf;jsessionid=C1CA85CFE1906647D491ED9FDD6DDBBE?sequence=1
+### Hyödyllinen opinnäytetyö: 
+http://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf;jsessionid=C1CA85CFE1906647D491ED9FDD6DDBBE?sequence=1
 
  
 ### Google Trends 
