@@ -1,0 +1,26 @@
+Tehtäväni oli vertailla lisää vaatimuksia IdM-järjestelmistä. Vaatimuksena oli, että soveltuuko IdM-järjestelmä suuriin yrityksiin.
+
+Soveltuu myös suureen yritykseen
+Apache Syncope - kyllä: käytetty monissa (suurissakin yrityksissä) mm. Helsingin yliopisto. http://www.tirasa.net/customers.html
+MidPoint - kyllä: paljon suuria yrityksiä käyttävät midPointtia. https://evolveum.com/about-us/references/
+OpenIDM	- kyllä: suuriakin yrityksiä käyttää järjestelmää - https://www.forgerock.com/our-customers 
+Soffid	- kyllä: muutamalla suurella yrityksellä on käytössä: http://www.soffid.com/customer-experiences-2/
+Keycloak - oletettavasti kyllä: ei mainintaa että voiko käyttöoikeusrooleja tehdä vain rajattu määrä.
+Unity - HYLÄTTY
+OpenIAM	- HYLÄTTY
+Shibboleth - HYLÄTTY
+WSO2 Indentity Server - kyllä: suuriakin yrityksiä käyttää järjestelmää. https://wso2.com/casestudies/nutanix-enhances-experience-of-rapidly-growing-user-base-with-single-sign-on-using-wso2-identity-server/
+Gluu - HYLÄTTY
+Josso - HYLÄTTY
+FreeIPA	- HYLÄTTY
+Aerobase - HYLÄTTY 
+Grouper - HYLÄTTY
+(1h 15min)
+
+Lähdettiin seuraavaksi hylkäämään ehdokkaita. Hylkäsimme ehdokkaita pääosin sillä perusteella, että kuinka paljon tuettuja järjestelmiä ja rajapintoja (tärkein kriteeri) IdM-järjestelmä tukee. Karsimme sitten muilla perusteilla järjestelmiä. 
+Tulokset ja hylkäyksen perusteet löytyvät Excel-vertailutaulukosta:
+https://haagahelia-my.sharepoint.com/:x:/g/personal/a1602670_myy_haaga-helia_fi/ERqRjvCz75ZMvGK91Upl6XUBQi4WUh07hVB1m1ge8tC9Ug?e=vywL8a
+
+Karsittuamme suurimman osan ehdokkaista pois jäimme kahden IdM-järjestelmäehdokkaan vaiheille: Apache Syncope ja midPoint. Päädyimme lopulta midPointin valintaan pääosin sen takia, kun se tukee enemän järjestelmiä ja rajapintoja.
+(1h 30min)
+
