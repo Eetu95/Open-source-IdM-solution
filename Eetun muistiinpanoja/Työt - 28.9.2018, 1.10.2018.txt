@@ -1,0 +1,119 @@
+Projektin työstäminen alkoi klo 9
+
+Vaatimukset (9 kpl)
+
+Hakumahdollisuudet:
+
+-Apache Syncope -> Kyllä (https://compare.evolveum.com/details-syncope.html, http://coheigea.blogspot.com/2016/
+, http://syncope-user.1051894.n5.nabble.com/Question-regarding-accountLink-and-resource-generated-IDs-td5707221.html)
+-MidPoint -> Kyllä (https://evolveum.com/blog/bwg_album/midpoint-3-4-screenshots/)
+-OpenIDM -> Kyllä (https://forum.forgerock.com/2014/11/openidm-trying-new-admin-ui/)
+-Soffid -> Kyllä (http://freshmeat.sourceforge.net/projects/soffid-iam/screenshots, 
+http://confluence.soffid.org/pages/viewpage.action?pageId=5177482, https://www.youtube.com/watch?v=nuIuEAZ9oYc)
+-Keycloack-> Kyllä (https://cbioportal.readthedocs.io/en/latest/Authenticating-and-Authorizing-Users-via-keycloak.html)
+-Unity -> Kyllä (https://sourceforge.net/projects/unity-idm/, http://www.unity-idm.eu/documentation/unity-1.4.0/manual.html)
+-OpenIAM -> Kyllä (https://www.openiam.com/wp-content/uploads/ACCESS.png, https://www.youtube.com/watch?v=laWloBFZjOc)
+-Shibboleth -> Ei löytynyt tietoa
+-WSO2 Identity Server -> Kyllä (https://www.youtube.com/watch?v=2MM-0B3SI7A)
+-Gluu -> Kyllä (https://gluu.org/docs/ce/3.0.2/admin-guide/user-management/)
+-Josso -> Kyllä (http://www.josso.org/docs/en-US.bkp/html/Atricore_Console_and_Model_Driven_Identity.html)
+-FreeIPA -> Kyllä (https://ttboj.wordpress.com/2014/07/24/hybrid-management-of-freeipa-types-with-puppet/, 
+https://admiyo.fedorapeople.org/ipa/)
+-Aerobase -> Hylätty (Ei löydy AD:lle tukea)
+-Grouper -> Kyllä (https://spaces.at.internet2.edu/display/Grouper/Newcastle+University+UI+2.2+Testing)
+
+IdM-järjestelmää kehitetään aktiivisesti:
+
+-Apache Syncope -> Kyllä (https://cwiki.apache.org/confluence/display/SYNCOPE/Fusion, 
+https://cwiki.apache.org/confluence/display/SYNCOPE/Jazz, https://cwiki.apache.org/confluence/display/SYNCOPE/Intermezzo)
+-MidPoint -> Kyllä (https://wiki.evolveum.com/display/midPoint/Release+3.8)
+-OpenIDM -> Kyllä (https://backstage.forgerock.com/docs/openidm/4.5/release-notes/, 
+https://bugster.forgerock.org/jira/browse/OPENIDM-7945)
+-Soffid -> Kyllä (https://github.com/SoffidIAM/, http://www.soffid.com/soffid-version-2-0-released/)
+-Keycloack-> Kyllä (https://github.com/keycloak, https://www.keycloak.org/docs/latest/release_notes/index.html)
+-Unity -> Kyllä (http://www.unity-idm.eu/downloads/, https://github.com/unity-idm/unity)
+-OpenIAM -> Hylätty (ilmainen versio ei tue yhtään mitään)
+-Shibboleth -> Hylätty (liian vähäinen järjestelmien tuki)
+-WSO2 Identity Server -> Kyllä (https://github.com/wso2/product-is, https://docs.wso2.com/display/IS550)
+-Gluu -> Kyllä (https://gluu.org/docs/ce/3.1.x-intro/, https://github.com/GluuFederation?utf8=%E2%9C%93&q=&type=&language=, 
+https://gluu.org/docs/ce/release-notes/)
+-Josso -> Hylätty (liian vähäinen järjestelmien tuki)
+-FreeIPA -> Kyllä (https://www.freeipa.org/page/Releases/4.7.0, 
+https://www.freeipa.org/page/Downloads#Releases_in_OS_Distributions)
+-Aerobase -> Hylätty (Ei löydy AD:lle tukea)
+-Grouper -> Kyllä (https://spaces.at.internet2.edu/display/Grouper/v2.4+Release+Notes, https://github.com/Internet2/grouper)
+
+Mahdollisuus manuaaliprovisiointiin:
+
+-Apache Syncope -> 
+-MidPoint ->
+-OpenIDM ->
+-Soffid ->
+-Keycloack->
+-Unity ->
+-OpenIAM -> Hylätty (ilmainen versio ei tue yhtään mitään)
+-Shibboleth -> Hylätty (liian vähäinen järjestelmien tuki)
+-WSO2 Identity Server ->
+-Gluu ->
+-Josso -> Hylätty (liian vähäinen järjestelmien tuki)
+-FreeIPA ->
+-Aerobase -> Hylätty (Ei löydy AD:lle tukea)
+-Grouper ->
+
+Raporttien luontimahdollisuus:
+
+-Apache Syncope -> 
+-MidPoint ->
+-OpenIDM ->
+-Soffid ->
+-Keycloack->
+-Unity ->
+-OpenIAM -> Hylätty (ilmainen versio ei tue yhtään mitään)
+-Shibboleth -> Hylätty (liian vähäinen järjestelmien tuki)
+-WSO2 Identity Server ->
+-Gluu ->
+-Josso -> Hylätty (liian vähäinen järjestelmien tuki)
+-FreeIPA ->
+-Aerobase -> Hylätty (Ei löydy AD:lle tukea)
+-Grouper ->
+
+Soveltuu myös suureen yritykseen:
+
+-Apache Syncope -> Kyllä (http://www.tirasa.net/customer/university-of-helsinki.html)
+-MidPoint ->
+-OpenIDM ->
+-Soffid ->
+-Keycloack->
+-Unity ->
+-OpenIAM -> Hylätty (ilmainen versio ei tue yhtään mitään)
+-Shibboleth -> Hylätty (liian vähäinen järjestelmien tuki)
+-WSO2 Identity Server ->
+-Gluu ->
+-Josso -> Hylätty (liian vähäinen järjestelmien tuki)
+-FreeIPA ->
+-Aerobase -> Hylätty (Ei löydy AD:lle tukea)
+-Grouper ->
+
+Tunnusten jäädytys ja poisto:
+
+-Apache Syncope -> Kyllä (https://cwiki.apache.org/confluence/display/SYNCOPE/Users)
+-MidPoint -> Kyllä (https://wiki.evolveum.com/display/midPoint/Administration+Interface#AdministrationInterface-DeletingUsers)
+-OpenIDM -> Kyllä (https://backstage.forgerock.com/knowledge/kb/book/b41310765#deleteusers)
+-Soffid -> Kyllä (http://www.soffid.com/soffid-is-now-scim-enabled/, http://confluence.soffid.org/display/SOF/Accounts)
+-Keycloack-> Kyllä (https://www.keycloak.org/docs/3.2/server_development/topics/user-storage/registration-query.html)
+-Unity -> Kyllä (http://www.unity-idm.eu/documentation/unity-1.9.4/manual.html#contents-management)
+-OpenIAM -> Hylätty (ilmainen versio ei tue yhtään mitään)
+-Shibboleth -> Hylätty (liian vähäinen järjestelmien tuki)
+-WSO2 Identity Server -> Kyllä (https://docs.wso2.com/display/IS560/Removing+References+to+Deleted+User+Identities)
+-Gluu -> Kyllä (https://gluu.org/docs/ce/3.0.2/admin-guide/user-scim/)
+-Josso -> Hylätty (liian vähäinen järjestelmien tuki)
+-FreeIPA -> Kyllä (https://docs.fedoraproject.org/en-US/Fedora/15/html/FreeIPA_Guide/sect-Enterprise_Identity_Management_Guide-Configuring_IPA_Users-Deleting_IPA_Users.html)
+-Aerobase -> Hylätty (Ei löydy AD:lle tukea)
+-Grouper -> Kyllä (https://spaces.at.internet2.edu/display/Grouper/Delete+Member)
+
+Jan ja Markus auttoivat etsimään vaatimuksiin tietoa: "Soveltuu myös suuren yritykseen", "Raporttien luontimahdollisuus", "Mahdollisuus manuaaliprovisiointiin",
+
+Vaatimustietojen keräämisen jälkeen lähdimme valitsemaan järjestelmää. Suurimpana kriteerinä oli järjestelmä- ja rajapintatuki, tämän jälkeen muut vaatimukset. Kokonaisvaltainen vertailu löytyy
+Vertailutaulukko.xlsx, joka on GitHubissa.
+
+Valittiin IdM-järjestelmäksi midPoint, vertailtuamme Apache Syncopea ja midPointia demojen avulla. Käyttöliittymä midPointissa oli parempi. 
