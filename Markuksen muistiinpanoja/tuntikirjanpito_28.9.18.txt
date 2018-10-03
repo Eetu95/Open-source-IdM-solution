@@ -88,8 +88,29 @@ Aerobase - HYLÄTTY
 Grouper - ei tietoa
 (1h 45min)
 
-Hylätyt järjestelmät:
+Soveltuu myös suureen yritykseen
+Apache Syncope - kyllä: käytetty monissa (suurissakin yrityksissä) mm. Helsingin yliopisto. http://www.tirasa.net/customers.html
+MidPoint - kyllä: paljon suuria yrityksiä käyttävät midPointtia. https://evolveum.com/about-us/references/
+OpenIDM	- kyllä: suuriakin yrityksiä käyttää järjestelmää - https://www.forgerock.com/our-customers 
+Soffid	- kyllä: muutamalla suurella yrityksellä on käytössä: http://www.soffid.com/customer-experiences-2/
+Keycloak - oletettavasti kyllä: ei mainintaa että voiko käyttöoikeusrooleja tehdä vain rajattu määrä.
+Unity - HYLÄTTY
+OpenIAM	- HYLÄTTY
+Shibboleth - HYLÄTTY
+WSO2 Indentity Server - kyllä: suuriakin yrityksiä käyttää järjestelmää. https://wso2.com/casestudies/nutanix-enhances-experience-of-rapidly-growing-user-base-with-single-sign-on-using-wso2-identity-server/
+Gluu - HYLÄTTY
+Josso - HYLÄTTY
+FreeIPA	- HYLÄTTY
+Aerobase - HYLÄTTY 
+Grouper - HYLÄTTY
+(1h 15min)
+
+Hylätyt järjestelmät tässä vaiheessa:
+Unity: Oma lisenssi; monimutkainen. Hylkäämme ehdokkaan.
 OpenIAM	- ilmainen versio ei tue juuri mitään järjestelmiä
 Shibboleth - liian vähäinen järjestelmien tuki
 Josso - liian vähäinen järjestelmien tuki
+FreeIPA - Tukee vain paria rajapintaa
 Aerobase - ei löydy esim. AD-tukea
+Grouper - Tukee vain paria rajapintaa/järjestelmätukea. Tarkoitettu lähinnä yliopistojen käyttöön.
+
