@@ -10,10 +10,8 @@ Apache 2.0 = Vapaan ohjelmiston lisenssi. Sallii lähdekoodin käytön vapaan ja
 
 ### Google Scholar 
 
-Viimeiset 2v: 101 tulosta 
-
-Kaikki tulokset: 1270 tulosta 
-
+Google Scholars - pois lukien patentit ja lainaukset, vuodesta 2014 alkaen. (Hakusanana järjestelmän nimi + identity management system) (kpl)
+Tulokset: 25.
 
 ### Opinnäytetyöt: 
 
@@ -87,9 +85,7 @@ Apache 2.0 = Vapaan ohjelmiston lisenssi. Sallii lähdekoodin käytön vapaan ja
  
 ### Google Scholar 
 
-Viimeiset 2v: 126 (paljon tuloksia muista aiheista kuin IdM-järjestelmästä)  
-
-Kaikki tulokset: 948 (paljon tuloksia muista aiheista kuin IdM-järjestelmästä)  
+Tulokset: 7. Hakusanana evolveum midpoint identity management system
 
 
 ### Opinnäytetyöt
@@ -144,9 +140,7 @@ CDDL = Ilmainen vapaan lähdekoodin ohjelmiston lisenssi, perustuu MPL-lisenssii
 
 ### Google Scholar 
 
-Viimeiset 2v: 50 tulosta 
-
-Kaikki tulokset: 14 tulosta 
+Tulokset: 28. 
 
  
 ### Artikkeli: 
@@ -199,9 +193,7 @@ GNU GPL Version 3.  Vapaan ohjelmiston lisenssi, joka antaa oikeuden kenelle tah
  
 ### Google Scholar 
 
-Viimeiset 2v: 0 tulosta 
-
-Kaikki tulokset: 17 tulosta (paljon tuloksia muista aiheista kuin IdM-järjestelmästä) 
+tulokset: 1.
 
 ### Google Trends 
 
@@ -240,9 +232,7 @@ Apache 2.0 = Vapaan ohjelmiston lisenssi. Sallii lähdekoodin käytön vapaan ja
  
 ### Google Scholar 
 
-Viimeiset 2v: 58 tulosta 
-
-Kaikki tulokset: 94 tulosta 
+Tulokset: 49.
 
 
 ### Artikkeli 
@@ -301,9 +291,7 @@ Tieto lisenssistä: http://www.unity-idm.eu/opensource/
  
 ### Google Scholar 
 
-Viimeiset 2v: 606 tulosta (todella paljon tuloksia muista aiheista kuin IdM-järjestelmästä) 
-
-Kaikki tulokset: 6270 tulosta (todella paljon tuloksia muista aiheista kuin IdM-järjestelmästä) 
+Tulokset: 18.
 
  
 ### Google Trends 
@@ -348,9 +336,7 @@ Joissakin tiedostoissa viitataan Apache sekä GPL v3 lisensseihin.
 
 ### Google Scholar 
 
-Viimeiset 2v: 3 tulosta 
-
-Kaikki tulokset: 46 tulosta 
+Tulokset: 31.
 
  
 ### Google Trends 
@@ -390,9 +376,7 @@ Tieto lisenssistä: https://wiki.shibboleth.net/confluence/display/SHIB2/Home
  
 ### Google Scholar 
 
-Viimeiset 2v: 170 tulosta 
-
-Kaikki tulokset: 926 tulosta 
+Tulokset: 3.
 
  
 ### Google Trends 
@@ -451,9 +435,7 @@ Tieto lisenssistä: https://wso2.com/licenses
 
 ### Google Scholar 
 
-Viimeiset 2v: 92 tulosta 
-
-Kaikki tulokset: 491 tulosta  
+Tulokset: 78. (hakusana: "wso2 identity server" identity management system)
 
  
 ### Google Trends 
@@ -534,9 +516,7 @@ https://www.gluu.org/blog/gluu-versus-keycloak/
 
 ### Google Scholar 
 
-Viimeiset 2v: 48 tulosta 
-
-Kaikki tulokset: 744 tulosta (paljon tuloksia muista aiheista kuin IdM-järjestelmästä)  
+Tulokset: 37.
 
  
 ### Google Trends 
@@ -581,9 +561,7 @@ Tieto lisenssistä: http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/
  
 ### Google Scholar 
 
-Viimeiset 2v: 0 tulosta 
-
-Kaikki tulokset: 24 tulosta (paljon tuloksia muista aiheista kuin IdM-järjestelmästä) 
+Tulokset: 24. 
 
  
 ### Google Trends 
@@ -629,9 +607,7 @@ Tieto lisenssistä: https://www.freeipa.org/page/License
  
 ### Google Scholar 
 
-Viimeiset 2v: 86 tulosta (paljon tuloksia muista aiheista kuin IdM-järjestelmästä) 
-
-Kaikki tulokset: 1180 tulosta (paljon tuloksia muista aiheista kuin IdM-järjestelmästä) 
+Tulokset: 58.
 
  
 ### Google Trends 
@@ -677,9 +653,7 @@ Tieto lisenssistä: http://aerobase.org/license/
 
 ### Google Scholar 
 
-Viimeiset 2v: 7 tulosta (ei vastaa IdM-järjestelmien tuloksia) 
-
-Kaikki tulokset: 127 tulosta 
+Tulokset: 0.
 
  
 ### Google Trends 
@@ -723,9 +697,7 @@ Tieto lisenssistä: https://www.internet2.edu/products-services/trust-identity/g
  
 ### Google Scholar 
 
-Viimeiset 2v: 17 tulosta 
-
-Kaikki tulokset: 227 tulosta 
+Tulokset: 32.
 
 ### Hyödyllinen opinnäytetyö: 
 http://www.theseus.fi/bitstream/handle/10024/62756/Heli_Saarinen.pdf;jsessionid=C1CA85CFE1906647D491ED9FDD6DDBBE?sequence=1
