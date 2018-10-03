@@ -1,0 +1,17 @@
+Kello: 12.04
+Paikka: Elisa-luokka
+Pvm: 3.10.2018
+
+K‰sitellyt asiat:
+
+* Katsokaa viel‰ lis‰‰ l‰hdekoodista.
+* Hyv‰ olla toinen varavaihtoehto olemassa.
+* Kannattaa tehd‰ kaksi testi‰: Ekalla kierroksella milt‰ se tuntuu ja toinen testi on kunnolla tyˆskentely‰ (exploratiivinen testi).
+* Analyysit kannattaa laittaa postiin --> Blogipostauksia. Analyyttisi‰ tarkasteluja kannattaa "heitt‰‰ v‰liin".
+* Aloitetaan mik‰ on eka suositus ja mik‰ on toinen perusteluineen.
+* Kannattaa ensisijaisesti k‰ytt‰‰ GitHubia.
+* Markus n‰ytti vertailutaulukkoa Terolle: Kannattaa mainita vertailussa miksi hyl‰tty, miksi ei tutkittu. 
+* Kannattaa laittaa kaikki heti nettiin!
+* Taulukkoon v‰rikoodit: Kyll‰ on vihre‰ ja Ei on punainen.
+* Otetaan kantaa m‰‰ritelm‰‰n avoimeen l‰hdekoodiin. OSI ja FSF julkaisee listat mitk‰ on hyv‰ksytty.
+* Tarkistakaa Google Scholars-luvut!
