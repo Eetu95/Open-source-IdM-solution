@@ -1,0 +1,3 @@
+Blogi kirjoittelua --> Master-palvelimen asennus
+
+midPointin asennuskokeilua.
