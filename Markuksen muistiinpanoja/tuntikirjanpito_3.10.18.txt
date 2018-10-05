@@ -1,0 +1,12 @@
+Pidettiin kokous Teron kanssa, jossa k‰ytiin l‰pi Idm-ehdokkaiden vertailun tuloksia. Varmistui, ett‰ kannattaa olla ainakin toinen varavaihtoehto olemassa IdM-j‰rjestelm‰n testausta varten.
+Vertailutaulukkoon tulisi lis‰t‰ perustelut miksi ehdokasta ei olla tutkittu en‰‰, kun on selvinnyt esimerkiksi, ett‰ j‰rjestelm‰ ei tue juuri mit‰‰n muita j‰rjestelmi‰/rajapintoja.
+Kokouksessa tuli selville, ett‰ Google Scholars -luvut tulisi tarkistuttaa viel‰ uudestaan, ett‰ ne oikeasti t‰sm‰‰v‰t. Kokouksen kesto 30min.
+
+L‰hdin tarkistamaan Google Scholars luvut uudelleen. Kun hakee Scholarista niin tulee ottaa vaihtoehdoista "hae patenteista" ja "sis.lainaukset" t‰p‰t pois. N‰in ollen hakuun ei tule hakuja patenteista ja lainauksista. Haut ovat vuodesta 2014 l‰htien. Lis‰sin kattavamman perustelun Excel-vertailutaulukkoomme.
+Hakusanana k‰ytin j‰rjestelm‰n nime‰ + identity management system. Kaikista j‰rjestelmist‰ lˆytyi alle 80 hakutulosta. Lis‰sin vertailun tulokset vertailutaulukkoon.
+Aikaa kului 1h.
+
+Seuraavaksi kirjoitin blogipostauksen vaatimuksista joita vertailin. 
+URL: https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-3/
+(3h)
+
