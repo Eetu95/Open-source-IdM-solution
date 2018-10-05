@@ -1,0 +1,22 @@
+Lähdettiin asentamaan Ubuntu Serveriä midPoint IdM-järjestelmää varten. Asennus vaiheesta otettiin kuvankaappauksia ja kirjoitettiin blogipostausta.
+Asennus tehtiin servulan koneelle. Samanaikasesti asensin virtualboxiin Ubuntu Server myös myöhempää käyttöä ja testausta sekä kuvankaappauksia asennus vaiheesta varten.
+(30min)
+
+Asennuksen jälkeen laitettiin palomuuri päälle Ubuntu Serverissä: sudo ufw enable
+Seuraavaksi asetettiin staattinen IP-osoite Ubuntu Serverille. Ohjeet: https://www.howtogeek.com/howto/ubuntu/change-ubuntu-server-from-dhcp-to-a-static-ip-address/
+(30min)
+
+Lähdin seuraavaksi kokeilemaan midPoint demoa. Jan jatkoi Ubuntu Serverin konfigurointia.
+(1h)
+
+Midpoint asennus Linuxille:
+https://wiki.evolveum.com/display/midPoint/MidPoint+Easy+Install
+Kokeiltuamme asentaa MidPointia kyseinen ohjeen mukaisesti, emme saaneet sitä siltikään toimimaan selaimen kautta. 
+Kokeilimme sen jälkeen toista ohjetta:https://wiki.evolveum.com/display/midPoint/midPoint+on+Ubuntu%2C+Tomcat%2C+PostgreSQL+HOWTO
+Siinä mainittiin PostgreSQL ja Apache Tomcat asennukset. Näilläkään ohjeilla emme saaneet MidPointia toimivaan selaimen kautta.
+(3h)
+
+MidPointin asennus ei onnistunut ohjeita seuraamalla ja netistä tutkailemalla. Aiomme seuraavaksi kokeilla aluksi MidPointin toimivuutta VirtualBoxilla testiympäristöön.
+Kun saadaan MidPoint siellä toimivaan niin sitten vasta kokeilemme tuotantoympäristössä (fyysisellä koneella) Haaga-Helian Servulassa.
+
+ 
