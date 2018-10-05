@@ -1,1 +1,1 @@
-(https://demo.evolveum.com/midpoint/login?0)
+https://demo.evolveum.com/midpoint/login?0
