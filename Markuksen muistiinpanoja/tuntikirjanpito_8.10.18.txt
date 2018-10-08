@@ -1,8 +1,0 @@
-Tällä kertaa saatiin midPoint toimimaan fyysisellä Servulan koneella. Jan kokeili aluksi kotonaan asentaa VirtualBoxiin Ubuntu Serverille midPointin ja onnistui siinä.
-Myöhemmin asennettiin samalla tavalla myös fyysiselle Servulan koneella. Tällä kertaa saatiin se myös siinä onnistuneesti asentumaan. Syynä oli vain se, että tar.gz tiedosto piti purkaa eri kansioon kun viimeksi se purettiin kotihakemistoon. Oikea kohde oli /opt
-
-Seuraaaksi lähdin asentamaan Linux-työasemaa (Ubuntu Desktop 16.04 LTS) testausta varten. Asetin virtuaalikoneelle 4 GB RAM-muistia ja tallennustilaa 30 GB. 
-Kesto 30min.
-
-Asennettiin seuraavaksi Java JCE, jotta voidaan käyttää pidempiä avaimia tunnistautumisessa Ubuntu Serverille, jossa midPoint on asennettuna. Aluksi tuli ladata zip-tiedosto sivulta https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
-Ladatussa zip-tiedostossa on ohjeet Java JCE:n asennukseen Linuxille (1h 15min).
