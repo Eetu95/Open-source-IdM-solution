@@ -1,0 +1,15 @@
+Tein esityslistan ja palautin työaikakirjanpidon. Jan sai midPointin asennuksen kuntoon kotonaan viikonlopun aikana.
+Hän sai myös yhteydet pelaamaan. Jan yrittää saada JCE -tiedostoja asentumaan midPointiin.
+
+Java tiedosto oli hakusessa, löydettiin polku:
+/usr/lib/jvm/java-8-openjdk-amd64
+
+Asensin VirtualBoxiin Windows 10 VM:n (Hain väliaikaisen ratkaisun modern.ie:stä, koska servulassa 64bit ISO-tiedoston
+lataaminen vaati admin oikeuksia.)
+- Importtasin MSEdge - Win10.ova Virtual Boxiin.
+- Käynnistin sen
+- En muuta ehtinytkään tehdä, menee seuraavaan kertaan
+
+Seuraavalla kerralla koitan testailla miten käyttäjänliittäminen onnistuu midPointtiin.
+
+Saatiin JCE.zip -tiedosto asennettua, joissa 2 java tiedostoa sekä 1 tekstitiedosto. Tekstitiedosto oli ohje. 
