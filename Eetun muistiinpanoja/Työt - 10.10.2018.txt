@@ -1,0 +1,33 @@
+Pystytin Ubuntu serverin 16.04 VirtualBoxiin ja asensin siihen PostgreSQL:n. Tein näiden ohjeiden mukaan:
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04
+https://wiki.evolveum.com/display/midPoint/PostgreSQL
+https://wiki.evolveum.com/display/midPoint/Repository+Configuration
+
+Pystytin midPoint serverin VirtualBoxiin (hain valmiiksi konffatun ova-tiedoston OneDrivesta). Vaihdoin dynaamisen
+IP-osoitteen staattiseksi.
+-Asensin postgresql clientin: $ sudo apt install potgresql-client-common
+
+UBUNTUSERVERPOSTGRESQL:
+- $ sudoedit /etc/network/interfaces
+	- IP staattiseksi (172.28.171.202) + netmask (255.255.0.0)
+	 + DNS serverit (172.28.170.201 172.28.170.202) + network (172.28.0.0) + gateway (172.28.1.254)
+
+Testiympäristö (midPoint):
+- $ sudoedit /etc/network/interfaces
+	- IP staattiseksi (172.28.171.158) + netmask (255.255.0.0)
+	 + DNS serverit (172.28.170.201 172.28.170.202) + network (172.28.0.0) + gateway (172.28.1.254)
+
+Kokeilin, että serverit saavat yhteyden toisiinsa sekä googlen dns.
+
+Testiympäristö (midPoint):
+- ping 172.28.171.202 -> toimii.
+- ping 8.8.8.8 -> toimii.
+
+UBUNTUSERVERPOSTGRESQL:
+- ping 172.28.171.158 -> toimii.
+- ping 8.8.8.8 -> toimii.
+
+
+
+
+
