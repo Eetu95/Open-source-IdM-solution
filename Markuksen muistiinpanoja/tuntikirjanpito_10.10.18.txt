@@ -1,0 +1,66 @@
+Tänään aluksi oli Teron kanssa kokous. Kokouksessa tuli ilmi, että meidän tulisi jakaa työtehtäviä paremmin.
+Lähdin kokeilemaan midPointia virtuaaliympäristössä. Virtuaalialustana oli Ubuntu Server 16.04, jota kokeilin Oraclen VirtualBoxilla.
+
+Tavoitteena on asentaa MariaDB tietokantapalvelin midPointin rinnalle, johon midPoint palvelin voi ottaa yhteyden.
+Midpoint ja MariaDB: https://wiki.evolveum.com/display/midPoint/MariaDB
+
+Asensin uuden virtuaalikoneen, johon asennetaan MariaDB tietokantapalvelin. Virtuaalikoneena toimii Ubuntu Server 16.04. Asennuksessa kesti 30min. Asennuksen jälkeen asetin virtualboxin network adapteriksi Bridged adapter, jotta saatiin oikeat ip-osoitteet näkyviin eikä NATin takana olevia IP-osoitteita. Sen jälkeen asetin staattisen IP-osoitteen palvelimelle, joka on 172.28.171.13
+Kokeilin seuraavaksi, että pingaukset toimivat testiympäristön (midPoint-virtuaalipalvelin) ja MariaDB-palvelimen välillä. Testiympäristön IP-osoite: 172.28.172.14. Pingaus toimi eli virtuaalikoneilla on yhteys toisiinsa.
+Seuraavaksi lähdin asentamaan MariaDB:tä
+Ohjeita MariaDB:n asennukseen Ubuntulle: https://www.vultr.com/docs/install-mariadb-on-ubuntu-14-04
+
+Noudatin ohjeita jonka löysin. Komennot: sudo apt-get install mariadb-server
+Kirjauduin MariaDB:seen: sudo mysql -u root
+Kesto 1h
+
+Lähdin seuraavaksi katsomaan midPointin ohjeita.
+Seuraavaksi tuli luoda tietokanta midpointille. Komennot:
+CREATE DATABASE midpoint CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
+CREATE USER 'midpoint'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL on midpoint.* TO 'midpoint'@'localhost';
+use midpoint; 
+
+Katsoin, että käyttäjä on tehty:
+SELECT User FROM mysql.user;
+
+Ohjeita mysql-komentoihin: https://www.cyberciti.biz/faq/how-to-show-list-users-in-a-mysql-mariadb-database/
+
+Muokkasin seuraavaksi testiympäristön virtuaalikoneella config.xml tiedostoa. Se löytyi polusta /opt/midpoint/var
+Sinne piti lisätä seuraavat neljä rivit repositoryn kohdalle:
+      <database>mariadb</database>
+      <jdbcUsername>midpoint</jdbcUsername>
+      <jdbcPassword>password</jdbcPassword>
+      <jdbcUrl>jdbc:mariadb://localhost:3306/midpoint?characterEncoding=utf8</jdbcUrl><!-- it seems that jdbc://mysql works as well -->
+Kommentoin muut rivit repositoryn kohdalta, jotta vain lisäämäni neljä riviä midPointin dokumentaatiosta toimivat.
+
+Seuraavaksi siirsin testiympäristön virtuaalikoneelta midpointin hakemistosta mysql scriptin MariaDB -palvelimelle.
+Menin aluksi testiympäristön koneella (midpoint) hakemistoon /opt/midpoint/doc/config/sql/_all
+Hakemistossa tein komennon, joka siirtään sql-tiedoston MariaDB-palvelimelle:
+scp mysql-3.8-all.sql pisnismiehet@172.28.171.13:/home/pisnismiehet
+Seuraavaksi tietokantapalvelimella ajoin sql scriptin: mysql -u root midpoint < mysql-3.8-all.sql
+
+MidPointin ohjeiden mukaan seuraavaksi midPoint pitäis toimia nyt selaimesta osoitteessa: http://localhost:8080/midpoint/admin/
+localhostin tilalle laitoin midpoint-palvelimen ip-osoitteen.
+
+Lukuisten yritysten jälkeen selaimen kautta ei saatu yhteyttä midPointiin.
+
+Ryhdyin seuraavaksi auttamaan Eetua PostgreSQL:n liittämisessä midPointiin.
+
+
+
+
+
+
+
+
+
+
+
+Käynnistin seuraavaksi apache-tomcatin uudelleen:
+
+
+
+
+
+
+
