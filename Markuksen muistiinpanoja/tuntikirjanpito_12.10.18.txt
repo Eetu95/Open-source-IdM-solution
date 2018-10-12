@@ -1,15 +1,15 @@
-Viime kerralla oli paljon hankaluuksia midPointin erillisen tietokanpalvelimen asennuksen suhteen. MidPointin dokumenteissa kerrotaan, ett‰ on suositeltavaa k‰ytt‰‰ erillist‰ tietokantapalvelinta, jonka takia ryhdyttiin sit‰ tekem‰‰n. 
-Sain kuitenkin asennettua tietokannan sis‰isesti samalle virtuaalikoneelle, jossa MidPointtikin on.
-Liitett‰ess‰ midPointtia erilliselle tietokantapalvelimelle se tuotti erityisen paljon ongelmia eik‰ sit‰ saatu liitetty‰. MidPointin dokumenteissa esimerkiksi MariaDB-tietokannan liitt‰misest‰ midPointiin erillisen‰ tietokantapalvelimena ei lˆytynyt t‰h‰n sopivia ohjeita, eik‰ myˆsk‰‰n Googlettamalla.
-Sama ongelma oli myˆs PostgreSQL-tietokannan kanssa. Kummatkin tietokannat kuitenkin toimivat samalla koneella, jossa midPointtikin on, mutta erillisin‰ ei.
+Viime kerralla oli paljon hankaluuksia midPointin erillisen tietokanpalvelimen asennuksen suhteen. MidPointin dokumenteissa kerrotaan, ett√§ on suositeltavaa k√§ytt√§√§ erillist√§ tietokantapalvelinta, jonka takia ryhdyttiin sit√§ tekem√§√§n. 
+Sain kuitenkin asennettua tietokannan sis√§isesti samalle virtuaalikoneelle, jossa MidPointtikin on.
+Liitett√§ess√§ midPointtia erilliselle tietokantapalvelimelle se tuotti erityisen paljon ongelmia eik√§ sit√§ saatu liitetty√§. MidPointin dokumenteissa esimerkiksi MariaDB-tietokannan liitt√§misest√§ midPointiin erillisen√§ tietokantapalvelimena ei l√∂ytynyt t√§h√§n sopivia ohjeita, eik√§ my√∂sk√§√§n Googlettamalla.
+Sama ongelma oli my√∂s PostgreSQL-tietokannan kanssa. Kummatkin tietokannat kuitenkin toimivat samalla koneella, jossa midPointtikin on, mutta erillisin√§ ei.
 
-T‰st‰ syyst‰ midPointin huonojen dokumenttien perusteella l‰hdettiin miettim‰‰n jo varavaihtoehtoa, joka oli Apache Syncope.
-Ryhdyin asentamaan Apache Syncopea virtuaalikoneelle testausta varten. Linuxin Debian paketteja varten lˆytyi selke‰t ohjeet Syncopen asennukselle.
+T√§st√§ syyst√§ midPointin huonojen dokumenttien perusteella l√§hdettiin miettim√§√§n jo varavaihtoehtoa, joka oli Apache Syncope.
+Ryhdyin asentamaan Apache Syncopea virtuaalikoneelle testausta varten. Linuxin Debian paketteja varten l√∂ytyi selke√§t ohjeet Syncopen asennukselle.
 Ohjeet: https://syncope.apache.org/docs/2.1/getting-started.html#debian-packages
-Hain .deb paketit: https://syncope.apache.org/downloads -> yhteens‰ kolme .deb pakettia. 
-wget http://www-eu.apache.org/dist/syncope/2.1.1/apache-syncope-2.1.1.deb
-wget http://www-eu.apache.org/dist/syncope/2.1.1/apache-syncope-console-2.1.1.deb
-wget http://www-eu.apache.org/dist/syncope/2.1.1/apache-syncope-enduser-2.1.1.deb
+Hain .deb paketit: https://syncope.apache.org/downloads -> yhteens√§ kolme .deb pakettia. 
+$ wget http://www-eu.apache.org/dist/syncope/2.1.1/apache-syncope-2.1.1.deb
+$ wget http://www-eu.apache.org/dist/syncope/2.1.1/apache-syncope-console-2.1.1.deb
+$ wget http://www-eu.apache.org/dist/syncope/2.1.1/apache-syncope-enduser-2.1.1.deb
 
 OpenJDK 8:n asennus
 $ sudo apt-get install openjdk-8-jre
@@ -20,15 +20,15 @@ $ sudo apt-get install tomcat8
 PostgreSQL:n asennus:
 $ sudo apt-get install libpostgresql-jdbc-java postgresql postgresql-client
 
-PostgreSQL:n JDBC ajurin liitt‰minen Tomcattiin:
+PostgreSQL:n JDBC ajurin liitt√§minen Tomcattiin:
 $ sudo ln -s /usr/share/java/postgresql-jdbc4.jar /usr/share/tomcat8/lib/
 
-Lis‰sin JAVA_OPTS konfiguraation polkuun /etc/default/tomcat8:
+Lis√§sin JAVA_OPTS konfiguraation polkuun /etc/default/tomcat8:
 JAVA_OPTS="-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server \
   -Xms1536m -Xmx1536m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:+DisableExplicitGC \
   -Djava.security.egd=file:/dev/./urandom"
 
-Pys‰ytin Tomcatin:
+Pys√§ytin Tomcatin:
 $ sudo service tomcat8 stop
 
 Asensin .deb paketit
@@ -39,15 +39,15 @@ Loin tietokannan Syncopelle:
 $ sudo SYNCOPE_USER="syncope" SYNCOPE_PASS="syncope" sh /usr/share/apache-syncope/dbinit-postgresql.sh
 // salasana ei voi olla eri, koska muuten Apache Syncope ei toimi selaimen kautta.
 
-K‰ynnistin Tomcatin uudelleen:
+K√§ynnistin Tomcatin uudelleen:
 $ sudo service tomcat8 start
 
-Selaimella p‰‰see Syncopen n‰kym‰‰n, joka toimi:
+Selaimella p√§√§see Syncopen n√§kym√§√§n, joka toimi:
 
-Admin-console n‰kym‰: "IP-osoite":8080/syncope-console/
-Loppuk‰ytt‰j‰n n‰kym‰: "IP-osoite":8080/syncope-enduser/
+Admin-console n√§kym√§: "IP-osoite":8080/syncope-console/
+Loppuk√§ytt√§j√§n n√§kym√§: "IP-osoite":8080/syncope-enduser/
 
-Laitoin palomuurin p‰‰lle ja lis‰sin s‰‰nnˆt:
+Laitoin palomuurin p√§√§lle ja lis√§sin s√§√§nn√∂t:
 $ sudo ufw enable
 $ sudo ufw allow ssh
 $ sudo ufw allow http
@@ -57,11 +57,11 @@ $ sudo ufw allow 8080
 Valmiista Apache Syncopesta
 Tein .ova tiedoston mahdollista tulevaisuuden testausta varten.
 
-Seuraavaksi lis‰sin MariaDB-tietokannan fyysiselle koneellemme.
+Seuraavaksi lis√§sin MariaDB-tietokannan fyysiselle koneellemme.
 Asensin aluksi MariaDB:n:
 $ sudo apt-get install -y mariadb-server 
 
-Menin MySQL:l‰‰n:
+Menin MySQL:l√§√§n:
 $ sudo mysql -u root
 
 Loin tietokannan:
@@ -74,7 +74,7 @@ Seuraavaksi muokkasin config.xml tiedostoa:
 $ cd /opt/midpoint/var
 $ sudoedit config.xml
 
-Lis‰sin sinne seuraavat rivit repositoryn kohdalle:
+Lis√§sin sinne seuraavat rivit repositoryn kohdalle:
       <database>mariadb</database>
       <jdbcUsername>midpoint</jdbcUsername>
       <jdbcPassword>************</jdbcPassword>
@@ -84,20 +84,20 @@ Ajoin SQL scriptin:
 $ cd /opt/midpoint/doc/config/sql/_all
 $ sudo mysql -u root midpoint < mysql-3.8-all.sql (kesti noin 5min ajossa)
 
-Seuraavaksi lis‰sin palomuuris‰‰nnˆn 3306-portille:
+Seuraavaksi lis√§sin palomuuris√§√§nn√∂n 3306-portille:
 $ sudo ufw allow 3306
 $ sudo ufw allow 3306/tcp
 
-K‰ynnistin sitten koneen uudelleen:
+K√§ynnistin sitten koneen uudelleen:
 $ sudo reboot
 
-K‰ynnistyksen j‰lkeen midPoint toimii selaimella: http://"IP-osoite":8080/midpoint
+K√§ynnistyksen j√§lkeen midPoint toimii selaimella: http://"IP-osoite":8080/midpoint
 
-Kirjauduin sis‰‰n ja vaihdoin p‰‰k‰ytt‰j‰n (privileged) nimen paremmaksi (oletus oli administrator).
-Sitten loin uuden k‰ytt‰j‰n kohdasta Users - New user
-Loimme jokaiselle omat k‰ytt‰j‰t midPointiin.
+Kirjauduin sis√§√§n ja vaihdoin p√§√§k√§ytt√§j√§n (privileged) nimen paremmaksi (oletus oli administrator).
+Sitten loin uuden k√§ytt√§j√§n kohdasta Users - New user
+Loimme jokaiselle omat k√§ytt√§j√§t midPointiin.
 
-Tarkistin seuraavaksi, ett‰ k‰ytt‰j‰t tallentuneet MariaDB:n tietokantaan:
+Tarkistin seuraavaksi, ett√§ k√§ytt√§j√§t tallentuneet MariaDB:n tietokantaan:
 $ sudo mysql -u root
 use midpoint;
 SHOW TABLES;
