@@ -1,0 +1,13 @@
+Sain PostgreSQL tietokannan toimimaan midPoint idm kanssa virtuaaliympäristössä (Virtual Box VM). Tietokanta piti asentaa samaan palvelimeen,
+ jossa midPoint on. midPointissa oli myös oma H2 tietokanta, mutta korvasin se PostgreSQL tietokannalla. midPointi dokumentaatiossa luki,
+että erillistä tietokantapalvelinta ei tarvitse olla. Kokeilin myös saada toimimaan PostgreSQL:n erillisessä virtuaalikoneessa kuin midPoint, mutta
+demotessa ilmeni, että midPoint tallentaa tiedot vain H2 tietokantaan. Sain siis PostgreSQL:n toimimaan vain samassa virtuaalikoneessa midPointin kanssa.
+Sovelsin näitä kahta ohjetta PostgreSQL asennuksessa ja konfiguroinnissa: https://wiki.evolveum.com/display/midPoint/PostgreSQL, https://wiki.evolveum.com/display/midPoint/midPoint+on+Ubuntu,+Tomcat,+PostgreSQL+HOWTO
+midPointin dokumentaatio oli todella sekavaa, siitä koitui ongelmia.
+
+Päätimme asentaa ja konfiguroida Apache Syncopen Debian version midPointin rinnalla, siltä varalta jos tulee liikaa ongelmia midPointin kanssa. Asensin ja päivitin
+siis käytettävät työasemat idm:iin (VM Ubuntu 16.04 Desktop, VM Windows 10 Desktop)(http://releases.ubuntu.com/16.04/, https://www.microsoft.com/fi-fi/software-download/windows10)
+
+Valittiin MariaDB tietokannaksi, kokeiltuamme PostgreSQL:ää ja MariaDB:tä Virtual Boxissa. Saatiin toimimaan "tuotantoympäristössä".
+
+Loimme käyttäjät midPointiin onnistuneesti. https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_k%C3%A4ytt%C3%A4j%C3%A4t.PNG
