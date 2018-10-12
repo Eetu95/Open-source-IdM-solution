@@ -54,16 +54,3 @@ Kesto 1h 30min.
 
 
 
-
-
-
-
-
-Käynnistin seuraavaksi apache-tomcatin uudelleen:
-
-
-
-
-
-
-
