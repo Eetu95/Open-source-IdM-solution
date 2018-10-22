@@ -1,5 +1,6 @@
-Windows Server 2016 asennus testiympäristöä varten. Asennuksen jälkeen asetin staattisen IP-osoitteen, asensin päivitykset, muutin tietokoneen nimen järkevämmäksi ja sallin etäyhteyden Windows Server -palvelimeen.
-Seuraavaksi lähdin tekemään Domain verkkoa, jotta testityöasemat saadaan liitettyä domainiin. Ohjeet: https://win10faq.com/create-domain-windows-server/
+Windows Server 2016 asennus testiympÃ¤ristÃ¶Ã¤ varten. Asennuksen jÃ¤lkeen asetin staattisen IP-osoitteen, asensin pÃ¤ivitykset, muutin tietokoneen nimen jÃ¤rkevÃ¤mmÃ¤ksi ja sallin etÃ¤yhteyden Windows Server -palvelimeen.
+
+Seuraavaksi lÃ¤hdin tekemÃ¤Ã¤n Domain verkkoa, jotta testityÃ¶asemat saadaan liitettyÃ¤ domainiin. Ohjeet: https://win10faq.com/create-domain-windows-server/
 
 
 
