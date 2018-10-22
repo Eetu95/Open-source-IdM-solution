@@ -1,0 +1,4 @@
+- Asennettiin Windows Server 2016 VirtualBox --> luotiin AD. IP-asetukset kuntoon (staattinen IP, DNS-palvelin IP-osoitteet kohdilleen jne.) 
+- Windows Server 2016 päivitykset ja muut alustavat konfiguroinnit (allow remote desktop jne.)
+- Tein esityslistan keskiviikon ohjauskokoukseen ja lähetin sen osanottajille.
+- HTTPS-yhteyden konfigurointi IdM-palvelimeen (SSL), valmistautumista. https://wiki.evolveum.com/pages/viewpage.action?pageId=15859743
