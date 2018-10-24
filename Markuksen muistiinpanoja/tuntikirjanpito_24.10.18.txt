@@ -1,0 +1,42 @@
+T‰n‰‰n pidettiin kokous Teron kanssa. Meit‰ askarrutti ongelmat midPointin kanssa
+Viime kerralla Windows Server 2016:n k‰yttˆˆnotto j‰i hieman kesken, joten l‰hdin jatkamaan siit‰. Windows Server tarvitaan sen takia, ett‰ voidaan autentikoitua IdM-j‰rjestelm‰‰ vasten Active Directoryll‰.
+
+Windows Serverill‰ oli tehty jo seuraavat vaiheet: asetettu staattinen IP-osoite ja sallittu et‰yhteys Windows Server palvelimeen. Windowsin aktivoinnissa oli ongelmia, kun laitettu tuotenumero oli k‰ytˆss‰ toisella koneella. Kokeilin aktivontia kyseisill‰ ohjeilla, mutta ilman tulosta: https://docs.ovh.com/gb/en/dedicated/windows-key/
+
+Kun Windows Server 2016 asensi p‰ivityksi‰, l‰hdin kokeilemaan virtuaalikoneella midPointin autenkoitumista Linux-j‰rjestelmill‰. T‰t‰ varten midPointiin pit‰‰ asentaa Unix Connector. Jonkinlaiset ohjeet t‰h‰n lˆytyiv‰t: https://evolveum.com/blog/provisioning-to-unix-in-5-steps/
+
+L‰hdin kokeilemaan Unix Connectorin asennusta. Loin uuden kansion unix-connector polkuun /opt/midpoint eli MidPoint Homeen.
+Kloonasin GitHubista olevan repositoryn juuri luotuun kansioon: 
+$ git clone https://github.com/Evolveum/ConnIdUNIXBundle.git
+
+Asetin JAVA_HOMEn: 
+$ sudoedit etc/environment
+Lis‰sin uudet rivit ja tallensin:
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+export JAVA_HOME
+
+T‰m‰n j‰lkeen ajoin connectorin:
+$ cd opt/midpoint/unix-connector/ConnIdUNIXBundle
+$ sudo apt-get install maven
+$ sudo mvn clean package -DskipTests=true -P it
+
+Paketin ajamisessa oli paljon ongelmia. Aluksi JAVA_HOME piti m‰‰ritt‰‰, jonka j‰lkeen seuraava virheilmoitus taas oli ett‰ POMia ei ole m‰‰ritetty.
+Sen sai m‰‰ritetty‰ ajamalla paketin oikeassa polussa eli: opt/midpoint/unix-connector/ConnIdUNIXBundle
+T‰m‰k‰‰n ei auttanut vaan tuli lis‰‰ virheit‰, mutta t‰ll‰ kertaa paketti ajettiin ainakin osittain, sill‰ target kansio ilmeistyi polkuun opt/midpoint/unix-connector/ConnIdUNIXBundle
+
+Lopulta paketti saatiin ajettua asentamalla openjdk-8-jdk. Meill‰ alunperin oli openjdk-8-jre.
+$ sudo apt-get install openjdk-8-jdk
+
+Domainin luonti Windows Serverill‰:
+Aluksi tuli asentaa Active Directory Domain Services, jonka j‰lkeen luotiin domain. Domainin nimeksi laitoin pisnismiehet.local
+Ohjeet: https://win10faq.com/create-domain-windows-server/
+
+Domainin luonnin j‰lkeen kone k‰ynnistettiin uudelleen.
+Server Managerissa k‰ynnistyksen j‰lkeen oli muutama herja ja n‰ytti punaista Local Server kohdassa palveluiden osalta. K‰ynnistin palvelut niin herja l‰hti.
+
+Testikonetta liitett‰ess‰ Domainiin ilmini ongelmia. Ilmeisesti Windowsin aktivointi est‰‰ domainin luomisen. Oma Windows Server 2016 Datacenter lisenssini on k‰ytˆss‰ jo muulla laitteella, vaikka n‰in ei ole. Netist‰ yritin etsi‰ muita Windows tuotenumerointi, mutta mik‰‰n niist‰ ei toiminut.
+Otin kuitenkin virtuaalikoneen talteen, vaikka domainiin liitt‰minen ei onnistunut, koska Windows Serverin asennus ja p‰ivitysten asentaminen kest‰‰ todella kauan, ainakin VirtualBoxilla. Kokeilemme seuraavalla kerralla, jos Eetu saisi hankittua oman Windows lisensin, jota voisimme kokeilla k‰ytt‰‰ t‰ss‰ Windows Serveriss‰ tai jos saan hankittua oman lisenssini takaisin.
+
+
+
+
