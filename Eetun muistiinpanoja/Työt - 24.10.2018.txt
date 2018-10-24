@@ -1,0 +1,59 @@
+Pidettiin ohjauskokous.
+
+Linux Connector ohjeet: https://wiki.evolveum.com/display/midPoint/Linux+-+RedHat
+
+Loin admin käyttäjän Ubuntu 16.04 Desktopiin ohjeen mukaan.
+
+$ sudo useradd -c "midPoint" -m -r midpoint
+
+$ sudo passwd (salanasa)
+
+Tein Ubuntu 16.04 Desktop VM:n tiedoston /etc/sudoers.d/midpoint, johon laitoin:
+midpoint    ALL = /usr/sbin/useradd, /usr/sbin/usermod, /usr/sbin/userdel, /usr/sbin/groupadd, /usr/sbin/groupmod,
+/usr/sbin/groupdel, /usr/bin/passwd, /usr/bin/id, /usr/bin/getent, /usr/bin/which
+
+Lisäsin oikeudet midpoint tiedostolle:
+
+$ chmod 0440 /etc/sudoers.d/midpoint
+
+Katsoin ohjeita Unix connectorin asennukseen: https://evolveum.com/blog/provisioning-to-unix-in-5-steps/
+
+Tein "unix-connector" kansion:
+
+$ sudo mkdir /opt/midpoint/var/unix-connector
+
+Latasin gitin:
+
+$ sudo git clone https://github.com/Evolveum/ConnIdUNIXBundle.git
+
+Jouduin asentamaan "maven":
+
+$ sudo apt install maven
+
+Sitten menin kansioon /opt/midpoint/var/unix-connector/ConnIdUNIXBundle, jossa oli pom.xml tiedosto.
+Yritin rakentaa connectoria
+
+$ mvn clean packge -DskipTest=true -P it
+
+Tämä heitti kuitenkin erroria (JAVA_HOME ei löytynyt). Yritin etsiä tietoa netistä, mutta ratkaisua ei löytynyt. 
+https://askubuntu.com/questions/175514/how-to-set-java-home-for-java
+Sain ajettua maven komennon, mutta se ei saanut kuitenkaan muodostettua .jar-tiedostoa. --> Löydettiin ongelma, piti
+asentaa openjdk-8-jdk. Oli asennettuna vain openjdk-8-jre.
+
+$ sudo apt-get install openjdk-8-jdk
+
+$ sudo cp /opt/midpoint/var/unix-connector/ConnIdUNIXBundle/target/org.connid.bundles.unix-1.1-SNAPSHOT.jar
+ /opt/midpoint/var/icf-connectors
+
+$ sudo mkdir /opt/midpoint/var/icf-connectors/lib
+
+$ sudo cp /opt/midpoint/var/unix-connector/ConnIdUNIXBundle/target/dependencies/jsch-0.1.53.jar
+ /opt/midpoint/var/icf-connectors/lib
+
+$ sudo reboot
+
+Päätin jatkaa perjantaina.
+
+Koitettiin liittää Windows 10 Desktop VM:n Windows Server 2016 VM AD:seen. Sekä sählättiin Windows Server 2016 AD:n kanssa
+(palomuuriin reikiä, DNS-osoitteet oikeaksi jne.)
+
