@@ -1,0 +1,4 @@
+- Tein esityslistan ohjauskokoukseen ja lähetin sen osallistujille.
+- Lähetin viimeviikon tuntikirjanpidon Moodleen.
+- Tein pöytäkirjan puhtaaksi
+- Tehtävänä seuraavalla kerralla Unix connector asennus midPointiin sekä VirtulBoxissa olevan palvelimen kytkeminen IdM:n piiriin.
