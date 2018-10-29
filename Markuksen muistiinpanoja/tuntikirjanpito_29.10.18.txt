@@ -1,3 +1,5 @@
-Yritin soittaa Microsoftin asiakaspalveluun, jotta Windows Server 2016 Datacenter versioni tuoteavain vapautettaisiin koneelta, koska Windows Server 2016 Datacenterin tuoteavain on lukittuna virtuaalikoneeseen eik‰ sit‰ saa itse poistettua, mutta asiakaspalvelu meni kiinni jo klo 18. P‰‰tettiin asentaa Windows palvelin Servulan fyysiselle koneelle. P‰‰dyimme fyysisen koneen asennukseen, koska virtuaalikoneille saattaa menn‰ Windowsissa tuoteavaimet sekaisin eik‰ Windowsia voi aktivoida. Fyysisen koneen asennuksella t‰m‰ estet‰‰n. 
+Yritin soittaa Microsoftin asiakaspalveluun, jotta Windows Server 2016 Datacenter versioni tuoteavain vapautettaisiin koneelta, koska Windows Server 2016 Datacenterin tuoteavain on lukittuna virtuaalikoneeseen eik√§ sit√§ saa itse poistettua, mutta asiakaspalvelu meni kiinni jo klo 18. 
 
-Asennuksen j‰lkeen kokeilin virtuaalikoneita uudessa testipalvelimella, jonka Jan teki. Sen ansiosta virtuaalikoneita ei tarvitse en‰‰ joka kerta Importata tai Exportata.
+P√§√§tettiin asentaa Windows palvelin Servulan fyysiselle koneelle. P√§√§dyimme fyysisen koneen asennukseen, koska virtuaalikoneille saattaa menn√§ Windowsissa tuoteavaimet sekaisin eik√§ Windowsia voi aktivoida. Fyysisen koneen asennuksella t√§m√§ estet√§√§n. 
+
+Asennuksen j√§lkeen kokeilin virtuaalikoneita uudessa testipalvelimella, jonka Jan teki. Sen ansiosta virtuaalikoneita ei tarvitse en√§√§ joka kerta Importata tai Exportata.
