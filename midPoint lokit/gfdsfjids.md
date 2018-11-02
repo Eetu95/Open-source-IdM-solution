@@ -1,1 +1,0 @@
-kyrvän syylä
