@@ -1,0 +1,54 @@
+midPointin käyttöliittymässä on Reports -> Audit Log Viewer. Siitä näkyi mm. käyttäjien
+lisäämiset, muokkaukset, autentikoinnit jne.. Exporttasin kaikki lokit (2018-10-12T13:20:06,863+3 - 2018-11-02T10:58:47,323+02:00)
+csv-tiedostona projektin GitHub repoon --> https://github.com/Eetu95/Open-source-IdM-solution/blob/master/midPoint%20lokit/AuditLogViewer_export.csv.
+
+https://wiki.evolveum.com/display/midPoint/Log+Viewer
+
+midPoint on kehittänyt isojen log tiedostojen katsomiseen "midPoint Log Viewer" -työkalun (kokeilu prototyyppi).
+Kokeilin työkalun toimivuutta.
+
+Asensin eclipsen (https://wiki.evolveum.com/display/midPoint/Eclipse+plugin+installation+HOWTO):
+
+$ sudo apt-get -y install eclipse
+
+Asensin OpenJDK:n (Open Java Development Kit):
+
+$ sudo apt-get -y install openjdk-8-jdk
+
+Asensin Gitin:
+
+$ sudo apt-get -y install git
+
+Asensin Mavenin:
+
+$ sudo apt-get -y install maven
+
+Rakensin pluginin itse:
+
+$ git clone https://github.com/Evolveum/midpoint-ide-plugins.git
+$ cd midpoint-ide-plugins\com.evolveum.midpoint.eclipse.parent
+$ mvn clean install
+
+
+Asensin Eclipsen pluginin sivuilta (http://www.eclipse.org/downloads/packages/release/neon/r/eclipse-ide-java-and-dsl-developers) Linux 64 bit paketin (wget:llä CLI:ssä
+suoraan linkistä selaimessa). Purin paketin:
+
+$ sudo wget ...
+
+$ sudo tar ...
+
+Menin eclipse-installer kansioon ja ajoin "eclipse-installer.ini" -tiedoston:
+
+$ sudo ./eclipse-installer.ini
+
+Epäselvät ohjeet, jäi kesken..
+
+
+
+
+
+
+
+
+
+ 
