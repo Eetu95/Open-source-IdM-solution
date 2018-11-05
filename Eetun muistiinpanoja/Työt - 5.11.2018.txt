@@ -1,0 +1,16 @@
+Työaikakirjanpito palautettu. Tarkoituksenani oli saada midPointin Log Viewer työkalu toimimaan (https://wiki.evolveum.com/display/midPoint/Log+Viewer#LogViewer-Installation). 
+Katsoin midPointin dokumentaatiosta ohjeita työkalun asennukseen --> https://wiki.evolveum.com/display/midPoint/Eclipse+plugin+installation+HOWTO
+Asensin "Eclipse for Java and DSL Developers" -paketin VirtualBox Linux Ubuntulle, joka pyörii fyysisessä VM palvelimessamme. Ohjeiden mukaan uuden pluginin
+saa asennettua kun menee HELP --> Install New Software... Help nappi ei minulla toiminut, joten pluginin asennus pysähtyi siihe. Yritin jonkun aikaa saada
+pluginia asennettua muuta kautta, mutta tämä ei onnistunut. Yritin koota pluginia itse lataamalla midPointin reposta ja kasaamalla mavenilla:
+
+$ git clone https://github.com/Evolveum/midpoint-ide-plugins.git
+$ cd midpoint-ide-plugins\com.evolveum.midpoint.eclipse.parent
+$ mvn clean install
+
+Tässä tuli kuitenkin errori (...Could not resolve dependencies for project...), joka voi johtua monesta eri syystä. Joten ongelman selvittelyssä olisi voinut mennä tuhottomasti aikaa, 
+päätin asian olla. Lokit on kuitenkin näkyvissä
+suoraan midPointissa. Eclipse midPoint Log Viewer projektin testaaminen olisi ollut mielenkiintoista, midPointin dokumenttien perusteella LogViewer näytti tosi pätevältä lokien tutkimisessa.
+
+Katselin seuraavana hommana SSL/HTTPS yhteyksien tekemistä (https://wiki.evolveum.com/display/midPoint/Encryption+and+Keys). Katselin myös uusia connectoreita mm. CMD connector, Google Apps Connector.
+Mietin myös mahdollisen Connector palvelimen pystyttämistä.
