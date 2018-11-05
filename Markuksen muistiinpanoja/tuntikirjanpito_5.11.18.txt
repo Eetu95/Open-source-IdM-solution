@@ -1,0 +1,35 @@
+L‰hdin kokeilemaan lis‰‰ Active Directoryn lis‰‰mist‰ midPointiin. Viime kerralla tuli ilmeisesti syyksi, ett‰ midPoint ei saa yhteytt‰ LDAPS porttiin (636) sen takia, koska Windows Serveriss‰mme ei ole m‰‰ritetty sertifikaattia. L‰hdin tutkimaan asiaa lis‰‰.
+
+Ohjeita LDAPS portin konfiguroimiseen: https://blogs.msdn.microsoft.com/microsoftrservertigerteam/2017/04/10/step-by-step-guide-to-setup-ldaps-on-windows-server/
+L‰hdin asentamaan Windows Serveriin Active Directory Lightweight Directory Services. M‰‰ritin siihen AD LDS instanssin nimeksi PISNISMIEHET. Valitsin LDAP porteiksi 50000 ja 50001, koska oletus LDAP portit (389 ja 636) ovat tuleet k‰yttˆˆn Active Directoryn Domain Services mukana.
+
+Application Directory Partition on CN=Midpoint,DC=PISNISMIEHET,DC=LOCAL
+
+Huomasin, ett‰ n‰m‰ vaiheet tuskin olivat pakollisia LDAP toimivuuden testaamiseksi. P‰‰tin kokeilla lis‰t‰ Active Directoryn connectoria midPointiin. Kopioin mallin evolveum GitHubista:
+https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/resources/ad-ldap/ad-ldap-medusa-medium.xml
+
+MidPoint k‰yttˆliittym‰st‰ valitsin Import Object - Embedded editor ja liitin esimerkkimallin siihen. Muokkkasin kuitenkin omat tiedot kohtaan <connectorConfiguration>:
+
+<connectorConfiguration xmlns:icfc="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/connector-schema-3">
+        <icfc:configurationProperties xmlns:icfcldap="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/bundle/com.evolveum.polygon.connector-ldap/com.evolveum.polygon.connector.ldap.ad.AdLdapConnector">
+            <icfcldap:host>***Windows Serverin IP***</icfcldap:host>
+            <icfcldap:port>***389***</icfcldap:port>
+            <icfcldap:baseContext>***DC=PISNISMIEHET,DC=LOCAL***</icfcldap:baseContext>
+            <icfcldap:bindDn>CN=midpoint,CN=Users,DC=PISNISMIEHET,DC=LOCAL</icfcldap:bindDn>
+            <icfcldap:connectionSecurity>ssl</icfcldap:connectionSecurity>
+            <icfcldap:bindPassword>
+                <t:clearValue>****************************</t:clearValue>
+            </icfcldap:bindPassword>
+            <icfcldap:pagingBlockSize>5</icfcldap:pagingBlockSize> <!-- ridiculously small, just to test paging -->
+        </icfc:configurationProperties>
+        <icfc:resultsHandlerConfiguration>
+			<icfc:enableNormalizingResultsHandler>false</icfc:enableNormalizingResultsHandler>
+			<icfc:enableFilteredResultsHandler>false</icfc:enableFilteredResultsHandler>
+			<icfc:enableAttributesToGetSearchResultsHandler>false</icfc:enableAttributesToGetSearchResultsHandler>
+		</icfc:resultsHandlerConfiguration>
+    </connectorConfiguration>
+
+Salasanaksi tulee on midpoint k‰ytt‰j‰n salasana. Portiksi valitsin 389 (LDAP portti ilman SSL) T‰m‰n j‰lkeen klikkasin Import object, jolloin connectori lis‰ttiin. Seuraavaksi testasin connectorin toimivuutta. Menin Resources - List resources - Medusa Active Directory (LDAP) - Edit configuration. Kokeilin sitten connectorin toimivuutta. J‰lleen tuli sama virheilmoitus: Unable to bind to LDAP server. Kokeilin t‰m‰n j‰lkeen ilman SSL yhteytt‰ eli j‰tin Connection Security kohdan tyhj‰ksi.
+
+T‰m‰n j‰lkeen Connectori yll‰tt‰en toimikin eli yhteys saatiin Windows Serveriin. Mielest‰ni kokeilin myˆs n‰in viime kerralla, mutta silti tuli virheit‰. T‰ll‰ kertaa kirjauduin midpoint k‰ytt‰j‰‰n ennenkuin kokeilin saada yhteyden serveriin. Mahdollisesti t‰m‰ ratkaisi ongelman, koska k‰ytt‰j‰lle ei oltu ainakaan luotu kotihakemistoa, joka luodaan ensimm‰isen kirjautumisen yhteydess‰.
+
