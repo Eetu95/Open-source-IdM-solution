@@ -1,8 +1,36 @@
+Teron kanssa kokous. N‰ytettiiin autentikointi toimii Linux k‰yttˆj‰rjestelmiss‰. Kokouksessa tuli ilmi, ett‰ kun saadaan autentikointi toimimaan myˆs AD:n kanssa niin sen j‰lkeen tulisi tehd‰ kahdenpuoleiset varmenteet ja SSL toimivuus tulisi testata.
+
 Nyt kun Active Directoryn Connector saatiin liitetty‰ midPointiin niin tarkoitus oli nyt kokeilla sen toimivuutta. Kokeilimme sen toimivuutta seuraavasti: menin connectorin kohtaan ja v‰lilehdelt‰ "Accounts" -> "Resource" koitin Importata k‰ytt‰j‰n, jotta se tulisi midPointin "Users" kohtaan. N‰in ei kuitenkaan tapahtunut kun yritti importata k‰ytt‰j‰n.
 
 T‰m‰n j‰lkeen kokeilin seuraavaa eli lis‰t‰ saman tyylisesti metaroolin midPointiin niin kuin tehtiin Unix Connectorin kanssa.
 Metarooli AD:n liitt‰miseksi:
 https://wiki.evolveum.com/display/midPoint/Active+Directory+Group+Synchronization+HOWTO
 
+Ohjeiden mukaan koitin lis‰t‰ seuraavan xml-tiedoston, jotta saataisiin synkronoitua midPoint AD:n kanssa:
+https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/resources/ad/ad-resource-groups-medusa-advanced.xml
+
+Muokkasin palvelimelle tiedot xml-tiedostoon, mutta tuli kuitenkin virhe XML-tiedoston importtauksessa. Virheen mukaan rooli olisi jo olemassa.
+Katsoin rooleista ja sen mukaan Metarole for groups olikin lis‰tty. Kun lis‰sin k‰ytt‰j‰n t‰h‰n rooliin, niin k‰ytt‰j‰ ei kuitenkaan yhdistynyt AD:hen.
+
+Seuraavaksi kokeilin lis‰t‰ k‰ytt‰j‰n AD:n Connectoriin manuaalisesti: valitsin k‰ytt‰j‰n ja Projections v‰lilehdelt‰ koitin yhdist‰‰ AD:n Connectoriin, mutta virheilmoituksena oli, ett‰:
+"Couldn't add object. Object already exists: Object already exists on the resource: org.identityconnectors.framework.common.exceptions.AlreadyExistsException(Error adding LDAP entry CN=kaisa testi,CN=Users,DC=PISNISMIEHET,DC=LOCAL"
+
+Yritin viel‰ seuraavalla tavalla luoda k‰ytt‰j‰n eli kun k‰ytt‰j‰ lis‰t‰‰n connectoriin eli v‰lilehdelt‰ Projections muokkasin attribuutit itse. Annoin seuraavat tiedot uudelle k‰ytt‰j‰lle, josta katsoin mallia AD:n Accounts v‰lilehdelt‰ ja sielt‰ tarkastelin midpoint k‰ytt‰j‰‰. 
+Annoin seuraavat tiedot k‰ytt‰j‰n yhdist‰misess‰ AD:hen:
+
+Distinguished Name = CN=kaisa,CN=Users,DC=pisnismiehet,DC=local
+userPrincipalName = kaisa@pisnismiehet.local
+Login name = kaisa
+cn = kaisa
+objectCategory = CN=Person,CN=Schema,CN=Configuration,DC=pisnismiehet,DC=local
+givenName = kaisa
+
+Kuitenkin annettua n‰m‰ tiedot tuli uusi virheilmoitus:
+Unencrypted value in field {http://midpoint.evolveum.com/xml/ns/public/common/common-3}value in object:null(null)
+
+T‰m‰n j‰lkeen kokeilin muokata AD Connectorin XML-tiedostoa. Kuitenkin jokin meni vikaan ja tuli fatal error resourcejen kohdalle. T‰t‰ ei pystynyt poistaa muuten kuin tietokannasta m_resource taulusta.
+
+T‰m‰n j‰lkeen lˆysin ohjeet sertifikaatin luomiseen Windowsille, koska sit‰ tulemme tarvitsemaan, jotta yhteys suojattu autentikoinnissa.
 Itseallekirjoitetun sertifikaatin luonti Windows Serverille:
 https://blogs.msdn.microsoft.com/mayurpatankar/2017/09/01/sha-256-self-signed-certificate-for-windows-server-2012-r2/
+
