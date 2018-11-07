@@ -1,0 +1,32 @@
+Jan lˆysi oikean help painikkeen Eclipsest‰, jonka kautta uusia ohjelmia saa asennettua (https://wiki.evolveum.com/display/midPoint/Eclipse+plugin+installation+HOWTO). 
+P‰‰tettiin kokeilla midPointin Log Viewer -tyˆkalua Windows 10 VM tyˆpˆyt‰ koneella, koska Ubuntu 16.04 VM tyˆpˆyt‰ koneessa on vain
+2 MB RAM:a, kun taas Windows VM:ss‰ on 4 MB RAM:a. Ubuntu VM oli t‰m‰n takia hidas ja kaatuili kun Eclipsen k‰ynnisti.
+Sain asennettua midPointin Log Viewerin Eclipse ymp‰ristˆˆn.
+
+Lˆysin ohjeet kuinka konfiguroidaan yhteys Eclipse midPoint pluginista midPoint palvelimeen. (https://wiki.evolveum.com/display/midPoint/Eclipse+plugin+HOWTO)
+Eclipsest‰ klikkasin midPoint -> Preferences ja lis‰sin yhteydenmuodostukseen tarvittavat tiedot. (mm. Name, URL, Login, Password...)
+Konfiguraatio tallentui "workspace" -kansioon ".metadata/.plugins/org.eclipse.core.runtime/.settings/com.evolveum.midpoint.eclipse.ui.prefs".
+
+T‰m‰n j‰lkeen tein uuden Eclipse projekti kansion, New -> Project -> General -> Project. (Ei "java projekt" vaan esim. "general project").
+
+MidPointin dokumentaatiossa kerrottiin:
+"This Eclipse plugin can be used in many ways, in various contexts. For example:
+
+1. Your primary means of managing your servers can be traditional web GUI. However, for some situation you might want to connect to a server,
+ browse its objects, and execute a few changes using the plugin.
+2. Or, you can develop and maintain your configuration within the plugin, uploading changes to the server(s) as necessary.
+3. Yet another people can use the plugin to experiment with midPoint features, 
+to hunt for midPoint bugs, to simulate various situations (e.g. to provide consultations to others)."
+
+T‰m‰n j‰lkeen selasin palvelimen objekteja, midPoint -> Browse server objects (Alt+F1). Avautuneessa ikkunassa klikkaa suoraan "Search"
+niin kaikki palvelimessa olevat tapahtumat listautuvat tuloskent‰n alle. Tapahtumia/objekteja voi filtterˆid‰ mm. Nimien, OID (one per line)
+tai XML tiedustelun mukaan. Myˆs tapahtumien/objektien m‰‰r‰‰ voi mm. muuttaa paljonko kerralla n‰kyy tuloksissa. Tuloksista voi generoida XML -tiedoston
+tai suoraan ladata objectit workspaceen. Workspacesta voi katsoa suoraan Eclipsess‰ kansioiden alta tapahtumia/objecteja ja avata niit‰ 
+(Hakemistopuu). Pluginissa oli myˆs paljon muitakin ominaisuuksia, jotka kerrotaan hyvin midPointin dokumentaatiossa.
+
+Aloin tutkimaan SSL yhteyksien tekoa ensin testiymp‰ristˆss‰ (VirtualBox ymp‰ristˆ). P‰ivitin testi vmdk-tiedostoja. Tutkin midPointin dokumentaatiota
+aiheesta -> https://wiki.evolveum.com/display/midPoint/Encryption+and+Keys. Asensin openssl:n:
+
+$ sudo apt-get -y install openssl
+
+Olikin jo asennettuna ja uusin versio. Katsoin kuinka tehd‰‰n itsekirjoitettu sertifikaatti. (https://devcenter.heroku.com/articles/ssl-certificate-self)
