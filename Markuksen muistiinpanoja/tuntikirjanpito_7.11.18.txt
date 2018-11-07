@@ -1,2 +1,8 @@
+Nyt kun Active Directoryn Connector saatiin liitettyä midPointiin niin tarkoitus oli nyt kokeilla sen toimivuutta. Kokeilimme sen toimivuutta seuraavasti: menin connectorin kohtaan ja välilehdeltä "Accounts" -> "Resource" koitin Importata käyttäjän, jotta se tulisi midPointin "Users" kohtaan. Näin ei kuitenkaan tapahtunut kun yritti importata käyttäjän.
+
+Tämän jälkeen kokeilin seuraavaa eli lisätä saman tyylisesti metaroolin midPointiin niin kuin tehtiin Unix Connectorin kanssa.
 Metarooli AD:n liittämiseksi:
 https://wiki.evolveum.com/display/midPoint/Active+Directory+Group+Synchronization+HOWTO
+
+Itseallekirjoitetun sertifikaatin luonti Windows Serverille:
+https://blogs.msdn.microsoft.com/mayurpatankar/2017/09/01/sha-256-self-signed-certificate-for-windows-server-2012-r2/
