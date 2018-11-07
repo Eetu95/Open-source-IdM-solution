@@ -1,0 +1,2 @@
+Metarooli AD:n liittämiseksi:
+https://wiki.evolveum.com/display/midPoint/Active+Directory+Group+Synchronization+HOWTO
