@@ -1,0 +1,42 @@
+Kysyimme viime kerralla midPointin postituslistalta, ett‰ miten voi importata k‰ytt‰ji‰ midPointiin. T‰n‰‰n sielt‰ tuli vastaus, ett‰ voidakseen importata k‰ytt‰ji‰ Active Directory resursista, niin pit‰‰ asettaa "inbound mappings" resurssin schemaHandling kohtaan.
+
+Dokumenttiohjeet: https://wiki.evolveum.com/display/midPoint/Resource+Schema+Handling
+
+Esimerkkikoodi: 
+
+<attribute>
+<c:ref>ri:USERNAME</c:ref>
+<inbound>
+<strength>strong</strength>
+<target>
+<c:path>$focus/name</c:path>
+</target>
+</inbound>
+</attribute>
+
+Kokeilin vastauksen mukaisesti lis‰t‰ XML tiedostoon kyseiset attribuutit.
+schemaHandling kohtaan muokkasin seuraavanlaisesti tiedot:
+
+<schemaHandling>
+
+	<objectType>
+	     <attribute>
+                <c:ref>ri:description</c:ref>
+                <inbound>
+                    <strength>strong</strength>
+                    <source>
+                        <c:path>description</c:path>
+                    </source>
+                </inbound>
+                <inbound>
+			<target>
+				<c:path>$focus/name</c:path>
+			</target>
+		</inbound>
+            </attribute>
+        </objectType>
+
+</schemaHandling>
+
+
+
