@@ -38,5 +38,68 @@ schemaHandling kohtaan muokkasin seuraavanlaisesti tiedot:
 
 </schemaHandling>
 
+Importtasin xml tiedoston, jolloin Medusa Active Directory Connector (LDAP) tehtiin. Tämän jälkeen kokelin importata käyttäjän midPointiin, mutta se ei onnistunut.
+
+Tämän jälkeen tein uuden käyttäjän ja yritin liittää sen AD Connectoriin. Tämäkään ei onnistunut vaan virheilmoitukseksi tuli, että PermissionDeniedException. Googlasin virhettä myös netistä ja ilmeisesti sen aiheuttaa Windowsin asetukset niin, että se ei salli ei-suojattuja yhteyksiä.
+Tätä ei pysty muuttamaan policysta, mutta mahdollisesti registeristä pystyisi. En kuitenkaan lähtenyt kokeilemaan poistaa tätä asetuksta registeristä vaan seuraavaksi yritin generoida SSL avaimen, jotta suojattu yhteys saataisiin midPontin ja Windows Active Directoryn välille.
+
+Netistä etsin ohjeet SSL sertifikaatin tekoon: https://devcenter.heroku.com/articles/ssl-certificate-self
+MidPointin ohjeet: https://wiki.evolveum.com/display/midPoint/Encryption+and+Keys
+
+Ajoin seuraavat komennot midPointin kotikansiossa (/opt/midpoint/var).
+
+Generoin avaimen ja lähetin sertifikaatti pyynnön:
+$ openssl genrsa -des3 -passout pass:x -out server.pass.key 2048
+$ openssl rsa -passin pass:x -in server.pass.key -out server.key
+writing RSA key
+$ rm server.pass.key
+
+Tämän jälkeen itse allekirjoitin sertifikaatin ja annoin tiedot meistä:
+$ openssl req -new -key server.key -out server.csr
+...
+Country Name (2 letter code) [AU]:FI
+...
+A challenge password []:
+... 
+
+Salasanaksi jätettiin tyhjäksi, koska ohjeiden mukaan sitä ei tarvita, koska sertifikaatti on itseallekirjoitettu.
+Itseallekirjoitettu sertifikaatti luotiin. Nimi: server.crt
+
+MidPointin ohjeiden mukaan keystore tulisi kumminkin osoittamaan JVM keystoreen komennolla:
+$ -Djavax.net.ssl.trustStore=/opt/midpoint/var/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks
+,joka löytyy midPointin ohjeista: https://wiki.evolveum.com/display/midPoint/Keystore+Configuration
+
+Tämä komento ei kumminkaan toiminut: ei löydä kyseistä kansiota tai tiedostoa. Lähdin tutkimaan jos löytyisi palvelimelta jo jotain jvm viittavaa etsi komennolla:
+
+$ sudo find / -type f -name "jvm*"
+
+Tämä antoi hakutulokseksi, että kyseisestä kansiosta löytyy jvm: /usr/lib/jvm/java-8-openjdk-amd64/jre/lib
+Menin tähän polkuun ja sieltä löytyi cacerts symbolinen linkki: /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security
+Katsoin mihin tämä symbolinen linkki osoitti:
+
+$ readlink cacerts
+/etc/ssl/certs/java/cacerts
+
+Tuosta kyseisestä polusta yritettiin muokata cacerts tiedostoa, mutta se on ilmeisesti kryptattu, koska teksti oli todella vaikea lukuista.
+
+Päätettiin importata itseallekirjoitettu sertificaatti midPoint VM palvelimelle midPointin kotikansiossa:
+
+$ sudo keytool -keystore keystore.jceks -storetype jceks -storepass changeit -import -alias nlight -trustcacerts -file server.crt
+
+Tämän jälkeen ajettiin Linux testityöasemalla sertifikaatin haku komento:
+$ openssl s_client -connect "palvelimen IP":8080
+
+Testityöasema ei kuitenkaan saanut avainta haettua:
+
+no peer certificate available
+---
+No client certificate CA names sent
+
+
+
+
+
+
+
 
 
