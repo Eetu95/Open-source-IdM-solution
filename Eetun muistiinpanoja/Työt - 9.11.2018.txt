@@ -1,0 +1,48 @@
+Salausavainten ja sertifikaatin teko sekä lisääminen keystoreen - SSL-yhteydet jne. (https://wiki.evolveum.com/display/midPoint/Encryption+and+Keys) 
+
+Tein itsekirjoitetun sertifikaatin midPoint VM testiympäristölle (https://devcenter.heroku.com/articles/ssl-certificate-self)
+
+Tarkista onko openssl asennettuna:
+
+$ which openssl --> /usr/bin/openssl. Openssl on asennettuna.
+
+Generoin henkilökohtaisen avaimen ja sertifikaatin allekirjoitus pyynnön:
+
+$ openssl genrsa -des3 -passout pass:x -out server.pass.key 2048
+...
+$ openssl rsa -passin pass:x -in server.pass.key -out server.key
+writing RSA key
+$ rm server.pass.key
+$ openssl req -new -key server.key -out server.csr
+...
+Country Name (2 letter code) [AU]:FI
+State or Province Name (full name) [Some-State]:
+...
+A challenge password []:
+...
+
+Generoin SSL sertifikaatin:
+
+$ sudo openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+
+Etsittiin JVM keystorea midPoint VM:stä. Tarkoituksena konfiguroida JVM keystore osoittamaan midPointin keystoree,
+ jotta connectorit osaavat etsiä sertifikaatin sieltä.
+
+$ sudo find / -type f name "jvm*"
+
+Löytyi:
+/usr/lib/jvm/* -polusta
+
+Importattiin sertifikaatti midPointin keystore.jceks:iin:
+
+$ sudo keytool -keystore keystore.jceks -storetype jceks -storepass changeit -import -alias nlight -trustcacerts -file server.crt
+
+Sertifikaatti ilmestyi sinne:
+
+$ sudo keytool -keystore keystore.jceks -storetype jceks -storepass changeit -list
+
+Sitten koitin hakea sertifikaattia Ubuntu Desktop VM:llä:
+
+$ openssl s_client -connect [ip-osoite:8080]
+
+Ei onnistunut.
