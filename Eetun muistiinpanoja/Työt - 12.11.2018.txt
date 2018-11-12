@@ -1,0 +1,25 @@
+Kokeiltiin hakea midPoint palvelimen sertifikaattia Windows 10 Pro VM:ll‰. Asennettiin OpenSSL 64 bit siihen
+--> httpwiki.evolveum.com/pages/viewpage.action?pageId=15859743s://
+
+Ajettiin Windowsin komentokehoitteessa (t‰m‰ hakee sertifikaatin midPointista):
+$ openssl s_client -connect [IP-osoite]:8080
+
+Tuli error:
+Loading 'screen' into random state - done
+CONNECTED(0000013C)
+5552:error:140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown protocol:.\ssl\s23_clnt.c:601:
+
+Googlasimme erroria. Olin tehnyt jo aikaisemmin uuden 256-bit AES avaimen 
+(keytool -genseckey -alias strong -keystore /var/opt/midpoint/keystore.jceks -storetype jceks -storepass changeit -keyalg AES -keysize 256 -keypass midpoint)
+, jonka alias on "strong".
+ Lis‰sin config.xml -tiedostoon:
+
+<keystore>
+    <keyStorePath>${midpoint.home}/keystore.jceks</keyStorePath>
+    <keyStorePassword>changeit</keyStorePassword>
+    <encryptionKeyAlias>strong</encryptionKeyAlias>
+    <xmlCipher>http://www.w3.org/2001/04/xmlenc#aes256-cbc</xmlCipher>   <---TƒMƒN!
+</keystore>
+
+T‰ll‰ kertaa ei tullut ede erroria kun yritettiin uudestaan. Avasin portin 3636 midPointista ja k‰ynnistin palomuurin uudestaan.
+Ei siltik‰‰n tapahtunut mit‰‰n.
