@@ -1,0 +1,47 @@
+Viime kerralla emme saaneet toimimaan itseallekirjoitettua SSL sertifikaattia Linux työasemalla. Kokelin tällä kertaa samaa Windows työasemalla, jospa se toimisi siellä.
+
+Latasin midPointin ohejiden mukaisesti 64bittisen openssl softan Windowssille: https://wiki.evolveum.com/pages/viewpage.action?pageId=15859743
+OpenSSL Windowssille: https://code.google.com/archive/p/openssl-for-windows/downloads
+
+Purin zip-tiedoston polkuun C:\Program Files\OpenSSL
+
+Komentokehotteella ajoin openssl komennon polussa, jossa ohjelma sijaitsi, joka hakee sertifikaatin:
+cd c:\program files\openssl\bin
+openssl s_client -connect *palvelimen IP*:8080
+
+Tämä antoi errorin:
+
+Loading 'screen' into random state - done
+CONNECTED(0000013C)
+5552:error:140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown protocol:.\ssl\s23_clnt.c:601:
+
+Googletimme virheilmoitusta mutta suoraa vastausta ei löytynyt.
+Kokeilin komentoa googleen:
+openssl s_client -connect google.com:443
+
+Tämä listasin sertifikaatin oikein eli testiyhteys onnistui toiseen palvelimeen.
+
+Tämän jälkeen kokeilimme toisilla midpointin ohjeilla lisätä Cipherin, koska testiyhteyden listauksessa mainittiin cipheristä: https://wiki.evolveum.com/display/midPoint/Encryption+and+Keys
+
+testipalvelimelle ajoin komennon:
+$ sudo keytool -genseckey -alias strong -keystore /opt/midpoint/var/keystore.jceks -storetype jceks -storepass changeit -keyalg AES -keysize 256 -keypass midpoint
+joka antoi tulokseksi että avain on jo luotu.
+
+Muokkasin config.xml tiedostoa, johon lisäsin cipherin palvelimella: 
+	<keystore>
+            <keyStorePath>${midpoint.home}/keystore.jceks</keyStorePath>
+            <keyStorePassword>**********</keyStorePassword>
+            <encryptionKeyAlias>strong</encryptionKeyAlias>
+            <xmlCipher>http://www.w3.org/2001/04/xmlenc#aes256-cbc</xmlCipher>
+        </keystore>
+
+käynnistettiin palvelin uudelleen ja avattiin portti palvelimella 3636 portti, koska midPointin esimerkiksi otettiin yhteys tuohon porttiin työasemalla:
+openssl s_client -connect *palvelimen IP*:3636
+
+Tämänkään ei auttanut eikä kyseisestä komennosta tullut edes erroa, mutta jos olisi yhdistynyt onnistuneesti, niin sertifikaatti olisi tullut näkyviin.
+
+
+
+
+
+
