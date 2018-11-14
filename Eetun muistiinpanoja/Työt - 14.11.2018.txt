@@ -1,0 +1,34 @@
+Kysyttiin midPointilta apua SSL:n konfiguroinnissa sähköpostilla. MidPointilta vastattiin, ja aloimme tekemään
+neuvojen mukaan. Luotiin setenv.sh -tiedosto opt/midpoint/bin -kansioon:
+
+$ sudo nano setenv.sh
+
+Koodattiin sen sisään JAVA_OPTS muuttuja:
+
+#!/bin/sh
+
+export JAVA_OPTS="$JAVA_OPTS
+
+-Djavax.net.ssl.trustStore=/opt/midpoint/var/keystore.jceks
+-Djavax.net.ssl.trustStoreType=jceks
+
+Tehtiin sh-tiedostosta ajettava:
+
+$ sudo chmod 755 setenv.sh
+
+Käynnistettiin midPoint palvelin uudestaan:
+
+$ sudo reboot
+
+Asiasta maininta myös täällä --> https://wiki.evolveum.com/display/midPoint/Installing+MidPoint+Server
+
+Yritettiin hakea sertifikaattia Windows 10 ja Ubuntu 16.04 VM työasemilla:
+
+$ openssl s_client -connect 172.28.171.29:8080
+
+Edelleen tuli sama error:
+Loading 'screen' into random state - done
+CONNECTED(0000013C)
+5552:error:140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown protocol:.\ssl\s23_clnt.c:601:
+
+Tarkistin portin 443 --> oli auki.
