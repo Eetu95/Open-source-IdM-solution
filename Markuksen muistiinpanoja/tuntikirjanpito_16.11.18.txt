@@ -1,0 +1,102 @@
+Viime kerralla meill‰ oli edelleen ongelmia SSL-sertifikaatin hakemisessa testityˆasemille. L‰hdin tutkimaan jos SSL-sertifikaatin saisi lis‰tty‰ jotenkin midPointin sis‰‰nrakennettuun Tomcatiin, jotta midPointin k‰yttˆliittym‰‰n p‰‰sisi https -yhteydell‰.
+
+Lˆysin sis‰‰nrakennettuun Tomcatiin ohjeet t‰‰lt‰: https://wiki.evolveum.com/display/midPoint/Using+MidPoint+with+embedded+Tomcat
+
+Ohjeissa oli mainistaa, ett‰ konfigurointi sis‰‰nrakennettuun Tomcatiin tapahtuisi seuraavasti:
+Oletus konfigurratiotiedosto olisi nimelt‰‰n application.yml ja t‰m‰ sijaitsisi polussa admin-gui/src/main/resources
+
+Kokeilin etsi‰ kyseist‰ polkua ja tiedostoa:
+$ sudo find / -type d -name "admin-gui/src/main/resources"
+$ sudo find / -type f -name "application.yml"
+
+Mit‰‰n t‰h‰n n‰ihin viittaavaa polkua tai tiedostoa ei lˆytynyt.
+Seuraavaksi kokelin luoda kyseisen tiedoston itse. Ohjeissa oli maininta, ett‰ kyseinen tiedosto tulisi laittaa midpoint home -kansioon, joka meid‰n tapauksessa on /opt/midpoint/var
+$ cd /opt/midpoint/var
+$ sudoedit application.yml
+
+Lis‰sin t‰h‰n tiedostoon rivit:
+
+# EMBEDDED SERVER CONFIGURATION (ServerProperties)
+server.port=8443
+server.ssl.enabled=true
+server.ssl.key-store=/opt/midpoint/var/keystore.jceks
+server.ssl.key-store-password=**********
+server.ssl.key-store-type=JCEKS
+server.ssl.key-alias=nlight
+
+T‰m‰n j‰lkeen avasin palomuurista portin 8443 ja k‰ynnistin midPointin uudelleen:
+$ sudo ufw allow 8443
+$ sudo reboot
+
+T‰m‰n j‰lkeen kokeilin selaimella yhdist‰‰ porttiin 8443:
+*palvelimen IP*:8443/midpoint
+
+T‰m‰ ei auttanut vaan tuli virheilmoitus: Connection refused
+
+T‰m‰n j‰lkeen kokelin vaihtaa keystoren formaattia. Lˆysin t‰h‰n ohjeet: https://knowledge.digicert.com/solution/SO17389.html
+Ajoin komennon, joka muuntaa nykyisen keystoren pcks12 formaattiin:
+$ cd /opt/midpoint/var
+$  sudo keytool -importkeystore -srckeystore keystore.jceks -srcstorepass changeit -destkeystore keystore.p12 -srcstoretype JCEKS -deststoretype PKCS12 -deststorepass ******** -destkeypass ***********
+
+T‰m‰n komennon j‰lkeen piti antaa salanat oletus aliaksille, jotka on luotu aiemmin.
+T‰m‰n j‰lkeen tuli ilmoitus, ett‰ onnistuneesti luotiin keystore.p12 tiedosto. Katsoin mit‰ se sis‰lsi:
+$ sudo keytool -list -v -keystore keystore.p12 -storetype pkcs12
+T‰h‰n piti antaa keystore salasana.
+
+T‰m‰n j‰lkeen importtasin itse allekirjoitetun sertifikaattimme PKCS12 keystoreen:
+$ sudo keytool -keystore keystore.p12 -storetype pkcs12 -storepass *********** -import -alias certificate -trustcacerts -file server.crt
+
+Listasin uudestaan keystore avaimet:
+$ sudo keytool -list -v -keystore keystore.p12 -storetype pkcs12
+
+T‰m‰n j‰lkeen loin uuden avaimen:
+$ sudo keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore /opt/midpoint/var/keystore.p12 -validity 3650
+Listasin viel‰ kerran avaimet:
+$ sudo keytool -list -v -keystore keystore.p12 -storetype pkcs12
+Nyt uusi avain aliaksella tomcat luotiin
+
+Muokkasin t‰m‰n j‰lkeen config.xml tiedostoa ja lis‰sin aliaksen avaint‰geihin sek‰ vaihdoin keystore polun:
+<keyStorePath>${midpoint.home}/keystore.p12</keyStorePath>
+..
+<encryptionKeyAlias>tomcat</encryptionKeyAlias>
+
+Muokkasin viel‰ application.yml tiedostoa:
+# EMBEDDED SERVER CONFIGURATION (ServerProperties)
+server.port=8443
+server.ssl.enabled=true
+server.ssl.key-store=/opt/midpoint/var/keystore.p12
+server.ssl.key-store-password=*******
+server.ssl.key-store-type=PKCS12
+server.ssl.key-alias=tomcat
+
+T‰m‰ ei auttanut, sill‰ uudelleen k‰ynnistyksen j‰lkeen midPointin ei l‰htenyt k‰yntiin ollenkaan.
+Syyn‰ oli se, ett‰ midPoint ei tue keystoren PKCS12 formaattia. T‰m‰ ilmeni lokeissa:
+/opt/midpoint/var/log/midpoint.log
+
+Loin viel‰ uuden avaimen JCEKS formaattiin:
+$ sudo keytool -genkey -alias tomcat -storetype JCEKS -keyalg RSA -keysize 2048 -keystore /opt/midpoint/var/keystore.jceks -validity 3650
+
+Lis‰sin tiedot meist‰ ja vahvistin avaimen. Tuli kuitenkin herja, ett‰ avainta ei voida tehd‰ jceks formaattiin se pit‰si muuntaa PKCS12 muotoon. T‰m‰ virheilmoitus on tullut aiemminkin eik‰ komento virheilmoituksen yhteydess‰ auta. Avain kuitenkin n‰kyi ett‰ se oli luotu komennolla:
+$ sudo keytool -keystore keystore.jceks -storetype jceks -storepass changeit -list
+
+P‰‰tin vaihtaa config.xml tiedostossa aliaksen avaint‰geihin sek‰ vaihdoin keystore polun:
+<keyStorePath>${midpoint.home}/keystore.jceks</keyStorePath>
+..
+<encryptionKeyAlias>tomcat</encryptionKeyAlias>
+
+T‰m‰k‰‰n ei auttanut, kun k‰ynnisti midPoint palvelimen uudelleen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
