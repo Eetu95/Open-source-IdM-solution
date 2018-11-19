@@ -1,0 +1,4 @@
+Viime kerralla emme saaneet SSL-yhteyttä toimimaan midPointin sulautetulla Tomcatilla, mutta Jan kokeili kotona Apachen avulla suojata yhteyden midPointin testiympäristössä ja onnistui siinä.
+
+Tarkoituksena oli kokeilla tänään SSL-sertifikaatin yhdistämistä midPointiin, mutta Linuxin LDAP autentikoinnissa oli ongelmia, joten niitä piti lähteä ratkaisemaan. Esimerkiksi kirjautuminen ei onnistunut linux-käyttäjille.
+
