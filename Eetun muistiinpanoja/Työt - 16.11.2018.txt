@@ -1,0 +1,6 @@
+Yritettiin edelleen ratkaista SSL ongelmaa:
+
+Kokeiltiin vaihtaa <encryptionKeyAlias>strong</encryptionKeyAlias>
+------> <encryptionKeyAlias>certificate</encryptionKeyAlias>
+
+Markuksen muistiinpanoista löytyy lisätietoa yrityksistä --> 
