@@ -1,0 +1,2 @@
+Jan onnistui saamaan SSL-yhteyden asentamalla Apachen midPointiin. Tällä hetkellä midPointissa on
+sulautettu Tomcat.
