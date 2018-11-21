@@ -1,0 +1,328 @@
+Tällä kerralla kokeilin saada midPointin virtuaalitestipalvelimeen SSL-sertifikaatin asetettua Apachen avulla. Jan antoi ohjeet tähän:
+(stepit 1 ja 2 eivät ole välttämättömiä suojauksen onnistumiseen)
+
+
+1. Latasin OneDrivesta meidän projektikansion alikansiosta "VBOX" paikalliselle tietokoneelle "Testiympäristö MidPoint (MariaDB, Unix Connector, LDAP,apache,embedded_tomcat)". Importtasin sen paikallisen tietokoneen VirtualBoxiin.
+2. Avasin virtuaalikoneen ja otin muistiin itselle mitä ip-osoitetta se käyttää. IP-osoite tuli dhcp:ltä
+3. Otin SSH-yhteyden meidän IdM:ään, joka on virtualbox palvelimella testiympäristössä.
+
+4. Asensin apache2 (https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-16-04)
+Ohjeiden mukaisesti Step 4 asti eli ajoin komennot:
+$ sudo apt-get update
+$ sudo apt-get install apache2
+Tämän jälkeen katsoin palomuurin listauksen ja lisäsin seuraavat sovellukset palomuurilistalle:
+$ sudo ufw app list
+$ sudo ufw allow 'Apache Full'
+$ sudo ufw allow 'OpenSSH'
+
+Tämän jälkeen listaus näytti tältä komennolla $ sudo ufw status:
+
+Status: active
+
+To                         Action      From
+--                         ------      ----
+OpenSSH                    ALLOW       Anywhere                  
+Apache Full                ALLOW       Anywhere                  
+OpenSSH (v6)               ALLOW       Anywhere (v6)             
+Apache Full (v6)           ALLOW       Anywhere (v6)
+
+Seuraavaksi katsoin Apachen tilan:
+$ sudo systemctl status apache2
+Näkyi, että Apache on käynnissä:
+Active: active (running)
+
+Tämän jälkeen kirjoitin selaimeen midPoint palvelimme IP-osoitteen, jolloin näkyviin tuli Apachen aloitus sivu. Eli Apache toimii oikein.
+
+5. Ajoin komennot:
+
+$ sudo a2enmod proxy
+$ sudo a2enmod proxy_http
+$ sudo systemctl restart apache2.service
+
+6. Tein SSL-sertificaatti (https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-16-04)
+Ohjeiden mukaisesti ohjeet piti tehdä kokonaisuudessaan.
+
+Loin aluksi uuden itseallekirjoitetun sertifikaatin:
+$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
+Lisäsin tähän tiedot meistä:
+
+Country Name (2 letter code) [AU]:FI
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:Helsinki
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Haaga-Helia
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:*palvelimen IP-osoite*
+Email Address []:markus.nissinen@myy.haaga-helia.fi
+
+Tämän jälkeen loin ohjeiden mukaisesti vahvan .pem tiedoston apachea varten:
+$ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+Tämän teossa kesti pari minuuttia.
+
+Seuraavaksi tein uuden konfiguraatiotiedoston salausta varten kansioon /etc/apache2/conf-available: 
+$ sudo nano /etc/apache2/conf-available/ssl-params.conf
+Tähän tiedostoon ohjeiden mukaisesti lisäsin seuraavat konfiguraatiorivit: 
+
+# from https://cipherli.st/
+# and https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html
+
+SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+SSLProtocol All -SSLv2 -SSLv3
+SSLHonorCipherOrder On
+# Disable preloading HSTS for now.  You can use the commented out header line that includes
+# the "preload" directive if you understand the implications.
+#Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains; preload"
+Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains"
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+# Requires Apache >= 2.4
+SSLCompression off 
+SSLSessionTickets Off
+SSLUseStapling on 
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+
+SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
+
+
+Tallensin tiedoston, jonka jälkeen muokkasin VirtualHostia. Tein aluksi varmuuskopion VirtualHost tiedostosta:
+$ sudo cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bak
+Avasin ja muokkasin VirtualHost tiedostoa:
+$ sudo nano /etc/apache2/sites-available/default-ssl.conf
+
+Lisäsin tähän seuraavat muutokset:
+<IfModule mod_ssl.c>
+        <VirtualHost _default_:443>
+                ServerAdmin markus.nissinen@myy.haaga-helia.fi
+                ServerName *palvelimen IP-osoite*
+
+                DocumentRoot /var/www/html
+
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+                SSLEngine on
+
+                SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
+                SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+
+                <FilesMatch "\.(cgi|shtml|phtml|php)$">
+                                SSLOptions +StdEnvVars
+                </FilesMatch>
+                <Directory /usr/lib/cgi-bin>
+                                SSLOptions +StdEnvVars
+                </Directory>
+
+                BrowserMatch "MSIE [2-6]" \
+                               nokeepalive ssl-unclean-shutdown \
+                               downgrade-1.0 force-response-1.0
+
+        </VirtualHost>
+</IfModule>
+
+Tallensin tiedoston ja lähdin seuraavaksi muokkaaman edelleenohjauksen konfiguraatiota:
+$ sudo nano /etc/apache2/sites-available/000-default.conf
+
+Lisäsin tähän tiedostoon rivin:
+<VirtualHost *:80>
+        . . .
+
+	#ServerName *palvelimen IP-osoite*
+
+	ServerAdmin markus.nissinen@myy.haaga-helia.fi
+	DocumentRoot /var/www/html
+
+        Redirect "/" "https://*palvelimen IP-osoite*"
+
+        . . .
+</VirtualHost>
+
+Tallensin tämän jälkeen tiedoston.
+Seuraavaksi lisäsin konfiguraatio muutoksia Apacheen. Ohjeiden mukaan piti lisätä ssl ja headers moduulit, jotta SSL toimii oikein:
+$ sudo a2enmod ssl
+$ sudo a2enmod headers
+
+Laitoin nämä toimimaan:
+$ sudo a2ensite default-ssl
+$ sudo a2enconf ssl-params
+
+Seuraavaksi tarkistin, että ei ole virheitä muutoksissa:
+$ sudo apache2ctl configtest
+
+Vastaukseksi tuli:
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
+Syntax OK
+
+Vastauksessa oli, että Syntax on OK eli Apache toimii oikein. Herja alussa viittaa siihen, että palvelimen nimi pitäisi määrittää globaalisti. Tein näin eli muokkasin tiedostoa /etc/apache2/apache2.conf:
+$ sudoedit /etc/apache2/apache2.conf
+Lisäsin tiedostoon rivin:
+ServerName *palvelimen IP-osoite*
+
+Tallensin tiedoston. Tämän jälkeen käynnistin Apachen uudelleen:
+$ sudo systemctl restart apache2
+
+Tämän jälkeen testasin suojauksen toimivuutta.
+Kirjoitin selaimeen https://*palvelimen IP-osoite*
+Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitin herjan vain Chromessa vain klikkaamalla Advanced ja Proceed to https://*palvelimen IP-osoite*
+
+Testasin vielä, että uudelleenohjaus toimii. Kirjoitin selaimeen http://*palvelimen IP-osoite*
+Selain uudelleenohjasi suojattuun sivustoon: https://*palvelimen IP-osoite*
+
+Seuraavaksi laitoin uudelleenohjauksen pysyväksi:
+$ sudo nano /etc/apache2/sites-available/000-default.conf
+
+Tiedostoon muokkasin rivin:
+ 
+<VirtualHost *:80>
+        . . .
+
+        Redirect permanent "/" "*palvelimen IP-osoite*"
+
+        . . .
+</VirtualHost>
+
+Tallensin tiedoston ja tarkistin virheet:
+$ sudo apache2ctl configtest
+
+Vastauksena tuli vain Syntax OK.
+
+Käynnistin apachen vielä uudelleen:
+$ sudo systemctl restart apache2
+
+8. Menin ladatulle virtuaalikoneelle ja laitoin komennon:
+
+$ sudo nano /etc/apache2/sites-available/000-default.conf
+
+9. Menin midPoint palvelimelle ja avasin saman tiedoston kuin kohdassa 8.
+
+10. Katsoin mallia virtuaalikoneen tiedostosta ja laitoin samalla lailla ei kommentoidut (eli ne, joissa ei ole alussa risuaitaa) midPoint palvelimen 000-default.conffiin. Vaihtoin ip-osoitteet oikeisiin eli midPoint palvelimen IP-osoitteet. Muokattavat rivit olivat:
+
+<VirtualHost *:80>
+
+	ServerName http://*palvelimen IP-osoite*
+
+	# ServerAdmin markus.nissinen@myy.haaga-helia.fi
+        # DocumentRoot /var/www/html
+
+        Redirect /secure https://*palvelimen IP-osoite*
+        Redirect permanent "/" "https://*palvelimen IP-osoite*/"
+
+</VirtualHost>
+
+Tämän jälkeen tallensin muutokset.
+
+11. Muokkasin default.conf tiedostoa virtuaalikoneella:
+
+$ sudo nano /etc/apache2/sites-available/default-ssl.conf
+
+12. Mene midPoint palvelimelle ja avaa sama tiedosto kuin kohdassa 11.
+
+13. Katsoin mallia tiedostosta ja laitoin samalla lailla ei kommentoidut (eli ne, joissa ei ole alussa risuaitaa) midPoint palvelimen default-ssl.conffiin. Tilalle näihin midPoint palvelimen IP-osoite:
+
+<VirtualHost *:80>
+
+		# ServerAdmin markus.nissinen@myy.haaga-helia.fi
+                # ServerName *palvelimen IP-osoite*
+
+                DocumentRoot /var/www/html
+                ProxyPass / http://127.0.0.1:8080/
+                ProxyPassReverse / http://127.0.0.1:8080/
+
+		SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
+                SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+
+		<FilesMatch "\.(cgi|shtml|phtml|php)$">
+                                SSLOptions +StdEnvVars
+                </FilesMatch>
+                <Directory /usr/lib/cgi-bin>
+                                SSLOptions +StdEnvVars
+                </Directory>
+
+ 		# BrowserMatch "MSIE [2-6]" \
+                #               nokeepalive ssl-unclean-shutdown \
+                #               downgrade-1.0 force-response-1.0
+
+</VirtualHost>
+
+Tallensin tiedoston.
+
+14. Laitoin midPoint palvelimeen komennon:
+
+$ sudoedit /opt/midpoint/var/application.yml
+
+15. Laita tähän tiedostoon seuraavaa:
+
+server.address: 127.0.0.1
+server.port: 8080
+server.session.timeout: 60
+server.use-forward-hearders: true
+server.tomcat.internal-proxies: 127.0.0.1
+
+16. Tallensin tiedoston.
+17. Käynnistä koko midPoint IdM palvelimen uudelleen:
+$ sudo reboot
+18. Kokeilin uudelleen käynnistyksen jälkeen Google Chromella
+
+http://<iposoite>
+(Pitäisi uudelleenohjata https -alkuiseen osoitteeseen. Jos herjaa itseallekirjoitetusta sertifikaatista, ohita se herjaus. Ruutuun pitäisi tulla MidPointin kirjautumisruutu.)
+
+https://<iposoite>
+(Pitäisi toimia. Jos herjaa itseallekirjoitetusta sertifikaatista, ohita se herjaus. Ruutuun pitäisi tulla MidPointin kirjautumisruutu.)
+
+http://<iposoite>:8080/midpoint/
+(ei pitäisi toimia. Tulee error ERR_CONNECTION_REFUSED)
+
+https://<iposoite>:8080/midpoint/
+(ei pitäisi toimia. Tulee error ERR_CONNECTION_REFUSED)
+
+Kokeilin jokaista tapausta selaimessa ja toimi niin kuin pitikin. midPoint on nyt suojattu!
+
+Onnistuneen SSL-suojauksen jälkeen palasin takaisin midPointin dokumentaatioon, jossa oli mainintaa SSL-yhteyksistä työasemilla: https://wiki.evolveum.com/pages/viewpage.action?pageId=15859743
+
+Otin yhteyden Ubuntu 16.04 Server testityöasemalla midPoint palvelimeen:
+$ sudo openssl s_client -connect *palvelimen IP-osoite*:443
+
+Komennolla saattin haettua palvelimen sertifikaatti. MidPointin ohjeiden mukaan nyt sertifikaatti tulee kopioida ja tallentaa .pem formaattiin. Kopioin koko sertifikaatin:
+-----BEGIN CERTIFICATE-----
+****************************
+-----END CERTIFICATE-----
+
+Loin kotihakemistoon servercert.pem tiedoston ja kopioin siihen sertifikaatin tiedot:
+$ sudo nano servercert.pem
+
+Tämän jälkeen servercert.pem tulisi importata midPointin keystoreen. kirjauduin midPoint palvelimeen PuTTYlla. Hain tiedoston midPoint palvelimeen scp komennolla:
+$ sudo scp pisnismiehet@*testityöaseman IP-osoite*:/home/pisnismiehet/servercert.pem /opt/midpoint/var
+
+Sertifikaatti saatiin kopioitua midPoint palvelimelle. Importtasin sertifikaatin keystoreen:
+$ sudo keytool -keystore /opt/midpoint/var/keystore.jceks -storetype jceks -storepass *keystoren salasana* -import -alias servercert -trustcacerts -file servercert.pem
+
+Tämän jälkeen listasin vielä keystoren sisällön:
+$ sudo keytool -keystore keystore.jceks -storetype jceks -storepass *keystoren salasana* -list
+
+Seuraavaksi käynnistin midPoint palvelimen uudelleen:
+$ sudo reboot
+
+Tämän jälkeen kokeilin uudestaan importata käyttäjän Active Directoryn connectorista. Vieläkään tämä ei toiminut vaikka, yhteys on nyt SSL-suojattu.
+
+Tämän jälkeen kokeilin muuttaa aliasta /opt/midpoint/var/config.xml tiedostosta servercert aliakseen, mutta tämän jälkeen tulee herja kun yrittää importata xml-tiedoston midPointiin. Herja viittaa väärään keystoren aliakseen.
+Vaihoin aliaksen takaisin alkuperäiseen (strong).
+
+Tämän jälkeen kokeilin konfiguroida Windows Serveriä. Ohjeet: 
+https://blogs.msdn.microsoft.com/microsoftrservertigerteam/2017/04/10/step-by-step-guide-to-setup-ldaps-on-windows-server/
+
+Tein tämän administrator käyttäjällä.
+Aloitin ohjeet kohdasta, jossa piti ADSI Edit sovelluksella koittaa yhdistää luotuun AD LDS yhteyteen, jonka olin jo luonut aiemmin. 
+Siinä oli seuraavat tiedot, jonka olin tehnyt 5.11.18:
+AD LDS instanssin nimi: PISNISMIEHET
+Valitsin LDAP porteiksi 50000 ja 50001, koska oletus LDAP portit (389 ja 636) ovat tuleet käyttöön Active Directoryn Domain Services mukana.
+Application Directory Partition on CN=Midpoint,DC=PISNISMIEHET,DC=LOCAL
+
+Seurasin ohjeita siltä osin samanlaisesti, mutta CA tyypiksi valitsin Enterprise CA, koska me käytemme Active Directory Domain Services sovellusta. Avaimen kryptaukseen valitsin SHA256.
+
+Ohjeiden mukaisesti sain importattua sertifikaatin javan keystoreen. Testasin yhteyttä ldp.exe sovelluksella, mutta en saanut yhteyttä porttiin 636. Jokin konfiguraatiossa ilmeisesti meni väärin.
+
+Ensi kerralla aion kokeilla tämän ohjeen mukaisesti:
+https://gist.github.com/magnetikonline/0ccdabfec58eb1929c997d22e7341e45
+
+
+
+
+
