@@ -3,4 +3,46 @@ Viime kerralla minulta j‰i kokeilematta yksi ohje, joka voisi auttaa Windows Ser
 Kokelin t‰m‰n ohjeen mukaisesti LDAPS yhteyden toimivuutta:
 https://gist.github.com/magnetikonline/0ccdabfec58eb1929c997d22e7341e45
 
-Loin avaimen
+Kokelin ennen sit‰ Windows Serverill‰ ldp.exe ohjelmalla kokeilla LDAPS yhteyden toimivuutta.
+Sovelluksesta klikkasin Connection - Connect to... Valitsin palvelimeksi localhost ja portiksi 636 sek‰ t‰pp‰ kohtaan SSL.
+
+Yhteys yll‰tt‰en toimikin, vaikka mit‰‰n konkreettista en ehtinyt tekem‰‰n. Viime kerralla yhteys ei toiminut jostain syyst‰.
+
+T‰m‰n j‰lkeen importtasin uudestaan midPoint palvelimelle Active Directory Connectorin. T‰ll‰ kertaa vaihdoin portiksi 636 sek‰ yhteydeksi SSL.
+Connectori sai onnistuneesti yhteyden Active Directoryyn. 
+
+Seuraavaksi kokeilin j‰lleen importata k‰ytt‰j‰n Active Directorysta. Tulee ilmoitus, ett‰ k‰ytt‰j‰ on importattu onnistuneesti midPointista, mutta siltik‰‰n k‰ytt‰j‰ ei ilmesty midPointin Users -kohtaan. 
+
+Kysyttiin j‰lleen apua t‰h‰n ongelmaan midPointin postituslistalta ja sielt‰ tuli j‰lleen samanlainen ohje kuin viime kerralla eli pit‰isi lis‰t‰ XML-tiedostoon inbound mappaust‰git.
+
+Malli:
+
+<attribute>
+<c:ref>ri:USERNAME</c:ref>
+<inbound>
+<strength>strong</strength>
+<target>
+<c:path>$focus/name</c:path>
+</target>
+</inbound>
+</attribute>
+
+En l‰htenyt enemp‰‰ muokkaamaan XML-tiedostoa, vaan kokeilin tehd‰ uuden k‰ytt‰j‰n midPointiin. Loin aluksi uuden k‰ytt‰j‰n antamalla sille vain etunimen, sukunimen, aktivoin k‰ytt‰j‰n ja vahvan salasanan. 
+T‰m‰n j‰lkeen muokkasin uuttaa k‰ytt‰j‰‰: Projections v‰lilehden kautta lis‰sin k‰ytt‰j‰n Active Directory Connectoriin. Yll‰tt‰en k‰ytt‰j‰ linkkautuikin AD Connectoriin, vaikka tulisin jotain virheilmoitusta salasanaan liittyen. Katsoin AD:n Connectorista, ja siell‰ nyt n‰kyi uusi k‰ytt‰j‰. 
+Seuraavaksi katsoin Windows Serverill‰ Active Directorya ja siell‰ n‰kyi juuri luotu k‰ytt‰j‰! Kokeilin testityˆasemalla kirjautua uudella k‰ytt‰j‰ll‰ ja sekin onnistui. K‰ytt‰j‰ oli tavallinen k‰ytt‰j‰ ilman Admin-oikeuksia.
+
+Kokeilin seuraavaksi tehd‰ uuden k‰ytt‰j‰n samalla tavalla, mutta t‰ll‰ kertaa annoin helpommin muistettavan salasanan, jolloin tulikin salasanaan viittaava virheilmoitus, eik‰ k‰ytt‰j‰‰ pystynyt yhdist‰m‰‰n AD Connectoriin.
+Muokkasin seuraavaksi Windows Serverin policya, jotta myˆs helpompia salasanoja voidaan k‰ytt‰‰.
+
+Avasin Windows Serverill‰ Server Managerin ja sielt‰ Tools - Group Policy Management
+Omasta domainnimest‰ hiiren oikealla klikkasin ja valitsin Create GPO in this domain, and Link it here...
+Annoin policylle nimen ja klikkasin OK.
+Seuraavaksi avasin domain.localin ja v‰lilehdelt‰ Linked Group Policy Objects vaihdoin j‰rjestyksen niin, ett‰ uusi GPO on ensimm‰isen‰ listassa. 
+T‰m‰n j‰lkeen klikkasin uudesta GPO:sta Edit ja jolloin p‰‰sin muokkaamaan policya. Puun‰kym‰st‰ valitsin Computer Configuration - Policies - Windows Settings - Security Settings - Account Policies - Password Policy.
+Muokkasin asetukset niin, ett‰ salasanojen ei tarvitse olla niin pitki‰ eik‰ edellyt‰ tiettyj‰ merkkej‰.
+
+T‰m‰n j‰lkeen kokelin lis‰t‰ midPointiin uuden k‰ytt‰j‰n ja yhdist‰‰ sen AD Connectoriin niin, ett‰ salasana oli helpompi. Lopuksi annoin komentokehotteessa komennon gpupdate /force. Nyt k‰ytt‰jille voi asettaa mink‰ tahansa salasanan. 
+
+
+
+
