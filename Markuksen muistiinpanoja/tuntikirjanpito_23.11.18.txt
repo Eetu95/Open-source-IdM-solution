@@ -1,0 +1,6 @@
+Viime kerralla minulta jäi kokeilematta yksi ohje, joka voisi auttaa Windows Serverin toimivuuteen siinä mielessä, että IdM saa yhteyden Windows Serveriin kokonaisuudessaan.
+
+Kokelin tämän ohjeen mukaisesti LDAPS yhteyden toimivuutta:
+https://gist.github.com/magnetikonline/0ccdabfec58eb1929c997d22e7341e45
+
+Loin avaimen
