@@ -1,0 +1,58 @@
+SSL sertifikaatin yhdistämisessä oli ongelmia viime kerralle, joten lähetimme midPointin postituslistalle kysymyksen siitä, miten SSL sertifikaatti tulisi asettaa midPointiin, koska omat midPointin ohjeet ovat epäselviä.
+
+Vastaukseksi midPointilta tuli, että JVM tulee osoittaa keystore.jceks tiedostoon uudella bash tiedostossa. Bash tiedoston nimeksi tulee setenv.sh ja se pitää olla polussa /opt/midpoint/bin:
+
+$ cd /opt/midpoint/bin
+$ sudo nano setenv.sh
+
+Lisättiin tiedostoon rivit:
+#!/bin/sh
+
+export JAVA_OPTS="$JAVA_OPTS
+-Djavax.net.ssl.trustStore=/opt/midpoint/var/keystore.jceks
+-Djavax.net.ssl.trustStoreType=jceks
+
+Tämän jälkeen annettiin tiedostoon ajo-oikeudet: 
+$ sudo chmod 755 setenv.sh
+
+Käynnistettiin tämän jälkeen midPoint testipalvelin uudelleen.
+Mainista tästä oli midPointin ohjeissa: https://wiki.evolveum.com/display/midPoint/Installing+MidPoint+Server
+
+
+
+Sähköpostiviesti kokonaisuudessaan:
+Hi,
+this is JVM option, not a command line command.
+You need to provide that in the same way as the other JVM parameter are passed to midPoint.
+
+If you are using standalone midPoint, you can do this:
+1. create <midpoint>/bin/setenv.sh file (<midpoint> is the directory where midPoint is installed)
+2. set the JAVA_OPTS variable inside that file:
+#!/bin/sh
+
+export JAVA_OPTS="$JAVA_OPTS -D.................."
+
+3. make the file executable: chmod 755 setenv.sh
+4. start midPoint
+
+This is mentioned also here: https://wiki.evolveum.com/display/midPoint/Installing+MidPoint+Server
+
+
+Tämä ei kuitenkaan auttanut sillä testityöasemat eivät siltikään saa haettua sertifikaattia palvelimelta:
+$ openssl s_client -connect *palvelimen IP*:8080
+
+Virheilmotus: 
+CONNECTED(00000003)
+140382839092888:error:140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown protocol:s23_clnt.c:794:
+
+Komento midPoint palvelun uudelleen käynnistämiseen:
+$ sudo systemctl restart midpoint
+
+Tarkistin, että kaikki tarvittavat portit ovat auki midPoint testipalvelimella. Ainakin portit 80, 8080, 443 tulee olla auki.
+Nämä kaikki olivat. Vieläkin on epäselvää miksi testityöasema ei saa haettua sertifikaattia palvelimelta.
+
+
+
+
+
+

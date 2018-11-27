@@ -1,0 +1,22 @@
+Etsin lisenssit vertailuun otetuille IdM-järjestelmille (Löytyvät Microsoft OneNote:sta):
+
+Apache Syncope
+- Apache 2.0 = Vapaan ohjelmiston lisenssi. Sallii lähdekoodin käytön vapaan ja avoimen koodin kehittämisen, myös omistetun ja suljetun koodin kehittämisen.
+(https://fi.wikipedia.org/wiki/Apache-lisenssi, http://www.apache.org/licenses/, https://syncope.apache.org/)
+
+midPoint
+- Apache 2.0 = Vapaan ohjelmiston lisenssi. Sallii lähdekoodin käytön vapaan ja avoimen koodin kehittämisen, myös omistetun ja suljetun koodin kehittämisen. 
+(http://www.apache.org/licenses/LICENSE-2.0, http://www.apache.org/licenses/, https://fi.wikipedia.org/wiki/Apache-lisenssi, https://wiki.evolveum.com/display/midPoint/Licensing)
+
+OpenIDM
+- CDDL = Ilmainen vapaan lähdekoodin ohjelmiston lisenssi, perustuu MPL-lisenssiin. CDDL lisenssillä varustetut tiedostot voi yhdistää muoden lisenssien alla oleviin tiedostoihin (avoimenlähdekoodin tai patentoitu).
+(https://en.wikipedia.org/wiki/OpenIDM, https://en.wikipedia.org/wiki/Common_Development_and_Distribution_License, https://forgerock.github.io/openidm-community-edition/)
+
+Soffid IAM
+- Soffid IAM Console projekti lisenssi = GNU GPL Version 3.  Vapaan ohjelmiston lisenssi, joka antaa oikeuden kenelle tahansa käyttää, kopioida, muuttaa ja jakaa edelleen ohjelmia ja niiden lähdekoodia. Lisenssi ei estä kaupallista käyttöä. 
+(http://www.soffid.com/doc/console/license.html, https://fi.wikipedia.org/wiki/GNU_General_Public_License,  http://www.gnu.org/licenses/gpl-3.0.en.html)
+
+Keycloak
+Apache 2.0 = Vapaan ohjelmiston lisenssi. Sallii lähdekoodin käytön vapaan ja avoimen koodin kehittämisen, myös omistetun ja suljetun koodin kehittämisen. 
+(http://www.apache.org/licenses/LICENSE-2.0, http://www.apache.org/licenses/, https://fi.wikipedia.org/wiki/Apache-lisenssi, https://github.com/keycloak/keycloak/blob/master/License.html,
+https://en.wikipedia.org/wiki/Keycloak)

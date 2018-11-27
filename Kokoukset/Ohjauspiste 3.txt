@@ -1,0 +1,17 @@
+Ohjauspiste 3
+--------------
+
+Päivämäärä: 12.11.2018
+Aika: 18:00 - 19:00
+Läsnäolijat:
+* Jan Parttimaa, Projektipäällikkö
+* Eetu Pihamäki, Projektin jäsen
+* Markus Nissinen, Projektin jäsen
+
+Tilanne:
+
+Olemme saaneet projektin aikataulua kirittyä aika hyvin. Olemme aikalailla IdM:n testauksessa. Unix- connector on saatu konfiguroitua sekä sen avulla saatu liitettyä testipalvelin IdM:n piiriin. Testipalvelimena toimii Ubuntu Server 16.04.5 LTS (64-bit). LDAP-connector on myös saatu konfiguroitua ja LDAP-palvelin saatu edellä mainitun connectorin avulla IdM:n piiriin ongelmista huolimatta. Kumpiekin osalta provisiointi on testattu ja se toimii. Eetu on tutkinnut IdM:n lokeja. Yrityspilotointi ollaan torpattu, koska aikataulu ei riitä siihen. IdM:n konfigurointi ja kohdejärjestelmien liittäminen IdM:n piiriin vei ja vie edelleen huomattavasti enemmän työtunteja verrattuna siihen mitä suunniteltiin. 
+
+Jatko:
+
+Edessä on Active Directoryn liittäminen IdM:n piiriin sekä provisioinnin testaus. Tämän päävastuu on Markuksella. Edessä on myös olemassa olevien yhteyksien salaaminen. Tätä on jo tutkinnut sekä Eetu ja Markus. Jan auttaa myös tässä. Näiden lisäksi on loppudokumentaation teko.  

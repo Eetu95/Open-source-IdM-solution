@@ -1,0 +1,13 @@
+Open source idM (backend) vertailu  aluksi. Linux master -> Yhteydet muihin järjestelmiin (AD, Linux-ympäristö, CRM, Flexim yms) salakirjoitettu (rajapinnat).
+Tapahtumien kirjaus lokeihin (esim. Windows-kirjautuminen).
+    -kuka,mihin,tiedot (ip,laite)
+integraatio tavallisiin järjestelmiin. Eritasoiset salasanat eri tasoisiin järjestelmiin.
+
+Tarkista open source idM softien suosio alla olevista hakupalveluista:
+google scholar
+google trends
+amazon
+
+
+
+

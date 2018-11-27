@@ -1,0 +1,49 @@
+Windows Serverin aktivoinnin kanssa ongelmat edelleen jatkuivat. Emme saaneet avaintamme aktivointua Windowsiin. Seuraavaksi päätimme ladata Windows Server 2016 Evalution version ISO tiedoston Microsoftin sivuilta, jossa on jo valmis lisenssi. Sivuston osoite: https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2016
+Lisenssi kestää tosin 180 päivää.
+
+Asensin Windows Serverille uudet päivitykset, asetin staattisen IP-osoitteen ja lähdin luomaan Domainia.
+
+Tässä välissä kokeilin lisätä loppuun MidPontin Unix-Connectoria palvelimelle.
+Asensin aluksi testikoneelle SSH:n
+
+$ sudo apt-get install ssh
+
+Kaikki oikeudet kansioon:
+$ cd /opt/midpoint/var
+$ sudo chmod -R ugo+rwx icf-connectors/
+
+Seuraavaksi loin Linux testityöasemalla midpoint käyttäjän ja asetin sille salasanan:
+$ sudo useradd -m midpoint
+$ sudo passwd midpoint
+
+Seuraavaksi lisäsin oikeudet midpoint käyttäjälle:
+$ sudoedit /etc/sudoers.d/midpoint
+Tänne tämä:
+https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/resources/unix/midpoint-user-example.txt
+Eli kansioon lisätään kyseiset oikeudet:
+
+Host_Alias HOST = ALL
+
+midpoint HOST=(ALL) NOPASSWD: /usr/sbin/useradd,/usr/sbin/usermod,/usr/sbin/userdel,/usr/sbin/groupadd,/usr/sbin/groupmod,/usr/sbin/groupdel,/bin/mv,/usr/bin/passwd,/usr/bin/getent,/bin/echo,/usr/bin/tee,/bin/chown,/bin/chmod,/bin/mkdir,/usr/bin/groups,/usr/bin/id,/usr/bin/replace,/bin/rm,/bin/cat
+
+
+Seuraavaksi latasin esimerkki konfiguraation unix-connectorille täältä:
+
+$ wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/resources/unix/resource-unix-advanced.xml
+Muokkasin seuraavaksi konfiguraatiota:
+$ sudoedit resource-unix-advanced.xml
+Muutin XML-tiedostoon testikoneen IP-osoitteen, laitoin luodun midpoint tunnuksen salasanan niille asetetuille paikoille (esimerkissä muutettavat kohdat oli kommentoitu).
+
+Seuravaaksi menin midpoint palvelimen osoitteeseen ja kirjauduin sisään.
+Lisäsin admin-konsolissa Import Object kohdasta sinne muokatun xml-tiedoston. Recources alla nyt näkyy Unix Connector onnistuneesti sekä yhteyskin toimi Test Connection nappia testaamalla.
+
+Seuraavaksi lähdin kirjoittamaan blogia edellisten kertojen MariaDB tietokannan liittämisestä midPoint palvelimelle.
+https://opensourceidm.wordpress.com/2018/10/26/mariadb-tietokannan-liittaminen-midpoint-palvelimelle/
+
+
+
+
+
+
+
+

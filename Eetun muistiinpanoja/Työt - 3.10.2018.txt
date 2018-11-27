@@ -1,0 +1,30 @@
+Tein pöytäkirjan tänään käydystä ohjauskokouksesta. 
+OSI ja FSF (Löytyvät GitHubista - Vertailutaulukko.xlsx):
+
+- Apache 2.0
+
+	-FSF:n hyväksymä vapaan ohjelmiston lisenssi, joka on yhteensopiva GNU GPL v3 lisenssin kanssa.
+	(https://www.apache.org/licenses/GPL-compatibility.html).
+
+- CDDL 1.0
+
+	-FSF:n hyväksymä vapaan ohjelmiston lisenssi, joka ei ole yhteensopiva GNU GPL:n kanssa.
+	(https://en.wikipedia.org/wiki/Common_Development_and_Distribution_License, https://directory.fsf.org/wiki/License:CDDL-1.0).
+
+- GNU GPL v3
+
+	-FSF:n hyväksymä vapaan ohjelmiston lisenssi. (https://en.wikipedia.org/wiki/GNU_General_Public_License,
+	https://www.gnu.org/licenses/gpl-3.0.html).
+
+- Unityn oma lisenssi,  ICM Uniwersytet Wasrszawski
+
+	-Ei tietoa, puolan kielistä tekstiä.
+
+- LGPL
+
+	-FSF:n hyväksymä vapaan ohjelmiston lisenssi. GPL:n ja LGPL:n välinen ero on se, että LGP-ohjelmistot pystytään linkittämään yhteen dynaamisesti ei-GPL-lisensioudun ohjelman osan kanssa. 
+	(https://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License, https://www.gnu.org/licenses/lgpl-3.0.en.html).
+
+Kirjoitin projektisivuillemme blogiviestin omalta osaltani IdM-järjestelien vertailukriteerien tiedonetsinnästä ja siitä
+kuinka hyvin eri järjestelmät pärjäsivät, linkit joka järjestelmä kommentin lopussa. --> https://opensourceidm.wordpress.com/
+

@@ -1,0 +1,10 @@
+- Google Scholars -opetus
+- Referenssit oltava tarkkoja ja yksityiskohtaisia
+- Käytetäänkö Suomessa jotain IdM-järjestelmäehdokasta
+- Kirjoitetaan omin sanoin vaatimukset, että itsekkin ymmärtää sekä muut kanssa
+- Yleisimmät järjestelmien rajapinnat
+- Mistä IdM-ehdokkaat löydetty (esim .Wikipedia yms)?
+- Tieto hylätyistä ehdokkaista (maksulliset)
+- Suosittuja kirjoja aiheesta? Esim. Amazon, Safari Books Online <-- Haaga-Helian verkosta pääsee.
+- IBM rajapinnat mahdollisesti pois listauksesta, jos eivät ole olennaisia
+- Kirjallinen dokumentti Githubiin tekstitiedostossa / markdown

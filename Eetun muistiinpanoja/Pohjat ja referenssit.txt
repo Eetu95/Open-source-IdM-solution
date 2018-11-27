@@ -1,0 +1,47 @@
+Esityslista pohja tehty --> https://haagahelia-my.sharepoint.com/:t:/g/personal/a1602670_myy_haaga-helia_fi/Ecg3edLRG3lNhMdz6eXQ9RkBf2QMq8qMuMKNGsjrouBI4g?e=Cy5yLy
+
+Kokousmuistio pohja tehty --> https://haagahelia-my.sharepoint.com/:w:/g/personal/a1602670_myy_haaga-helia_fi/EfdYnk936mFIn-QlsbNwLswBRV1hwxRiHhYQ_JKRkk62_A?e=bt4Z3L
+
+Löysin Apache Syncope IdM-järjestelmälle referenssejä:
+
+- http://www.tirasa.net/customers.html 
+
+- http://www.tirasa.net/customer/university-of-helsinki.html 
+
+- http://www.tirasa.net/customer/ptc.html 
+
+- http://www.tirasa.net/customer/university-of-porto.html 
+
+- http://www.tirasa.net/customer/esercito-italiano.html 
+
+- http://www.tirasa.net/customer/plainid.html 
+
+- http://www.tirasa.net/customer/swm.html 
+
+- http://www.tirasa.net/customer/ospedali-riuniti.html 
+
+- http://www.tirasa.net/customer/iwelcome.html 
+
+- http://www.tirasa.net/customer/ulss6.html 
+
+- http://www.tirasa.net/customer/everett.html 
+
+- http://www.tirasa.net/customer/university-of-pavia.html 
+
+- http://www.tirasa.net/customer/usharesoft.html 
+
+- http://www.tirasa.net/customer/izs.html
+
+Löysin OpenIDM IdM-järjestelmälle referenssejä:
+
+- https://forgerock.wistia.com/medias/u6geik4t98
+
+Ei varmuutta ovatko nämä juuri openIDM:n käyttäjiä.
+
+- https://www.forgerock.com/resources/view/63288963/customer-story/axalta-selects-forgerock-to-support-new-ecommerce-platform.pdf
+
+- https://www.forgerock.com/resources/view/63234462/customer-story/powering-digital-transformation-at-the-bbc.pdf
+
+- https://www.forgerock.com/resources/view/64996733/customer-story/dvsa-delivers-digital-transformation.pdf
+
+- https://www.forgerock.com/resources/view/63234514/customer-story/cnav-gets-speed-user-convenience-and-high-security-of-personal-data.pdf

@@ -1,0 +1,116 @@
+28.9.18
+Vertailin 9 eri vaatimusta kustakin IdM-järjestelmästä. Lisättiin vertaillun tulokset Excel-taulukkoon. Aloitin Google Trendsin vertailulla, suosituimpana järjestelmänä oli Keycloak, vähiten suosituin oli Grouper.
+Lisäsin vertailutaulukkoon Google Trendsin, kirjojen ja referenssien osalta tiedot, joita olimme listanneet GitHubiin (45min).
+Lähdin seuraavaksi hakemaan tietoa IdM-järjestelmistä vaatimusten mukaan.
+
+Eri salasanat eri tasoisiin järjestelmiin, tukee järjestelmien omia käytäntöjä
+Apache Syncope - kyllä: http://syncope-user.1051894.n5.nabble.com/Active-Directory-password-propagation-td5708922.html
+MidPoint - kyllä: https://wiki.evolveum.com/display/midPoint/Initial+Password+Management+Discussion#InitialPasswordManagementDiscussion-ActiveDirectorypasswordsynchronization
+OpenIDM	- kyllä: https://backstage.forgerock.com/knowledge/kb/book/b77434199 kohdasta: How do I troubleshoot Active Directory password synchronization issues in IDM/OpenIDM (All versions)?
+Soffid	- kyllä: http://confluence.soffid.org/display/SOF/3.+Synchronization+Server+Connectors
+Keycloak - kyllä: https://www.keycloak.org/docs/3.0/server_admin/topics/user-federation/ldap.html
+Unity - kyllä: http://www.unity-idm.eu/documentation/unity-1.4.0/manual.html#external-idps
+OpenIAM	- HYLÄTTY
+Shibboleth - kyllä: https://wiki.shibboleth.net/confluence/display/IDP30/PasswordAuthnConfiguration	
+WSO2 Indentity Server - kyllä: https://docs.wso2.com/display/ISCONNECTORS/Authenticators+and+Connectors
+Gluu - kyllä: https://gluu.org/docs/ce/authn-guide/passport/
+Josso - kyllä: http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/html/en-US/JOSSO_Reference.html#Authentication_Setup
+FreeIPA	- kyllä: https://www.freeipa.org/page/HowTos#Interoperability_with_other_systems
+Aerobase - ei tietoa	
+Grouper - ei tietoa
+(1h 30min)
+
+Henkilö- ja käyttäjätunnusprofiilien muokkausmahdollisuus
+Apache Syncope - kyllä: https://cwiki.apache.org/confluence/display/SYNCOPE/Users
+MidPoint - kyllä: https://wiki.evolveum.com/display/midPoint/Self+Services
+OpenIDM	- kyllä: https://backstage.forgerock.com/docs/openidm/4/integrators-guide/#ui-profile-custtab
+Soffid	- kyllä: http://confluence.soffid.org/display/SOF/User+attributes
+Keycloak - kyllä: https://www.keycloak.org/docs/3.3/server_admin/topics/users/required-actions.html | https://www.keycloak.org/docs/2.5/server_admin/topics/account.html
+Unity - kyllä: http://www.unity-idm.eu/documentation/unity-1.4.0/manual.html#_authorization
+OpenIAM	- HYLÄTTY
+Shibboleth - HYLÄTTY 	
+WSO2 Indentity Server - kyllä: https://docs.wso2.com/display/IS530/Configuring+Users#ConfiguringUsers-Updateusers
+Gluu - kyllä: https://gluu.org/docs/ce/3.1.0/admin-guide/user-management/
+Josso - HYLÄTTY kyllä: http://docs.atricore.com/josso2/2.4/josso-reference-guide/html/en-US/JOSSO_Reference.html#User_Accounts
+FreeIPA	- kyllä: https://www.redhat.com/archives/freeipa-users/2014-February/msg00050.html
+Aerobase - HYLÄTTY. Ei tietoa muokkausmahdollisuudesta.
+Grouper - ei tietoa
+(1h)
+
+IdM-järjestelmä pyörii Linux-palvelimella
+Apache Syncope - kyllä: https://syncope.apache.org/docs/2.0/getting-started.html#debian-packages
+MidPoint - kyllä: https://wiki.evolveum.com/display/midPoint/Linux+-+RedHat
+OpenIDM	- kyllä: https://backstage.forgerock.com/docs/idm/5/release-notes/index.html#requirements-os
+Soffid	- kyllä: https://www.youtube.com/watch?v=NPiHFghFGZ8
+Keycloak - kyllä: https://github.com/keycloak/keycloak-quickstarts
+Unity - kyllä: http://www.unity-idm.eu/downloads/
+OpenIAM	- HYLÄTTY: ilmainen versio ei tue juuri mitään järjestelmiä
+Shibboleth - HYLÄTTY: liian vähäinen järjestelmien tuki
+WSO2 Indentity Server - kyllä: https://docs.wso2.com/display/IS500/Installing+on+Linux+or+OS+X
+Gluu - kyllä: https://gluu.org/docs/ce/installation-guide/install/
+Josso - HYLÄTTY: liian vähäinen järjestelmien tuki. Linux kyllä: http://www.josso.org/getting-started.html kts. kuvat
+FreeIPA	- kyllä: https://www.youtube.com/watch?v=_zlcxjkbayk | https://www.freeipa.org/page/About
+Aerobase - HYLÄTTY: ei löydy AD-tukea. Linux kyllä: https://aerobase.atlassian.net/wiki/spaces/ARB/pages/7077889/Installing+Aerobase	
+Grouper - kyllä: https://spaces.at.internet2.edu/display/Grouper/Grouper+Book+-+Installing+the+quickstart+-+Linux
+(30min)
+
+Tapahtumien kirjaus lokeihin
+Apache Syncope - kyllä: https://www.youtube.com/watch?v=si7iO183Oio
+MidPoint - kyllä: https://wiki.evolveum.com/display/midPoint/Log+Viewer
+OpenIDM	- kyllä: http://docs.forgerock.org/en/openidm/2.0.2/integrators-guide/OpenIDM-Integrators-Guide/chap-auditing.html
+Soffid	- kyllä: http://www.soffid.com/soffid-learning-site/
+Keycloak - kyllä: https://www.keycloak.org/docs/3.2/server_admin/topics/events/login.html
+Unity - kyllä: https://docs.unity3d.com/Manual/LogFiles.html
+OpenIAM	- HYLÄTTY: ilmainen versio ei tue juuri mitään järjestelmiä
+Shibboleth - HYLÄTTY: liian vähäinen järjestelmien tuki
+WSO2 Indentity Server - kyllä: https://docs.wso2.com/display/IS530/System+Logs
+Gluu - kyllä: https://gluu.org/docs/ce/operation/logs/
+Josso - HYLÄTTY: liian vähäinen järjestelmien tuki. Linux kyllä: http://www.josso.org/getting-started.html kts. kuvat
+FreeIPA	- kyllä: https://www.freeipa.org/page/Centralized_Logging
+Aerobase - HYLÄTTY: ei löydy AD-tukea. Linux kyllä: https://aerobase.atlassian.net/wiki/spaces/ARB/pages/7077889/Installing+Aerobase	
+Grouper - kyllä: https://spaces.at.internet2.edu/display/Grouper/Grouper+Provisioning%3A+PSPNG
+(30min)
+
+Vaarallisten työyhdistelmien tunnistus tehtävätasoisesti
+Apache Syncope - kyllä: https://cwiki.apache.org/confluence/display/SYNCOPE/Work+with+user+approval
+MidPoint - kyllä: https://wiki.evolveum.com/display/midPoint/Workflows
+OpenIDM	- kyllä: https://forum.forgerock.com/2017/04/introducing-idm-workflow/
+Soffid	- kyllä: https://www.youtube.com/watch?v=H6zhC8APIoA
+Keycloak - kyllä: https://www.keycloak.org/docs/3.0/server_admin/topics/roles.html
+Unity - kyllä: http://www.unity-idm.eu/documentation/unity-2.6.2/manual.html#_authorization
+OpenIAM	- HYLÄTTY
+Shibboleth - HYLÄTTY
+WSO2 Indentity Server - kyllä: https://docs.wso2.com/display/IS530/Workflow+Management
+Gluu - kyllä: https://gluu.org/docs/ce/user-management/local-user-management/
+Josso - HYLÄTTY
+FreeIPA	- ei tietoa
+Aerobase - HYLÄTTY 
+Grouper - ei tietoa
+(1h 45min)
+
+Soveltuu myös suureen yritykseen
+Apache Syncope - kyllä: käytetty monissa (suurissakin yrityksissä) mm. Helsingin yliopisto. http://www.tirasa.net/customers.html
+MidPoint - kyllä: paljon suuria yrityksiä käyttävät midPointtia. https://evolveum.com/about-us/references/
+OpenIDM	- kyllä: suuriakin yrityksiä käyttää järjestelmää - https://www.forgerock.com/our-customers 
+Soffid	- kyllä: muutamalla suurella yrityksellä on käytössä: http://www.soffid.com/customer-experiences-2/
+Keycloak - oletettavasti kyllä: ei mainintaa että voiko käyttöoikeusrooleja tehdä vain rajattu määrä.
+Unity - HYLÄTTY
+OpenIAM	- HYLÄTTY
+Shibboleth - HYLÄTTY
+WSO2 Indentity Server - kyllä: suuriakin yrityksiä käyttää järjestelmää. https://wso2.com/casestudies/nutanix-enhances-experience-of-rapidly-growing-user-base-with-single-sign-on-using-wso2-identity-server/
+Gluu - HYLÄTTY
+Josso - HYLÄTTY
+FreeIPA	- HYLÄTTY
+Aerobase - HYLÄTTY 
+Grouper - HYLÄTTY
+(1h 15min)
+
+Hylätyt järjestelmät tässä vaiheessa:
+Unity: Oma lisenssi; monimutkainen. Hylkäämme ehdokkaan.
+OpenIAM	- ilmainen versio ei tue juuri mitään järjestelmiä
+Shibboleth - liian vähäinen järjestelmien tuki
+Josso - liian vähäinen järjestelmien tuki
+FreeIPA - Tukee vain paria rajapintaa
+Aerobase - ei löydy esim. AD-tukea
+Grouper - Tukee vain paria rajapintaa/järjestelmätukea. Tarkoitettu lähinnä yliopistojen käyttöön.
+

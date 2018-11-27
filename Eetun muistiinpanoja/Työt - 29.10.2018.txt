@@ -1,0 +1,6 @@
+- Tein esityslistan ohjauskokoukseen ja lähetin sen osallistujille.
+- Lähetin viimeviikon tuntikirjanpidon Moodleen.
+- Tein pöytäkirjan puhtaaksi
+- Microsoft Supportilta selvitystä Windows Server 2016 aktivointiavaimesta. Aktivoitiin avain kerran VirtualBoxissa -> poistettiin
+virtuaalikone -> avain ei toiminut uudella koneella (avain on aktivoitu!) -> Microsoft Supporttiin yhteys.
+- Tehtävänä seuraavalla kerralla Unix connector asennus midPointiin sekä VirtulBoxissa olevan palvelimen kytkeminen IdM:n piiriin.

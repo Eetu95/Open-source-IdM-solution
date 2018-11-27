@@ -1,0 +1,13 @@
+Aloin liittämään Ubuntu Serveriä (testipalvelinta) midPointiin Unix-connectorin avulla tuotantoympäristössä --> 
+https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Eetun%20muistiinpanoja/Ty%C3%B6t%20-%2026.10.2018.txt
+
+Ongelmia tuli vastaan kun yritin lisätä testipalvelinta käyttäjille midPointissa
+(Error: ..."Could not create user: >>> /etc/sudoers.d/%midpoint-admins: syntax error near line 1 <<< sudo: parse error in near line 1 sudo: no valid sudoers sources found, quitting sudo:unable to initialize policy plugin: Got unexpected exception:...).
+Sain lisättyä käyttäjän testipalvelimelle kun jätti scheman pois (käyttäjä: testii). Kokeilin asentaa uudella käyttäjällä, mutta
+se ei aluksi onnistunut, koska käyttäjä ei ollut sudo ryhmässä. Piti midpointissa laittaa "testii" käyttäjän
+subtypeksi "sudo" sekä tehdä rooli nimeltä "sudo" sekä roolin asetuksissa laittaa display nimeksi sudo ja
+subtypeksi "root".
+
+Katselin midPointin lokeja ensin --> less /var/log/syslog (shift + g), less /var/log/authlog (shift + g).
+Ei löytänyt käyttäjien lisäämistietoja. Menin katsomaan midPointin GUI --> Reports --> Audot Log Viewer.
+Katsoin midPointin omaa dokumentaatiota lokeista. https://wiki.evolveum.com/display/midPoint/Log+Viewer

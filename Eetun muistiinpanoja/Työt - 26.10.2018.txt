@@ -1,0 +1,37 @@
+Jatkoin Unix connectorin asentamista --> https://evolveum.com/blog/provisioning-to-unix-in-5-steps/
+Asensin midPoint VM serveriin sek‰ Ubuntu 16.04 VM Desktopiin ssh:n
+
+$ sudo apt-get install ssh
+
+Otin yhteyden Ubuntu 16.04 Desktopiin ssh:lla ja tein sinne k‰ytt‰j‰n.
+
+$ ssh pisnismiehet@172.28.171.228
+
+$ sudo useradd -m midpoint
+
+$ sudo passwd midpoint
+
+Loin kansion, jonne konffasin oikeat luvat midpoint k‰ytt‰j‰lle. Permissions --> 
+https://github.com/Evolveum/midpoint/blob/master/samples/resources/unix/midpoint-user-example.txt
+
+$ sudo nano /etc/sudoers.d/midpoint
+
+Latasin Ubuntu 16.04 Desktopiin unix konffitiedoston --> https://github.com/Evolveum/midpoint/blob/master/samples/resources/unix/midpoint-user-example.txt
+
+$ sudo wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/resources/unix/resource-unix-advanced.xml
+
+Vaihdoin tiedostosta hostname, username ja salasanan oikeisiin.
+
+Importtasin kyseisen xml-tiedoston midPointin selaink‰yttˆliittym‰n kautta.
+
+Importattiin MidPointin GitHubista (https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-management/role-assignment-inducement-metarole.xml)
+
+K‰ynnistettiin palvelin uudelleen
+
+Kokeiltiin sitten Resource -> List Resources -> alhaalta "Test Connection".
+
+Yhteys toimi.
+
+Tehtiin ryhm‰ p‰‰k‰ytt‰jille (sudo) ja normik‰ytt‰jille (LinuxUsers)
+
+Luotiin uudet k‰ytt‰j‰t ja liitettiin nevastaluotuihin ryhmiin.

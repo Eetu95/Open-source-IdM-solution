@@ -1,0 +1,91 @@
+Tänään vihdoin sain uuden lisenssin Windows Server 2016 Datacenter 64bit versioo varten. Viime kerralla asensin sen käyttöjärjestelmän jo fyysiselle koneelle ilman lisenssiä.
+Laitoin lisenssin nyt Windows Serverille. Windowsin aktivoinnin jälkeen loin domain verkon Windows Serverillä. Ohjeet: https://win10faq.com/create-domain-windows-server/
+
+Domainin luomisen jälkeen liitin Windows 10 virtuaalikoneen luotuun domainiin. Domainin liittämisessä palvelimen IP-osoite tulee asettaa staattiseksi.
+Myös palvelimen DNS-osoitteet tulee asettaa Haaga-Helia verkon omiin DNS-osoitteisiin. Sekä työasemalla ja palvelimella asetetaan Network Discovery päälle ja otetaan IPv6 pois päältä.
+
+Testityöaseman liittäminen domainiin tapahtuu seuraavasti: Control Panel - System and Security - System - Change Settings - Change - täpätään liitos Domainiin.
+
+Seuraavaksi kokelin lisätä uuden käyttäjän domainiin, jotta todella varmistutaan siitä, että Active Directory todella toimii.
+Windows Administrative Tools - Active Directory Users and Computers - domain.nimi - Users - New User.
+Luotuani käyttäjän kokeilin kirjautua sillä testityöasemasta käsin. 
+Kirjautuminen onnistui uudella luodulla käyttäjällä. Kokelin vielä, että kyseessä on tavallinen (ei admin-oikeuksia). Käyttäjällä ei ollut admin-oikeuksia niin kuin ei kuuluisikaan.
+
+Tämän jälkeen lähdin kokeilemaan kehittyneempää ratkaisua unix-connectorille. MidPointin dokumentin ohjeissa: https://evolveum.com/blog/provisioning-to-unix-in-5-steps/
+Kohta Running advanced scenarios
+Virtuaalisella testipalvelimelle, jossa on Ubuntu Server 16.04 kokeilin lisätä ohjeen mukaisesti lisä scheman midpoint testipalvelimelle. Aluksi tuli lisätä objekti midPointiin selaimen kautta. Lisättävät tiedostot löytyvät täältä: https://github.com/Evolveum/midpoint/tree/master/samples/stories/unix-management
+Lisättävät tiedostot olivat:
+extension-unix.xsd
+role-assignment-inducement-metarole.xml
+
+Lisätään tiedostot midPoint palvelimeen:
+Selaimessa Import object - Choose File
+
+Tämän jälkeen kokielin lisätä uuden roolin ohjeiden mukaisesti:
+Roles - New role: Nimeksi "midpoint-admins on Unix" Namen ja Group Namen kohdalle.
+Tämän jälkeen Assignments välilehdeltä lisäsin roolin koskemaan ryhmää: Assignement & Inducement Unix Group Metarole
+Sitten kokeilin tehdä uuden käyttäjän ja lisäsen sen kyseiseen luotuun rooliin, mutta tämä ei onnistunut. Virhe ilmoituksena oli:
+
+Got unexpected exception: org.identityconnectors.framework.common.exceptions.PermissionDeniedException: Could not create user: >>> /etc/sudoers.d/%midpoint-admins: syntax error near line 1 <<< sudo: parse error in near line 1 sudo: no valid sudoers sources found, quitting sudo: unable to initialize policy plugin : Got unexpected exception: org.identityconnectors.framework.common.exceptions.PermissionDeniedException: Could not create user: >>> /etc/sudoers.d/%midpoint-admins: syntax error near line 1 <<< sudo: parse error in near line 1 sudo: no valid sudoers sources found, quitting sudo: unable to initialize policy plugin : Got unexpected exception: org.identityconnectors.framework.common.exceptions.PermissionDeniedException: Could not create user: >>> /etc/sudoers.d/%midpoint-admins: syntax error near line 1 <<< sudo: parse error in near line 1 sudo: no valid sudoers sources found, quitting sudo: unable to initialize policy plugin : Got unexpected exception: org.identityconnectors.framework.common.exceptions.PermissionDeniedException: Could not create user: >>> /etc/sudoers.d/%midpoint-admins: syntax error near line 1 <<< sudo: parse error in near line 1 sudo: no valid sudoers sources found, quitting sudo: unable to initialize policy plugin
+
+Tämän takia käyttäjää ei pystytty luomaan, sekä nyt liitettävän testipalvelimen sudoers.d kansioon oli luotu uusi %midpoint-admins käyttäjä, jota ei pysty edes poistamaan root käyttäjällä, koska root käyttäjään ei pysty kirjautumaan komennolla $ su -
+
+Poistin scheman kuitenkin pois midpoint testipalvelimelta koska emme saaneet toimimaan sitä.
+$ cd /opt/midpoint/var
+$ su -
+$ cd schema
+$ rm -r extension-unix.xsd
+
+Käynnistin palvelimen uudelleen, jolloin midPointin selaimessa schema oli otettu pois. Mm. roolia luodessa ei ole enää pakollista kohtaa Group Name
+
+Kokelin seuraavaksi uudella virtuaali testipalvelinta liittää midpoint testipalvelimeen.
+Aluksi loin käyttäjän midpoint ja asetin salasanan sille:
+$ sudo useradd -m midpoint
+$ sudo passwd midpoint
+Asetin oikeudet midpoint käyttäjälle:
+$ sudoedit /etc/sudoers.d/midpoint
+Tämä kyseiseen tiedostoon:
+Host_Alias HOST = ALL
+
+midpoint HOST=(ALL) NOPASSWD: /usr/sbin/useradd,/usr/sbin/usermod,/usr/sbin/userdel,/usr/sbin/groupadd,/usr/sbin/groupmod,/usr/sbin/groupdel,/bin/mv,/usr/bin/passwd,/usr/bin/getent,/bin/echo,/usr/bin/tee,/bin/chown,/bin/chmod,/bin/mkdir,/usr/bin/groups,/usr/bin/id,/usr/bin/replace,/bin/rm,/bin/cat
+
+Muokkasin .xml tiedostoon omat konfiguraatiot: https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/resources/unix/resource-unix-advanced.xml
+Talletin sen koneelle ja lisäsin sen midpoint testipalvelimelle.
+Tämän jälkeen kokeilin lisätä uudet roolit: sudo ja tavalliset käyttäjät:
+
+Loin roolin nimeltä sudo sekä laitoin Subtype kohtaan sudo. Laitoin roolin aktiiviseksi ja yhdistin sen rooliin Assignments välilehdellä Assignemnt & Inducement UNIX Group Metarole
+Tallensin roolin ja tein uuden käyttäjän, jonka lisäsin kyseiseen sudo rooliin. Käyttäjä luotiin nyt myös testipalvelimelle sekä kotikansio luotiin samalla. Kokeilin kirjautua käyttäjään ja samalla kokelin, että käyttäjällä on sudo oikeudet.
+$ sudo apt-get update
+
+Käyttäjällä oli sudo oikeudet, joten rooli luotiin onnistuneesti. Kokeilin seuraavaksi luoda tavallisen käyttäjäryhmän, joilla ei ole sudo oikeuksia.
+Loin roolin samalla tavalla kuin sudo roolin, mutta laitoin nimeksi users ja subtypeksi on laittanut mitään. Liitin roolin myös Assignemnt & Inducement UNIX Group Metarole rooliin. Tein jälleen uuden käyttäjän, jonka lisäsin tällä kertaa users rooliin. 
+Käyttäjä oli luotu nyt sekä kotihakemisto löytyi. Kirjauduin käyttäjälle ssh:ta käyttäen sekä kokeilin onko käyttäjällä sudo oikeudet:
+$ sudo apt-get update.
+Tällä kertaa tuli ilmoitus: testikayttaja is not in the sudoers file.  This incident will be reported.
+
+Tavallisen sekä sudo ryhmän luonti onnistui onnistuneesti.
+
+
+Tein seuraavaksi CSV connectorin midPoint testipalvelimelle. CSV connectoria on siinä mielessä kätevä, että sen avulla voi esimerkiksi lisätä useita eri käyttäjiä midpoitin piiriin nopeasti.
+
+Ohje löytyi evolveumin videosta: https://www.youtube.com/watch?v=HBYZpZ22fDo
+MidPoint kirja: https://evolveum.com/wp-content/uploads/2018/04/practical-idm-with-midpoint-1.1.pdf
+
+Kopioin koneelle tiedoston XML formaattiin: https://github.com/Evolveum/midpoint/blob/master/samples/book/2/resource-csv-hr.xml
+Importtasin tämän XML-tiedoston midpoint testipalvelimelle. Tämän jälkeen midpoint testipalvelimella hain esimerkki CSV tiedoston midpointtin kotikansioon:
+$ cd /opt/midpoint/var
+$ sudo wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/hr.csv
+Kopioin sitten tämän tiedostopolun:
+$ pwd
+/opt/midpoint/var
+
+Lisäsin polun importattuun XML-tiedostoon resurrsin alla: HR System - Edit Configuration - File Path: /opt/midpoint/var/hr.csv
+Tämän jälkeen Save and Test Connection, jonka jälkeen Finish.
+Seuraavaksi menin Accounts välilehdelle ja sivulta valikosta Resource näkyy käyttäjät, jotka voidaan importata midPoint käyttöliittymään valitsemalla halutun käyttäjän ja valitsemalla Import.
+
+
+
+
+
+
+

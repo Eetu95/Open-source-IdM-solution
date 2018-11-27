@@ -1,0 +1,105 @@
+Viime kerralla oli paljon hankaluuksia midPointin erillisen tietokanpalvelimen asennuksen suhteen. MidPointin dokumenteissa kerrotaan, että on suositeltavaa käyttää erillistä tietokantapalvelinta, jonka takia ryhdyttiin sitä tekemään. 
+Sain kuitenkin asennettua tietokannan sisäisesti samalle virtuaalikoneelle, jossa MidPointtikin on.
+Liitettäessä midPointtia erilliselle tietokantapalvelimelle se tuotti erityisen paljon ongelmia eikä sitä saatu liitettyä. MidPointin dokumenteissa esimerkiksi MariaDB-tietokannan liittämisestä midPointiin erillisenä tietokantapalvelimena ei löytynyt tähän sopivia ohjeita, eikä myöskään Googlettamalla.
+Sama ongelma oli myös PostgreSQL-tietokannan kanssa. Kummatkin tietokannat kuitenkin toimivat samalla koneella, jossa midPointtikin on, mutta erillisinä ei.
+
+Tästä syystä midPointin huonojen dokumenttien perusteella lähdettiin miettimään jo varavaihtoehtoa, joka oli Apache Syncope.
+Ryhdyin asentamaan Apache Syncopea virtuaalikoneelle testausta varten. Linuxin Debian paketteja varten löytyi selkeät ohjeet Syncopen asennukselle.
+Ohjeet: https://syncope.apache.org/docs/2.1/getting-started.html#debian-packages
+Hain .deb paketit: https://syncope.apache.org/downloads -> yhteensä kolme .deb pakettia. 
+$ wget http://www-eu.apache.org/dist/syncope/2.1.1/apache-syncope-2.1.1.deb
+$ wget http://www-eu.apache.org/dist/syncope/2.1.1/apache-syncope-console-2.1.1.deb
+$ wget http://www-eu.apache.org/dist/syncope/2.1.1/apache-syncope-enduser-2.1.1.deb
+
+OpenJDK 8:n asennus
+$ sudo apt-get install openjdk-8-jre
+
+Apache Tomcat 8 asennus:
+$ sudo apt-get install tomcat8
+
+PostgreSQL:n asennus:
+$ sudo apt-get install libpostgresql-jdbc-java postgresql postgresql-client
+
+PostgreSQL:n JDBC ajurin liittäminen Tomcattiin:
+$ sudo ln -s /usr/share/java/postgresql-jdbc4.jar /usr/share/tomcat8/lib/
+
+Lisäsin JAVA_OPTS konfiguraation polkuun /etc/default/tomcat8:
+JAVA_OPTS="-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server \
+  -Xms1536m -Xmx1536m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:+DisableExplicitGC \
+  -Djava.security.egd=file:/dev/./urandom"
+
+Pysäytin Tomcatin:
+$ sudo service tomcat8 stop
+
+Asensin .deb paketit
+$ sudo apt upgrade -f
+$ sudo dpkg -i apache-syncope-*.deb
+
+Loin tietokannan Syncopelle:
+$ sudo SYNCOPE_USER="syncope" SYNCOPE_PASS="syncope" sh /usr/share/apache-syncope/dbinit-postgresql.sh
+// salasana ei voi olla eri, koska muuten Apache Syncope ei toimi selaimen kautta.
+
+Käynnistin Tomcatin uudelleen:
+$ sudo service tomcat8 start
+
+Selaimella pääsee Syncopen näkymään, joka toimi:
+
+Admin-console näkymä: "IP-osoite":8080/syncope-console/
+Loppukäyttäjän näkymä: "IP-osoite":8080/syncope-enduser/
+
+Laitoin palomuurin päälle ja lisäsin säännöt:
+$ sudo ufw enable
+$ sudo ufw allow ssh
+$ sudo ufw allow http
+$ sudo ufw allow https
+$ sudo ufw allow 8080
+
+Valmiista Apache Syncopesta
+Tein .ova tiedoston mahdollista tulevaisuuden testausta varten.
+
+Seuraavaksi lisäsin MariaDB-tietokannan fyysiselle koneellemme.
+Asensin aluksi MariaDB:n:
+$ sudo apt-get install -y mariadb-server 
+
+Menin MySQL:lään:
+$ sudo mysql -u root
+
+Loin tietokannan:
+CREATE DATABASE midpoint CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
+CREATE USER 'midpoint'@'localhost' IDENTIFIED BY '************';
+GRANT ALL on midpoint.* TO 'midpoint'@'localhost';
+use midpoint;
+
+Seuraavaksi muokkasin config.xml tiedostoa:
+$ cd /opt/midpoint/var
+$ sudoedit config.xml
+
+Lisäsin sinne seuraavat rivit repositoryn kohdalle:
+      <database>mariadb</database>
+      <jdbcUsername>midpoint</jdbcUsername>
+      <jdbcPassword>************</jdbcPassword>
+      <jdbcUrl>jdbc:mariadb://localhost:3306/midpoint?characterEncoding=utf8</jdbcUrl><!-- it seems that jdbc://mysql works as well -->
+
+Ajoin SQL scriptin:
+$ cd /opt/midpoint/doc/config/sql/_all
+$ sudo mysql -u root midpoint < mysql-3.8-all.sql (kesti noin 5min ajossa)
+
+Seuraavaksi lisäsin palomuurisäännön 3306-portille:
+$ sudo ufw allow 3306
+$ sudo ufw allow 3306/tcp
+
+Käynnistin sitten koneen uudelleen:
+$ sudo reboot
+
+Käynnistyksen jälkeen midPoint toimii selaimella: http://"IP-osoite":8080/midpoint
+
+Kirjauduin sisään ja vaihdoin pääkäyttäjän (privileged) nimen paremmaksi (oletus oli administrator).
+Sitten loin uuden käyttäjän kohdasta Users - New user
+Loimme jokaiselle omat käyttäjät midPointiin.
+
+Tarkistin seuraavaksi, että käyttäjät tallentuneet MariaDB:n tietokantaan:
+$ sudo mysql -u root
+use midpoint;
+SHOW TABLES;
+SELECT * FROM m_user;
+SELECT fullName_norm,oid FROM m_user;
