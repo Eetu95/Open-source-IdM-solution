@@ -81,8 +81,10 @@ IdM-järjestelmiä löytyy markkinoilta sekä maksullisia että maksuttomia. Mak
 | SAP | SAP Identity Management | https://www.sap.com/products/identity-management.html |
 | Oracle | Oracle Identity Management (IdM) and Access Management | https://www.oracle.com/technetwork/middleware/id-mgmt/overview/index.html |
 <br>
+ 
 Havaintojemme perusteella monissa yrityksissä on käytössä maksullisia IdM -järjestelmiä, koska niiden laatu on erittäin hyvä sekä yritykset saavat käyttöönsä reaaliaikaisen teknisen tuen halutessan, jos tulee jotain ongelmia tai kysymyksiä käytössä olevaan IdM-järjestelmään liittyen. 
-<br><br>
+
+
 Maksuttomia, avoimen lähdekoodin IdM-järjestelmiä tarjoaa muun muassa seuraavat valmistajat:
 
 | Valmistaja | Tuote | Linkki |
@@ -132,4 +134,3 @@ IdM-järjestelmien dokumentaatiot:
 <li>Josso:<a href="http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/html/en-US/JOSSO_Reference.html">http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/html/en-US/JOSSO_Reference.html</a></li>
 <li>FreeIPA:<a href="https://www.freeipa.org/page/Documentation">https://www.freeipa.org/page/Documentation</a></li>
 <li>Aerobase:<a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a></li>
->>>>>>> 61fa553c67d68d47275d9a143d6afdee224b11bd
