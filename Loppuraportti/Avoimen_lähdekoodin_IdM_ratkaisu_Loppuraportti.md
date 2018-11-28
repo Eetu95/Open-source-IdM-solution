@@ -41,10 +41,6 @@ Projektia tehdessämme tarvitsimme seuraavan laitteistokokoonpanon:
 <li>Neljä (4) virtuaalista tietokonetta</li>
 
 Käytössä olevamme keskusyksiköt olivat seuraavat:
-| Merkki |Malli|Prosessori|Keskusmuisti|Kiintolevyjen lukumäärä|Kiintolevyjen koko|Tietokoneen nimi|
-|---|---|---|---|---|---|---|
-|HP|<a href="http://h20195.www2.hp.com/v2/GetDocument.aspx?docname=4AA6-9033EEAP&doctype=data%20sheet&doclang=EN_GB&searchquery=&cc=nz&lc=en">Prodesk 600 G3 MT</a>|Intel(R) Core(TM) i5-7500 CPU @ 3.40GHz (4 ydintä)|32 Gt|2 kpl|149 Gt (SSD) ja 500 Gt (HDD) |MIDPOINTIDM|
-|HP|   |   |   |   |   |   |
-|HP|   |   |   |   |   |   |
+
 
 ## IdM-järjestelmien vertailu<div id='idm-jarjestelmien-vertailu'></div>
