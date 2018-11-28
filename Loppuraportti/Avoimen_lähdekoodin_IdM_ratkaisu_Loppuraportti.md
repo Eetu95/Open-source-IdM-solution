@@ -33,4 +33,4 @@ Päivämäärä: 28.11.2018
  <li><a href="#lahteet">Lähteet</a></li>
 </ol>
 
-## Yleistä IdM-järjestelmistä<div id='idm-jarjestelmien-vertailu'></div>
+## IdM-järjestelmien vertailu<div id='idm-jarjestelmien-vertailu'></div>
