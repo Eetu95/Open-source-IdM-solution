@@ -1,0 +1,44 @@
+Tällä kerralla aion laittaa meidän midPoint ympäristöön (fyysiselle koneelle) Active Directory Connectorin, koska se sieltä vielä puuttui.
+
+Kopioin meidän GitHubista Active Directory Connectorin XML-tiedoston. https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/ad-ldap-medusa-medium.xml
+
+midPointissa valitsin Import Object - Embedded editor ja kopioin XML tiedoston sisällön tähän. Muokkasin lopuksi meidän Windows Serverin IP-osoitteen ja salasanan Active Directoryn midPoint käyttäjälle niille tarkoitettuihin kohtaan. Tähdet koodissa tarkoittavat muutettavia kohtia
+
+<connectorConfiguration xmlns:icfc="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/connector-schema-3">
+        <icfc:configurationProperties xmlns:icfcldap="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/bundle/com.evolveum.polygon.connector-ldap/com.evolveum.polygon.connector.ldap.ad.AdLdapConnector">
+            <icfcldap:host>******</icfcldap:host>
+            <icfcldap:port>636</icfcldap:port>
+            <icfcldap:baseContext>DC=*******,DC=*****</icfcldap:baseContext>
+            <icfcldap:bindDn>CN=midpoint,CN=Users,DC=********,DC=*****</icfcldap:bindDn>
+            <icfcldap:connectionSecurity>ssl</icfcldap:connectionSecurity>
+            <icfcldap:bindPassword>
+                <t:clearValue>********</t:clearValue>
+            </icfcldap:bindPassword>
+            <icfcldap:pagingBlockSize>5</icfcldap:pagingBlockSize> <!-- ridiculously small, just to test paging -->
+        </icfc:configurationProperties>
+        <icfc:resultsHandlerConfiguration>
+			<icfc:enableNormalizingResultsHandler>false</icfc:enableNormalizingResultsHandler>
+			<icfc:enableFilteredResultsHandler>false</icfc:enableFilteredResultsHandler>
+			<icfc:enableAttributesToGetSearchResultsHandler>false</icfc:enableAttributesToGetSearchResultsHandler>
+		</icfc:resultsHandlerConfiguration>
+</connectorConfiguration>
+
+Tämän jälkeen klikkasin Import object, jolloin AD:n Connectori lisättiin midPointiin. 
+Menin midPointin Resources kohtaan ja valitsin sieltä Medusa Active Directory (LDAP). Klikkasin Edit configuration - Save and test connection
+Tuli ilmoitus, että connector sai onnistuneesti yhteyden Active Directoryyn ja Windows Serveriin.
+
+
+Tämän jälkeen loin midPointissa uuden käyttäjän: lisäsin tälle nimen, koko nimen, sukunimen, etunimen ja Administrative statukseksi valitsen Enabled. Valid from kohtaan valitsin vielä kyseisen kellon ajan, jolloin käyttäjä tehtiin, jotta käyttäjä on heti voimassa. Kirjoitin vielä salasanan käyttäjälle ja klikkasin Save.
+
+Tämän jälkeen muokkasin luotu käyttäjää uudestaan. Klikkasin välilehteä Projections ja valitsin käyttäjän liitettäväksi AD Connectoriin ja klikkasin Save. 
+Tuli ilmoitus, että käyttäjä liitettiin onnistuneesti AD Connectoriin. Tarkistin vielä, että käyttäjä on liitoksissa AD Connectoriin: Resources - Medusa Active Directory (LDAP) - Accounts välilehdeltä tarkistin, että käyttäjä on yhteyksissä connectoriin. Käyttäjän kohdalla lukee nyt LINKED.
+
+Tarkistin vielä Windows Serverillä, että käyttäjä luotu Active Directoryyn. Käyttäjä löytyikin Active Directorysta niin kuin pitikin.
+
+Kokeilin vielä Windows testityöasemalla kirjautua kyseiselle käyttäjälle. Kirjautuminen onnistui testityöasemaan ja tuli Windowsin ilmoitus, että kestää hetki ennen kuin käyttäjä on valmis, joka tulee aina kun käyttäjälle kirjaudutaan ensimmäistä kertaa.
+Käyttäjälle ei ole myöskään admin oikeuksia, koska näin ei olla määritelty.
+
+Seuraavaksi lähdin kirjoittamaan loppuraporttia. Otsikko, jota lähdin kirjoittamaan oli MidPoint ja siihen liittyvät esivalmistelut. 
+
+
+
