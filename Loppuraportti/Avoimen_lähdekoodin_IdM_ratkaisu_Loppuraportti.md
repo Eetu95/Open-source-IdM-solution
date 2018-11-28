@@ -33,14 +33,37 @@ Päivämäärä: 28.11.2018
  <li><a href="#lahteet">Lähteet</a></li>
 </ol>
 
-## Johdanto<div id='johdanto'></div>
-Tässä raportissa kerromme alussa lyhyesti mikä on Identiteetinhallintajärjestelmä (IdM), mitä sillä tehdään ja mitä hyötyjä kyseinen järjestelmä tuo yrityksen tietojärjestelmien käyttäjähallintaan. Tämän jälkeen kerromme kuinka vertailimme avoimen lähdekoodin IdM-järjestelmiä ja kuinka juuri valitsimme testattavaksi järjestelmäksi MidPointin. Kerromme myös kuinka MidPointin asennus ja konfigurointi onnistuu vaiheittain. Raportin loppuvaiheessa kerromme lisäksi kuinka testasimme kyseistä järjestelmää.
-
-Projektia tehdessämme tarvitsimme seuraavan laitteistokokoonpanon:
-<li>Kolme (3) keskusyksikköä</li>
-<li>Neljä (4) virtuaalista tietokonetta</li>
-
-Käytössä olevamme keskusyksiköt olivat seuraavat:
-
-
 ## IdM-järjestelmien vertailu<div id='idm-jarjestelmien-vertailu'></div>
+
+### Avoimen lähdekoodin IdM-järjestelmien vertailun aloitus
+
+Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme vertailuun:
+<li><a href="Apache Syncope">https://syncope.apache.org/</a></li>
+<li><a href="MidPoint">https://evolveum.com/midpoint/</a></li>
+<li><a href="OpenIDM">https://backstage.forgerock.com/docs/idm</a></li>
+<li><a href="Soffid">http://www.soffid.com/</a></li>
+<li><a href="Keycloak">https://www.keycloak.org/</a></li>
+<li><a href="Unity">http://www.unity-idm.eu/</a></li>
+<li><a href="OpenIAM">https://www.openiam.com/</a></li>
+<li><a href="Shibboleth">https://www.shibboleth.net/</a></li>
+<li><a href="WSO2 Identity Server">https://wso2.com/identity-and-access-management/</a></li>
+<li><a href="Gluu">https://www.gluu.org/</a></li>
+<li><a href="Josso">http://www.josso.org/install.html</a></li>
+<li><a href="FreeIPA">https://www.freeipa.org/page/Main_Page</a></li>
+<li><a href="Aerobase">http://aerobase.org/</a></li>\
+
+ 
+IdM-järjestelmien dokumentaatiot:
+<li>Apache Syncope:<a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
+<li>MidPoint:<a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a></li>
+<li>OpenIDM:<a href="https://backstage.forgerock.com/docs/idm">https://backstage.forgerock.com/docs/idm</a></li>
+<li>Soffid:<a href="http://www.soffid.com/products-and-services/open-source-sso-and-identity-and-access-management/">http://www.soffid.com/products-and-services/open-source-sso-and-identity-and-access-management/</a></li>
+<li>Keycloak:<a href="https://www.keycloak.org/documentation.html">https://www.keycloak.org/documentation.html</a></li>
+<li>Unity:<a href="http://www.unity-idm.eu/documentation/unity-2.6.2/manual.html">http://www.unity-idm.eu/documentation/unity-2.6.2/manual.html</a></li>
+<li>OpenIAM:<a href="http://docs41.openiam.com/">http://docs41.openiam.com/</a></li>
+<li>Shibboleth:<a href="https://wiki.shibboleth.net/confluence/#all-updates">https://wiki.shibboleth.net/confluence/#all-updates</a></li>
+<li>WSO2 Identity Server:<a href="https://github.com/wso2/product-is/">https://github.com/wso2/product-is/</a></li>
+<li>Gluu:<a href="https://gluu.org/docs/">https://gluu.org/docs/</a></li>
+<li>Josso:<a href="http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/html/en-US/JOSSO_Reference.html">http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/html/en-US/JOSSO_Reference.html</a></li>
+<li>FreeIPA:<a href="https://www.freeipa.org/page/Documentation">https://www.freeipa.org/page/Documentation</a></li>
+<li>Aerobase:<a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a></li>
