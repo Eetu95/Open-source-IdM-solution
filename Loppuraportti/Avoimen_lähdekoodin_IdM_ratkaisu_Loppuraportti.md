@@ -33,7 +33,6 @@ Päivämäärä: 28.11.2018
  <li><a href="#lahteet">Lähteet</a></li>
 </ol>
 
-<<<<<<< HEAD
 ## Johdanto<div id='johdanto'></div>
 Tässä raportissa kerromme alussa lyhyesti mikä on Identiteetinhallintajärjestelmä (IdM), mitä sillä tehdään ja mitä hyötyjä kyseinen järjestelmä tuo yrityksen tietojärjestelmien käyttäjähallintaan. Tämän jälkeen kerromme kuinka vertailimme avoimen lähdekoodin IdM-järjestelmiä ja kuinka juuri valitsimme testattavaksi järjestelmäksi midPointin. Kerromme myös kuinka midPointin asennus ja konfigurointi onnistuu vaiheittain. Raportin loppuvaiheessa kerromme lisäksi kuinka lisäsimme Linux-palvelimen, OpenLDAP-palvelimen sekä Windows -palvelimen midPointtiin ja kuinka teimme testauksen.
 
@@ -64,8 +63,6 @@ ja rajapintoihin.
 - Kuinka liitetään IdM-järjestelmän piiriin muita järjestelmiä.
 - Tulokset, lokit ja raportit ovat valmiiksi näytettävissä.
 - Opitaan pitämään projektin aikataulusta huolta ja pitämään kiinni työaikakirjauksesta.
-<br>
-
 
 
 ## Yleistä IdM-järjestelmistä (Identity Management System)<div id='yleista'></div>
@@ -99,7 +96,8 @@ Lisää avoimen lähdekoodin IdM-järjestelmistä sekä niiden vertailusta löyt
 Monissa avoimen lähdekoodin järjestelmistä on myös tarjolla myös maksullisia vaihtoehtoja, joiden tarkoitus on yleensä tuoda kyseiseen IdM-järjestelmään enemmän ominaisuuksia sekä reaaliaikaisen teknisen tuen.
 
 Tässä projektissa keskitymme ainoastaan niihin IdM-järjestelmiin, jotka eivät maksa mitään ja joiden lähdekoodi on vapasti saatavilla.
-=======
+
+
 ## IdM-järjestelmien vertailu<div id='idm-jarjestelmien-vertailu'></div>
 
 ### Avoimen lähdekoodin IdM-järjestelmien vertailun aloitus
