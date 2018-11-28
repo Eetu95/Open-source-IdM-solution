@@ -117,7 +117,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <li><a href="Gluu">https://www.gluu.org/</a></li>
 <li><a href="Josso">http://www.josso.org/install.html</a></li>
 <li><a href="FreeIPA">https://www.freeipa.org/page/Main_Page</a></li>
-<li><a href="Aerobase">http://aerobase.org/</a></li>\
+<li><a href="Aerobase">http://aerobase.org/</a></li>
 
  
 IdM-järjestelmien dokumentaatiot:
