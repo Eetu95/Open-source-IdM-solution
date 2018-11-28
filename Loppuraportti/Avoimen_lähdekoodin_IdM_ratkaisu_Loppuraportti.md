@@ -71,7 +71,6 @@ Identiteetinhallintajärjestelmä) on järjestelmä,
 jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä,
 palveluita, tietokantoja, ohjelmistoja sekä ohjelmien käyttöoikeuksia että
 pääsynhallintaa. IdM:n ansiosta yritys pystyy helposti pitämään huolen siitä ketkä työntekijät pääsevät käyttämään mitäkin tietojärjestelmiä sekä palveluita ja ketkä taas eivät. IdM-järjestelmiä on hyvin erilaisia ja hyvin erilaisina kokonaisuuksina.
->>>>>>> 43ccf3047f006ee504032f1219c10dcad9b10baa
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/IdM_esimerkki.jpg)
 Kuva 1: Havainnollistava esimerkki Indentiteetinhallintajärjestelmästä (IdM)
@@ -127,10 +126,8 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <br>
 
 IdM-järjestelmien dokumentaatiot:
-<<<<<<< HEAD
 =======
 <br>
->>>>>>> 43ccf3047f006ee504032f1219c10dcad9b10baa
 <li>Apache Syncope: <a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
 <li>MidPoint: <a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a></li>
 <li>OpenIDM: <a href="https://backstage.forgerock.com/docs/idm">https://backstage.forgerock.com/docs/idm</a></li>
@@ -233,4 +230,3 @@ Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM
 
 =======
 <li>Aerobase: <a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a></li>
->>>>>>> 43ccf3047f006ee504032f1219c10dcad9b10baa
