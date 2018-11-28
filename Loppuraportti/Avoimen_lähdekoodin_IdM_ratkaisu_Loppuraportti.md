@@ -125,9 +125,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 
 <br>
 
-IdM-järjestelmien dokumentaatiot:
-=======
-<br>
+### IdM-järjestelmien dokumentaatiot:
 <li>Apache Syncope: <a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
 <li>MidPoint: <a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a></li>
 <li>OpenIDM: <a href="https://backstage.forgerock.com/docs/idm">https://backstage.forgerock.com/docs/idm</a></li>
@@ -142,13 +140,13 @@ IdM-järjestelmien dokumentaatiot:
 <li>FreeIPA: <a href="https://www.freeipa.org/page/Documentation">https://www.freeipa.org/page/Documentation</a></li>
 <li>Aerobase: <a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a></li>
 
-### Avoimen lähdekoodin IdM-järjestelmien valintakriteerit [lisenssit, versionhallinta (GitHub), Google Scholar, Google Trends, Kirjat (Amazon, Safari Books Online)] ].
+### Avoimen lähdekoodin IdM-järjestelmien valintakriteerit
 
 Katsoimme kyseisten avoimen lähdekoodin IdM-järjestelmien lisenssit läpi. Laitoimme ne ylös vertailudokumenttiin ja selitimme ne. Lisäsimme lähteet, joista ilmenee lisenssit ja mitä ne pitävät sisällään.
 
 ![Apache 2.0 -lisenssi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Vertailu/Apache%202.0%20-lisenssi.PNG?raw=true)
 
-Jan konsultoi työpaikallaan IdM-järjestelmän vaatimuksista, mm. mitä mieltä kollegat olivat vaatimuksista ja mitä voisi vielä lisätä. Otimme ne huomioon vertailussamme.
+Yksi projektiryhmämme jäsenistä konsultoi työpaikallaan IdM-järjestelmän vaatimuksista, mm. mitä mieltä kollegat olivat vaatimuksista ja mitä voisi vielä lisätä. Otimme ne huomioon vertailussamme.
 
 Otimme huomioon vertailussa IdM-järjestelmien GitHub -suosion, kuinka paljon seuraajia (Watch), tähtiä (Star), haarukoita (Fork). Tutkimme myös muut versionhallintapalvelut - ei löytynyt muualta kuin GitHubista. Esim. Apache Syncopella, midPointilla ja Keycloakilla oli projektit GitHubissa.
 
