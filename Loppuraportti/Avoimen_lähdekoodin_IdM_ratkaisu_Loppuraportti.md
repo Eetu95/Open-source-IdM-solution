@@ -120,7 +120,8 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <li><a href="Aerobase">http://aerobase.org/</a></li>
 
 
- 
+<br>
+
 IdM-järjestelmien dokumentaatiot:
 <br>
 <li>Apache Syncope: <a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
