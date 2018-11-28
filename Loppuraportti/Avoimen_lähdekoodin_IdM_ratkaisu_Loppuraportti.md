@@ -34,9 +34,9 @@ Päivämäärä: 28.11.2018
 </ol>
 
 ## Johdanto<div id='johdanto'></div>
-Tässä raportissa kerromme alussa lyhyesti mikä on Identiteetinhallintajärjestelmä (IdM), mitä sillä tehdään ja mitä hyötyjä kyseinen järjestelmä tuo yrityksen tietojärjestelmien käyttäjähallintaan. Tämän jälkeen kerromme kuinka vertailimme avoimen lähdekoodin IdM-järjestelmiä ja kuinka juuri valitsimme testattavaksi järjestelmäksi midPointin. Kerromme myös kuinka midPointin asennus ja konfigurointi onnistuu vaiheittain. Raportin loppuvaiheessa kerromme lisäksi kuinka lisäsimme Linux-palvelimen, OpenLDAP-palvelimen sekä Windows -palvelimen midPointtiin ja kuinka teimme testauksen.
+Tässä raportissa kerromme kuinka avoimen lähdekoodiin perustuvan Identiteetinhallintajärjestelmän saa käyttöön (asennus ja määritys) sekä kuinka sillä voidaan hallita Unix/Linux -palvelien, OpenLDAP-palvelimen sekä Windows -domainin käyttäjiä. Käytämme projektissa Evolveumin "midPoint" nimistä avoimen lähdekoodin identiteetinhallintajärjestelmää.
 
-Käynnistimme projektin aiheesta, koska muutamat projektiryhmän jäsenet ovat työssään joutuneet tekemään
+Käynnistimme projektin kyseisestä aiheesta, koska muutamat projektiryhmän jäsenet ovat työssään joutuneet tekemään
 töitä Iddentiteetinhallintajärjestelmien parissa. Yleensä kyseiset järjestelmät, jotka ovat yrityksissä
 käytössä ovat suljetun lähdekoodin järjestelmiä, jonka vuoksi yritykset
 joutuvat maksamaan järjestelmän käytöstä lisenssimaksua. Tämän lisäksi
