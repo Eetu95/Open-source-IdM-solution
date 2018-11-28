@@ -74,7 +74,9 @@ pääsynhallintaa. IdM:n ansiosta yritys pystyy helposti pitämään huolen siit
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/IdM_esimerkki.jpg)
 Kuva 1: Havainnollistava kuvaesimerkki Indentiteetinhallintajärjestelmästä (IdM)
-
+ 
+<br>
+ 
 IdM-järjestelmiä löytyy markkinoilta sekä maksullisia että maksuttomia. Makullisia, suljetun lähdekoodin IdM-järjestelmiä on tarjolla muun muassa seuraavia:
 
 | Valmistaja | Tuote | Linkki |
