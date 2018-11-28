@@ -1,0 +1,1 @@
+T‰n‰‰n aloimme tekem‰‰n loppudokumentointia projektista GitHubiin. Kirjoitin IdM-j‰rjestelmien vertailusta loppudokumentaatioomme Microsoft Visual Studio Codella.
