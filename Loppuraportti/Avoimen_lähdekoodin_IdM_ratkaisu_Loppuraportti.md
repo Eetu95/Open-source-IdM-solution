@@ -34,3 +34,21 @@ Päivämäärä: 28.11.2018
 </ol>
 
 ## IdM-järjestelmien vertailu<div id='idm-jarjestelmien-vertailu'></div>
+
+### Avoimen lähdekoodin IdM-järjestelmien vertailun aloitus
+
+Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme vertailuun:
+<li><a href="Apache Syncope">https://syncope.apache.org/</a></li>
+<li><a href="MidPoint">https://evolveum.com/midpoint/</a></li>
+<li><a href="OpenIDM">https://backstage.forgerock.com/docs/idm</a></li>
+<li><a href="Soffid">http://www.soffid.com/</a></li>
+<li><a href="Keycloak">https://www.keycloak.org/</a></li>
+<li><a href="Unity">http://www.unity-idm.eu/</a></li>
+<li><a href="OpenIAM">https://www.openiam.com/</a></li>
+<li><a href="Shibboleth">https://www.shibboleth.net/</a></li>
+<li><a href="WSO2 Identity Server">https://wso2.com/identity-and-access-management/</a></li>
+<li><a href="Gluu">https://www.gluu.org/</a></li>
+<li><a href="Josso">http://www.josso.org/install.html</a></li>
+<li><a href="FreeIPA">https://www.freeipa.org/page/Main_Page</a></li>
+<li><a href="Aerobase">http://aerobase.org/</a></li>
+ 
