@@ -52,7 +52,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <li><a href="FreeIPA">https://www.freeipa.org/page/Main_Page</a></li>
 <li><a href="Aerobase">http://aerobase.org/</a></li>
 
-
+ 
 IdM-järjestelmien dokumentaatiot:
 <li>Apache Syncope:<a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
 <li>MidPoint:<a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a></li>
