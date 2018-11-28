@@ -72,6 +72,9 @@ jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä,
 palveluita, tietokantoja, ohjelmistoja sekä ohjelmien käyttöoikeuksia että
 pääsynhallintaa. IdM:n ansiosta yritys pystyy helposti pitämään huolen siitä ketkä työntekijät pääsevät käyttämään mitäkin tietojärjestelmiä sekä palveluita ja ketkä taas eivät. IdM-järjestelmiä on hyvin erilaisia ja hyvin erilaisina kokonaisuuksina.
 
+![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/IdM_esimerkki.jpg)
+Kuva 1: Havainnollistava kuvaesimerkki Indentiteetinhallintajärjestelmästä (IdM)
+
 IdM-järjestelmiä löytyy markkinoilta sekä maksullisia että maksuttomia. Makullisia, suljetun lähdekoodin IdM-järjestelmiä on tarjolla muun muassa seuraavia:
 
 | Valmistaja | Tuote | Linkki |
