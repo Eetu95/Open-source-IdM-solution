@@ -1,5 +1,6 @@
 # Avoimen lähdekoodin IdM ratkaisu 
 Loppuraportti
+
 Tekijät: Jan Parttimaa, Eetu Pihamäki & Markus Nissinen
 Kurssi: Monialaprojekti
  
