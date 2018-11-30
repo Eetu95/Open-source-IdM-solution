@@ -954,30 +954,50 @@ Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan sala
 #### Testityöasemien sekä testipalvelimen asennus ja konfigurointi
 
 ##### Windows 10
-Testityöasemia käytimme virtuaaliympäristössä Oracle VM VirtualBoxissa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
+Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen <a href="modern.ie"> modern.ie sivustolta</a>, joka toimii 90 päivän lisenssillä. Kyseinen virtuaalikone toimii testityöasemana ja on nimeltään "TESTIPC1".
 
-Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
+Kirjauduimme SSH-yhteydellä VirtualBox_palvelimeen (VMSERVER) ja kirjaudumme sisään tunnuksilla, jotka teimme VMSERVERI:n asennuksen yhteydessä
+2. Latasimme TESTIPC1:sen modern.ie -sivulta komennolla:
+    ```
+    https://az792536.vo.msecnd.net/vms/VMBuild_20180425/VirtualBox/MSEdge/MSEdge.Win10.VirtualBox.zip
+    ```
+    Komennon jälkeen painoimme Enter. Virtuaalikonetta alettiin lataamaan ja siinä kesti tovin.
+3. Purkasimme kansion kotihakemistoon komennolla:
+    ```
+    unzip MSEdge.Win10.VirtualBox.zip
+    ```
+5. Siirryimme seuraavaksi root- käyttäjäksi komennolla:
+    ```
+    sudo su
+    ```
+6. Siirsimme virtuaalikoneen imagen ```vbox``` käyttäjän kotihakemistoon komennolla:
+    ```
+    mv 'MSEdge - Win10.ova' /home/vbox/
+    ```
+    Komennon jälkeen panoimme Enter. Virtuaalikoneen image siirtyi haluttuun sijaintiin. Kirjauduimme lopuksi pois root-käyttäjästä komennolla ```exit```.
 
-![VirtualBox import](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/Capture_1.PNG?raw=true)
+7. Kirjauduimme sisään VirtualBoxin web-käyttöliittymään ja valitsimme valikosta ```File -> Import Appliance... ``` Klikkattiin  avautuvasta ikkunasta kansion kuvaa
+ 
+![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboximport.JPG)
 
-Toimme (import) Windows 10 virtuaalikoneen imagen VirtualBoxiin. Sen saa tehtyä valitsemalla VirtualBoxista File - Import Appliance... 
-Laitoimme VirtualBoxissa verkkokortin siltaavaksi (Bridged Adapter), jotta IP-osoitteet ovat verkon mukaisia eikä VirtualBoxin omia. Tämän sai tehtyä muokkaamalla virtuaalikoneen asetuksia VirtualBoxissa:
-```
-Settings - Network - Adapter 1 - Attached to: Bridged Adapter
-```
-
-![MSEdge - Win10](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/Capture_2.PNG?raw=true)
-
-Tämän jälkeen virtuaalikone oli valmiina käynnistettäväksi. Käynnistettiin kone, jolloin haluttiin liittää se Domainiin. Teimme seuraavat asiat:
-<li>IPv6 pois päältä
-<li>IPv4 verkkokorttiin DNS osoitteeksi Windows palvelimen IP-osoite
-<li>Network Discovery päälle
-<li>Etäyhteyden salliminen
-<li>Tietokoneen nimen muuttaminen (TESTIPC1)
+ 
+    ja haimme virtuaalikoneen imagen ````vbox```` käyttäjän kotihakemistosta. Lopuksi painoimme ```OK```.
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxselect.JPG)
+     
+    Valtsimme se jälkeen ```Next >>``` ja katsoimme onko avautuvasta ikkunasta onko virtuaalikoneen asetukset ok. Muutimme nimeksi "TESTIPC1" ja laitoimme täpän kohtaan "Reinitialize the MAC address of all network cards". Lopuksi painoimme ```Import```. Testikone oli tuotu VirtualBox-palvelimelle onnistuneesti. Tämän jälkeen muutimme virtuaalikoneesta verkkokortin siltaavaksi, jotta se näkyy lähiverkossa muiden laitteiden joukossa. Teimme sen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Settings -> Network -> Adapter 1 ``` ja drop-down valikosta valitsemalla "Bridged Adapter". 
+    Tämän jälkeen sallimme etäyhteyden virtuaalikoneeseen. Valitsimme auki olevista asetuksista ```Display -> Remote Display``` Porttinumeroksi laitoimme 9000. Hyväksyimme muutoksen painamalla OK. Käynnistimme virtuaalikoneen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Start```.
+ TESTIPC1 oli päällä. Seuraavaksi teimme siihen seuraavat määritykset:
+<ul>
+    <li>IPv6 pois päältä</li>
+    <li>IPv4 verkkokorttiin DNS osoitteeksi Windows palvelimen IP-osoite</li>
+    <li>Network Discovery päälle</li>
+    <li>Etäyhteyden salliminen</li>
+    <li>Tietokoneen nimen muuttaminen (TESTIPC1)</li>
+</ul>
 
 Tämän jälkeen liitettiin Windows testityöasema domainiin: 
 ```
-Control Panel - System and Security - System - Change settings - Change
+Control Panel -> System and Security -> System -> Change settings -> Change
 ```
 Valittiin täppä, että liitetään domainiin ja kirjoitettiin domain nimi. Seuraavaksi kysyttiin domainin Admin käyttäjän tunnuksia. Kirjoitettiin ne ja domainin liitos onnistui. Virtuaalikone kirjautui ulos ja takaisin. Virtuaalikoneesta nyt näki, että kone on liitoksissa domainiin esimerkiksi System asetuksista.
 
