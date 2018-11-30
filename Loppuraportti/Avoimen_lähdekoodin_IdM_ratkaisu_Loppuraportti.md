@@ -223,7 +223,6 @@ Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM
 |Mahdollisuus manuaaliprovisiointiin   |Tukeeko valittavat mahdollisuudet esimerkiksi radiobuttoneita, checkboxeja jne.   |
 |Soveltuu myös suureen yritykseen   |  Käyttöoikeuksia voi olla esimerkiksi yli 7000  |
 
-<<<<<<< HEAD
 ### Varsinainen vertailutaulukko
 
 ![vertailutaulukko](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Vertailu/vertailutaulukko.jpg?raw=true)
@@ -237,9 +236,6 @@ Tässä vertailutaulukossa näkyy vertaulumme varsinainen tulos ja se miten pä�
 Aputaulukko selventää vertailutaulukon lukua. Lataa PDF <a href="https://opensourceidm.files.wordpress.com/2018/10/aputaulukko.pdf">tästä</a>.
 
 ## 4. Midpoint<div id='midpoint'></div>
-=======
-## Midpoint<div id='midpoint'></div>
->>>>>>> ea9d5639c60e48ccc6f08ee7cc5632c2ab61aa01
 
 Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuksia ja pisteitä omisti midPoint IdM-järjestelmä kuin mikään muu IdM-järjestelmä, mistä syystä päädyimme juuri tähän järjestelmään. Vahvaksi toiseksi ehdokkaaksi valiutui Apache Syncope, joka muuten midPointin kanssa sisälsi melkein identtiset ominaisuudet kuin midPoint, mutta midPoint IdM-järjestelmä tuki enemmän muita järjestelmiä ja rajapintoja. Järjestelmät ja rajapinnat, joita midPoint tukee ovat:
 <li>Active Directory
@@ -538,8 +534,8 @@ Seuraavaksi tuli määriteltyjen asetusten tarkasteluruutu. Kaikki oli OK eli kl
 
 Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin.
  
-##### Hyper-V:n sekä OpenLDAP-serverin asennus
-Halusimme laittaa Windows Serveriin OpenLDAP -palvelimen, joka asennetaan siihen virtuaalikoneena. Jotta virtuaalikoneiden käyttö on mahdollista, lisäsimme Windows Serveriin Hyper-V:n. Sitä ennen latasimme <a href"http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso">64-bittisen Ubuntu Server 16.04.5 LTS:n levykuvan</a> talteen Windows -palvelimelle.
+##### Hyper-V:n sekä uuden virtuaalipalvelimen asennus
+Halusimme laittaa Windows Serveriin OpenLDAP -palvelimen, joka asennetaan siihen virtuaalipalvelimena. Jotta virtuaalipalvelimen käyttö on mahdollista, lisäsimme Windows Serveriin Hyper-V:n. Sitä ennen latasimme <a href"http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso">64-bittisen Ubuntu Server 16.04.5 LTS:n levykuvan</a> talteen Windows -palvelimelle.
  
 Lisäsimme sen Windows Server 2016:sta seuraavanlaisesti:
 
@@ -561,13 +557,13 @@ Kun Hyper-V Manager avautui, loimme uuden virtuaalisen kytkimen painamalla Actio
 
 Avautui uusi ikkuna. Vasemmasta paneelista valitsimme "New virtual network switch" ja valitsimme External. Lopuksi painoimme "Create Virtual Switch" -painiketta. Uudeksi nimeksi laitettiin "OPENLDAP Server" ja alimmaisesta "Connection type" kohdasta varmistettiin, että "External network" oli valittu. Lopuksi painoimme OK.
 
-Tämän jälkeen alkoi varsinainen virtuaalikoneen luominen Hyper-V:ssä. Valittiin valikosta Actions -> New -> Virtual Machine.
+Tämän jälkeen alkoi varsinainen virtuaalipalvelimen luominen Hyper-V:ssä. Valittiin valikosta Actions -> New -> Virtual Machine.
 
-Avautui virtuaalikoneen ohjattu asennus. Virtuaalikoneen nimeksi laitoimme "OPENLDAP Server". Käytämme virtuaalikoneessa oletussijaintia tallennuspaikaksi. Menimme eteenpäin painamalla "Next >". 
+Avautui virtuaalipalvelimen ohjattu asennus. Virtuaalipalvelimen nimeksi laitoimme "OPENLDAP Server". Käytämme virtuaalipalvelimessa oletussijaintia tallennuspaikaksi. Menimme eteenpäin painamalla "Next >". 
 
-Seuraavasta ikkunasta valitsimme, että virtuaalikone on 2. sukupolvea. Valitsimme siis "Generation 2" ja siirryimme eteenpäin painamalla "Next >".
+Seuraavasta ikkunasta valitsimme, että virtuaalipalvelin on 2. sukupolvea. Valitsimme siis "Generation 2" ja siirryimme eteenpäin painamalla "Next >".
 
- Seuraavasta kohdassa määritimme virtuaalikoneelle keskusmuistin määrä (RAM). Meille riittää 2048 Megatavua, joten kirjoitamme arvoksi 2048 ja siirryimme eteenpäin painamalla "Next >".
+ Seuraavasta kohdassa määritimme virtuaalipalvelimelle keskusmuistin määrä (RAM). Meille riittää 2048 Megatavua, joten kirjoitamme arvoksi 2048 ja siirryimme eteenpäin painamalla "Next >".
 
  "Configure Networking" -kohdassa valitsimme aiemmin tehdyn virtuaalisen kytkimen ja painoimme "Next >".
 
@@ -577,9 +573,116 @@ Seuraavasta ikkunasta valitsimme, että virtuaalikone on 2. sukupolvea. Valitsim
 
 Lopuksi painoimme "Finish".
 
-Käynnistimme luodun virtuaalikoneen ja teimme ohjatun Ubuntu Serverin asennusvaiheen samalla tavalla kuten muissakin aiemmin. Annoimme asennusvaiheessa palvelimen nimeksi "openldapserver".
+Käynnistimme luodun virtuaalipalvelimen ja teimme ohjatun Ubuntu Serverin asennusvaiheen samalla tavalla kuten muissakin aiemmin. Annoimme asennusvaiheessa palvelimen nimeksi "openldapserver".
+
+Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa teimme tämän jälkeen teimme seuraavat peruskonfiguraatiot:
+
+1. Lataamaan ja asentamaan uusimmat päivitykset:
+    ```
+    sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+    ```
+2. Laittamalla palomuurin päälle:
+    ```
+    sudo ufw enable
+    ```
+3. Sallimalla palomuurista SSH-yhteydet:
+    ```
+    sudo ufw allow ssh
+    ```
+4. Asentamalla SSH-palvelun palvelimelle etäyhteyksiä varten:
+    ```
+    sudo apt-get install ssh -y
+    ```
+5. Asettamalla palvelimelle staattiset IP-osoitteet:
+    ```
+    sudoedit /etc/network/interfaces
+    ```
+    "interfaces" -tiedosto avautui Nano-ohjelmaan, johon korvasimme kyseisen otsakkeen alla (otsakeessa risuaita edessä) olevat määritykset seuraavilla:
+    <pre>
+    # The primary network interface
+    auto eth0
+    iface eth0 inet static
+    address 172.28.171.15
+    netmask 255.255.0.0
+    gateway 172.28.1.254
+    network 172.28.0.0
+    dns-nameservers 172.28.170.201 172.28.170.202
+    </pre>
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
+6. Konfiguroimalla DNS-asetukset:
+    ```
+    sudoedit /etc/hosts
+    ```
+    "hosts" -tiedosto avautui Nano-ohjelmaan, johon teimme seuraavat määritykset riville numero 2:
+    ```
+    127.0.1.1       ldap.pisnismiehet.local ldap openldapserver LDAP.PISNISMIEHET.LOCAL OPENLDAPSERVER LDAP
+    ```
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
+
+7. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, jos yrittää kirjautua SSH:n kautta:
+    ```
+    sudoedit /etc/motd
+    ```
+    "motd" -tiedosto avautui Nano -ohjelmalla, johon lisäsimme haluamamme viestin:
+    ```
+    OPENLDAPSERVER
+    --------
+
+    HUOMIO!
+    -------
+    Tämä työasema on varattu palvelinkäyttöön 13.1.2019 asti.
+    Lisätietoja antaa tarvittaessa Jan Parttimaa (jan.parttimaa@myy.haaga-helia.fi)
+    Kurssi: Monialaprojekti (ICT-Infrastruktuuri) PRO4TN004-3001
+    Varaajat: Jan Parttimaa, Eetu Pihamäki ja Markus Nissinen
+    Kurssiopettajat: Tero Karvinen ja Harto Holmström                                           $
+
+    ÄLÄ SAMMUTA TYÖASEMAA!
 
 
+    TERVETULOA / WELCOME
+    --------------------
+    ```
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```. Kyseinen viesti näkyy, kun kirjautuu onnistuneesti SSH-yhteyden kautta sisään palvelimelle.
+
+8. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, joka näkyy heti ruudulla, jos yrittää kirjautua suoraan palvelimelle:
+    ```
+    sudoedit /etc/issue
+    ```
+    "issue" -tiedosto avautui Nano -ohjelmalla, josta poistimme kaikki tiedot ja lisäsimme tämän jälkeen haluamamme viestin:
+    ```
+                                          OPENLDAPSERVER
+    --------------------------------------------------------------------------------------------
+
+    ----------------------------------------- HUOMIO! ------------------------------------------
+    | Tämä työasema on varattu palvelinkäyttöön 13.1.2019 asti.                                |
+    | Lisätietoja antaa tarvittaessa Jan Parttimaa (jan.parttimaa@myy.haaga-helia.fi)          |
+    | Kurssi: Monialaprojekti (ICT-Infrastruktuuri) PRO4TN004-3001                             |
+    | Varaajat: Jan Parttimaa, Eetu Pihamäki ja Markus Nissinen                                |
+    | Kurssiopettajat: Tero Karvinen ja Harto Holmström                                        |
+    |                                                                                          |
+    --------------------------------------------------------------------------------------------
+                                            NÄPIT IRTI!
+                                       ÄLÄ SAMMUTA TYÖASEMAA!
+    
+
+
+
+    TERVETULOA / WELCOME
+    --------------------
+    ```
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
+
+
+9. Käynnistämällä palvelimen uudelleen:
+    ```
+    sudo reboot
+    ```
+
+##### OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen
+
+Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
+
+1. 
 
 #### VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -työasemaan
 
@@ -678,7 +781,8 @@ Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme 
     --------------------------------------------------------------------------------------------
                                             NÄPIT IRTI!
                                        ÄLÄ SAMMUTA TYÖASEMAA!
-    
+                        JOS TARVITSEE SAMMUTTAA TAI KÄYNNISTÄÄ UUDELLEEN,
+                        SULJE ENSIN KAIKKI AVOINNA OLEVAT VIRTUAALIKONEET!
 
 
 
@@ -849,55 +953,31 @@ Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan sala
 
 #### Testityöasemien sekä testipalvelimen asennus ja konfigurointi
 
-#### Windows 10 (TESTIPC1)
+##### Windows 10
+Testityöasemia käytimme virtuaaliympäristössä Oracle VM VirtualBoxissa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
 
-Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen <a href="modern.ie"> modern.ie sivustolta</a>, joka toimii 90 päivän lisenssillä. Kyseinen virtuaalikone toimii testityöasemana ja on nimeltään "TESTIPC1".
+Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
 
-Latasimme testityöaseman seuraavasti VirtualBox-palvelimeen:
+![VirtualBox import](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/Capture_1.PNG?raw=true)
 
-1. Kirjauduimme SSH-yhteydellä VirtualBox_palvelimeen (VMSERVER) ja kirjaudumme sisään tunnuksilla, jotka teimme VMSERVERI:n asennuksen yhteydessä
-2. Latasimme TESTIPC1:sen modern.ie -sivulta komennolla:
-    ```
-    https://az792536.vo.msecnd.net/vms/VMBuild_20180425/VirtualBox/MSEdge/MSEdge.Win10.VirtualBox.zip
-    ```
-    Komennon jälkeen painoimme Enter. Virtuaalikonetta alettiin lataamaan ja siinä kesti tovin.
-3. Purkasimme kansion kotihakemistoon komennolla:
-    ```
-    unzip MSEdge.Win10.VirtualBox.zip
-    ```
-5. Siirryimme seuraavaksi root- käyttäjäksi komennolla:
-    ```
-    sudo su
-    ```
-6. Siirsimme virtuaalikoneen imagen ```vbox``` käyttäjän kotihakemistoon komennolla:
-    ```
-    mv 'MSEdge - Win10.ova' /home/vbox/
-    ```
-    Komennon jälkeen panoimme Enter. Virtuaalikoneen image siirtyi haluttuun sijaintiin. Kirjauduimme lopuksi pois root-käyttäjästä komennolla ```exit```.
+Toimme (import) Windows 10 virtuaalikoneen imagen VirtualBoxiin. Sen saa tehtyä valitsemalla VirtualBoxista File - Import Appliance... 
+Laitoimme VirtualBoxissa verkkokortin siltaavaksi (Bridged Adapter), jotta IP-osoitteet ovat verkon mukaisia eikä VirtualBoxin omia. Tämän sai tehtyä muokkaamalla virtuaalikoneen asetuksia VirtualBoxissa:
+```
+Settings - Network - Adapter 1 - Attached to: Bridged Adapter
+```
 
-7. Kirjauduimme sisään VirtualBoxin web-käyttöliittymään ja valitsimme valikosta ```File -> Import Appliance... ``` Klikkattiin  avautuvasta ikkunasta kansion kuvaa 
+![MSEdge - Win10](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/Capture_2.PNG?raw=true)
 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboximport.JPG)
+Tämän jälkeen virtuaalikone oli valmiina käynnistettäväksi. Käynnistettiin kone, jolloin haluttiin liittää se Domainiin. Teimme seuraavat asiat:
+<li>IPv6 pois päältä
+<li>IPv4 verkkokorttiin DNS osoitteeksi Windows palvelimen IP-osoite
+<li>Network Discovery päälle
+<li>Etäyhteyden salliminen
+<li>Tietokoneen nimen muuttaminen (TESTIPC1)
 
- 
-    ja haimme virtuaalikoneen imagen ````vbox```` käyttäjän kotihakemistosta. Lopuksi painoimme ```OK```.
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxselect.JPG)
-     
-    Valtsimme se jälkeen ```Next >>``` ja katsoimme onko avautuvasta ikkunasta onko virtuaalikoneen asetukset ok. Muutimme nimeksi "TESTIPC1" ja laitoimme täpän kohtaan "Reinitialize the MAC address of all network cards". Lopuksi painoimme ```Import```. Testikone oli tuotu VirtualBox-palvelimelle onnistuneesti. Tämän jälkeen muutimme virtuaalikoneesta verkkokortin siltaavaksi, jotta se näkyy lähiverkossa muiden laitteiden joukossa. Teimme sen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Settings -> Network -> Adapter 1 ``` ja drop-down valikosta valitsemalla "Bridged Adapter". 
-    Tämän jälkeen sallimme etäyhteyden virtuaalikoneeseen. Valitsimme auki olevista asetuksista ```Display -> Remote Display``` Porttinumeroksi laitoimme 9000. Hyväksyimme muutoksen painamalla OK. Käynnistimme virtuaalikoneen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Start```.
-
-
-TESTIPC1 oli päällä. Seuraavaksi teimme siihen seuraavat määritykset:
-<ul>
-    <li>IPv6 pois päältä</li>
-    <li>IPv4 verkkokorttiin DNS osoitteeksi Windows palvelimen IP-osoite</li>
-    <li>Network Discovery päälle</li>
-    <li>Etäyhteyden salliminen</li>
-    <li>Tietokoneen nimen muuttaminen (TESTIPC1)</li>
-</ul>
 Tämän jälkeen liitettiin Windows testityöasema domainiin: 
 ```
-Control Panel -> System and Security -> System -> Change settings -> Change
+Control Panel - System and Security - System - Change settings - Change
 ```
 Valittiin täppä, että liitetään domainiin ja kirjoitettiin domain nimi. Seuraavaksi kysyttiin domainin Admin käyttäjän tunnuksia. Kirjoitettiin ne ja domainin liitos onnistui. Virtuaalikone kirjautui ulos ja takaisin. Virtuaalikoneesta nyt näki, että kone on liitoksissa domainiin esimerkiksi System asetuksista.
 
@@ -909,7 +989,7 @@ Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käytt�
 
 ##### Ubuntu Desktop
 
-Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 16.04.5 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
+Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 16.04.5 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiin. Ladattiin tätä varten .ISO tiedosto netistä: http://releases.ubuntu.com/16.04/. VirtualBoxissa loimme virtuaalikoneen:
 <li>Tyyppi: Linux
 <li>Versio: Ubuntu (64-bit)
 <li>RAM-muistia: 2048 MB
@@ -917,7 +997,7 @@ Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetu
 <li>Hard disk tyyppi: VDI | Dynamically allocated
 <li>Kiintolevyn koko: 20 GB
 
-Tämän jälkeen muokkasimme virtuaalikoneen asetuksia: Settings -> Storage -> Empty -> levyn kohdasta valittiin Choose Virtual Optical Disk File... ja lisättiin .ISO tiedosto tähän ```vbox``` käyttäjän kotihakemistosta (```/home/vbox)```. Tämän jälkeen laitettiin vielä verkkokortti siltaavaksi. Nyt virtuaalikone oli valmis asennettavaksi. Käynnistettiin virtuaalikone. 
+Tämän jälkeen muokkasimme virtuaalikoneen asetuksia: Settings - Storage - Empty -levyn kohdasta valittiin Choose Virtual Optical Disk File... ja lisättiin .ISO tiedosto tähän. Tämän jälkeen laitettiin vielä verkkokortti siltaavaksi. Nyt virtuaalikone oli valmis asennettavaksi. Käynnistettiin virtuaalikone. 
 
 Ensimmäiseksi aukesi asennusruutu:
 
@@ -960,4 +1040,4 @@ Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käytt�
 
 ##### Ubuntu Server 
 
-Asensimme testipalvelimen myös VirtuaLBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit.
+Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit.
