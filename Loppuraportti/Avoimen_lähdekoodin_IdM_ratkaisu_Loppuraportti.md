@@ -1060,7 +1060,6 @@ Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käytt�
 
 ##### Ubuntu Server 
 
-<<<<<<< HEAD
 Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin käyttöä siellä ensin ennenkuin siirrämme valmiit tuotokset fyysiselle Ubuntu Serverille. Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
 
 ## 2. Asennus
@@ -1110,7 +1109,6 @@ Esimerkki tietokanta järjestelmän vaatimuksista (for operational data/small am
 | Levytila | 1GB | 5GB | 20GB |
 | Levy I/O | pieni | keskikokoinen | keskikokoinen |
 
-=======
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit.
  
 ### Asennus
@@ -1180,4 +1178,3 @@ SELECT fullName_norm,oid FROM m_user;
 ```
 ![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
->>>>>>> 22b035611df74697b02f658f37f066ba4b34c0f8
