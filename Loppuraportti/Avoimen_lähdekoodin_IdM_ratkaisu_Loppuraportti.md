@@ -840,19 +840,21 @@ Latasimme testityöaseman seuraavasti VirtualBox-palvelimeen:
     ja haimme virtuaalikoneen imagen ````vbox```` käyttäjän kotihakemistosta. Lopuksi painoimme ```OK```.
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxselect.JPG)
      
-    Valtsimme se jälkeen ```Next >>``` ja katsoimme onko avautuvasta ikkunasta onko virtuaalikoneen asetukset ok. Muutimme nimeksi "TESTIPC1" ja laitoimme täpän kohtaan "Reinitialize the MAC address of all network cards". Lopuksi painoimme ```Import```. Testikone oli tuotu VirtualBox-palvelimelle onnistuneesti. Tämän jälkeen muutimme virtuaalikoneesta verkkokortin siltaavaksi, jotta se näkyy lähiverkossa muiden laitteiden joukossa. Teimme sen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Settings -> Network -> Adapter 1 ``` ja drop-down valikosta valitsemalla "Bridged Adapter". Hyväksyimme muutoksen painamalla OK. Käynnistimme virtuaalikoneen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Start```.
+    Valtsimme se jälkeen ```Next >>``` ja katsoimme onko avautuvasta ikkunasta onko virtuaalikoneen asetukset ok. Muutimme nimeksi "TESTIPC1" ja laitoimme täpän kohtaan "Reinitialize the MAC address of all network cards". Lopuksi painoimme ```Import```. Testikone oli tuotu VirtualBox-palvelimelle onnistuneesti. Tämän jälkeen muutimme virtuaalikoneesta verkkokortin siltaavaksi, jotta se näkyy lähiverkossa muiden laitteiden joukossa. Teimme sen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Settings -> Network -> Adapter 1 ``` ja drop-down valikosta valitsemalla "Bridged Adapter". 
+    Tämän jälkeen sallimme etäyhteyden virtuaalikoneeseen. Valitsimme auki olevista asetuksista ```Display -> Remote Display``` Porttinumeroksi laitoimme 9000. Hyväksyimme muutoksen painamalla OK. Käynnistimme virtuaalikoneen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Start```.
 
 
-Tämän jälkeen virtuaalikone oli valmiina käynnistettäväksi. Käynnistettiin kone, jolloin haluttiin liittää se Domainiin. Teimme seuraavat asiat:
-<li>IPv6 pois päältä
-<li>IPv4 verkkokorttiin DNS osoitteeksi Windows palvelimen IP-osoite
-<li>Network Discovery päälle
-<li>Etäyhteyden salliminen
-<li>Tietokoneen nimen muuttaminen (TESTIPC1)
-
+TESTIPC1 oli päällä. Seuraavaksi teimme siihen seuraavat määritykset:
+<ul>
+    <li>IPv6 pois päältä</li>
+    <li>IPv4 verkkokorttiin DNS osoitteeksi Windows palvelimen IP-osoite</li>
+    <li>Network Discovery päälle</li>
+    <li>Etäyhteyden salliminen</li>
+    <li>Tietokoneen nimen muuttaminen (TESTIPC1)</li>
+</ul>
 Tämän jälkeen liitettiin Windows testityöasema domainiin: 
 ```
-Control Panel - System and Security - System - Change settings - Change
+Control Panel -> System and Security -> System -> Change settings -> Change
 ```
 Valittiin täppä, että liitetään domainiin ja kirjoitettiin domain nimi. Seuraavaksi kysyttiin domainin Admin käyttäjän tunnuksia. Kirjoitettiin ne ja domainin liitos onnistui. Virtuaalikone kirjautui ulos ja takaisin. Virtuaalikoneesta nyt näki, että kone on liitoksissa domainiin esimerkiksi System asetuksista.
 
@@ -864,7 +866,7 @@ Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käytt�
 
 ##### Ubuntu Desktop
 
-Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 16.04.5 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiin. Ladattiin tätä varten .ISO tiedosto netistä: http://releases.ubuntu.com/16.04/. VirtualBoxissa loimme virtuaalikoneen:
+Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 16.04.5 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
 <li>Tyyppi: Linux
 <li>Versio: Ubuntu (64-bit)
 <li>RAM-muistia: 2048 MB
@@ -872,7 +874,7 @@ Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetu
 <li>Hard disk tyyppi: VDI | Dynamically allocated
 <li>Kiintolevyn koko: 20 GB
 
-Tämän jälkeen muokkasimme virtuaalikoneen asetuksia: Settings - Storage - Empty -levyn kohdasta valittiin Choose Virtual Optical Disk File... ja lisättiin .ISO tiedosto tähän. Tämän jälkeen laitettiin vielä verkkokortti siltaavaksi. Nyt virtuaalikone oli valmis asennettavaksi. Käynnistettiin virtuaalikone. 
+Tämän jälkeen muokkasimme virtuaalikoneen asetuksia: Settings -> Storage -> Empty -> levyn kohdasta valittiin Choose Virtual Optical Disk File... ja lisättiin .ISO tiedosto tähän ```vbox``` käyttäjän kotihakemistosta (```/home/vbox)```. Tämän jälkeen laitettiin vielä verkkokortti siltaavaksi. Nyt virtuaalikone oli valmis asennettavaksi. Käynnistettiin virtuaalikone. 
 
 Ensimmäiseksi aukesi asennusruutu:
 
@@ -915,4 +917,4 @@ Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käytt�
 
 ##### Ubuntu Server 
 
-Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin käyttöä siellä ensin ennenkuin siirrämme valmiit tuotokset fyysiselle Ubuntu Serverille. Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
+Asensimme testipalvelimen myös VirtuaLBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
