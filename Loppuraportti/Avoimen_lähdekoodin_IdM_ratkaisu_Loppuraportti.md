@@ -968,6 +968,7 @@ Käynnistyksen jälkeen midPoint toimii selaimella: ”IP-osoite”:8080/midpoin
 Kirjauduttiin sisään ja tarkistettiin, että MariaDB on yhdistynyt midPoint palvelimeen. Sen pystyi tarkistaa kohdasta About.
 ![midPoint tietoja](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_about.png?raw=true)
 
+Repository URL kohdasta nähdään, mitä tietokantaa midPoint käyttää. MariaDB:n liittäminen midPointiin onnistui.
 Luotiin seuraavaksi jokaiselle meidän projektiryhmän jäsenelle käyttäjä midPoint käyttöliittymästä: Users – New user.
 
 Tarkistettiin seuraavaksi, että käyttäjät ovat todella tallentuneet MariaDB:n tietokantaan:
