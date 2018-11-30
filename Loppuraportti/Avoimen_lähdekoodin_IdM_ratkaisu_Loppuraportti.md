@@ -526,23 +526,89 @@ Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edel
 
 #### c.	Testityöasemien sekä testipalvelimen asennus ja konfigurointi
 
+##### Windows 10
 Testityöasemia käytimme virtuaaliympäristössä Oracle VM VirtualBoxissa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
 
 ![VirtualBox import](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/Capture_1.PNG?raw=true)
 
-Toimme (import) Windows 10 virtuaalikoneen imagen VirtualBoxiin. Sen saa tehtyä valitsemma VirtualBoxista File - Import Appliance... 
+Toimme (import) Windows 10 virtuaalikoneen imagen VirtualBoxiin. Sen saa tehtyä valitsemalla VirtualBoxista File - Import Appliance... 
+Laitoimme VirtualBoxissa verkkokortin siltaavaksi (Bridged Adapter), jotta IP-osoitteet ovat verkon mukaisia eikä VirtualBoxin omia. Tämän sai tehtyä muokkaamalla virtuaalikoneen asetuksia VirtualBoxissa:
+```
+Settings - Network - Adapter 1 - Attached to: Bridged Adapter
+```
 
 ![MSEdge - Win10](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/Capture_2.PNG?raw=true)
 
 Tämän jälkeen virtuaalikone oli valmiina käynnistettäväksi. Käynnistettiin kone, jolloin haluttiin liittää se Domainiin. Teimme seuraavat asiat:
 <li>IPv6 pois päältä
-<li>DNS osoitteeksi Windows palvelimen IP-osoite
+<li>IPv4 verkkokorttiin DNS osoitteeksi Windows palvelimen IP-osoite
 <li>Network Discovery päälle
-<li>etäyhteyden salliminen
+<li>Etäyhteyden salliminen
+<li>Tietokoneen nimen muuttaminen (TESTIPC1)
 
 Tämän jälkeen liitettiin Windows testityöasema domainiin: 
 ```
 Control Panel - System and Security - System - Change settings - Change
 ```
-Valittiin täppä, että liitetään domainiin ja kirjoitettiin domain nimi. Seuraavaksi kysyttiin domainin Admin käyttäjän tunnuksia. Laitettiin ne ja domainin liitos onnistui. Virtuaalikone kirjautui ulos ja takaisin. Virtuaalikoneesta nyt näki, että kone on liitoksissa domainiin esimerkiksi System asetuksista.
+Valittiin täppä, että liitetään domainiin ja kirjoitettiin domain nimi. Seuraavaksi kysyttiin domainin Admin käyttäjän tunnuksia. Kirjoitettiin ne ja domainin liitos onnistui. Virtuaalikone kirjautui ulos ja takaisin. Virtuaalikoneesta nyt näki, että kone on liitoksissa domainiin esimerkiksi System asetuksista.
 
+Testattiin seuraavaksi, että Active Directory toimii. Windows palvelimella loimme uuden käyttäjän Active Directoryyn:
+```
+Start - Windows Administrative Tools - Active Directory Users and Computers - pisnismiehet.local - Users - New - User
+```
+Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käyttäjästä sekä luotiin käyttäjälle salasana. Tämän jälkeen kun käyttäjä oli luotu niin testattiin kirjautua käyttäjälle testityöasemaa käyttäen. Kirjautuminen onnistui ja varmistuttiin siitä, että testityöasema on liitoksissa domainiin.
+
+##### Ubuntu Desktop
+
+Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 16.04.5 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiin. Ladattiin tätä varten .ISO tiedosto netistä: http://releases.ubuntu.com/16.04/. VirtualBoxissa loimme virtuaalikoneen:
+<li>Tyyppi: Linux
+<li>Versio: Ubuntu (64-bit)
+<li>RAM-muistia: 2048 MB
+<li>Hard disk: Create a virtual hard disk now
+<li>Hard disk tyyppi: VDI | Dynamically allocated
+<li>Kiintolevyn koko: 20 GB
+
+Tämän jälkeen muokkasimme virtuaalikoneen asetuksia: Settings - Storage - Empty -levyn kohdasta valittiin Choose Virtual Optical Disk File... ja lisättiin .ISO tiedosto tähän. Tämän jälkeen laitettiin vielä verkkokortti siltaavaksi. Nyt virtuaalikone oli valmis asennettavaksi. Käynnistettiin virtuaalikone. 
+
+Ensimmäiseksi aukesi asennusruutu:
+
+![Ubuntu Desktop asennus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(1).png?raw=true)
+
+Valittiin käyttöjärjestelmän kieliksi English ja klikattiin Install Ubuntu.
+
+![Ubuntu Desktop päivitykset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(2).png?raw=true)
+
+Seuraavassa kohdassa kysyttiin päivitysten asennusta ja kolmen osapuolen ohjelmia asennettavaksi. Valittiin nämä molemmat ja klikattiin Continue.
+
+![Asennus tyyppi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(3).png?raw=true)
+
+Seuraavaksi kysyttiin asennustyypin tapaa. Valittin Erase disk and Install Ubuntu. Klikattiin sitten Install now. 
+
+![varmistus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(4).png?raw=true)
+
+Tuli vielä varmistus kyseisestä valinnasta. Klikattiin Continue. 
+
+![aikavyöhyke](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(5).png?raw=true)
+
+Seuraavaksi kysyttiin sijaintia. Valittiin Helsinki ja klikattiin Continue. 
+
+![näppäimistön layout](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(6).png?raw=true)
+
+Seuraavaksi kysyttiin näppäimistön kieliasetuksia. Valittiin Finnish ja klikattiin Continue.
+
+![käyttäjän luominen](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(7).png?raw=true)
+
+Seuraavaksi kysyttiin tietokoneen nimeä, käyttäjätunnusta ja salasanaa. Kirjoitimme nämä ja klikattiin Continue.
+
+![Ubuntu Desktop asennus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(8).png?raw=true)
+
+Ubuntu Desktop lähti asentumaan.
+
+![asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(9).png?raw=true)
+
+Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now.
+Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käyttöjärjestelmään liittyen.
+
+##### Ubuntu Server 
+
+Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin käyttöä siellä ensin ennenkuin siirrämme valmiit tuotokset fyysiselle Ubuntu Serverille. Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
