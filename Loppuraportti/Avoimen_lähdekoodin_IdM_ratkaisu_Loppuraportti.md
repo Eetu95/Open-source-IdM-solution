@@ -1061,3 +1061,71 @@ Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käytt�
 ##### Ubuntu Server 
 
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit.
+ 
+### Asennus
+
+### Konfigurointi
+ 
+#### 1. Tietokannan määrittäminen
+Päätimme liittää fyysiselle midPoint palvelimellemme MariaDB tietokannan. Kokeilimme aluksi liittämistä virtuaalitestipalvelimella, jonka jälkeen liitimme sen fyysiselle palvelimelle. MidPointissa tulee mukana sulautettu tietokanta H2, jota suositellaan käytettävän vain testaukseen. Tästä syystä päätimme valita MariaDB tietokannan, sillä osaamme jo muutenkin hieman MySQL:ää. Toinen vaihtoehto olisi ollut PostgreSQL, mutta päädyimme MariDB:seen edellä mainitusta syystä. 
+Aluksi palvelimelle tulee asentaa MariaDB:
+```
+$ sudo apt-get install -y mariadb-server
+```
+Asennuksen jälkeen kirjauduttiin MariaDB:seen root käyttäjällä:
+```
+$ sudo mysql -u root
+```
+Seuraavaksi luotiin tietokannan nimeltä midpoint:
+```
+CREATE DATABASE midpoint CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
+```
+Luotiin käyttäjä midpoint ja asetettiin salasana:
+```
+GRANT ALL on midpoint.* TO ’midpoint’@’localhost’;
+```
+Testattiin, että tietokanta on luotu:
+```
+use midpoint;
+```
+Poistuttiin tietokannasta komennolla exit. Seuraavaksi muokkattiin config.xml tiedostoa, johon konfiguraatiomuutokset tehdään. Config.xml asentui midPoint asennuksen aikana ja se löytyy midPointin kotikansiosta (meillä se löytyy polusta /opt/midpoint/var).
+```
+$ sudoedit /opt/midpoint/var/config.xml
+```
+Lisättiin config.xml tiedostoon seuraavat rivit repositoryn kohdalle, jotka löytyivät midPointin MariaDB dokumentaatiosta:
+```
+<database>mariadb</database>
+<jdbcUsername>midpoint</jdbcUsername>
+<jdbcPassword>************</jdbcPassword>
+<jdbcUrl>jdbc:mariadb://localhost:3306/midpoint?characterEncoding=utf8</jdbcUrl><!– it seems that jdbc://mysql works as well –>
+```
+![config.xml mariadb](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb.png?raw=true)
+Tallennettiin tiedoston muokkaukset. Seuraavaksi ajettiin SQL scriptti, jotta MariaDB yhdistyy midPoint palvelimelle:
+```
+$ cd /opt/midpoint/doc/config/sql/_all
+$ sudo mysql -u root midpoint < mysql-3.8-all.sql
+```
+SQL-scriptin ajossa kesti noin viisi minuuttia. Seuravaaksi lisättiin palomuurisäännön 3306-portille, jota käytetään tietokannan liittämiseen.
+```
+$ sudo ufw allow 3306
+$ sudo ufw allow 3306/tcp
+```
+Tämän jälkeen käynnistettiin koneen uudelleen:
+```
+$ sudo reboot
+```
+Käynnistyksen jälkeen midPoint toimii selaimella: ”IP-osoite”:8080/midpoint
+Kirjauduttiin sisään ja tarkistettiin, että MariaDB on yhdistynyt midPoint palvelimeen. Sen pystyi tarkistaa kohdasta About.
+![midPoint tietoja](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_about.png?raw=true)
+Repository URL kohdasta nähdään, mitä tietokantaa midPoint käyttää. MariaDB:n liittäminen midPointiin onnistui.
+Luotiin seuraavaksi jokaiselle meidän projektiryhmän jäsenelle käyttäjä midPoint käyttöliittymästä: Users – New user.
+Tarkistettiin seuraavaksi, että käyttäjät ovat todella tallentuneet MariaDB:n tietokantaan:
+```
+$ sudo mysql -u root
+use midpoint;
+SHOW TABLES;
+SELECT * FROM m_user;
+SELECT fullName_norm,oid FROM m_user;
+```
+![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
+Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
