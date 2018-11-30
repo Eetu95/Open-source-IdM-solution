@@ -225,7 +225,7 @@ Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM
 |Mahdollisuus manuaaliprovisiointiin   |Tukeeko valittavat mahdollisuudet esimerkiksi radiobuttoneita, checkboxeja jne.   |
 |Soveltuu myös suureen yritykseen   |  Käyttöoikeuksia voi olla esimerkiksi yli 7000  |
 
-## 4. Midpoint<div id='midpoint'></div>
+## Midpoint<div id='midpoint'></div>
 
 Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuksia ja pisteitä omisti midPoint IdM-järjestelmä kuin mikään muu IdM-järjestelmä, mistä syystä päädyimme juuri tähän järjestelmään. Vahvaksi toiseksi ehdokkaaksi valiutui Apache Syncope, joka muuten midPointin kanssa sisälsi melkein identtiset ominaisuudet kuin midPoint, mutta midPoint IdM-järjestelmä tuki enemmän muita järjestelmiä ja rajapintoja. Järjestelmät ja rajapinnat, joita midPoint tukee ovat:
 <li>Active Directory
@@ -242,7 +242,7 @@ Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuk
 <li>CSV
 
 Tosin kaikissa connectoreissa ja rajapinnoissa käyttäjätietojen synkronointi ei valmistajan mukaan toimi esimerkiksi Atlassian tuotteiden ja Oraclen kanssa. Omien connectoreiden teko on myös mahdollista midPontissa. Tämän projektin aikana kokeilimme Active Directory, Unix/Linux, LDAP ja CSV connectoreita.
-### 1.	Esivalmistelut<div id='esivalmistelut'></div>
+### Esivalmistelut<div id='esivalmistelut'></div>
 
 Valittuamme midPoint IdM-järjestelmän ryhdyimme tekemään esivalmisteluja IdM-järjestelmää varten. Tarkoituksena oli, että kokeilemme mahdollisimman montaa connectoria. Tätä varten tarvitsimme sekä Linux että Windows käyttöjärjestelmillä varustetut työasemat. Aluksi aina kokeilimme midPointin käyttöä sekä työasemien asennusta ja konfigurointia virtuaaliympäristössä. Käytössämme oli Oracle VM VirtualBox, jonne loimme virtuaalikoneita testauksia varten. Myöhemmin kuitenkin teimme samat muutokset fyysisellä työasemalla, johon midPoint IdM-järjestelmä asennettiin, kun virtuaaliympäristössä saatiin haluttu lopputulos toimimaan. 
 
@@ -261,7 +261,7 @@ Käytössä olevat keskusyksiköt olivat meillä seuraavat:
 Asennamme Identiteetinhallintajärjestelmän työasemaan "MIDPOINT", VirtualBox-palvelimen testityöasemia sekä testipalvelinta varten työasemaan "VMSERVER" sekä Windows -palvelimen työasemaan "WINDOWSSERVER". Toisin sanoen nämä edellä mainitut työasemat toimivat palvelinkäytössä.
 
 
-#### a.	Ubuntu Server asennus ja konfigurointi
+#### Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -työasemaan<div id ='ubuntu-server-asennus-ja-konfigurointi'></div>
 
 Ensimmäisenä esivalmisteluvaiheena oli Linux palvelimen käyttöjärjestelmän asennus ja konfigurointi. MidPoint järjestelmä asennetaan tähän käyttöjärjestelmään. Valitsimme palvelimeksi Ubuntu Server 16.04.5 LTS 64-bittisen version. Asensimme käyttöjärjestelmän fyysiselle tietokoneelle USB-livetikun avulla. Valitsimme tietokoneesta käynnistystavaksi USB boottauksen, jolloin pääsimme asentamaan käyttöjärjestelmää. 
 
@@ -405,7 +405,7 @@ Avautui ”interfaces” -tiedosto, johon laitoimme seuraavat määritykset:
 
 ![interfaces määritykset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/etc_network_interfaces.png?raw=true)
 
-#### b.	Windows Server asennus ja konfigurointi
+#### Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -työasemaan
 
 Seuraavaksi asensimme Windows Server 2016 Datacenter 64-bittisen version fyysiselle tietokoneelle, jota tarvisimme, jotta saamme tähän koneeseen tehtyä Active Directoryn ja yhdistettyä sen midPointiin. Kokeilimme aluksi Windows Serverin asennusta Oraclen VM VirtuaBoxiin, jotta voisimme testata sitä Windows Serveriä sitä kautta. Ilmeni kuitenkin ongelmia Windowsin aktivoinnin kanssa myöhemmin. Kun veimme (export) valmiin VirtualBoxin Windows Serverin imagen talteen, johon oli liitetty tuoteavain huomattiin, että kun tuotiin (imnport) image takaisin VirtualBoxiin niin Windowsia ei oltu enää aktivoitu ja piti hankkia uusi tuoteavain. Tästä syystä on aihetta välttää Windowsin käyttöä virtuaaliympäristössä ainakin niiltä osin, jos tuodaan ja viedään VirtualBoxin imageja. Virtuaalikoneita voidaan käyttää kuitenkin esimerkiksi phpVirtualBox palvelimella, jolloin vältytään imagejen tuomisesta ja viemisestä. 
 
@@ -522,11 +522,277 @@ Seuraavaksi tuli määriteltyjen asetusten tarkasteluruutu. Kaikki oli OK eli kl
 
 ![edellytykset AD DS](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture16.PNG?raw=true)
 
-Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin. 
+Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin.
 
-#### c.	Testityöasemien sekä testipalvelimen asennus ja konfigurointi
+#### VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -työasemaan
 
-Testityöasemia käytimme virtuaaliympäristössä Oracle VM VirtualBoxissa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
+Asensimme "VMSERVER" -työasemaan Linux -käyttöjärstelmään pohjautuvan 64-bittisen Ubuntu Server 16.04.5 LTS -käyttöjärjestelmän samalla tavalla kuten se asennettiin "MIDPOINTIDM" -työasemaan < a href="#ubuntu-server-asennus-ja-konfigurointi">aiemmassa kappaleessa</a>. Muuten tehdään siis samalla tavalla mutta asennusvaiheessa annetaan palvelimen nimeksi "VMSERVER" eikä "MIDPOINTIDM". Loimme myös samat käyttäjätunnukset asennusvaiheessa. Suositeltavaa tosin olisi tehdä erit käyttäjätunnukset.
+
+Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme sisään käyttämällä asennusvaiheessa luotuja käyttäjätunnuksia. Kun olimme päässeet sisälle, aloimme tedä seuraavat peruskonfiguraatiot järjestyksessä (jokaisen komennon jälkeen painoimme Enter):
+
+1. Lataamaan ja asentamaan uusimmat päivitykset:
+    ```
+    sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+    ```
+2. Laittamalla palomuurin päälle:
+    ```
+    sudo ufw enable
+    ```
+3. Sallimalla palomuurista SSH-yhteydet:
+    ```
+    sudo ufw allow ssh
+    ```
+4. Asentamalla SSH-palvelun palvelimelle etäyhteyksiä varten:
+    ```
+    sudo apt-get install ssh -y
+    ```
+5. Asettamalla palvelimelle staattiset IP-osoitteet:
+    ```
+    sudoedit /etc/network/interfaces
+    ```
+    "interfaces" -tiedosto avautui Nano-ohjelmaan, johon korvasimme kyseisen otsakkeen alla (otsakeessa risuaita edessä) olevat määritykset seuraavilla:
+    <pre>
+    
+    # The primary network interface
+    auto eno1
+    iface eno1 inet static
+    address 172.28.175.26
+    netmask 255.255.0.0
+    gateway 172.28.1.254
+    network 172.28.0.0
+    dns-nameservers 172.28.170.201 172.28.170.202
+    </pre>
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
+
+6. Konfiguroimalla DNS-asetukset:
+    ```
+    sudoedit /etc/hosts
+    ```
+    "hosts" -tiedosto avautui Nano-ohjelmaan, johon teimme seuraavat määritykset riveille numero 2 ja 3:
+    ```
+    127.0.1.1       VMSERVER vmserver
+    172.28.175.26   vmserver.pisnismiehet.local
+    ```
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
+
+7. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, jos yrittää kirjautua SSH:n kautta:
+    ```
+    sudoedit /etc/motd
+    ```
+    "motd" -tiedosto avautui Nano -ohjelmalla, johon lisäsimme haluamamme viestin:
+    ```
+    VMSERVER
+    --------
+
+    HUOMIO!
+    -------
+    Tämä työasema on varattu palvelinkäyttöön 13.1.2019 asti.
+    Lisätietoja antaa tarvittaessa Jan Parttimaa (jan.parttimaa@myy.haaga-helia.fi)
+    Kurssi: Monialaprojekti (ICT-Infrastruktuuri) PRO4TN004-3001
+    Varaajat: Jan Parttimaa, Eetu Pihamäki ja Markus Nissinen
+    Kurssiopettajat: Tero Karvinen ja Harto Holmström                                           $
+
+    ÄLÄ SAMMUTA TYÖASEMAA!
+    JOS TARVITSEE SAMMUTTAA TAI KÄYNNISTÄÄ UUDELLEEN,
+    SULJE ENSIN KAIKKI AVOINNA OLEVAT VIRTUAALIKONEET!
+
+
+    TERVETULOA / WELCOME
+    --------------------
+    ```
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```. Kyseinen viesti näkyy, kun kirjautuu onnistuneesti SSH-yhteyden kautta sisään palvelimelle.
+
+8. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, joka näkyy heti ruudulla, jos yrittää kirjautua suoraan palvelimelle:
+    ```
+    sudoedit /etc/issue
+    ```
+    "issue" -tiedosto avautui Nano -ohjelmalla, josta poistimme kaikki tiedot ja lisäsimme tämän jälkeen haluamamme viestin:
+    ```
+                                             VMSERVER
+    --------------------------------------------------------------------------------------------
+
+    ----------------------------------------- HUOMIO! ------------------------------------------
+    | Tämä työasema on varattu palvelinkäyttöön 13.1.2019 asti.                                |
+    | Lisätietoja antaa tarvittaessa Jan Parttimaa (jan.parttimaa@myy.haaga-helia.fi)          |
+    | Kurssi: Monialaprojekti (ICT-Infrastruktuuri) PRO4TN004-3001                             |
+    | Varaajat: Jan Parttimaa, Eetu Pihamäki ja Markus Nissinen                                |
+    | Kurssiopettajat: Tero Karvinen ja Harto Holmström                                        |
+    |                                                                                          |
+    --------------------------------------------------------------------------------------------
+                                            NÄPIT IRTI!
+                                       ÄLÄ SAMMUTA TYÖASEMAA!
+    
+
+
+
+    TERVETULOA / WELCOME
+    --------------------
+    ```
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
+
+
+9. Käynnistämällä palvelimen uudelleen:
+    ```
+    sudo reboot
+    ```
+ 
+Kun palvelin oli käynnistynyt uudelleen, kirjauduimme siihen uudelleen sisälle. Tämän jälkeen aloitimme VirtualBoxin asentamisen palvelimelle.
+ 
+Teimme VirtualBoxin asennuksen seuraavanlaisesti:
+ 
+1. Asensimme tarvittavat Linux Headers:it komennolla:
+    ```
+    sudo apt-get -y install gcc make linux-headers-$(uname -r) dkms
+    ```
+    Komennon antamisen jälkeen painoimme Enter. Lataus ja asennus alkoi. Tähän ei mennyt kauan.
+ 
+2. Ladattiin ja lisättiin VirtualBoxin repositoryn avain sekä itse repository (jokaisen komennon annon jälkeen painettiin Enter):
+    ```
+    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+    sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" >> /etc/apt/sources.list'
+    ```
+ 
+3. Asennettiin VirtualBox (jokaisen komennon annon jälkeen painettiin Enter):
+    ```
+    sudo apt-get update
+    sudo apt-get install virtualbox-5.2 -y
+    ```
+ 
+4. Testasimme, että VirtualBox on asennettu komennolla:
+    ```
+    VBoxManage -v
+    ```
+    Oli asennettu onnistuneesti.
+ 
+5. Ladattiin ja asennettiin VirtualBox Extension Pack (jokaisen komennon annon jälkeen painettiin Enter):
+    ```
+    curl -O https://download.virtualbox.org/virtualbox/5.2.20/Oracle_VM_VirtualBox_Extension_Pack-5.2.20.vbox-extpack
+    sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.20.vbox-extpack
+    ```
+    Latauksessa ja asennuksessa kesti jonkin aikaa.
+ 
+6. Testasimme, että VirtualBox Extension Pack oli asennettu:
+    ```
+    VBoxManage list extpacks
+    ```
+     
+    Tuloksena tuli seuraavaa:
+    ```
+    Extension Packs: 1
+    Pack no. 0:   Oracle VM VirtualBox Extension Pack
+    Version:      5.2.20
+    Revision:     125813
+    Edition:
+    Description:  USB 2.0 and USB 3.0 Host Controller, Host Webcam, VirtualBox RDP, PXE ROM, Disk Encryption, NVMe.
+    VRDE Module:  VBoxVRDP
+    Usable:       true
+    Why unusable:
+    ```
+    Onnistuneesti oli asennettu.
+
+Jotta pystymme hallitsemaan VirtualBoxia graaffisesti, jouduimme asentamaan ja määrittämään palvelimelle phpVirtualBoxin. Tämän ansiosta voimme hallita palvelimelle asennettua VirtualBoxia graaffisesti suoraan verkkoselaimelta käsin mistä vain. Jotta phpVirtualBox toimisi, jouduimme myös asentamaan palvelimelle Apachen2:sen sekä PHP:n.
+
+Hoidimme phpVirtualBoxin sekä muiden komponenttien asennuksen sekä konfiguroinnin seuraavanlaisesti:
+
+1. Sallimme ensiksi palomuurista http, https:n, www:n sekä portit 9000, 9001 sekä 9002:
+    ```
+    sudo ufw allow http && sudo ufw allow https && sudo ufw allow www && sudo ufw allow 9000/tcp && sudo ufw allow 9000 && sudo ufw allow 9001/tcp && sudo ufw allow 9001 && sudo ufw allow 9002/tcp && sudo ufw allow 9002
+    ```
+    Komennon annon jälkeen painoimme Enter. Uudet palomuurisäännöt tulivat voimaan. Sallimme portit http, https ja www:lle, jotta asiakaskone voi ottaa yhteyden verkkoselaimella palvelimelle ja pääsee ohjaamaan VirtualBoxia graaffisesti verkkoselaimella. Sallimme porttinumerot 9000 - 9002, jotta asiakas voi tarpeen tullen ottaa konsoliyhteyden sekä etäyhteyden VirtualBoxissa oleviin kolmeen virtuaalikoneeseen.
+2. Siirryttiin komentokehotteessa root käyttäjäksi:
+    ```
+    sudo su
+    ```
+    Komennon jälkeen painoimme Enter ja annoimme myös salasanan. Oltiin nyt root käyttäjiä.
+3. Lisättiin uusi käyttäjä "vbox" ja se uuteen ryhmään "vboxusers"
+    ```
+    useradd -m vbox -G vboxusers
+    ```
+    Komennon jälkeen painoimme Enter. Uusi käyttäjä luotiin.
+4. Määriteltiin tämän jälkeen "vbox" -käyttäjälle salasana komennolla:
+    ```
+    passwd vbox
+    ```
+    Komennon jälkeen painoimme Enter. Tämän jälkeen määritimme käyttäjälle uuden salasanan ruudussa olevien ohjeiden mukaisesti.
+5. Lisäsimme uuden tiedoston:
+    ```
+    sudoedit /etc/default/virtualbox
+    ```
+    "virtualbox" -tiedosto avautui "Nano" -ohjelmassa. Lisäsimme siihen seuraavan määrityksen, jossa kiinnitämme käyttäjän "vbox" VirtualBoxin web-käyttöliittymän käyttäjäksi: ```VBOXWEB_USER=vbox```. Lopuksi tallensimme ja suljimme tiedoston.
+6. Sallimme "vboxweb-servicen" käynnistyvän automaattisesti, kun palvelin käynnistyy (jokaisen komennon jälkeen painoimme Enter):
+    ```
+    systemctl enable vboxweb-service
+    systemctl start vboxweb-service
+    ```
+7. Asensimme Apache2:n, PHP:n sekä muut tarvittavat:
+    ```
+    apt-get -y install apache2 libapache2-mod-php7.0 libapr1 libaprutil1 libaprutil1-dbd-sqlite3 libaprutil1-ldap libapr1 php7.0-common php7.0-mysql php7.0-soap php-pear wget -y
+    ```
+    Komennon annon jälkeen painoimme Enter. Latauksessa ja asennuksessa kesti tovin.
+8. Käynnistettiin Apache2 uudelleen:
+    ```
+    systemctl restart apache2.service
+    ```
+    Komennon jälkeen painoimme Enter. Apache2 käynnistyi uudelleen.
+9. Vaihdettiin sijaintia ja ladattiin phpVirtualBox (jokaisen komennon jälkeen painoimme Enter):
+    ```
+    cd /var/www/html
+    wget https://github.com/phpvirtualbox/phpvirtualbox/archive/master.zip
+    ```
+10. Asennettiin "unzip", jotta voidaan purkaa ladattu zip -kansio:
+    ```
+    sudo apt-get install unzip -y
+    ```
+    Komennon jälkeen painoimme Enter. Lataus ja asenns alkoi, jossa ei kestänyt kauan.
+11. Purkasimme ladatun zip-kansion:
+    ```
+    unzip phpvirtualbox-master.zip
+    ```
+    Komennon jälkeen painoimme Enter. Kansio purettiin haluttuun sijaintiin, mihin menimme kohdassa 8.
+12. Uudelleennimettiin purettu kansio:
+    ```
+    mv phpvirtualbox-master phpvirtualbox
+    ```
+13. siirryttiin "phpvirtualbox" -kansioon:
+    ```
+    cd phpvirtualbox
+    ```
+14. Luotiin config tiedosto kopioimalla esimerkkitiedosto:
+    ```
+    cp config.php-example config.php
+    ```
+    Avattiin "config.php" tiedosto komennolla:
+    ```
+    sudoedit config.php
+    ```
+    Tiedosto avautui Nano -ohjelmassa. Etsimme tiedostosta kyseisen rivin:
+    ```
+    var $password = 'secret';
+    ```
+    Sanan "secret" tilalle asetimme saman salasanan mikä "vbox" käyttäjällä on. Tallensimme lopuksi tiedoston ja suljimme sen myös.
+15. Käynnistimme "vboxweb-service" palvelun uudelleen komennolla:
+    ```
+    systemctl restart vboxweb-service
+    ```
+16. Kirjauduimme root-käyttäjästä pois komennolla:
+    ```
+    exit
+    ```
+ 
+Nyt on phpvirtualbox asennettu. Menimme verkkoselaimella osoitteeseen ```http://<VMSERVERIN ip-osoite>/phpvirtualbox``` eli meidän tapauksessa ```http://172.28.175.26/phpvirtualbox```. Siirrymme sivulle painamalla Enter.
+
+Avautui kirjautumisikkuna. Oletuskäyttäjätunnus (Username) on ```admin``` ja salasana (Password) on ```admin```. Kirjauduimme näillä painamalla "Log in".
+
+![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxlogin.JPG)
+
+Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan salasanaan. Se onnistuu valitsemalla käyttliittymän valikosta ```File -> Change Password```. Avautuu ikkuna, johon pitää kertoa sekä vanha salasana, että uusi salasana kahdesti. Lopuksi hyväksytään muutokset painamalla OK.
+
+![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxpassword.JPG)
+
+
+#### Testityöasemien sekä testipalvelimen asennus ja konfigurointi
+
+Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
 
 ![VirtualBox import](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/Capture_1.PNG?raw=true)
 
