@@ -917,4 +917,4 @@ Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käytt�
 
 ##### Ubuntu Server 
 
-Asensimme testipalvelimen myös VirtuaLBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
+Asensimme testipalvelimen myös VirtuaLBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit.
