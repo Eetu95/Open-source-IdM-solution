@@ -1060,7 +1060,6 @@ Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käytt�
 
 ##### Ubuntu Server 
 
-<<<<<<< HEAD
 Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin käyttöä siellä ensin ennenkuin siirrämme valmiit tuotokset fyysiselle Ubuntu Serverille. Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
 
 ### Asennus<div id='asennus'></div>
@@ -1120,8 +1119,11 @@ Esimerkki tietokanta järjestelmän vaatimuksista (for operational data/small am
 | Levytila | 1GB | 5GB | 20GB |
 | Levy I/O | pieni | keskikokoinen | keskikokoinen |
 
+<<<<<<< HEAD
 =======
 >>>>>>> 7364e614ae1ea41745454949dafbb8a6d14a7eab
+=======
+>>>>>>> 8f5a0c3cd63ec06c6b5babcd83fe1c5ac28f9560
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit.
  
 ### Asennus
@@ -1191,6 +1193,7 @@ SELECT fullName_norm,oid FROM m_user;
 ```
 ![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #### 2. Connectoreiden määrittäminen<div id='connectoreiden-maarittaminen'></div>
@@ -1424,6 +1427,3 @@ Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtu
 ![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
 
 
-=======
->>>>>>> 22b035611df74697b02f658f37f066ba4b34c0f8
->>>>>>> 7364e614ae1ea41745454949dafbb8a6d14a7eab
