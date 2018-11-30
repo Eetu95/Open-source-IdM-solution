@@ -1060,6 +1060,7 @@ Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käytt�
 
 ##### Ubuntu Server 
 
+<<<<<<< HEAD
 Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin käyttöä siellä ensin ennenkuin siirrämme valmiit tuotokset fyysiselle Ubuntu Serverille. Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
 
 ### Asennus<div id='asennus'></div>
@@ -1068,6 +1069,59 @@ Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin k
 
 #### 1. Tietokannan määrittäminen<div id='tietokannan-maarittaminen'></div>
 
+=======
+<<<<<<< HEAD
+Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin käyttöä siellä ensin ennenkuin siirrämme valmiit tuotokset fyysiselle Ubuntu Serverille. Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
+
+## 2. Asennus
+
+### MidPoint palvelimen asennus
+
+MidPoint on Java-verkkosovellus, joka on jaettu itsenäisenä palvelimena. Palvelimen järjestelmävaatimuksia (1 instance/node):
+
+|     | Minimi | 5000 käyttäjää | 50 000 käyttäjää | 100 000 käyttäjää
+| --- | --- | --- | --- | --- |
+| CPU | 1 ydin | 4 ydintä | 8 ydintä | 16 ydintä |
+| RAM | 4GB | 8GB | 16GB | 16GB |
+| Levytila | 2GB | 10GB | 10BG | 10GB |
+| Levy I/O | merkityksetön | merkityksetön | merkityksetön | merkityksetön |
+
+Käyttöjärjestelmäksi suositellen Linux-pohjaisia jakeluita, kuten Ubuntu Serveriä (16.04.5 LTS, 64-bit). Kehitysympäristö vaatii myös JDK 8:n (Java Development Kit).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Esimerkki tietokanta järjestelmän vaatimuksista (for operational data/small amount of historical data storage) - ei päde joka tapaukseen - kysy asiantuntijoiden mielipidettä (Riippuu mm. tietokantajärjestelmän koosta ja kokoonpanosta sekä tietojen koosta, luonteesta ja käyttötavoista.):
+
+|     | Minimi | 50 000 käyttäjää | 100 000 käyttäjää | 
+| --- | --- | --- | --- |
+| CPU | 1 ydin | 2 ydintä | 4 ydintä | 16 ydintä |
+| RAM | 2GB | 3GB | 4GB |
+| Levytila | 1GB | 5GB | 20GB |
+| Levy I/O | pieni | keskikokoinen | keskikokoinen |
+
+=======
+>>>>>>> 7364e614ae1ea41745454949dafbb8a6d14a7eab
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit.
  
 ### Asennus
@@ -1137,6 +1191,7 @@ SELECT fullName_norm,oid FROM m_user;
 ```
 ![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
+<<<<<<< HEAD
 
 #### 2. Connectoreiden määrittäminen<div id='connectoreiden-maarittaminen'></div>
 
@@ -1369,3 +1424,6 @@ Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtu
 ![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
 
 
+=======
+>>>>>>> 22b035611df74697b02f658f37f066ba4b34c0f8
+>>>>>>> 7364e614ae1ea41745454949dafbb8a6d14a7eab
