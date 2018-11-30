@@ -223,7 +223,6 @@ Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM
 |Mahdollisuus manuaaliprovisiointiin   |Tukeeko valittavat mahdollisuudet esimerkiksi radiobuttoneita, checkboxeja jne.   |
 |Soveltuu myös suureen yritykseen   |  Käyttöoikeuksia voi olla esimerkiksi yli 7000  |
 
-<<<<<<< HEAD
 ### Varsinainen vertailutaulukko
 
 ![vertailutaulukko](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Vertailu/vertailutaulukko.jpg?raw=true)
@@ -237,9 +236,6 @@ Tässä vertailutaulukossa näkyy vertaulumme varsinainen tulos ja se miten pä�
 Aputaulukko selventää vertailutaulukon lukua. Lataa PDF <a href="https://opensourceidm.files.wordpress.com/2018/10/aputaulukko.pdf">tästä</a>.
 
 ## 4. Midpoint<div id='midpoint'></div>
-=======
-## Midpoint<div id='midpoint'></div>
->>>>>>> ea9d5639c60e48ccc6f08ee7cc5632c2ab61aa01
 
 Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuksia ja pisteitä omisti midPoint IdM-järjestelmä kuin mikään muu IdM-järjestelmä, mistä syystä päädyimme juuri tähän järjestelmään. Vahvaksi toiseksi ehdokkaaksi valiutui Apache Syncope, joka muuten midPointin kanssa sisälsi melkein identtiset ominaisuudet kuin midPoint, mutta midPoint IdM-järjestelmä tuki enemmän muita järjestelmiä ja rajapintoja. Järjestelmät ja rajapinnat, joita midPoint tukee ovat:
 <li>Active Directory
@@ -537,6 +533,156 @@ Seuraavaksi tuli määriteltyjen asetusten tarkasteluruutu. Kaikki oli OK eli kl
 ![edellytykset AD DS](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture16.PNG?raw=true)
 
 Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin.
+ 
+##### Hyper-V:n sekä uuden virtuaalipalvelimen asennus
+Halusimme laittaa Windows Serveriin OpenLDAP -palvelimen, joka asennetaan siihen virtuaalipalvelimena. Jotta virtuaalipalvelimen käyttö on mahdollista, lisäsimme Windows Serveriin Hyper-V:n. Sitä ennen latasimme <a href"http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso">64-bittisen Ubuntu Server 16.04.5 LTS:n levykuvan</a> talteen Windows -palvelimelle.
+ 
+Lisäsimme sen Windows Server 2016:sta seuraavanlaisesti:
+
+1. Avattiin Server Manager (Start -> Server Manager).
+2. Valitiin Manage -> Add Roles and Features.
+3. Ruutuun tuli "Before you begin" sivu. Painettiin eteenpäin painamalla "Next"
+4. "Select installation type" -sivulta valittiin "Role-based or feature-based installation" ja klikattiin eteenpäin valisemalla "Next".
+5. "Select destination server" -sivulta valittiin meidän palvelin eli WINDOWSSERVER.pisnismiehet.local. Seuraavaksi mentiin eteenpäin valitsemalla Next.
+6. "Select server roles" -sivulta valittiin "Hyper-V".
+7. Painettiin avautuvasta ikkunasta "Add Features". Ohitettiin "Features" -kohta painamalla "Next".
+8. Mentiin "Create Virtual Switches", "Virtual Machine Migration" ja "Default Stores" -sivut oletusasetuksilla. Näissä vain painettiin "Next".
+9. "Confirm installation selections" sivulla valittiin "Restart the destination server automatically if required" ja painettiin "Install".
+ 
+Hyper-V saatiin asennettua.
+ 
+Asennuksen jälkeen avattiin "Hyper-V Manager" (Tools -> Hyper-V Manager).
+ 
+Kun Hyper-V Manager avautui, loimme uuden virtuaalisen kytkimen painamalla Actions- valikosta New -> Virtual Switch Manager.
+
+Avautui uusi ikkuna. Vasemmasta paneelista valitsimme "New virtual network switch" ja valitsimme External. Lopuksi painoimme "Create Virtual Switch" -painiketta. Uudeksi nimeksi laitettiin "OPENLDAP Server" ja alimmaisesta "Connection type" kohdasta varmistettiin, että "External network" oli valittu. Lopuksi painoimme OK.
+
+Tämän jälkeen alkoi varsinainen virtuaalipalvelimen luominen Hyper-V:ssä. Valittiin valikosta Actions -> New -> Virtual Machine.
+
+Avautui virtuaalipalvelimen ohjattu asennus. Virtuaalipalvelimen nimeksi laitoimme "OPENLDAP Server". Käytämme virtuaalipalvelimessa oletussijaintia tallennuspaikaksi. Menimme eteenpäin painamalla "Next >". 
+
+Seuraavasta ikkunasta valitsimme, että virtuaalipalvelin on 2. sukupolvea. Valitsimme siis "Generation 2" ja siirryimme eteenpäin painamalla "Next >".
+
+ Seuraavasta kohdassa määritimme virtuaalipalvelimelle keskusmuistin määrä (RAM). Meille riittää 2048 Megatavua, joten kirjoitamme arvoksi 2048 ja siirryimme eteenpäin painamalla "Next >".
+
+ "Configure Networking" -kohdassa valitsimme aiemmin tehdyn virtuaalisen kytkimen ja painoimme "Next >".
+
+ "Connect Virtual Hard Disk" -kohdassa märitämme, että teemme uuden virtuaalisen kiintolevyn ("Create a virtual hard disk") ja sen koko määriteltiin 80 Gigatavuun. Jatkoimme eteenpäin painamalla "Next >".
+
+"Installation Options" -kohdassa valitsimme, että asennus tapahtuu levykyvan kautta "Install an operating system from a bootable CD/DVD-ROM -> Image file (.iso))". Haimme aiemmin ladatun levynkuvan sijainnin.
+
+Lopuksi painoimme "Finish".
+
+Käynnistimme luodun virtuaalipalvelimen ja teimme ohjatun Ubuntu Serverin asennusvaiheen samalla tavalla kuten muissakin aiemmin. Annoimme asennusvaiheessa palvelimen nimeksi "openldapserver".
+
+Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa teimme tämän jälkeen teimme seuraavat peruskonfiguraatiot:
+
+1. Lataamaan ja asentamaan uusimmat päivitykset:
+    ```
+    sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+    ```
+2. Laittamalla palomuurin päälle:
+    ```
+    sudo ufw enable
+    ```
+3. Sallimalla palomuurista SSH-yhteydet:
+    ```
+    sudo ufw allow ssh
+    ```
+4. Asentamalla SSH-palvelun palvelimelle etäyhteyksiä varten:
+    ```
+    sudo apt-get install ssh -y
+    ```
+5. Asettamalla palvelimelle staattiset IP-osoitteet:
+    ```
+    sudoedit /etc/network/interfaces
+    ```
+    "interfaces" -tiedosto avautui Nano-ohjelmaan, johon korvasimme kyseisen otsakkeen alla (otsakeessa risuaita edessä) olevat määritykset seuraavilla:
+    <pre>
+    # The primary network interface
+    auto eth0
+    iface eth0 inet static
+    address 172.28.171.15
+    netmask 255.255.0.0
+    gateway 172.28.1.254
+    network 172.28.0.0
+    dns-nameservers 172.28.170.201 172.28.170.202
+    </pre>
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
+6. Konfiguroimalla DNS-asetukset:
+    ```
+    sudoedit /etc/hosts
+    ```
+    "hosts" -tiedosto avautui Nano-ohjelmaan, johon teimme seuraavat määritykset riville numero 2:
+    ```
+    127.0.1.1       ldap.pisnismiehet.local ldap openldapserver LDAP.PISNISMIEHET.LOCAL OPENLDAPSERVER LDAP
+    ```
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
+
+7. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, jos yrittää kirjautua SSH:n kautta:
+    ```
+    sudoedit /etc/motd
+    ```
+    "motd" -tiedosto avautui Nano -ohjelmalla, johon lisäsimme haluamamme viestin:
+    ```
+    OPENLDAPSERVER
+    --------
+
+    HUOMIO!
+    -------
+    Tämä työasema on varattu palvelinkäyttöön 13.1.2019 asti.
+    Lisätietoja antaa tarvittaessa Jan Parttimaa (jan.parttimaa@myy.haaga-helia.fi)
+    Kurssi: Monialaprojekti (ICT-Infrastruktuuri) PRO4TN004-3001
+    Varaajat: Jan Parttimaa, Eetu Pihamäki ja Markus Nissinen
+    Kurssiopettajat: Tero Karvinen ja Harto Holmström                                           $
+
+    ÄLÄ SAMMUTA TYÖASEMAA!
+
+
+    TERVETULOA / WELCOME
+    --------------------
+    ```
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```. Kyseinen viesti näkyy, kun kirjautuu onnistuneesti SSH-yhteyden kautta sisään palvelimelle.
+
+8. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, joka näkyy heti ruudulla, jos yrittää kirjautua suoraan palvelimelle:
+    ```
+    sudoedit /etc/issue
+    ```
+    "issue" -tiedosto avautui Nano -ohjelmalla, josta poistimme kaikki tiedot ja lisäsimme tämän jälkeen haluamamme viestin:
+    ```
+                                          OPENLDAPSERVER
+    --------------------------------------------------------------------------------------------
+
+    ----------------------------------------- HUOMIO! ------------------------------------------
+    | Tämä työasema on varattu palvelinkäyttöön 13.1.2019 asti.                                |
+    | Lisätietoja antaa tarvittaessa Jan Parttimaa (jan.parttimaa@myy.haaga-helia.fi)          |
+    | Kurssi: Monialaprojekti (ICT-Infrastruktuuri) PRO4TN004-3001                             |
+    | Varaajat: Jan Parttimaa, Eetu Pihamäki ja Markus Nissinen                                |
+    | Kurssiopettajat: Tero Karvinen ja Harto Holmström                                        |
+    |                                                                                          |
+    --------------------------------------------------------------------------------------------
+                                            NÄPIT IRTI!
+                                       ÄLÄ SAMMUTA TYÖASEMAA!
+    
+
+
+
+    TERVETULOA / WELCOME
+    --------------------
+    ```
+    Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
+
+
+9. Käynnistämällä palvelimen uudelleen:
+    ```
+    sudo reboot
+    ```
+
+##### OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen
+
+Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
+
+1. 
 
 #### VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -työasemaan
 
@@ -635,7 +781,8 @@ Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme 
     --------------------------------------------------------------------------------------------
                                             NÄPIT IRTI!
                                        ÄLÄ SAMMUTA TYÖASEMAA!
-    
+                        JOS TARVITSEE SAMMUTTAA TAI KÄYNNISTÄÄ UUDELLEEN,
+                        SULJE ENSIN KAIKKI AVOINNA OLEVAT VIRTUAALIKONEET!
 
 
 
@@ -807,30 +954,50 @@ Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan sala
 #### Testityöasemien sekä testipalvelimen asennus ja konfigurointi<div id='testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi'></div>
 
 ##### Windows 10
-Testityöasemia käytimme virtuaaliympäristössä Oracle VM VirtualBoxissa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
+Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen <a href="modern.ie"> modern.ie sivustolta</a>, joka toimii 90 päivän lisenssillä. Kyseinen virtuaalikone toimii testityöasemana ja on nimeltään "TESTIPC1".
 
-Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
+Kirjauduimme SSH-yhteydellä VirtualBox_palvelimeen (VMSERVER) ja kirjaudumme sisään tunnuksilla, jotka teimme VMSERVERI:n asennuksen yhteydessä
+2. Latasimme TESTIPC1:sen modern.ie -sivulta komennolla:
+    ```
+    https://az792536.vo.msecnd.net/vms/VMBuild_20180425/VirtualBox/MSEdge/MSEdge.Win10.VirtualBox.zip
+    ```
+    Komennon jälkeen painoimme Enter. Virtuaalikonetta alettiin lataamaan ja siinä kesti tovin.
+3. Purkasimme kansion kotihakemistoon komennolla:
+    ```
+    unzip MSEdge.Win10.VirtualBox.zip
+    ```
+5. Siirryimme seuraavaksi root- käyttäjäksi komennolla:
+    ```
+    sudo su
+    ```
+6. Siirsimme virtuaalikoneen imagen ```vbox``` käyttäjän kotihakemistoon komennolla:
+    ```
+    mv 'MSEdge - Win10.ova' /home/vbox/
+    ```
+    Komennon jälkeen panoimme Enter. Virtuaalikoneen image siirtyi haluttuun sijaintiin. Kirjauduimme lopuksi pois root-käyttäjästä komennolla ```exit```.
 
-![VirtualBox import](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/Capture_1.PNG?raw=true)
+7. Kirjauduimme sisään VirtualBoxin web-käyttöliittymään ja valitsimme valikosta ```File -> Import Appliance... ``` Klikkattiin  avautuvasta ikkunasta kansion kuvaa
+ 
+![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboximport.JPG)
 
-Toimme (import) Windows 10 virtuaalikoneen imagen VirtualBoxiin. Sen saa tehtyä valitsemalla VirtualBoxista File - Import Appliance... 
-Laitoimme VirtualBoxissa verkkokortin siltaavaksi (Bridged Adapter), jotta IP-osoitteet ovat verkon mukaisia eikä VirtualBoxin omia. Tämän sai tehtyä muokkaamalla virtuaalikoneen asetuksia VirtualBoxissa:
-```
-Settings - Network - Adapter 1 - Attached to: Bridged Adapter
-```
-
-![MSEdge - Win10](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/Capture_2.PNG?raw=true)
-
-Tämän jälkeen virtuaalikone oli valmiina käynnistettäväksi. Käynnistettiin kone, jolloin haluttiin liittää se Domainiin. Teimme seuraavat asiat:
-<li>IPv6 pois päältä
-<li>IPv4 verkkokorttiin DNS osoitteeksi Windows palvelimen IP-osoite
-<li>Network Discovery päälle
-<li>Etäyhteyden salliminen
-<li>Tietokoneen nimen muuttaminen (TESTIPC1)
+ 
+    ja haimme virtuaalikoneen imagen ````vbox```` käyttäjän kotihakemistosta. Lopuksi painoimme ```OK```.
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxselect.JPG)
+     
+    Valtsimme se jälkeen ```Next >>``` ja katsoimme onko avautuvasta ikkunasta onko virtuaalikoneen asetukset ok. Muutimme nimeksi "TESTIPC1" ja laitoimme täpän kohtaan "Reinitialize the MAC address of all network cards". Lopuksi painoimme ```Import```. Testikone oli tuotu VirtualBox-palvelimelle onnistuneesti. Tämän jälkeen muutimme virtuaalikoneesta verkkokortin siltaavaksi, jotta se näkyy lähiverkossa muiden laitteiden joukossa. Teimme sen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Settings -> Network -> Adapter 1 ``` ja drop-down valikosta valitsemalla "Bridged Adapter". 
+    Tämän jälkeen sallimme etäyhteyden virtuaalikoneeseen. Valitsimme auki olevista asetuksista ```Display -> Remote Display``` Porttinumeroksi laitoimme 9000. Hyväksyimme muutoksen painamalla OK. Käynnistimme virtuaalikoneen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Start```.
+ TESTIPC1 oli päällä. Seuraavaksi teimme siihen seuraavat määritykset:
+<ul>
+    <li>IPv6 pois päältä</li>
+    <li>IPv4 verkkokorttiin DNS osoitteeksi Windows palvelimen IP-osoite</li>
+    <li>Network Discovery päälle</li>
+    <li>Etäyhteyden salliminen</li>
+    <li>Tietokoneen nimen muuttaminen (TESTIPC1)</li>
+</ul>
 
 Tämän jälkeen liitettiin Windows testityöasema domainiin: 
 ```
-Control Panel - System and Security - System - Change settings - Change
+Control Panel -> System and Security -> System -> Change settings -> Change
 ```
 Valittiin täppä, että liitetään domainiin ja kirjoitettiin domain nimi. Seuraavaksi kysyttiin domainin Admin käyttäjän tunnuksia. Kirjoitettiin ne ja domainin liitos onnistui. Virtuaalikone kirjautui ulos ja takaisin. Virtuaalikoneesta nyt näki, että kone on liitoksissa domainiin esimerkiksi System asetuksista.
 
@@ -901,90 +1068,74 @@ Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin k
 
 #### 1. Tietokannan määrittäminen<div id='tietokannan-maarittaminen'></div>
 
-Päätimme liittää fyysiselle midPoint palvelimellemme MariaDB tietokannan. Kokeilimme aluksi liittämistä virtuaalitestipalvelimella, jonka jälkeen liitimme sen fyysiselle palvelimelle. MidPointissa tulee mukana sulautettu tietokanta H2, jota suositellaan käytettävän vain testaukseen. Tästä syystä päätimme valita MariaDB tietokannan, sillä osaamme jo muutenkin hieman MySQL:ää. Toinen vaihtoehto olisi ollut PostgreSQL, mutta päädyimme MariDB:seen edellä mainitusta syystä. 
+Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit.
+ 
+### Asennus
 
+### Konfigurointi
+ 
+#### 1. Tietokannan määrittäminen
+Päätimme liittää fyysiselle midPoint palvelimellemme MariaDB tietokannan. Kokeilimme aluksi liittämistä virtuaalitestipalvelimella, jonka jälkeen liitimme sen fyysiselle palvelimelle. MidPointissa tulee mukana sulautettu tietokanta H2, jota suositellaan käytettävän vain testaukseen. Tästä syystä päätimme valita MariaDB tietokannan, sillä osaamme jo muutenkin hieman MySQL:ää. Toinen vaihtoehto olisi ollut PostgreSQL, mutta päädyimme MariDB:seen edellä mainitusta syystä. 
 Aluksi palvelimelle tulee asentaa MariaDB:
 ```
 $ sudo apt-get install -y mariadb-server
 ```
-
 Asennuksen jälkeen kirjauduttiin MariaDB:seen root käyttäjällä:
 ```
 $ sudo mysql -u root
 ```
-
 Seuraavaksi luotiin tietokannan nimeltä midpoint:
 ```
 CREATE DATABASE midpoint CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
 ```
-
 Luotiin käyttäjä midpoint ja asetettiin salasana:
 ```
 GRANT ALL on midpoint.* TO ’midpoint’@’localhost’;
 ```
-
 Testattiin, että tietokanta on luotu:
 ```
 use midpoint;
 ```
-
 Poistuttiin tietokannasta komennolla exit. Seuraavaksi muokkattiin config.xml tiedostoa, johon konfiguraatiomuutokset tehdään. Config.xml asentui midPoint asennuksen aikana ja se löytyy midPointin kotikansiosta (meillä se löytyy polusta /opt/midpoint/var).
 ```
 $ sudoedit /opt/midpoint/var/config.xml
 ```
-
 Lisättiin config.xml tiedostoon seuraavat rivit repositoryn kohdalle, jotka löytyivät midPointin MariaDB dokumentaatiosta:
 ```
 <database>mariadb</database>
-
 <jdbcUsername>midpoint</jdbcUsername>
-
 <jdbcPassword>************</jdbcPassword>
-
 <jdbcUrl>jdbc:mariadb://localhost:3306/midpoint?characterEncoding=utf8</jdbcUrl><!– it seems that jdbc://mysql works as well –>
 ```
 ![config.xml mariadb](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb.png?raw=true)
-
 Tallennettiin tiedoston muokkaukset. Seuraavaksi ajettiin SQL scriptti, jotta MariaDB yhdistyy midPoint palvelimelle:
 ```
 $ cd /opt/midpoint/doc/config/sql/_all
-
 $ sudo mysql -u root midpoint < mysql-3.8-all.sql
 ```
-
 SQL-scriptin ajossa kesti noin viisi minuuttia. Seuravaaksi lisättiin palomuurisäännön 3306-portille, jota käytetään tietokannan liittämiseen.
 ```
 $ sudo ufw allow 3306
-
 $ sudo ufw allow 3306/tcp
 ```
 Tämän jälkeen käynnistettiin koneen uudelleen:
 ```
 $ sudo reboot
 ```
-
 Käynnistyksen jälkeen midPoint toimii selaimella: ”IP-osoite”:8080/midpoint
-
 Kirjauduttiin sisään ja tarkistettiin, että MariaDB on yhdistynyt midPoint palvelimeen. Sen pystyi tarkistaa kohdasta About.
 ![midPoint tietoja](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_about.png?raw=true)
-
 Repository URL kohdasta nähdään, mitä tietokantaa midPoint käyttää. MariaDB:n liittäminen midPointiin onnistui.
 Luotiin seuraavaksi jokaiselle meidän projektiryhmän jäsenelle käyttäjä midPoint käyttöliittymästä: Users – New user.
-
 Tarkistettiin seuraavaksi, että käyttäjät ovat todella tallentuneet MariaDB:n tietokantaan:
 ```
 $ sudo mysql -u root
-
 use midpoint;
-
 SHOW TABLES;
-
 SELECT * FROM m_user;
-
 SELECT fullName_norm,oid FROM m_user;
 ```
 ![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
-
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 
 #### 2. Connectoreiden määrittäminen<div id='connectoreiden-maarittaminen'></div>
