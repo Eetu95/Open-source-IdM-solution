@@ -537,6 +537,49 @@ Seuraavaksi tuli määriteltyjen asetusten tarkasteluruutu. Kaikki oli OK eli kl
 ![edellytykset AD DS](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture16.PNG?raw=true)
 
 Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin.
+ 
+##### Hyper-V:n sekä OpenLDAP-serverin asennus
+Halusimme laittaa Windows Serveriin OpenLDAP -palvelimen, joka asennetaan siihen virtuaalikoneena. Jotta virtuaalikoneiden käyttö on mahdollista, lisäsimme Windows Serveriin Hyper-V:n. Sitä ennen latasimme <a href"http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso">64-bittisen Ubuntu Server 16.04.5 LTS:n levykuvan</a> talteen Windows -palvelimelle.
+ 
+Lisäsimme sen Windows Server 2016:sta seuraavanlaisesti:
+
+1. Avattiin Server Manager (Start -> Server Manager).
+2. Valitiin Manage -> Add Roles and Features.
+3. Ruutuun tuli "Before you begin" sivu. Painettiin eteenpäin painamalla "Next"
+4. "Select installation type" -sivulta valittiin "Role-based or feature-based installation" ja klikattiin eteenpäin valisemalla "Next".
+5. "Select destination server" -sivulta valittiin meidän palvelin eli WINDOWSSERVER.pisnismiehet.local. Seuraavaksi mentiin eteenpäin valitsemalla Next.
+6. "Select server roles" -sivulta valittiin "Hyper-V".
+7. Painettiin avautuvasta ikkunasta "Add Features". Ohitettiin "Features" -kohta painamalla "Next".
+8. Mentiin "Create Virtual Switches", "Virtual Machine Migration" ja "Default Stores" -sivut oletusasetuksilla. Näissä vain painettiin "Next".
+9. "Confirm installation selections" sivulla valittiin "Restart the destination server automatically if required" ja painettiin "Install".
+ 
+Hyper-V saatiin asennettua.
+ 
+Asennuksen jälkeen avattiin "Hyper-V Manager" (Tools -> Hyper-V Manager).
+ 
+Kun Hyper-V Manager avautui, loimme uuden virtuaalisen kytkimen painamalla Actions- valikosta New -> Virtual Switch Manager.
+
+Avautui uusi ikkuna. Vasemmasta paneelista valitsimme "New virtual network switch" ja valitsimme External. Lopuksi painoimme "Create Virtual Switch" -painiketta. Uudeksi nimeksi laitettiin "OPENLDAP Server" ja alimmaisesta "Connection type" kohdasta varmistettiin, että "External network" oli valittu. Lopuksi painoimme OK.
+
+Tämän jälkeen alkoi varsinainen virtuaalikoneen luominen Hyper-V:ssä. Valittiin valikosta Actions -> New -> Virtual Machine.
+
+Avautui virtuaalikoneen ohjattu asennus. Virtuaalikoneen nimeksi laitoimme "OPENLDAP Server". Käytämme virtuaalikoneessa oletussijaintia tallennuspaikaksi. Menimme eteenpäin painamalla "Next >". 
+
+Seuraavasta ikkunasta valitsimme, että virtuaalikone on 2. sukupolvea. Valitsimme siis "Generation 2" ja siirryimme eteenpäin painamalla "Next >".
+
+ Seuraavasta kohdassa määritimme virtuaalikoneelle keskusmuistin määrä (RAM). Meille riittää 2048 Megatavua, joten kirjoitamme arvoksi 2048 ja siirryimme eteenpäin painamalla "Next >".
+
+ "Configure Networking" -kohdassa valitsimme aiemmin tehdyn virtuaalisen kytkimen ja painoimme "Next >".
+
+ "Connect Virtual Hard Disk" -kohdassa märitämme, että teemme uuden virtuaalisen kiintolevyn ("Create a virtual hard disk") ja sen koko määriteltiin 80 Gigatavuun. Jatkoimme eteenpäin painamalla "Next >".
+
+"Installation Options" -kohdassa valitsimme, että asennus tapahtuu levykyvan kautta "Install an operating system from a bootable CD/DVD-ROM -> Image file (.iso))". Haimme aiemmin ladatun levynkuvan sijainnin.
+
+Lopuksi painoimme "Finish".
+
+Käynnistimme luodun virtuaalikoneen ja teimme ohjatun Ubuntu Serverin asennusvaiheen samalla tavalla kuten muissakin aiemmin. Annoimme asennusvaiheessa palvelimen nimeksi "openldapserver".
+
+
 
 #### VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -työasemaan
 
