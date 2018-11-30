@@ -419,7 +419,7 @@ Avautui ”interfaces” -tiedosto, johon laitoimme seuraavat määritykset:
 
 ![interfaces määritykset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/etc_network_interfaces.png?raw=true)
 
-#### Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -työasemaan
+#### Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -työasemaan<div id='windows-server-asennus-ja-konfigurointi'></div>
 
 Seuraavaksi asensimme Windows Server 2016 Datacenter 64-bittisen version fyysiselle tietokoneelle, jota tarvisimme, jotta saamme tähän koneeseen tehtyä Active Directoryn ja yhdistettyä sen midPointiin. Kokeilimme aluksi Windows Serverin asennusta Oraclen VM VirtuaBoxiin, jotta voisimme testata sitä Windows Serveriä sitä kautta. Ilmeni kuitenkin ongelmia Windowsin aktivoinnin kanssa myöhemmin. Kun veimme (export) valmiin VirtualBoxin Windows Serverin imagen talteen, johon oli liitetty tuoteavain huomattiin, että kun tuotiin (imnport) image takaisin VirtualBoxiin niin Windowsia ei oltu enää aktivoitu ja piti hankkia uusi tuoteavain. Tästä syystä on aihetta välttää Windowsin käyttöä virtuaaliympäristössä ainakin niiltä osin, jos tuodaan ja viedään VirtualBoxin imageja. Virtuaalikoneita voidaan käyttää kuitenkin esimerkiksi phpVirtualBox palvelimella, jolloin vältytään imagejen tuomisesta ja viemisestä. 
 
@@ -804,7 +804,7 @@ Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan sala
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxpassword.JPG)
 
 
-#### Testityöasemien sekä testipalvelimen asennus ja konfigurointi
+#### Testityöasemien sekä testipalvelimen asennus ja konfigurointi<div id='testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi'></div>
 
 ##### Windows 10
 Testityöasemia käytimme virtuaaliympäristössä Oracle VM VirtualBoxissa. Latasimme Windows 10 virtuaalikoneen modern.ie sivustolta. Sivustolta kohdasta Virtual Machines päästiin valitsemaan ladattava virtuaalikone. Valitsimme koneeksi MSEdge on Win10 (x64) Stable (17.17134) ja alustaksi VirtualBox. Latasimme .ZIP tiedoston, jossa VirtualBoxin image oli. 
@@ -895,11 +895,11 @@ Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käytt�
 
 Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin käyttöä siellä ensin ennenkuin siirrämme valmiit tuotokset fyysiselle Ubuntu Serverille. Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
 
-### Asennus
+### Asennus<div id='asennus'></div>
 
-### Konfigurointi
+### Konfigurointi<div id='konfigurointi'></div>
 
-#### 1. Tietokannan määrittäminen
+#### 1. Tietokannan määrittäminen<div id='tietokannan-maarittaminen'></div>
 
 Päätimme liittää fyysiselle midPoint palvelimellemme MariaDB tietokannan. Kokeilimme aluksi liittämistä virtuaalitestipalvelimella, jonka jälkeen liitimme sen fyysiselle palvelimelle. MidPointissa tulee mukana sulautettu tietokanta H2, jota suositellaan käytettävän vain testaukseen. Tästä syystä päätimme valita MariaDB tietokannan, sillä osaamme jo muutenkin hieman MySQL:ää. Toinen vaihtoehto olisi ollut PostgreSQL, mutta päädyimme MariDB:seen edellä mainitusta syystä. 
 
@@ -986,5 +986,235 @@ SELECT fullName_norm,oid FROM m_user;
 ![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
 
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
+
+#### 2. Connectoreiden määrittäminen<div id='connectoreiden-maarittaminen'></div>
+
+#### 3. Suojatun yhteyden konfigurointi<div id='suojatun-yhteyden-konfigurointi'></div>
+
+Suojattua yhteyttä tarvitaan, jotta midPointin tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston eli midPointin välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta midPointin käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
+
+Suojattua yhteyttä varten tarvitsi asentaa Apache2: 
+```
+$ sudo apt-get update
+$ sudo apt-get install apache2
+```
+Tämän jälkeen katsottiin palomuurin listaus ja lisättiin seuraavat sovellukset palomuurilistalle:
+```
+$ sudo ufw app list
+$ sudo ufw allow 'Apache Full'
+$ sudo ufw allow 'OpenSSH'
+```
+Listaus näytti tämän jälkeen tältä komennolla: ```
+$ sudo ufw status```:
+```
+Status: active
+
+To                         Action      From
+--                         ------      ----
+OpenSSH                    ALLOW       Anywhere                  
+Apache Full                ALLOW       Anywhere                  
+OpenSSH (v6)               ALLOW       Anywhere (v6)             
+Apache Full (v6)           ALLOW       Anywhere (v6)
+```
+
+Seuraavaksi katsottiin Apachen tila: ```
+$ sudo systemctl status apache2```:
+```
+Output
+● apache2.service - LSB: Apache2 web server
+   Loaded: loaded (/etc/init.d/apache2; bad; vendor preset: enabled)
+  Drop-In: /lib/systemd/system/apache2.service.d
+           └─apache2-systemd.conf
+   Active: active (running) since Fri 2017-05-19 18:30:10 UTC; 1h 5min ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 4336 ExecStop=/etc/init.d/apache2 stop (code=exited, status=0/SUCCESS)
+  Process: 4359 ExecStart=/etc/init.d/apache2 start (code=exited, status=0/SUCCESS)
+    Tasks: 55
+   Memory: 2.3M
+      CPU: 4.094s
+   CGroup: /system.slice/apache2.service
+           ├─4374 /usr/sbin/apache2 -k start
+           ├─4377 /usr/sbin/apache2 -k start
+           └─4378 /usr/sbin/apache2 -k start
+```
+Näkyi, että Apache oli käynnissä: ```Active: active (running)```. Tämän jälkeen testattiin Apachen toimivuutta selaimessa. Kirjoitettiin selaimeen midPoint palvelimemme IP-osoitteen, jolloin tuli näkyviin Apachen aloitussivu. Apache toimii näin ollen oikein.
+
+Seuraavaksi ajettiin komennot proxyn luomiseksi ja lopuksi käynnistettiin Apache palvelu uudelleen:
+```
+$ sudo a2enmod proxy
+$ sudo a2enmod proxy_http
+$ sudo systemctl restart apache2.service
+```
+
+Seuraavaksi tehtiin itseallekirjoitettu SSL-sertifikaatti ja avain. Nimeksi valittiin ```apache-selfsigned.key``` ja ```apache-selfsigned.crt```. Avain ja sertifikaatti luotiin polkuun ```/etc/ssl/private```:
+```
+$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
+```
+Mitä komento tekee:
+
+<li>openssl = CLI työkalu, jolla luodaan ja hallitaan OpenSSL sertifikaatteja, avaimia ja muita tiedostoja.
+<li>req = alikomento, jolla kerrotaan että halutaan käyttää X.509 CSR:ää. X.509 on julkisenavaimen infrastruktuuri standardi, jota
+SSL ja TLS noudattavat. Teimme siis uuden X.509 sertin.
+<li>-x509 = modifioi aikaisempaa alikomentoa kertomalla apuohjelmalle, että halutaan tehdä itsekirjoitettu sertifikaatti sen sijaan että tehtäisiin
+sertifikaatin allekirjoitus pyyntö.
+<li>-nodes = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
+lukemaan tiedosto ilman, että käyttäjä puuttuu siihen silloin kun palvelin käynnistyy. Tunnuslause (passphrase)
+estäisi tämän toteutumisen, koska meidän pitäisi aina syöttää se jokaisen uudelleenkäynnistyksen yhteydessä.
+<li>-days 365 = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
+<li>-newkey rsa:2048 =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
+tehdä RSA avain, joka on 2048 bittiä pitkä.
+<li>-keyout = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
+<li>-out = Kertoo OpenSSL:lle minne sertifikaatti pistetään.
+
+Komentoon piti luoda tiedot meistä:
+```
+Country Name (2 letter code) [AU]:FI
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:Helsinki
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Haaga-Helia
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:*palvelimen IP-osoite*
+Email Address []:markus.nissinen@myy.haaga-helia.fi
+```
+
+Tämän jälkeen luotiin .PEM tiedosto Apachea varten:
+```
+$ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+```
+Tämän teko kesti noin pari minuuttia.
+
+Seuraavaksi tehtiin uusi konfiguraatiotiedosto salausta varten kansioon ```/etc/apache2/conf-available```:
+```
+$ sudo nano /etc/apache2/conf-available/ssl-params.conf
+```
+
+Tähän tiedostoon lisättiin seuraavat konfiguraatiorivit:
+```
+# from https://cipherli.st/
+# and https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html
+
+SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+SSLProtocol All -SSLv2 -SSLv3
+SSLHonorCipherOrder On
+# Disable preloading HSTS for now.  You can use the commented out header line that includes
+# the "preload" directive if you understand the implications.
+#Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains; preload"
+Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains"
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+# Requires Apache >= 2.4
+SSLCompression off 
+SSLSessionTickets Off
+SSLUseStapling on 
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+
+SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
+```
+
+Talletettiin tiedosto, jonka jälkeen muokattiin VirtualHostia. Aluksi tehtiin 
+varmuuskopio VirtualHost tiedostosta kaiken varalta:
+```
+$ sudo cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bak
+```
+
+Seuraavaksi muokattiin VirtualHost tiedostoa:
+```
+$ sudo nano /etc/apache2/sites-available/default-ssl.conf
+```
+
+Lisättiin tähän seuraavat muutokset
+```
+<IfModule mod_ssl.c>
+        <VirtualHost _default_:443>
+                ServerAdmin markus.nissinen@myy.haaga-helia.fi
+                ServerName *palvelimen IP-osoite*
+
+                DocumentRoot /var/www/html
+
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+                SSLEngine on
+
+                SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
+                SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+
+                <FilesMatch "\.(cgi|shtml|phtml|php)$">
+                                SSLOptions +StdEnvVars
+                </FilesMatch>
+                <Directory /usr/lib/cgi-bin>
+                                SSLOptions +StdEnvVars
+                </Directory>
+
+                BrowserMatch "MSIE [2-6]" \
+                               nokeepalive ssl-unclean-shutdown \
+                               downgrade-1.0 force-response-1.0
+
+        </VirtualHost>
+</IfModule>
+```
+
+Tallennettiin tiedosto ja seuraavaksi muokattiin edelleenohjauksen konfiguraatiota: 
+```
+$ sudo nano /etc/apache2/sites-available/000-default.conf
+```
+
+Lisättiin tähän tiedostoon muokkaukset:
+```
+<VirtualHost *:80>
+        . . .
+
+	#ServerName *palvelimen IP-osoite*
+
+	ServerAdmin markus.nissinen@myy.haaga-helia.fi
+	DocumentRoot /var/www/html
+
+        Redirect "/" "https://*palvelimen IP-osoite*"
+
+        . . .
+</VirtualHost>
+```
+Tallennettiin tiedosto. Seuraavaksi lisättiin konfiguraatiomuutoksia Apacheen. Lisättiin SSL ja Headers moduulit, jotta SSL toimii oikein:
+```
+$ sudo a2enmod ssl
+$ sudo a2enmod headers
+```
+
+Laitettiin nämä toimimaan:
+```
+$ sudo a2ensite default-ssl
+$ sudo a2enconf ssl-params
+```
+
+Seuraavaksi tarkistettiin, että ei ole virheitä muutoksissa: 
+```
+$ sudo apache2ctl configtest
+```
+
+Tuli tuloste: 
+```
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
+Syntax OK
+```
+
+Tulosteessa luki, että ```Syntax OK``` eli Apache toimii oikein. Herja alussa viittaa siihen, että palvelimen nimi pitäisi määrittää globaalisti. Tehtiin näin eli muokkattiin tiedostoa ```/etc/apache2/apache2.conf```: 
+```
+$ sudoedit /etc/apache2/apache2.conf
+```
+Lisättiin tiedostoon rivi:
+```
+ServerName *palvelimen IP-osoite*
+```
+Tallennettiin tiedosto. Tämän jälkeen käynnistettiin Apache uudelleen:
+```
+$ sudo systemctl restart apache2
+```
+
+Käynnistyksen jälkeen testattiin Apachen toimivuutta. Kirjoitettiin selaimeen:
+```
+https://*palvelimen IP-osoite*
+```
+Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitin herjan Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
+![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
 
 
