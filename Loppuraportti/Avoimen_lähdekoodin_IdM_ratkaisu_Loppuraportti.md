@@ -91,7 +91,7 @@ ja rajapintoihin.
 - Opitaan pitämään projektin aikataulusta huolta ja pitämään kiinni työaikakirjauksesta.
 
 
-## Yleistä IdM-järjestelmistä (Identity Management System)<div id='yleista'></div>
+## Yleistä IdM-järjestelmistä (Identity Management System)<div id='#yleista'></div>
 IdM-järjestelmä (Englanniksi: Identity Management System, Suomeksi:
 Identiteetinhallintajärjestelmä) on järjestelmä,
 jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä,
@@ -131,7 +131,7 @@ Monissa avoimen lähdekoodin järjestelmistä on myös tarjolla myös maksullisi
 Tässä projektissa keskitymme ainoastaan niihin IdM-järjestelmiin, jotka eivät maksa mitään ja joiden lähdekoodi on vapasti saatavilla.
 
 
-## IdM-järjestelmien vertailu<div id='idm-jarjestelmien-vertailu'></div>
+## IdM-järjestelmien vertailu<div id='#idm-jarjestelmien-vertailu'></div>
 
 Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme vertailuun seuraavat, joita löysimme:
 <li><a href="https://syncope.apache.org/">Apache Syncope</a></li>
@@ -152,7 +152,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <br>
 
 
-### IdM-järjestelmien dokumentaatiot<div id='idm-jarjestelmien-dokumentaatiot'></div>
+### IdM-järjestelmien dokumentaatiot<div id='#idm-jarjestelmien-dokumentaatiot'></div>
 <li>Apache Syncope:<a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
 <li>MidPoint:<a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a></li>
 <li>OpenIDM:<a href="https://backstage.forgerock.com/docs/idm">https://backstage.forgerock.com/docs/idm</a></li>
@@ -168,7 +168,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <li>Aerobase:<a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a></li>
 
 
-### Avoimen lähdekoodin IdM-järjestelmien valintakriteerit<div id='avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit'></div>
+### Avoimen lähdekoodin IdM-järjestelmien valintakriteerit<div id='#avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit'></div>
 
 Katsoimme kyseisten avoimen lähdekoodin IdM-järjestelmien lisenssit läpi. Laitoimme ne ylös vertailudokumenttiin ja selitimme ne. Lisäsimme lähteet, joista ilmenee lisenssit ja mitä ne pitävät sisällään.
 
@@ -226,7 +226,7 @@ Lisäsimme vertailuumme löytämämme uuden avoimen lähdekoodin IdM-järjestelm
 
 Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM-järjestelmille. Löydettiin myös suomalaisia yrityksiä ja järjestöjä, jotka käyttävät joitakin vertailussamme olevista IdM-järjestelmistä. Löydettiin mm. että <a href="http://www.tirasa.net/customer/university-of-helsinki.html">Helsingin Yliopisto käyttää Apache Syncopea</a>
 
-### Alustavat vaatimukset<div id='alustavat-vaatimukset'></div>
+### Alustavat vaatimukset<div id='#alustavat-vaatimukset'></div>
 
 | Vaatimus  |  Lisätietoja   |
 |---|---|
@@ -249,7 +249,7 @@ Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM
 |Mahdollisuus manuaaliprovisiointiin   |Tukeeko valittavat mahdollisuudet esimerkiksi radiobuttoneita, checkboxeja jne.   |
 |Soveltuu myös suureen yritykseen   |  Käyttöoikeuksia voi olla esimerkiksi yli 7000  |
 
-### Vertailu- ja aputaulukko<div id='vertailu-ja-aputaulukko'></div>
+### Vertailu- ja aputaulukko<div id='#vertailu-ja-aputaulukko'></div>
 
 ![vertailutaulukko](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Vertailu/vertailutaulukko.jpg?raw=true)
 
@@ -260,7 +260,7 @@ Tässä vertailutaulukossa näkyy vertaulumme varsinainen tulos ja se miten pä�
 
 Aputaulukko selventää vertailutaulukon lukua. Lataa PDF <a href="https://opensourceidm.files.wordpress.com/2018/10/aputaulukko.pdf">tästä</a>.
 
-## Midpoint<div id='midpoint'></div>
+## Midpoint<div id='#midpoint'></div>
 
 Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuksia ja pisteitä omisti midPoint IdM-järjestelmä kuin mikään muu IdM-järjestelmä, mistä syystä päädyimme juuri tähän järjestelmään. Vahvaksi toiseksi ehdokkaaksi valiutui Apache Syncope, joka muuten midPointin kanssa sisälsi melkein identtiset ominaisuudet kuin midPoint, mutta midPoint IdM-järjestelmä tuki enemmän muita järjestelmiä ja rajapintoja. Järjestelmät ja rajapinnat, joita midPoint tukee ovat:
 <li>Active Directory
@@ -277,7 +277,7 @@ Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuk
 <li>CSV
 
 Tosin kaikissa connectoreissa ja rajapinnoissa käyttäjätietojen synkronointi ei valmistajan mukaan toimi esimerkiksi Atlassian tuotteiden ja Oraclen kanssa. Omien connectoreiden teko on myös mahdollista midPontissa. Tämän projektin aikana kokeilimme Active Directory, Unix/Linux, LDAP ja CSV connectoreita.
-### Esivalmistelut<div id='esivalmistelut'></div>
+### Esivalmistelut<div id='#esivalmistelut'></div>
 
 Valittuamme midPoint IdM-järjestelmän ryhdyimme tekemään esivalmisteluja IdM-järjestelmää varten. Tarkoituksena oli, että kokeilemme mahdollisimman montaa connectoria. Tätä varten tarvitsimme sekä Linux että Windows käyttöjärjestelmillä varustetut työasemat. Aluksi aina kokeilimme midPointin käyttöä sekä työasemien asennusta ja konfigurointia virtuaaliympäristössä. Käytössämme oli Oracle VM VirtualBox, jonne loimme virtuaalikoneita testauksia varten. Myöhemmin kuitenkin teimme samat muutokset fyysisellä työasemalla, johon midPoint IdM-järjestelmä asennettiin, kun virtuaaliympäristössä saatiin haluttu lopputulos toimimaan. 
 
@@ -306,7 +306,7 @@ VMSERVERiin asennamme myöhemmin seuraavat virtuaaliset testikoneet ja -palvelim
 Tämän lisäksi asenamme Windows -palvelimeen OpenLDAP -virtuaalipalvelimen Hyper-V:n kautta. Käyttöjärjestelmältään se on myös Ubuntu Server 16.04.5 LTS (64-bit).
  
 
-#### Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön<div id ='ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon'></div>
+#### Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön<div id ='#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon'></div>
 
 Ensimmäisenä esivalmisteluvaiheena oli Linux palvelimen käyttöjärjestelmän asennus ja konfigurointi. MidPoint järjestelmä asennetaan tähän käyttöjärjestelmään. Valitsimme palvelimeksi Ubuntu Server 16.04.5 LTS 64-bittisen version. Asensimme käyttöjärjestelmän fyysiselle tietokoneelle USB-livetikun avulla. Valitsimme tietokoneesta käynnistystavaksi USB boottauksen, jolloin pääsimme asentamaan käyttöjärjestelmää. 
 
@@ -426,7 +426,7 @@ Asennusta viimeisteltiin.
 
 Asennus oli valmis! Käynnistimme palvelimen uudelleen valitsemalla nuolinäppäimillä ”Continue” ja hyväksymällä se painamalla Enter. Palvelin käynnistyi uudelleen ja irroitimme USB-asennustikun palvelinlaitteesta.
 
-##### Palvelimen perusmääritykset<div id='palvelimen-perusmaaritykset'></div>
+##### Palvelimen perusmääritykset<div id='#palvelimen-perusmaaritykset'></div>
 
 Kirjauduimme palvelimelle sisään pääkäyttäjänä, jonka jälkeen teimme heti seuraavat toimenpiteet:
 
@@ -450,7 +450,7 @@ Avautui ”interfaces” -tiedosto, johon laitoimme seuraavat määritykset:
 
 ![interfaces määritykset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/etc_network_interfaces.png?raw=true)
 
-#### Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -keskusyksikköön<div id='windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon"></div>
+#### Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -keskusyksikköön<div id='#windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon"></div>
 
 Seuraavaksi asensimme Windows Server 2016 Datacenter 64-bittisen version fyysiselle tietokoneelle, jota tarvisimme, jotta saamme tähän koneeseen tehtyä Active Directoryn ja yhdistettyä sen midPointiin. Kokeilimme aluksi Windows Serverin asennusta Oraclen VM VirtuaBoxiin, jotta voisimme testata sitä Windows Serveriä sitä kautta. Ilmeni kuitenkin ongelmia Windowsin aktivoinnin kanssa myöhemmin. Kun veimme (export) valmiin VirtualBoxin Windows Serverin imagen talteen, johon oli liitetty tuoteavain huomattiin, että kun tuotiin (imnport) image takaisin VirtualBoxiin niin Windowsia ei oltu enää aktivoitu ja piti hankkia uusi tuoteavain. Tästä syystä on aihetta välttää Windowsin käyttöä virtuaaliympäristössä ainakin niiltä osin, jos tuodaan ja viedään VirtualBoxin imageja. Virtuaalikoneita voidaan käyttää kuitenkin esimerkiksi phpVirtualBox palvelimella, jolloin vältytään imagejen tuomisesta ja viemisestä. 
 
@@ -477,7 +477,7 @@ Seuraavaksi asennusvaiheessa piti valita asennustyypin valinta. Valitsimme ensim
 
 Seuraavaksi piti valita levy, jolle käyttöjärjestelmä asennetaan (tässä ei näy oikeaa levyä, koska imitoimme asennusta VirtualBoxissa). Valitsimme levyn ja klikkasimme Next.
 
-##### Windows -palvelimen perusmääritykset<div id='windows-palvelimen-perusmaaritykset'></div>
+##### Windows -palvelimen perusmääritykset<div id='#windows-palvelimen-perusmaaritykset'></div>
 
 Asennettuamme Windows Server 2016 Datacenter 64-bittisen version fyysiselle koneelle, aktivoimme aluksi Windowsin. Windowsin voi aktivoida seuraavasti antamalla tuoteavaimen:
 ```
@@ -569,7 +569,7 @@ Seuraavaksi tuli määriteltyjen asetusten tarkasteluruutu. Kaikki oli OK eli kl
 
 Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin.
  
-##### Hyper-V:n sekä uuden virtuaalipalvelimen asennus<div id='hyper-vn-seka-uuden-virtuaalipalvelimen-asennus'></div>
+##### Hyper-V:n sekä uuden virtuaalipalvelimen asennus<div id='#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus'></div>
 Halusimme laittaa Windows Serveriin OpenLDAP -palvelimen, joka asennetaan siihen virtuaalipalvelimena. Jotta virtuaalipalvelimen käyttö on mahdollista, lisäsimme Windows Serveriin Hyper-V:n. Sitä ennen latasimme <a href"http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso">64-bittisen Ubuntu Server 16.04.5 LTS:n levykuvan</a> talteen Windows -palvelimelle.
  
 Lisäsimme sen Windows Server 2016:sta seuraavanlaisesti:
@@ -709,13 +709,13 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     sudo reboot
     ```
 
-##### OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen<div id='openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen'></div>
+##### OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen<div id='#openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen'></div>
 
 Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
 
 1. 
 
-#### VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön<div id='virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon'></div>
+#### VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön<div id='#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon'></div>
 
 Asensimme "VMSERVER" -keskusyksikköön Linux -käyttöjärjestelmään pohjautuvan 64-bittisen Ubuntu Server 16.04.5 LTS -käyttöjärjestelmän samalla tavalla kuten se asennettiin "MIDPOINTIDM" -keskusyksikköön <a href="#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">aiemmassa kappaleessa</a>. Muuten tehdään siis samalla tavalla mutta asennusvaiheessa annetaan palvelimen nimeksi "VMSERVER" eikä "MIDPOINTIDM". Loimme myös samat käyttäjätunnukset asennusvaiheessa. Suositeltavaa tosin olisi tehdä erit käyttäjätunnukset.
 
@@ -878,7 +878,7 @@ Teimme VirtualBoxin asennuksen seuraavanlaisesti:
     ```
     Onnistuneesti oli asennettu.
  
-#### phpVirtualBox -web-käyttöliittymän asennus ja konfigurointi<div id='phpvirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi'></div>
+#### phpVirtualBox -web-käyttöliittymän asennus ja konfigurointi<div id='#phpvirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi'></div>
 
 Jotta pystymme hallitsemaan VirtualBoxia graaffisesti, jouduimme asentamaan ja määrittämään palvelimelle phpVirtualBoxin. Tämän ansiosta voimme hallita palvelimelle asennettua VirtualBoxia graaffisesti suoraan verkkoselaimelta käsin mistä vain. Jotta phpVirtualBox toimisi, jouduimme myös asentamaan palvelimelle Apachen2:sen sekä PHP:n.
 
@@ -979,11 +979,11 @@ Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan sala
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxpassword.JPG)
  
-##### Suojatun yhteyden määritys<div id='suojatun-yhteyden-maaritys'></div>
+##### Suojatun yhteyden määritys<div id='#suojatun-yhteyden-maaritys'></div>
 
-#### Testityöasemien sekä testipalvelimen asennus ja konfigurointi<div id='testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi'></div>
+#### Testityöasemien sekä testipalvelimen asennus ja konfigurointi<div id='#testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi'></div>
 
-##### Windows 10 (TESTIPC1)<div id='windows-10-testipc1'></div>
+##### Windows 10 (TESTIPC1)<div id='#windows-10-testipc1'></div>
 Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen <a href="modern.ie"> modern.ie sivustolta</a>, joka toimii 90 päivän lisenssillä. Kyseinen virtuaalikone toimii testityöasemana ja on nimeltään "TESTIPC1".
 
 Kirjauduimme SSH-yhteydellä VirtualBox_palvelimeen (VMSERVER) ja kirjaudumme sisään tunnuksilla, jotka teimme VMSERVERI:n asennuksen yhteydessä
@@ -1037,7 +1037,7 @@ Start - Windows Administrative Tools - Active Directory Users and Computers - pi
 ```
 Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käyttäjästä sekä luotiin käyttäjälle salasana. Tämän jälkeen kun käyttäjä oli luotu niin testattiin kirjautua käyttäjälle testityöasemaa käyttäen. Kirjautuminen onnistui ja varmistuttiin siitä, että testityöasema on liitoksissa domainiin.
 
-##### Ubuntu Desktop 18.04.1 LTS (TESTIPC2)<div id='ubuntu-desktop-18041-lts-testipc2'></div>
+##### Ubuntu Desktop 18.04.1 LTS (TESTIPC2)<div id='#ubuntu-desktop-18041-lts-testipc2'></div>
 Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 18.04.1 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
 
 <li>Tyyppi: Linux
@@ -1088,17 +1088,15 @@ Ubuntu Desktop lähti asentumaan.
 Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now.
 Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käyttöjärjestelmään liittyen.
 
-##### Ubuntu Server 16.04.5 LTS<div id='ubuntu-server-16045-lts-testipalvelin'></div>
+##### Ubuntu Server 16.04.5 LTS<div id='#ubuntu-server-16045-lts-testipalvelin'></div>
 
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBox -palvelimella. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. Asetimme myös tässäkin verkkokortin siltaavaksi kuten myös muiden testikoneiden osalta.
  
-### Asennus
+### Asennus<div id='#asennus'></div>
 
-### Konfigurointi
+### Konfigurointi<div id='#konfigurointi'></div>
  
-### Konfigurointi
- 
-#### Tietokannan määrittäminen
+#### Tietokannan määrittäminen<div id='#tietokannan-maarittaminen'></div>
 Päätimme liittää fyysiselle midPoint palvelimellemme MariaDB tietokannan. Kokeilimme aluksi liittämistä virtuaalitestipalvelimella, jonka jälkeen liitimme sen fyysiselle palvelimelle. MidPointissa tulee mukana sulautettu tietokanta H2, jota suositellaan käytettävän vain testaukseen. Tästä syystä päätimme valita MariaDB tietokannan, sillä osaamme jo muutenkin hieman MySQL:ää. Toinen vaihtoehto olisi ollut PostgreSQL, mutta päädyimme MariDB:seen edellä mainitusta syystä. 
 Aluksi palvelimelle tulee asentaa MariaDB:
 ```
