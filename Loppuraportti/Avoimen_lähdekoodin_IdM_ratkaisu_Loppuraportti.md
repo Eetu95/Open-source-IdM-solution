@@ -249,7 +249,7 @@ Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM
 |Mahdollisuus manuaaliprovisiointiin   |Tukeeko valittavat mahdollisuudet esimerkiksi radiobuttoneita, checkboxeja jne.   |
 |Soveltuu myös suureen yritykseen   |  Käyttöoikeuksia voi olla esimerkiksi yli 7000  |
 
-### Vertailu- ja aputaulukko<div id='#vertailu-ja-aputaulukko'></div>
+<h3 id="vertailu-ja-aputaulukko">Vertailu- ja aputaulukko</h3>
 
 ![vertailutaulukko](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Vertailu/vertailutaulukko.jpg?raw=true)
 
@@ -260,7 +260,7 @@ Tässä vertailutaulukossa näkyy vertaulumme varsinainen tulos ja se miten pä�
 
 Aputaulukko selventää vertailutaulukon lukua. Lataa PDF <a href="https://opensourceidm.files.wordpress.com/2018/10/aputaulukko.pdf">tästä</a>.
 
-## Midpoint<div id='#midpoint'></div>
+<h2 id="midpoint">Midpoint</h2>
 
 Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuksia ja pisteitä omisti midPoint IdM-järjestelmä kuin mikään muu IdM-järjestelmä, mistä syystä päädyimme juuri tähän järjestelmään. Vahvaksi toiseksi ehdokkaaksi valiutui Apache Syncope, joka muuten midPointin kanssa sisälsi melkein identtiset ominaisuudet kuin midPoint, mutta midPoint IdM-järjestelmä tuki enemmän muita järjestelmiä ja rajapintoja. Järjestelmät ja rajapinnat, joita midPoint tukee ovat:
 <li>Active Directory
@@ -277,7 +277,8 @@ Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuk
 <li>CSV
 
 Tosin kaikissa connectoreissa ja rajapinnoissa käyttäjätietojen synkronointi ei valmistajan mukaan toimi esimerkiksi Atlassian tuotteiden ja Oraclen kanssa. Omien connectoreiden teko on myös mahdollista midPontissa. Tämän projektin aikana kokeilimme Active Directory, Unix/Linux, LDAP ja CSV connectoreita.
-### Esivalmistelut<div id='#esivalmistelut'></div>
+ 
+<h3 id="esivalmistelut">Esivalmistelut</h3>
 
 Valittuamme midPoint IdM-järjestelmän ryhdyimme tekemään esivalmisteluja IdM-järjestelmää varten. Tarkoituksena oli, että kokeilemme mahdollisimman montaa connectoria. Tätä varten tarvitsimme sekä Linux että Windows käyttöjärjestelmillä varustetut työasemat. Aluksi aina kokeilimme midPointin käyttöä sekä työasemien asennusta ja konfigurointia virtuaaliympäristössä. Käytössämme oli Oracle VM VirtualBox, jonne loimme virtuaalikoneita testauksia varten. Myöhemmin kuitenkin teimme samat muutokset fyysisellä työasemalla, johon midPoint IdM-järjestelmä asennettiin, kun virtuaaliympäristössä saatiin haluttu lopputulos toimimaan. 
 
@@ -306,7 +307,7 @@ VMSERVERiin asennamme myöhemmin seuraavat virtuaaliset testikoneet ja -palvelim
 Tämän lisäksi asenamme Windows -palvelimeen OpenLDAP -virtuaalipalvelimen Hyper-V:n kautta. Käyttöjärjestelmältään se on myös Ubuntu Server 16.04.5 LTS (64-bit).
  
 
-#### Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön<div id ='#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon'></div>
+<h4 id="ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön</h4>
 
 Ensimmäisenä esivalmisteluvaiheena oli Linux palvelimen käyttöjärjestelmän asennus ja konfigurointi. MidPoint järjestelmä asennetaan tähän käyttöjärjestelmään. Valitsimme palvelimeksi Ubuntu Server 16.04.5 LTS 64-bittisen version. Asensimme käyttöjärjestelmän fyysiselle tietokoneelle USB-livetikun avulla. Valitsimme tietokoneesta käynnistystavaksi USB boottauksen, jolloin pääsimme asentamaan käyttöjärjestelmää. 
 
@@ -426,7 +427,7 @@ Asennusta viimeisteltiin.
 
 Asennus oli valmis! Käynnistimme palvelimen uudelleen valitsemalla nuolinäppäimillä ”Continue” ja hyväksymällä se painamalla Enter. Palvelin käynnistyi uudelleen ja irroitimme USB-asennustikun palvelinlaitteesta.
 
-##### Palvelimen perusmääritykset<div id='#palvelimen-perusmaaritykset'></div>
+<h5 id="palvelimen-perusmaaritykset">Palvelimen perusmääritykset</h5>
 
 Kirjauduimme palvelimelle sisään pääkäyttäjänä, jonka jälkeen teimme heti seuraavat toimenpiteet:
 
@@ -450,7 +451,7 @@ Avautui ”interfaces” -tiedosto, johon laitoimme seuraavat määritykset:
 
 ![interfaces määritykset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/etc_network_interfaces.png?raw=true)
 
-#### Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -keskusyksikköön<div id='#windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon"></div>
+<h4 id="windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon">Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -keskusyksikköön</h4>
 
 Seuraavaksi asensimme Windows Server 2016 Datacenter 64-bittisen version fyysiselle tietokoneelle, jota tarvisimme, jotta saamme tähän koneeseen tehtyä Active Directoryn ja yhdistettyä sen midPointiin. Kokeilimme aluksi Windows Serverin asennusta Oraclen VM VirtuaBoxiin, jotta voisimme testata sitä Windows Serveriä sitä kautta. Ilmeni kuitenkin ongelmia Windowsin aktivoinnin kanssa myöhemmin. Kun veimme (export) valmiin VirtualBoxin Windows Serverin imagen talteen, johon oli liitetty tuoteavain huomattiin, että kun tuotiin (imnport) image takaisin VirtualBoxiin niin Windowsia ei oltu enää aktivoitu ja piti hankkia uusi tuoteavain. Tästä syystä on aihetta välttää Windowsin käyttöä virtuaaliympäristössä ainakin niiltä osin, jos tuodaan ja viedään VirtualBoxin imageja. Virtuaalikoneita voidaan käyttää kuitenkin esimerkiksi phpVirtualBox palvelimella, jolloin vältytään imagejen tuomisesta ja viemisestä. 
 
@@ -477,7 +478,7 @@ Seuraavaksi asennusvaiheessa piti valita asennustyypin valinta. Valitsimme ensim
 
 Seuraavaksi piti valita levy, jolle käyttöjärjestelmä asennetaan (tässä ei näy oikeaa levyä, koska imitoimme asennusta VirtualBoxissa). Valitsimme levyn ja klikkasimme Next.
 
-##### Windows -palvelimen perusmääritykset<div id='#windows-palvelimen-perusmaaritykset'></div>
+<h5 id="windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</h5>
 
 Asennettuamme Windows Server 2016 Datacenter 64-bittisen version fyysiselle koneelle, aktivoimme aluksi Windowsin. Windowsin voi aktivoida seuraavasti antamalla tuoteavaimen:
 ```
@@ -569,7 +570,8 @@ Seuraavaksi tuli määriteltyjen asetusten tarkasteluruutu. Kaikki oli OK eli kl
 
 Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin.
  
-##### Hyper-V:n sekä uuden virtuaalipalvelimen asennus<div id='#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus'></div>
+<h5 id="hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</h5>
+ 
 Halusimme laittaa Windows Serveriin OpenLDAP -palvelimen, joka asennetaan siihen virtuaalipalvelimena. Jotta virtuaalipalvelimen käyttö on mahdollista, lisäsimme Windows Serveriin Hyper-V:n. Sitä ennen latasimme <a href"http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso">64-bittisen Ubuntu Server 16.04.5 LTS:n levykuvan</a> talteen Windows -palvelimelle.
  
 Lisäsimme sen Windows Server 2016:sta seuraavanlaisesti:
@@ -709,13 +711,13 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     sudo reboot
     ```
 
-##### OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen<div id='#openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen'></div>
+<h5 id="openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen</h5>
 
 Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
 
 1. 
 
-#### VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön<div id='#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon'></div>
+<h4 id="virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</h4>
 
 Asensimme "VMSERVER" -keskusyksikköön Linux -käyttöjärjestelmään pohjautuvan 64-bittisen Ubuntu Server 16.04.5 LTS -käyttöjärjestelmän samalla tavalla kuten se asennettiin "MIDPOINTIDM" -keskusyksikköön <a href="#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">aiemmassa kappaleessa</a>. Muuten tehdään siis samalla tavalla mutta asennusvaiheessa annetaan palvelimen nimeksi "VMSERVER" eikä "MIDPOINTIDM". Loimme myös samat käyttäjätunnukset asennusvaiheessa. Suositeltavaa tosin olisi tehdä erit käyttäjätunnukset.
 
@@ -878,7 +880,7 @@ Teimme VirtualBoxin asennuksen seuraavanlaisesti:
     ```
     Onnistuneesti oli asennettu.
  
-#### phpVirtualBox -web-käyttöliittymän asennus ja konfigurointi<div id='#phpvirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi'></div>
+<h4 id="phpvirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi">phpVirtualBox -web-käyttöliittymän asennus ja konfigurointi</h4>
 
 Jotta pystymme hallitsemaan VirtualBoxia graaffisesti, jouduimme asentamaan ja määrittämään palvelimelle phpVirtualBoxin. Tämän ansiosta voimme hallita palvelimelle asennettua VirtualBoxia graaffisesti suoraan verkkoselaimelta käsin mistä vain. Jotta phpVirtualBox toimisi, jouduimme myös asentamaan palvelimelle Apachen2:sen sekä PHP:n.
 
@@ -979,11 +981,12 @@ Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan sala
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxpassword.JPG)
  
-##### Suojatun yhteyden määritys<div id='#suojatun-yhteyden-maaritys'></div>
+<h5 id="suojatun-yhteyden-maaritys-2">Suojatun yhteyden määritys</h5>
 
-#### Testityöasemien sekä testipalvelimen asennus ja konfigurointi<div id='#testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi'></div>
+<h4 id="testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi">Testityöasemien sekä testipalvelimen asennus ja konfigurointi</h4>
 
-##### Windows 10 (TESTIPC1)<div id='#windows-10-testipc1'></div>
+<h5 id="windows-10-testipc1">Windows 10 (TESTIPC1)</h5>
+ 
 Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen <a href="modern.ie"> modern.ie sivustolta</a>, joka toimii 90 päivän lisenssillä. Kyseinen virtuaalikone toimii testityöasemana ja on nimeltään "TESTIPC1".
 
 Kirjauduimme SSH-yhteydellä VirtualBox_palvelimeen (VMSERVER) ja kirjaudumme sisään tunnuksilla, jotka teimme VMSERVERI:n asennuksen yhteydessä
@@ -1037,7 +1040,8 @@ Start - Windows Administrative Tools - Active Directory Users and Computers - pi
 ```
 Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käyttäjästä sekä luotiin käyttäjälle salasana. Tämän jälkeen kun käyttäjä oli luotu niin testattiin kirjautua käyttäjälle testityöasemaa käyttäen. Kirjautuminen onnistui ja varmistuttiin siitä, että testityöasema on liitoksissa domainiin.
 
-##### Ubuntu Desktop 18.04.1 LTS (TESTIPC2)<div id='#ubuntu-desktop-18041-lts-testipc2'></div>
+<h5 id="ubuntu-desktop-18041-lts-testipc2">Ubuntu Desktop 18.04.1 LTS (TESTIPC2)</h5>
+ 
 Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 18.04.1 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
 
 <li>Tyyppi: Linux
@@ -1088,15 +1092,16 @@ Ubuntu Desktop lähti asentumaan.
 Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now.
 Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käyttöjärjestelmään liittyen.
 
-##### Ubuntu Server 16.04.5 LTS<div id='#ubuntu-server-16045-lts-testipalvelin'></div>
+<h5 id="ubuntu-server-16045-lts-testipalvelin">Ubuntu Server 16.04.5 LTS</h5>
 
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBox -palvelimella. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. Asetimme myös tässäkin verkkokortin siltaavaksi kuten myös muiden testikoneiden osalta.
  
-### Asennus<div id='#asennus'></div>
+<h3 id="asennus">Asennus</h3>
 
-### Konfigurointi<div id='#konfigurointi'></div>
+<h3 id="konfigurointi">Konfigurointi</h3>
  
-#### Tietokannan määrittäminen<div id='#tietokannan-maarittaminen'></div>
+<h4 id="tietokannan-maarittaminen">Tietokannan määrittäminen</h4>
+ 
 Päätimme liittää fyysiselle midPoint palvelimellemme MariaDB tietokannan. Kokeilimme aluksi liittämistä virtuaalitestipalvelimella, jonka jälkeen liitimme sen fyysiselle palvelimelle. MidPointissa tulee mukana sulautettu tietokanta H2, jota suositellaan käytettävän vain testaukseen. Tästä syystä päätimme valita MariaDB tietokannan, sillä osaamme jo muutenkin hieman MySQL:ää. Toinen vaihtoehto olisi ollut PostgreSQL, mutta päädyimme MariDB:seen edellä mainitusta syystä. 
 Aluksi palvelimelle tulee asentaa MariaDB:
 ```
@@ -1162,9 +1167,9 @@ Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 <<<<<<< HEAD
 <<<<<<< HEAD
 
-#### Connectoreiden määrittäminen<div id='connectoreiden-maarittaminen'></div>
+<h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
 
-#### Suojatun yhteyden konfigurointi itseallekirjoitetulla sertifikaatilla<div id='suojatun-yhteyden-konfigurointi-itseallekirjoitetulla-sertifikaatilla'></div>
+<h4 id="suojatun-yhteyden-konfigurointi">Suojatun yhteyden konfigurointi</h4>
 
 Suojattua yhteyttä tarvitaan, jotta midPointin tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston eli midPointin välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta midPointin käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
 
