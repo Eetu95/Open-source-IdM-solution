@@ -9,7 +9,7 @@ Kurssi: Monialaprojekti
 Päivämäärä: 28.11.2018
  
 <h2>Sisällysluettelo</h2>
-<ol style="list-style-type:none>
+<ol style="list-style-type:none">
   <li><a href="#johdanto">Johdanto</a></li>
   <li><a href="#yleista-idm-jarjestelmista-identity-management-system">Yleistä IdM-järjestelmistä (Identity Management System)</a></li>
   <li><a href="#idm-jarjestelmien-vertailu">IdM-järjestelmien vertailu</a></li>
