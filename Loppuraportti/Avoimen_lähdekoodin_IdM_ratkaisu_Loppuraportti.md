@@ -130,7 +130,7 @@ Monissa avoimen lähdekoodin järjestelmistä on myös tarjolla myös maksullisi
 Tässä projektissa keskitymme ainoastaan niihin IdM-järjestelmiin, jotka eivät maksa mitään ja joiden lähdekoodi on vapasti saatavilla.
 
 
-## IdM-järjestelmien vertailu<div id='#idm-jarjestelmien-vertailu'></div>
+<h2 id="idm-jarjestelmien-vertailu">IdM-järjestelmien vertailu</h2>
 
 Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme vertailuun seuraavat, joita löysimme:
 <li><a href="https://syncope.apache.org/">Apache Syncope</a></li>
@@ -151,7 +151,8 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <br>
 
 
-### IdM-järjestelmien dokumentaatiot<div id='#idm-jarjestelmien-dokumentaatiot'></div>
+<h3 id="idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</h3>
+ 
 <li>Apache Syncope:<a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
 <li>MidPoint:<a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a></li>
 <li>OpenIDM:<a href="https://backstage.forgerock.com/docs/idm">https://backstage.forgerock.com/docs/idm</a></li>
@@ -167,7 +168,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <li>Aerobase:<a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a></li>
 
 
-### Avoimen lähdekoodin IdM-järjestelmien valintakriteerit<div id='#avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit'></div>
+<h3 id="avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit">Avoimen lähdekoodin IdM-järjestelmien valintakriteerit</h3>
 
 Katsoimme kyseisten avoimen lähdekoodin IdM-järjestelmien lisenssit läpi. Laitoimme ne ylös vertailudokumenttiin ja selitimme ne. Lisäsimme lähteet, joista ilmenee lisenssit ja mitä ne pitävät sisällään.
 
@@ -225,7 +226,7 @@ Lisäsimme vertailuumme löytämämme uuden avoimen lähdekoodin IdM-järjestelm
 
 Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM-järjestelmille. Löydettiin myös suomalaisia yrityksiä ja järjestöjä, jotka käyttävät joitakin vertailussamme olevista IdM-järjestelmistä. Löydettiin mm. että <a href="http://www.tirasa.net/customer/university-of-helsinki.html">Helsingin Yliopisto käyttää Apache Syncopea</a>
 
-### Alustavat vaatimukset<div id='#alustavat-vaatimukset'></div>
+<h3 id="alustavat-vaatimukset">Alustavat vaatimukset</h3>
 
 | Vaatimus  |  Lisätietoja   |
 |---|---|
