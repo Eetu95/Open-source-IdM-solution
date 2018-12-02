@@ -1,4 +1,5 @@
-# Avoimen lähdekoodin IdM ratkaisu 
+<h1>Avoimen lähdekoodin IdM ratkaisu</h1>
+ 
 Loppuraportti
 
 Tekijät: Jan Parttimaa, Eetu Pihamäki & Markus Nissinen
@@ -7,10 +8,10 @@ Kurssi: Monialaprojekti
  
 Päivämäärä: 28.11.2018
  
-## Sisällysluettelo
+<h2>Sisällysluettelo</h2>
 <ol>
   <li><a href="#johdanto">Johdanto</a></li>
-  <li><a href="#yleistä-idm-jarjestelmista-identity-management-system">Yleistä IdM-järjestelmistä (Identity Management System)</a></li>
+  <li><a href="#yleista-idm-jarjestelmista-identity-management-system">Yleistä IdM-järjestelmistä (Identity Management System)</a></li>
   <li><a href="#idm-jarjestelmien-vertailu">IdM-järjestelmien vertailu</a></li>
   <ol>
         <li><a href="#idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</a></li>
@@ -59,7 +60,8 @@ Päivämäärä: 28.11.2018
  <li><a href="#lahteet">Lähteet</a></li>
 </ol>
 
-## Johdanto<div id='#johdanto'></div>
+<h2 id="johdanto">Johdanto</h2>
+ 
 Tässä raportissa kerromme kuinka avoimen lähdekoodiin perustuvan Identiteetinhallintajärjestelmän saa käyttöön (asennus ja määritys) sekä kuinka sillä voidaan hallita Unix/Linux -palvelien, OpenLDAP-palvelimen sekä Windows -domainin käyttäjiä. Käytämme projektissa Evolveumin "midPoint" nimistä avoimen lähdekoodin identiteetinhallintajärjestelmää.
 
 Käynnistimme projektin kyseisestä aiheesta, koska muutamat projektiryhmän jäsenet ovat työssään joutuneet tekemään
@@ -91,12 +93,9 @@ ja rajapintoihin.
 - Opitaan pitämään projektin aikataulusta huolta ja pitämään kiinni työaikakirjauksesta.
 
 
-## Yleistä IdM-järjestelmistä (Identity Management System)<div id='#yleistä-idm-jarjestelmista-identity-management-system'></div>
-IdM-järjestelmä (Englanniksi: Identity Management System, Suomeksi:
-Identiteetinhallintajärjestelmä) on järjestelmä,
-jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä,
-palveluita, tietokantoja, ohjelmistoja sekä ohjelmien käyttöoikeuksia että
-pääsynhallintaa. IdM:n ansiosta yritys pystyy helposti pitämään huolen siitä ketkä työntekijät pääsevät käyttämään mitäkin tietojärjestelmiä sekä palveluita ja ketkä taas eivät. IdM-järjestelmiä on hyvin erilaisia ja hyvin erilaisina kokonaisuuksina.
+<h2 id="yleista-idm-jarjestelmista-identity-management-system">Yleistä IdM-järjestelmistä (Identity Management System)</h2>
+ 
+IdM-järjestelmä (Englanniksi: Identity Management System, Suomeksi: Identiteetinhallintajärjestelmä) on järjestelmä, jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä, palveluita, tietokantoja, ohjelmistoja sekä ohjelmien käyttöoikeuksia että pääsynhallintaa. IdM:n ansiosta yritys pystyy helposti pitämään huolen siitä ketkä työntekijät pääsevät käyttämään mitäkin tietojärjestelmiä sekä palveluita ja ketkä taas eivät. IdM-järjestelmiä on hyvin erilaisia ja hyvin erilaisina kokonaisuuksina.
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/IdM_esimerkki.jpg)
 Kuva 1: Havainnollistava esimerkki Indentiteetinhallintajärjestelmästä (IdM)
