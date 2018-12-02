@@ -238,18 +238,18 @@ Aputaulukko selventää vertailutaulukon lukua. Lataa PDF <a href="https://opens
 ## 4. Midpoint<div id='midpoint'></div>
 
 Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuksia ja pisteitä omisti midPoint IdM-järjestelmä kuin mikään muu IdM-järjestelmä, mistä syystä päädyimme juuri tähän järjestelmään. Vahvaksi toiseksi ehdokkaaksi valiutui Apache Syncope, joka muuten midPointin kanssa sisälsi melkein identtiset ominaisuudet kuin midPoint, mutta midPoint IdM-järjestelmä tuki enemmän muita järjestelmiä ja rajapintoja. Järjestelmät ja rajapinnat, joita midPoint tukee ovat:
-<li>Active Directory
-<li>Unix/Linux
-<li>Office365
-<li>Google Apps
-<li>SAP
-<li>Box
-<li>Drupal
-<li>Atlassian ohjelmat (JIRA, Nitbucket, Confluence)
-<li>Lotus Notes
-<li>tietokannat
-<li>LDAP
-<li>CSV
+<li>Active Directory</li>
+<li>Unix/Linux</li>
+<li>Office365</li>
+<li>Google Apps</li>
+<li>SAP</li>
+<li>Box</li>
+<li>Drupal</li>
+<li>Atlassian ohjelmat (JIRA, Bitbucket, Confluence)</li>
+<li>Lotus Notes</li>
+<li>Tietokannat</li>
+<li>LDAP</li>
+<li>CSV</li>
 
 Tosin kaikissa connectoreissa ja rajapinnoissa käyttäjätietojen synkronointi ei valmistajan mukaan toimi esimerkiksi Atlassian tuotteiden ja Oraclen kanssa. Omien connectoreiden teko on myös mahdollista midPontissa. Tämän projektin aikana kokeilimme Active Directory, Unix/Linux, LDAP ja CSV connectoreita.
 ### Esivalmistelut<div id='esivalmistelut'></div>
