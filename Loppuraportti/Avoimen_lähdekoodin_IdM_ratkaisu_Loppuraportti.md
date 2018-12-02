@@ -12,13 +12,39 @@ Päivämäärä: 28.11.2018
   <li><a href="#johdanto">Johdanto</a></li>
   <li><a href="#yleista">Yleistä IdM-järjestelmistä (Identity Management System)</a></li>
   <li><a href="#idm-jarjestelmien-vertailu">IdM-järjestelmien vertailu</a></li>
+  <ol>
+        <li><a href="#idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</a></li>
+        <li><a href="#avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit">Avoimen lähdekoodin IdM-järjestelmien valintakriteerit</a></li>
+        <li><a href="#alustavat-vaatimukset">Alustavat vaatimukset</a></li>
+        <li><a href="#vertailu-ja-aputaulukko">Vertailu- ja aputaulukko</a></li>
+  </ol>
   <li><a href="#midpoint">Midpoint</a></li>
   <ol>
       <li><a href="#esivalmistelut">Esivalmistelut</a></li>
       <ol>
-          <li><a href="#ubuntu-server-asennus-ja-konfigurointi">Ubuntu Server asennus ja konfigurointi</a></li>
-          <li><a href="#windows-server-asennus-ja-konfigurointi">Windows Server asennus ja konfigurointi</a></li>
+          <li><a href="#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön</a></li>
+          <ol>
+                <li><a href="#palvelimen-perusmaaritykset">Palvelimen perusmääritykset</a></li>
+          </ol>
+          <li><a href="#windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon">Windows Server 2016 asennus ja konfigurointi "WINDOWSSERVER" -keskusyksikköön</a></li>
+          <ol>
+                <li><a href="#windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</a></li>
+                <li><a href="#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</a></li>
+                <li><a href="#openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen</a></li>
+                <li><a href="#phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</a></li>
+                <li><a href="#suojatun-yhteyden-maaritys">Suojatun yhteyden määritys</a></li>
+          </ol>
+          <li><a href="#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</a></li>
+          <ol>
+                <li><a href="#phpVirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi">phpVirtualbox -web-käyttöliittymän asennus ja konfigurointi</a></li>
+                <li><a href="#suojatun-yhteyden-maaritys">Suojatun yhteyden määritys</a></li>
+          </ol>
           <li><a href="#testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi">Testityöasemien sekä testipalvelimen asennus ja konfigurointi</a></li>
+          <ol>
+                <li><a href="#windows-10-testipc1">Windows 10 (TESTIPC1)</a></li>
+                <li><a href="#ubuntu-desktop-18041-lts-testipc2">Ubuntu Desktop 18.04.1 LTS (TESTIPC2)</a></li>
+                <li><a href="#ubuntu-server-16045-lts-testipalvelin">Ubuntu Server 16.04.5 LTS (TESTIPALVELIN)</a></li>
+          </ol>
       </ol>
       <li><a href="#asennus">Asennus</a></li>
       <li><a href="#konfigurointi">Konfigurointi</a></li>
@@ -126,7 +152,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <br>
 
 
-### IdM-järjestelmien dokumentaatiot:
+### IdM-järjestelmien dokumentaatiot<div id='idm-jarjestelmien-dokumentaatiot'></div>
 <li>Apache Syncope:<a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
 <li>MidPoint:<a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a></li>
 <li>OpenIDM:<a href="https://backstage.forgerock.com/docs/idm">https://backstage.forgerock.com/docs/idm</a></li>
@@ -142,7 +168,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <li>Aerobase:<a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a></li>
 
 
-### Avoimen lähdekoodin IdM-järjestelmien valintakriteerit
+### Avoimen lähdekoodin IdM-järjestelmien valintakriteerit<div id='avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit'></div>
 
 Katsoimme kyseisten avoimen lähdekoodin IdM-järjestelmien lisenssit läpi. Laitoimme ne ylös vertailudokumenttiin ja selitimme ne. Lisäsimme lähteet, joista ilmenee lisenssit ja mitä ne pitävät sisällään.
 
@@ -200,7 +226,7 @@ Lisäsimme vertailuumme löytämämme uuden avoimen lähdekoodin IdM-järjestelm
 
 Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM-järjestelmille. Löydettiin myös suomalaisia yrityksiä ja järjestöjä, jotka käyttävät joitakin vertailussamme olevista IdM-järjestelmistä. Löydettiin mm. että <a href="http://www.tirasa.net/customer/university-of-helsinki.html">Helsingin Yliopisto käyttää Apache Syncopea</a>
 
-### Alustavat vaatimukset
+### Alustavat vaatimukset<div id='alustavat-vaatimukset'></div>
 
 | Vaatimus  |  Lisätietoja   |
 |---|---|
@@ -223,33 +249,32 @@ Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM
 |Mahdollisuus manuaaliprovisiointiin   |Tukeeko valittavat mahdollisuudet esimerkiksi radiobuttoneita, checkboxeja jne.   |
 |Soveltuu myös suureen yritykseen   |  Käyttöoikeuksia voi olla esimerkiksi yli 7000  |
 
-### Varsinainen vertailutaulukko
+### Vertailu- ja aputaulukko<div id='vertailu-ja-aputaulukko'></div>
 
 ![vertailutaulukko](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Vertailu/vertailutaulukko.jpg?raw=true)
 
 Tässä vertailutaulukossa näkyy vertaulumme varsinainen tulos ja se miten päädyimme valintaan. Huom! Jotkin vaatimukset ovat kriittisempiä kuin toiset, joka johtaa kriittisemmän vaatimuksen täyttävän järjestelmän suosimiseen. Lataa PDF <a href="https://opensourceidm.files.wordpress.com/2018/10/vertailutaulukko.pdf">tästä</a>.
-
-### Aputaulukko
-
+<br>
+<br>
 ![aputaulukko](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Vertailu/aputaulukko.jpg?raw=true)
 
 Aputaulukko selventää vertailutaulukon lukua. Lataa PDF <a href="https://opensourceidm.files.wordpress.com/2018/10/aputaulukko.pdf">tästä</a>.
 
-## 4. Midpoint<div id='midpoint'></div>
+## Midpoint<div id='midpoint'></div>
 
 Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuksia ja pisteitä omisti midPoint IdM-järjestelmä kuin mikään muu IdM-järjestelmä, mistä syystä päädyimme juuri tähän järjestelmään. Vahvaksi toiseksi ehdokkaaksi valiutui Apache Syncope, joka muuten midPointin kanssa sisälsi melkein identtiset ominaisuudet kuin midPoint, mutta midPoint IdM-järjestelmä tuki enemmän muita järjestelmiä ja rajapintoja. Järjestelmät ja rajapinnat, joita midPoint tukee ovat:
-<li>Active Directory</li>
-<li>Unix/Linux</li>
-<li>Office365</li>
-<li>Google Apps</li>
-<li>SAP</li>
-<li>Box</li>
-<li>Drupal</li>
-<li>Atlassian ohjelmat (JIRA, Bitbucket, Confluence)</li>
-<li>Lotus Notes</li>
-<li>Tietokannat</li>
-<li>LDAP</li>
-<li>CSV</li>
+<li>Active Directory
+<li>Unix/Linux
+<li>Office365
+<li>Google Apps
+<li>SAP
+<li>Box
+<li>Drupal
+<li>Atlassian ohjelmat (JIRA, Nitbucket, Confluence)
+<li>Lotus Notes
+<li>tietokannat
+<li>LDAP
+<li>CSV
 
 Tosin kaikissa connectoreissa ja rajapinnoissa käyttäjätietojen synkronointi ei valmistajan mukaan toimi esimerkiksi Atlassian tuotteiden ja Oraclen kanssa. Omien connectoreiden teko on myös mahdollista midPontissa. Tämän projektin aikana kokeilimme Active Directory, Unix/Linux, LDAP ja CSV connectoreita.
 ### Esivalmistelut<div id='esivalmistelut'></div>
@@ -268,10 +293,20 @@ Käytössä olevat keskusyksiköt olivat meillä seuraavat:
 | HP | <a href="https://support.hp.com/us-en/product/hp-compaq-8200-elite-microtower-pc/5037940/document/c02779504">HP Compaq 8200 Elite Microtower</a>   | Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz (4 ydintä) | 8 Gt  |  1 kpl | 500 Gt (HDD)  | VMSERVER  |
 | HP | <a href="https://support.hp.com/us-en/product/hp-compaq-8200-elite-microtower-pc/5037940/document/c02779504">HP Compaq 8200 Elite Microtower</a>   | Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz (4 ydintä) | 8 Gt  |  1 kpl | 500 Gt (HDD)  | WINDOWSSERVER  |
 
-Asennamme Identiteetinhallintajärjestelmän työasemaan "MIDPOINT", VirtualBox-palvelimen testityöasemia sekä testipalvelinta varten työasemaan "VMSERVER" sekä Windows -palvelimen työasemaan "WINDOWSSERVER". Toisin sanoen nämä edellä mainitut työasemat toimivat palvelinkäytössä.
+Asennamme Identiteetinhallintajärjestelmän keskusyksikköön "MIDPOINT", VirtualBox-palvelimen testityöasemia sekä testipalvelinta varten keskusyksikköön "VMSERVER" sekä Windows -palvelimen keskusyksikköön "WINDOWSSERVER". Toisin sanoen nämä edellä mainitut keskusyksiköt toimivat palvelinkäytössä.
 
+VMSERVERiin asennamme myöhemmin seuraavat virtuaaliset testikoneet ja -palvelimen:
+ 
+| Virtuaalikoneen nimi | Käyttöjärjestelmä | Prosessorin ytimien lukumäärä | Keskusmuisti | Kiintolevyjen koko | Näytönohjaimen muisti
+| --- | --- | --- | --- | --- | --- |
+| TESTIPC2 | Ubuntu Desktop 18.04.1 LTS (64-bit) | 2 | 2048 Mt | 50 Gt | 128 Mt |
+| TESTIPC1 | Windows 10 (64-bit) | 1 | 2048 Mt | 50 Gt | 128 Mt |
+|TESTIPALVELIN | Ubuntu Server 16.04.5 LTS (64-bit) | 1 | 1024 Mt | 10 Gt | 16 Mt |  
+ 
+Tämän lisäksi asenamme Windows -palvelimeen OpenLDAP -virtuaalipalvelimen Hyper-V:n kautta. Käyttöjärjestelmältään se on myös Ubuntu Server 16.04.5 LTS (64-bit).
+ 
 
-#### Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -työasemaan<div id ='ubuntu-server-asennus-ja-konfigurointi'></div>
+#### Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön<div id ='ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon'></div>
 
 Ensimmäisenä esivalmisteluvaiheena oli Linux palvelimen käyttöjärjestelmän asennus ja konfigurointi. MidPoint järjestelmä asennetaan tähän käyttöjärjestelmään. Valitsimme palvelimeksi Ubuntu Server 16.04.5 LTS 64-bittisen version. Asensimme käyttöjärjestelmän fyysiselle tietokoneelle USB-livetikun avulla. Valitsimme tietokoneesta käynnistystavaksi USB boottauksen, jolloin pääsimme asentamaan käyttöjärjestelmää. 
 
@@ -391,7 +426,7 @@ Asennusta viimeisteltiin.
 
 Asennus oli valmis! Käynnistimme palvelimen uudelleen valitsemalla nuolinäppäimillä ”Continue” ja hyväksymällä se painamalla Enter. Palvelin käynnistyi uudelleen ja irroitimme USB-asennustikun palvelinlaitteesta.
 
-##### Palvelimen perusmääritykset
+##### Palvelimen perusmääritykset<div id='palvelimen-perusmaaritykset'></div>
 
 Kirjauduimme palvelimelle sisään pääkäyttäjänä, jonka jälkeen teimme heti seuraavat toimenpiteet:
 
@@ -415,7 +450,7 @@ Avautui ”interfaces” -tiedosto, johon laitoimme seuraavat määritykset:
 
 ![interfaces määritykset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/etc_network_interfaces.png?raw=true)
 
-#### Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -työasemaan<div id='windows-server-asennus-ja-konfigurointi'></div>
+#### Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -keskusyksikköön<div id='windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon"></div>
 
 Seuraavaksi asensimme Windows Server 2016 Datacenter 64-bittisen version fyysiselle tietokoneelle, jota tarvisimme, jotta saamme tähän koneeseen tehtyä Active Directoryn ja yhdistettyä sen midPointiin. Kokeilimme aluksi Windows Serverin asennusta Oraclen VM VirtuaBoxiin, jotta voisimme testata sitä Windows Serveriä sitä kautta. Ilmeni kuitenkin ongelmia Windowsin aktivoinnin kanssa myöhemmin. Kun veimme (export) valmiin VirtualBoxin Windows Serverin imagen talteen, johon oli liitetty tuoteavain huomattiin, että kun tuotiin (imnport) image takaisin VirtualBoxiin niin Windowsia ei oltu enää aktivoitu ja piti hankkia uusi tuoteavain. Tästä syystä on aihetta välttää Windowsin käyttöä virtuaaliympäristössä ainakin niiltä osin, jos tuodaan ja viedään VirtualBoxin imageja. Virtuaalikoneita voidaan käyttää kuitenkin esimerkiksi phpVirtualBox palvelimella, jolloin vältytään imagejen tuomisesta ja viemisestä. 
 
@@ -442,7 +477,7 @@ Seuraavaksi asennusvaiheessa piti valita asennustyypin valinta. Valitsimme ensim
 
 Seuraavaksi piti valita levy, jolle käyttöjärjestelmä asennetaan (tässä ei näy oikeaa levyä, koska imitoimme asennusta VirtualBoxissa). Valitsimme levyn ja klikkasimme Next.
 
-##### Windows palvelimen perusmääritykset
+##### Windows -palvelimen perusmääritykset<div id='windows-palvelimen-perusmaaritykset'></div>
 
 Asennettuamme Windows Server 2016 Datacenter 64-bittisen version fyysiselle koneelle, aktivoimme aluksi Windowsin. Windowsin voi aktivoida seuraavasti antamalla tuoteavaimen:
 ```
@@ -534,7 +569,7 @@ Seuraavaksi tuli määriteltyjen asetusten tarkasteluruutu. Kaikki oli OK eli kl
 
 Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin.
  
-##### Hyper-V:n sekä uuden virtuaalipalvelimen asennus
+##### Hyper-V:n sekä uuden virtuaalipalvelimen asennus<div id='hyper-vn-seka-uuden-virtuaalipalvelimen-asennus'></div>
 Halusimme laittaa Windows Serveriin OpenLDAP -palvelimen, joka asennetaan siihen virtuaalipalvelimena. Jotta virtuaalipalvelimen käyttö on mahdollista, lisäsimme Windows Serveriin Hyper-V:n. Sitä ennen latasimme <a href"http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso">64-bittisen Ubuntu Server 16.04.5 LTS:n levykuvan</a> talteen Windows -palvelimelle.
  
 Lisäsimme sen Windows Server 2016:sta seuraavanlaisesti:
@@ -563,11 +598,11 @@ Avautui virtuaalipalvelimen ohjattu asennus. Virtuaalipalvelimen nimeksi laitoim
 
 Seuraavasta ikkunasta valitsimme, että virtuaalipalvelin on 2. sukupolvea. Valitsimme siis "Generation 2" ja siirryimme eteenpäin painamalla "Next >".
 
- Seuraavasta kohdassa määritimme virtuaalipalvelimelle keskusmuistin määrä (RAM). Meille riittää 2048 Megatavua, joten kirjoitamme arvoksi 2048 ja siirryimme eteenpäin painamalla "Next >".
+Seuraavasta kohdassa määritimme virtuaalipalvelimelle keskusmuistin määrä (RAM). Meille riittää 2048 Megatavua, joten kirjoitamme arvoksi 2048 ja siirryimme eteenpäin painamalla "Next >".
 
- "Configure Networking" -kohdassa valitsimme aiemmin tehdyn virtuaalisen kytkimen ja painoimme "Next >".
+"Configure Networking" -kohdassa valitsimme aiemmin tehdyn virtuaalisen kytkimen ja painoimme "Next >".
 
- "Connect Virtual Hard Disk" -kohdassa märitämme, että teemme uuden virtuaalisen kiintolevyn ("Create a virtual hard disk") ja sen koko määriteltiin 80 Gigatavuun. Jatkoimme eteenpäin painamalla "Next >".
+"Connect Virtual Hard Disk" -kohdassa märitämme, että teemme uuden virtuaalisen kiintolevyn ("Create a virtual hard disk") ja sen koko määriteltiin 80 Gigatavuun. Jatkoimme eteenpäin painamalla "Next >".
 
 "Installation Options" -kohdassa valitsimme, että asennus tapahtuu levykyvan kautta "Install an operating system from a bootable CD/DVD-ROM -> Image file (.iso))". Haimme aiemmin ladatun levynkuvan sijainnin.
 
@@ -589,11 +624,7 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     ```
     sudo ufw allow ssh
     ```
-4. Asentamalla SSH-palvelun palvelimelle etäyhteyksiä varten:
-    ```
-    sudo apt-get install ssh -y
-    ```
-5. Asettamalla palvelimelle staattiset IP-osoitteet:
+4. Asettamalla palvelimelle staattiset IP-osoitteet:
     ```
     sudoedit /etc/network/interfaces
     ```
@@ -609,7 +640,7 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     dns-nameservers 172.28.170.201 172.28.170.202
     </pre>
     Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
-6. Konfiguroimalla DNS-asetukset:
+5. Konfiguroimalla DNS-asetukset:
     ```
     sudoedit /etc/hosts
     ```
@@ -619,7 +650,7 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     ```
     Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
 
-7. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, jos yrittää kirjautua SSH:n kautta:
+6. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, jos yrittää kirjautua SSH:n kautta:
     ```
     sudoedit /etc/motd
     ```
@@ -634,7 +665,7 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     Lisätietoja antaa tarvittaessa Jan Parttimaa (jan.parttimaa@myy.haaga-helia.fi)
     Kurssi: Monialaprojekti (ICT-Infrastruktuuri) PRO4TN004-3001
     Varaajat: Jan Parttimaa, Eetu Pihamäki ja Markus Nissinen
-    Kurssiopettajat: Tero Karvinen ja Harto Holmström                                           $
+    Kurssiopettajat: Tero Karvinen ja Harto Holmström                                           
 
     ÄLÄ SAMMUTA TYÖASEMAA!
 
@@ -644,7 +675,7 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     ```
     Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```. Kyseinen viesti näkyy, kun kirjautuu onnistuneesti SSH-yhteyden kautta sisään palvelimelle.
 
-8. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, joka näkyy heti ruudulla, jos yrittää kirjautua suoraan palvelimelle:
+7. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, joka näkyy heti ruudulla, jos yrittää kirjautua suoraan palvelimelle:
     ```
     sudoedit /etc/issue
     ```
@@ -673,22 +704,22 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
 
 
-9. Käynnistämällä palvelimen uudelleen:
+8. Käynnistämällä palvelimen uudelleen:
     ```
     sudo reboot
     ```
 
-##### OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen
+##### OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen<div id='openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen'></div>
 
 Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
 
 1. 
 
-#### VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -työasemaan
+#### VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön<div id='virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon'></div>
 
-Asensimme "VMSERVER" -työasemaan Linux -käyttöjärstelmään pohjautuvan 64-bittisen Ubuntu Server 16.04.5 LTS -käyttöjärjestelmän samalla tavalla kuten se asennettiin "MIDPOINTIDM" -työasemaan < a href="#ubuntu-server-asennus-ja-konfigurointi">aiemmassa kappaleessa</a>. Muuten tehdään siis samalla tavalla mutta asennusvaiheessa annetaan palvelimen nimeksi "VMSERVER" eikä "MIDPOINTIDM". Loimme myös samat käyttäjätunnukset asennusvaiheessa. Suositeltavaa tosin olisi tehdä erit käyttäjätunnukset.
+Asensimme "VMSERVER" -keskusyksikköön Linux -käyttöjärjestelmään pohjautuvan 64-bittisen Ubuntu Server 16.04.5 LTS -käyttöjärjestelmän samalla tavalla kuten se asennettiin "MIDPOINTIDM" -keskusyksikköön <a href="#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">aiemmassa kappaleessa</a>. Muuten tehdään siis samalla tavalla mutta asennusvaiheessa annetaan palvelimen nimeksi "VMSERVER" eikä "MIDPOINTIDM". Loimme myös samat käyttäjätunnukset asennusvaiheessa. Suositeltavaa tosin olisi tehdä erit käyttäjätunnukset.
 
-Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme sisään käyttämällä asennusvaiheessa luotuja käyttäjätunnuksia. Kun olimme päässeet sisälle, aloimme tedä seuraavat peruskonfiguraatiot järjestyksessä (jokaisen komennon jälkeen painoimme Enter):
+Kun olimme asentaneet Ubuntun palvelimena toimivalle keskusyksikölle, kirjauduimme sisään käyttämällä asennusvaiheessa luotuja käyttäjätunnuksia. Kun olimme päässeet sisälle, aloimme tedä seuraavat peruskonfiguraatiot järjestyksessä (jokaisen komennon jälkeen painoimme Enter):
 
 1. Lataamaan ja asentamaan uusimmat päivitykset:
     ```
@@ -702,11 +733,7 @@ Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme 
     ```
     sudo ufw allow ssh
     ```
-4. Asentamalla SSH-palvelun palvelimelle etäyhteyksiä varten:
-    ```
-    sudo apt-get install ssh -y
-    ```
-5. Asettamalla palvelimelle staattiset IP-osoitteet:
+4. Asettamalla palvelimelle staattiset IP-osoitteet:
     ```
     sudoedit /etc/network/interfaces
     ```
@@ -724,7 +751,7 @@ Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme 
     </pre>
     Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
 
-6. Konfiguroimalla DNS-asetukset:
+5. Konfiguroimalla DNS-asetukset:
     ```
     sudoedit /etc/hosts
     ```
@@ -735,7 +762,7 @@ Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme 
     ```
     Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
 
-7. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, jos yrittää kirjautua SSH:n kautta:
+6. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, jos yrittää kirjautua SSH:n kautta:
     ```
     sudoedit /etc/motd
     ```
@@ -750,7 +777,7 @@ Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme 
     Lisätietoja antaa tarvittaessa Jan Parttimaa (jan.parttimaa@myy.haaga-helia.fi)
     Kurssi: Monialaprojekti (ICT-Infrastruktuuri) PRO4TN004-3001
     Varaajat: Jan Parttimaa, Eetu Pihamäki ja Markus Nissinen
-    Kurssiopettajat: Tero Karvinen ja Harto Holmström                                           $
+    Kurssiopettajat: Tero Karvinen ja Harto Holmström                                           
 
     ÄLÄ SAMMUTA TYÖASEMAA!
     JOS TARVITSEE SAMMUTTAA TAI KÄYNNISTÄÄ UUDELLEEN,
@@ -762,7 +789,7 @@ Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme 
     ```
     Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```. Kyseinen viesti näkyy, kun kirjautuu onnistuneesti SSH-yhteyden kautta sisään palvelimelle.
 
-8. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, joka näkyy heti ruudulla, jos yrittää kirjautua suoraan palvelimelle:
+7. Asettamalla palvelimelle MOTD (Message Of The Day) -viestin, joka näkyy heti ruudulla, jos yrittää kirjautua suoraan palvelimelle:
     ```
     sudoedit /etc/issue
     ```
@@ -792,7 +819,7 @@ Kun olimme asentaneet Ubuntun palvelimena toimivalle työasemalle, kirjauduimme 
     Tallensimme muutokset näppäinkomennoilla ```Ctrl+X```, ```Y``` ja ```Enter```.
 
 
-9. Käynnistämällä palvelimen uudelleen:
+8. Käynnistämällä palvelimen uudelleen:
     ```
     sudo reboot
     ```
@@ -850,6 +877,8 @@ Teimme VirtualBoxin asennuksen seuraavanlaisesti:
     Why unusable:
     ```
     Onnistuneesti oli asennettu.
+ 
+#### phpVirtualBox -web-käyttöliittymän asennus ja konfigurointi<div id='phpvirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi'></div>
 
 Jotta pystymme hallitsemaan VirtualBoxia graaffisesti, jouduimme asentamaan ja määrittämään palvelimelle phpVirtualBoxin. Tämän ansiosta voimme hallita palvelimelle asennettua VirtualBoxia graaffisesti suoraan verkkoselaimelta käsin mistä vain. Jotta phpVirtualBox toimisi, jouduimme myös asentamaan palvelimelle Apachen2:sen sekä PHP:n.
 
@@ -949,11 +978,12 @@ Avautui kirjautumisikkuna. Oletuskäyttäjätunnus (Username) on ```admin``` ja 
 Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan salasanaan. Se onnistuu valitsemalla käyttliittymän valikosta ```File -> Change Password```. Avautuu ikkuna, johon pitää kertoa sekä vanha salasana, että uusi salasana kahdesti. Lopuksi hyväksytään muutokset painamalla OK.
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxpassword.JPG)
-
+ 
+##### Suojatun yhteyden määritys<div id='suojatun-yhteyden-maaritys'></div>
 
 #### Testityöasemien sekä testipalvelimen asennus ja konfigurointi<div id='testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi'></div>
 
-##### Windows 10
+##### Windows 10 (TESTIPC1)<div id='windows-10-testipc1'></div>
 Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen <a href="modern.ie"> modern.ie sivustolta</a>, joka toimii 90 päivän lisenssillä. Kyseinen virtuaalikone toimii testityöasemana ja on nimeltään "TESTIPC1".
 
 Kirjauduimme SSH-yhteydellä VirtualBox_palvelimeen (VMSERVER) ja kirjaudumme sisään tunnuksilla, jotka teimme VMSERVERI:n asennuksen yhteydessä
@@ -1007,130 +1037,68 @@ Start - Windows Administrative Tools - Active Directory Users and Computers - pi
 ```
 Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käyttäjästä sekä luotiin käyttäjälle salasana. Tämän jälkeen kun käyttäjä oli luotu niin testattiin kirjautua käyttäjälle testityöasemaa käyttäen. Kirjautuminen onnistui ja varmistuttiin siitä, että testityöasema on liitoksissa domainiin.
 
-##### Ubuntu Desktop
+##### Ubuntu Desktop 18.04.1 LTS (TESTIPC2)<div id='ubuntu-desktop-18041-lts-testipc2'></div>
+Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 18.04.1 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
 
-Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 16.04.5 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiin. Ladattiin tätä varten .ISO tiedosto netistä: http://releases.ubuntu.com/16.04/. VirtualBoxissa loimme virtuaalikoneen:
 <li>Tyyppi: Linux
 <li>Versio: Ubuntu (64-bit)
 <li>RAM-muistia: 2048 MB
 <li>Hard disk: Create a virtual hard disk now
 <li>Hard disk tyyppi: VDI | Dynamically allocated
-<li>Kiintolevyn koko: 20 GB
+<li>Kiintolevyn koko: 50 GB
 
-Tämän jälkeen muokkasimme virtuaalikoneen asetuksia: Settings - Storage - Empty -levyn kohdasta valittiin Choose Virtual Optical Disk File... ja lisättiin .ISO tiedosto tähän. Tämän jälkeen laitettiin vielä verkkokortti siltaavaksi. Nyt virtuaalikone oli valmis asennettavaksi. Käynnistettiin virtuaalikone. 
+Tämän jälkeen muokkasimme virtuaalikoneen asetuksia: Settings -> Storage -> Empty -> levyn kohdasta valittiin Choose Virtual Optical Disk File... ja lisättiin .ISO tiedosto tähän ```vbox``` käyttäjän kotihakemistosta (```/home/vbox)```. Tämän jälkeen laitettiin vielä verkkokortti siltaavaksi. Nyt virtuaalikone oli valmis asennettavaksi. Käynnistettiin virtuaalikone. 
 
 Ensimmäiseksi aukesi asennusruutu:
 
-![Ubuntu Desktop asennus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(1).png?raw=true)
+![Ubuntu Desktop asennus](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(1).png)
 
-Valittiin käyttöjärjestelmän kieliksi English ja klikattiin Install Ubuntu.
+Valittiin käyttöjärjestelmän kieliksi English (1.) ja klikattiin "Install Ubuntu" (2.).
 
-![Ubuntu Desktop päivitykset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(2).png?raw=true)
+![Näppäimistön layout](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(2).png)
 
-Seuraavassa kohdassa kysyttiin päivitysten asennusta ja kolmen osapuolen ohjelmia asennettavaksi. Valittiin nämä molemmat ja klikattiin Continue.
+Seuraavaksi kysyttiin näppäimistön kieliasetuksia. Valittiin "Finnish" (1. ja 2.) ja klikattiin "Continue" (3.).
 
-![Asennus tyyppi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(3).png?raw=true)
+![Asennus tyyppi 1/2](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(3).png)
 
-Seuraavaksi kysyttiin asennustyypin tapaa. Valittin Erase disk and Install Ubuntu. Klikattiin sitten Install now. 
+Seuraavaksi kysyttiin halutaanko tehdä normaali asennus vai minimaalinen asennus. Koska emme halunneet mitään ylimääräistä asennettavan, valitsimme minimaalisen asennuksen (1.). Halusimme myös asentaa tarvittavat päivitykset (2.) sekä kolmannen osapuolen välttämättömät ohjelmat (3.). Jatkoimme eteenpäin klikkaamalla "Continue" (4.).
 
-![varmistus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(4).png?raw=true)
+![Asennus tyyppi 2/2](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(4).png)
 
-Tuli vielä varmistus kyseisestä valinnasta. Klikattiin Continue. 
+Asennustyypiksi valittiin ensimmäinen vaihtoehto eli tyhjennetään koko kiintolevy ja asennetaan siihen Ubuntu (1.). Aloitimme asennuksen painamalla "Install Now" (2.).
 
-![aikavyöhyke](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(5).png?raw=true)
+![Varmistus](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(5).png)
 
-Seuraavaksi kysyttiin sijaintia. Valittiin Helsinki ja klikattiin Continue. 
+Hyväksyttiin tehtävät muutokset kiintolevylle painamalla "Continue" (1.).
 
-![näppäimistön layout](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(6).png?raw=true)
+![Sijainti](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(6).png)
 
-Seuraavaksi kysyttiin näppäimistön kieliasetuksia. Valittiin Finnish ja klikattiin Continue.
+Sijainniksi valittiin "Helsinki" (1.) ja mentiin eteenpäin valitsemalla "Continue" (2.).
 
-![käyttäjän luominen](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(7).png?raw=true)
+![käyttäjän luominen](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(7).png)
 
-Seuraavaksi kysyttiin tietokoneen nimeä, käyttäjätunnusta ja salasanaa. Kirjoitimme nämä ja klikattiin Continue.
+Seuraavaksi kysyttiin tietokoneen nimeä, käyttäjätunnusta ja salasanaa. Kirjoitimme nämä (1.) ja klikattiin Continue (2.).
 
-![Ubuntu Desktop asennus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(8).png?raw=true)
+![Ubuntu Desktop asennus](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(8).png)
 
 Ubuntu Desktop lähti asentumaan.
 
-![asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(9).png?raw=true)
+![asennus valmis](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(9).png)
 
 Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now.
 Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käyttöjärjestelmään liittyen.
 
-##### Ubuntu Server 
+##### Ubuntu Server 16.04.5 LTS<div id='ubuntu-server-16045-lts-testipalvelin'></div>
 
-Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin käyttöä siellä ensin ennenkuin siirrämme valmiit tuotokset fyysiselle Ubuntu Serverille. Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
-
-### Asennus<div id='asennus'></div>
-
-### Konfigurointi<div id='konfigurointi'></div>
-
-#### 1. Tietokannan määrittäminen<div id='tietokannan-maarittaminen'></div>
-
-=======
-<<<<<<< HEAD
-Testipalvelimen asensimme myös VirtualBoxiin, jotta voimme testata midPointin käyttöä siellä ensin ennenkuin siirrämme valmiit tuotokset fyysiselle Ubuntu Serverille. Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. 
-
-## 2. Asennus
-
-### MidPoint palvelimen asennus
-
-MidPoint on Java-verkkosovellus, joka on jaettu itsenäisenä palvelimena. Palvelimen järjestelmävaatimuksia (1 instance/node):
-
-|     | Minimi | 5000 käyttäjää | 50 000 käyttäjää | 100 000 käyttäjää
-| --- | --- | --- | --- | --- |
-| CPU | 1 ydin | 4 ydintä | 8 ydintä | 16 ydintä |
-| RAM | 4GB | 8GB | 16GB | 16GB |
-| Levytila | 2GB | 10GB | 10BG | 10GB |
-| Levy I/O | merkityksetön | merkityksetön | merkityksetön | merkityksetön |
-
-Käyttöjärjestelmäksi suositellen Linux-pohjaisia jakeluita, kuten Ubuntu Serveriä (16.04.5 LTS, 64-bit). Kehitysympäristö vaatii myös JDK 8:n (Java Development Kit).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Esimerkki tietokanta järjestelmän vaatimuksista (for operational data/small amount of historical data storage) - ei päde joka tapaukseen - kysy asiantuntijoiden mielipidettä (Riippuu mm. tietokantajärjestelmän koosta ja kokoonpanosta sekä tietojen koosta, luonteesta ja käyttötavoista.):
-
-|     | Minimi | 50 000 käyttäjää | 100 000 käyttäjää | 
-| --- | --- | --- | --- |
-| CPU | 1 ydin | 2 ydintä | 4 ydintä | 16 ydintä |
-| RAM | 2GB | 3GB | 4GB |
-| Levytila | 1GB | 5GB | 20GB |
-| Levy I/O | pieni | keskikokoinen | keskikokoinen |
-
-<<<<<<< HEAD
-=======
->>>>>>> 7364e614ae1ea41745454949dafbb8a6d14a7eab
-=======
->>>>>>> 8f5a0c3cd63ec06c6b5babcd83fe1c5ac28f9560
-Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBoxissa. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit.
+Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBox -palvelimella. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. Asetimme myös tässäkin verkkokortin siltaavaksi kuten myös muiden testikoneiden osalta.
  
 ### Asennus
 
 ### Konfigurointi
  
-#### 1. Tietokannan määrittäminen
+### Konfigurointi
+ 
+#### Tietokannan määrittäminen
 Päätimme liittää fyysiselle midPoint palvelimellemme MariaDB tietokannan. Kokeilimme aluksi liittämistä virtuaalitestipalvelimella, jonka jälkeen liitimme sen fyysiselle palvelimelle. MidPointissa tulee mukana sulautettu tietokanta H2, jota suositellaan käytettävän vain testaukseen. Tästä syystä päätimme valita MariaDB tietokannan, sillä osaamme jo muutenkin hieman MySQL:ää. Toinen vaihtoehto olisi ollut PostgreSQL, mutta päädyimme MariDB:seen edellä mainitusta syystä. 
 Aluksi palvelimelle tulee asentaa MariaDB:
 ```
@@ -1196,68 +1164,44 @@ Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 <<<<<<< HEAD
 <<<<<<< HEAD
 
-#### 2. Connectoreiden määrittäminen<div id='connectoreiden-maarittaminen'></div>
+#### Connectoreiden määrittäminen<div id='connectoreiden-maarittaminen'></div>
 
-#### 3. Suojatun yhteyden konfigurointi<div id='suojatun-yhteyden-konfigurointi'></div>
+#### Suojatun yhteyden konfigurointi itseallekirjoitetulla sertifikaatilla<div id='suojatun-yhteyden-konfigurointi-itseallekirjoitetulla-sertifikaatilla'></div>
 
 Suojattua yhteyttä tarvitaan, jotta midPointin tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston eli midPointin välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta midPointin käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
 
-Suojattua yhteyttä varten tarvitsi asentaa Apache2: 
-```
-$ sudo apt-get update
-$ sudo apt-get install apache2
-```
-Tämän jälkeen katsottiin palomuurin listaus ja lisättiin seuraavat sovellukset palomuurilistalle:
-```
-$ sudo ufw app list
-$ sudo ufw allow 'Apache Full'
-$ sudo ufw allow 'OpenSSH'
-```
-Listaus näytti tämän jälkeen tältä komennolla: ```
-$ sudo ufw status```:
-```
-Status: active
+Koska meillä ei ole rahallista budjettia meidän projektissa, emme voineet hankkia kunnollista sertifikaattia, koska se olisi maksanut jonkin verran. Näin ollen käytimme itseallekirjoitettua sertifikaattia. Joudumme myös määrittelemään käänteisen välityspalvelimen, jotta sertifikaatin käyttö midPointin käyttöliittymässä on mahdollista.
 
-To                         Action      From
---                         ------      ----
-OpenSSH                    ALLOW       Anywhere                  
-Apache Full                ALLOW       Anywhere                  
-OpenSSH (v6)               ALLOW       Anywhere (v6)             
-Apache Full (v6)           ALLOW       Anywhere (v6)
-```
+Suojatun yhtyeden määritys onnistui seuraavanlaisesti:
 
-Seuraavaksi katsottiin Apachen tila: ```
-$ sudo systemctl status apache2```:
-```
-Output
-● apache2.service - LSB: Apache2 web server
-   Loaded: loaded (/etc/init.d/apache2; bad; vendor preset: enabled)
-  Drop-In: /lib/systemd/system/apache2.service.d
-           └─apache2-systemd.conf
-   Active: active (running) since Fri 2017-05-19 18:30:10 UTC; 1h 5min ago
-     Docs: man:systemd-sysv-generator(8)
-  Process: 4336 ExecStop=/etc/init.d/apache2 stop (code=exited, status=0/SUCCESS)
-  Process: 4359 ExecStart=/etc/init.d/apache2 start (code=exited, status=0/SUCCESS)
-    Tasks: 55
-   Memory: 2.3M
-      CPU: 4.094s
-   CGroup: /system.slice/apache2.service
-           ├─4374 /usr/sbin/apache2 -k start
-           ├─4377 /usr/sbin/apache2 -k start
-           └─4378 /usr/sbin/apache2 -k start
-```
-Näkyi, että Apache oli käynnissä: ```Active: active (running)```. Tämän jälkeen testattiin Apachen toimivuutta selaimessa. Kirjoitettiin selaimeen midPoint palvelimemme IP-osoitteen, jolloin tuli näkyviin Apachen aloitussivu. Apache toimii näin ollen oikein.
+1. Suojattua yhteyttä varten tarvitsi asentaa Apache2 komennoilla:
 
-Seuraavaksi ajettiin komennot proxyn luomiseksi ja lopuksi käynnistettiin Apache palvelu uudelleen:
 ```
-$ sudo a2enmod proxy
-$ sudo a2enmod proxy_http
-$ sudo systemctl restart apache2.service
+sudo apt-get update
+sudo apt-get install apache2 -y
 ```
-
-Seuraavaksi tehtiin itseallekirjoitettu SSL-sertifikaatti ja avain. Nimeksi valittiin ```apache-selfsigned.key``` ja ```apache-selfsigned.crt```. Avain ja sertifikaatti luotiin polkuun ```/etc/ssl/private```:
+Latauksessa ja asennuksessa kesti tovin.
+ 
+2. Laitettiin seuraavaksi Apache2:sta ssl-moduuli päälle komennolla:
 ```
-$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
+sudo a2enmod ssl
+```
+Komennon antamisen jälkeen painoimme Enter. Moduuli meni päälle.
+ 
+3. Käynnistettiin Apache2 uudelleen komennolla:
+```
+sudo service apache2 restart
+```
+ 
+4. Luodaan uusi sijainti itseallekitjoitetulle sertifikaatille:
+```
+sudo mkdir /etc/apache2/ssl
+```
+Komennon antamisen jälkeen painoimme Enter. Uusi sijainti luotiin.
+ 
+5. Itseallekirjoitetun sertifikaatin loimme komennolla:
+```
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
 ```
 Mitä komento tekee:
 
@@ -1278,145 +1222,85 @@ tehdä RSA avain, joka on 2048 bittiä pitkä.
 Komentoon piti luoda tiedot meistä:
 ```
 Country Name (2 letter code) [AU]:FI
-State or Province Name (full name) [Some-State]:
+State or Province Name (full name) [Some-State]:Uusimaa
 Locality Name (eg, city) []:Helsinki
-Organization Name (eg, company) [Internet Widgits Pty Ltd]:Haaga-Helia
-Organizational Unit Name (eg, section) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Pisnismiehet
+Organizational Unit Name (eg, section) []:Projectgroup
 Common Name (e.g. server FQDN or YOUR name) []:*palvelimen IP-osoite*
 Email Address []:markus.nissinen@myy.haaga-helia.fi
 ```
+ 
+6. Siirryimme root -käyttäjäksi komennolla:
+```
+sudo su
+```
+ 
+7. Käänteistä välityspalvelinta varten joudumme sallimaan neljän eri moduulin käytön. Nämä sallimme komennoilla:
+```
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod proxy_balancer
+sudo a2enmod lbmethod_byrequests
+```
+ 
+8. Käynnistimme taas Apache2:sen uudelleen:
+```
+sudo systemctl restart apache2
+```
+9. Avasimme seuraavan tiedoston komennolla:
+```
+sudo nano /etc/apache2/sites-available/default-ssl.conf
+```
+Tiedosto avautui Nano- ohjelmassa.
+ 
+10. Muutimme "default-ssl.conf" -tiedostosta seuraavat kohdat:
+```
+# ServerAdmin markus.nissinen@myy.haaga-helia.fi
+# ServerName 172.28.230.27
+DocumentRoot /var/www/html
+ProxyPass / http://127.0.0.1:8080/
+ProxyPassReverse / http://127.0.0.1:8080/
 
-Tämän jälkeen luotiin .PEM tiedosto Apachea varten:
-```
-$ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
-```
-Tämän teko kesti noin pari minuuttia.
+#   SSL Engine Switch:
+#   Enable/Disable SSL for this virtual host.
+SSLEngine on
 
-Seuraavaksi tehtiin uusi konfiguraatiotiedosto salausta varten kansioon ```/etc/apache2/conf-available```:
-```
-$ sudo nano /etc/apache2/conf-available/ssl-params.conf
-```
+#   A self-signed (snakeoil) certificate can be created by installing
+#   the ssl-cert package. See
+#   /usr/share/doc/apache2/README.Debian.gz for more info.
+#   If both key and certificate are stored in the same file, only the
+#   SSLCertificateFile directive is needed.
+SSLCertificateFile      /etc/apache2/ssl/apache.crt
+SSLCertificateKeyFile /etc/apache2/ssl/apache.key
 
-Tähän tiedostoon lisättiin seuraavat konfiguraatiorivit:
 ```
-# from https://cipherli.st/
-# and https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html
+Tallensimme ja suljimme lopuksi tiedoston.
+ 
+11. Avasimme tämän jälkeen seuraavan tiedoston:
+```
+sudoedit /etc/apache2/sites-available/000-default.conf
+```
+Tiedosto avautui myös Nano -ohjelmaan.
+ 
+12. Muutimme "000-default.conf" -tiedostosta seuraavat kohdat:
+```
+ServerName http://172.28.230.27
+Redirect /secure https://172.28.230.27
+Redirect permanent / https://172.28.230.27
 
-SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
-SSLProtocol All -SSLv2 -SSLv3
-SSLHonorCipherOrder On
-# Disable preloading HSTS for now.  You can use the commented out header line that includes
-# the "preload" directive if you understand the implications.
-#Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains; preload"
-Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains"
-Header always set X-Frame-Options DENY
-Header always set X-Content-Type-Options nosniff
-# Requires Apache >= 2.4
-SSLCompression off 
-SSLSessionTickets Off
-SSLUseStapling on 
-SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
-
-SSLOpenSSLConfCmd DHParameters "/etc/ssl/certs/dhparam.pem"
+# ServerAdmin webmaster@localhost
+# DocumentRoot /var/www/html
 ```
-
-Talletettiin tiedosto, jonka jälkeen muokattiin VirtualHostia. Aluksi tehtiin 
-varmuuskopio VirtualHost tiedostosta kaiken varalta:
+Tallensimme ja suljimme lopuksi tiedoston.
+ 
+13. Aktivoimme Apachen SSL Virtuaalihostin komennolla:
 ```
-$ sudo cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bak
+sudo a2ensite default-ssl.conf
 ```
-
-Seuraavaksi muokattiin VirtualHost tiedostoa:
+ 
+14. Käynnistimme lopuksi Apachen uudelleen komennolla:
 ```
-$ sudo nano /etc/apache2/sites-available/default-ssl.conf
-```
-
-Lisättiin tähän seuraavat muutokset
-```
-<IfModule mod_ssl.c>
-        <VirtualHost _default_:443>
-                ServerAdmin markus.nissinen@myy.haaga-helia.fi
-                ServerName *palvelimen IP-osoite*
-
-                DocumentRoot /var/www/html
-
-                ErrorLog ${APACHE_LOG_DIR}/error.log
-                CustomLog ${APACHE_LOG_DIR}/access.log combined
-
-                SSLEngine on
-
-                SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
-                SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
-
-                <FilesMatch "\.(cgi|shtml|phtml|php)$">
-                                SSLOptions +StdEnvVars
-                </FilesMatch>
-                <Directory /usr/lib/cgi-bin>
-                                SSLOptions +StdEnvVars
-                </Directory>
-
-                BrowserMatch "MSIE [2-6]" \
-                               nokeepalive ssl-unclean-shutdown \
-                               downgrade-1.0 force-response-1.0
-
-        </VirtualHost>
-</IfModule>
-```
-
-Tallennettiin tiedosto ja seuraavaksi muokattiin edelleenohjauksen konfiguraatiota: 
-```
-$ sudo nano /etc/apache2/sites-available/000-default.conf
-```
-
-Lisättiin tähän tiedostoon muokkaukset:
-```
-<VirtualHost *:80>
-        . . .
-
-	#ServerName *palvelimen IP-osoite*
-
-	ServerAdmin markus.nissinen@myy.haaga-helia.fi
-	DocumentRoot /var/www/html
-
-        Redirect "/" "https://*palvelimen IP-osoite*"
-
-        . . .
-</VirtualHost>
-```
-Tallennettiin tiedosto. Seuraavaksi lisättiin konfiguraatiomuutoksia Apacheen. Lisättiin SSL ja Headers moduulit, jotta SSL toimii oikein:
-```
-$ sudo a2enmod ssl
-$ sudo a2enmod headers
-```
-
-Laitettiin nämä toimimaan:
-```
-$ sudo a2ensite default-ssl
-$ sudo a2enconf ssl-params
-```
-
-Seuraavaksi tarkistettiin, että ei ole virheitä muutoksissa: 
-```
-$ sudo apache2ctl configtest
-```
-
-Tuli tuloste: 
-```
-AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
-Syntax OK
-```
-
-Tulosteessa luki, että ```Syntax OK``` eli Apache toimii oikein. Herja alussa viittaa siihen, että palvelimen nimi pitäisi määrittää globaalisti. Tehtiin näin eli muokkattiin tiedostoa ```/etc/apache2/apache2.conf```: 
-```
-$ sudoedit /etc/apache2/apache2.conf
-```
-Lisättiin tiedostoon rivi:
-```
-ServerName *palvelimen IP-osoite*
-```
-Tallennettiin tiedosto. Tämän jälkeen käynnistettiin Apache uudelleen:
-```
-$ sudo systemctl restart apache2
+sudo service apache2 restart
 ```
 
 Käynnistyksen jälkeen testattiin Apachen toimivuutta. Kirjoitettiin selaimeen:
@@ -1425,5 +1309,3 @@ https://*palvelimen IP-osoite*
 ```
 Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitin herjan Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
 ![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
-
-
