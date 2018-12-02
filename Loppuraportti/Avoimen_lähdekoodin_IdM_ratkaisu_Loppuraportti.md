@@ -10,7 +10,7 @@ Päivämäärä: 28.11.2018
 ## Sisällysluettelo
 <ol>
   <li><a href="#johdanto">Johdanto</a></li>
-  <li><a href="#yleista">Yleistä IdM-järjestelmistä (Identity Management System)</a></li>
+  <li><a href="#yleista-idm-jarjestelmista-identity-management-system">Yleistä IdM-järjestelmistä (Identity Management System)</a></li>
   <li><a href="#idm-jarjestelmien-vertailu">IdM-järjestelmien vertailu</a></li>
   <ol>
         <li><a href="#idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</a></li>
@@ -91,7 +91,7 @@ ja rajapintoihin.
 - Opitaan pitämään projektin aikataulusta huolta ja pitämään kiinni työaikakirjauksesta.
 
 
-## Yleistä IdM-järjestelmistä (Identity Management System)<div id='#yleista'></div>
+## Yleistä IdM-järjestelmistä (Identity Management System)<div id='#yleista-idm-jarjestelmista-identity-management-system'></div>
 IdM-järjestelmä (Englanniksi: Identity Management System, Suomeksi:
 Identiteetinhallintajärjestelmä) on järjestelmä,
 jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä,
