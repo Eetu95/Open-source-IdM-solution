@@ -14,8 +14,8 @@ Päivämäärä: 28.11.2018
   <li><a href="#yleista-idm-jarjestelmista-identity-management-system">Yleistä IdM-järjestelmistä (Identity Management System)</a></li>
   <li><a href="#idm-jarjestelmien-vertailu">IdM-järjestelmien vertailu</a></li>
   <ol>
-        <li><a href="#idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</a></li>
-        <li><a href="#avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit">Avoimen lähdekoodin IdM-järjestelmien valintakriteerit</a></li>
+        <span>1.1</span> <a href="#idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</a><br>
+        <span>1.2 </span><a href="#avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit">Avoimen lähdekoodin IdM-järjestelmien valintakriteerit</a><br>
         <li><a href="#alustavat-vaatimukset">Alustavat vaatimukset</a></li>
         <li><a href="#vertailu-ja-aputaulukko">Vertailu- ja aputaulukko</a></li>
   </ol>
@@ -1164,8 +1164,6 @@ SELECT fullName_norm,oid FROM m_user;
 ```
 ![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 <h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
 
