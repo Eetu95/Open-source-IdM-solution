@@ -59,7 +59,7 @@ Päivämäärä: 28.11.2018
  <li><a href="#lahteet">Lähteet</a></li>
 </ol>
 
-## Johdanto<div id='johdanto'></div>
+## Johdanto<div id='#johdanto'></div>
 Tässä raportissa kerromme kuinka avoimen lähdekoodiin perustuvan Identiteetinhallintajärjestelmän saa käyttöön (asennus ja määritys) sekä kuinka sillä voidaan hallita Unix/Linux -palvelien, OpenLDAP-palvelimen sekä Windows -domainin käyttäjiä. Käytämme projektissa Evolveumin "midPoint" nimistä avoimen lähdekoodin identiteetinhallintajärjestelmää.
 
 Käynnistimme projektin kyseisestä aiheesta, koska muutamat projektiryhmän jäsenet ovat työssään joutuneet tekemään
