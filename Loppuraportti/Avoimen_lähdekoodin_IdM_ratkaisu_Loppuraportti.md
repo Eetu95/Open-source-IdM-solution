@@ -14,50 +14,50 @@ Päivämäärä: 28.11.2018
   <li><a href="#yleista-idm-jarjestelmista-identity-management-system">Yleistä IdM-järjestelmistä (Identity Management System)</a></li>
   <li><a href="#idm-jarjestelmien-vertailu">IdM-järjestelmien vertailu</a></li>
   <ol>
-        <span>1.1</span> <a href="#idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</a><br>
-        <span>1.2 </span><a href="#avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit">Avoimen lähdekoodin IdM-järjestelmien valintakriteerit</a><br>
-        <li><a href="#alustavat-vaatimukset">Alustavat vaatimukset</a></li>
-        <li><a href="#vertailu-ja-aputaulukko">Vertailu- ja aputaulukko</a></li>
+        <span>3.1.</span> <a href="#idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</a><br>
+        <span>3.2. </span><a href="#avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit">Avoimen lähdekoodin IdM-järjestelmien valintakriteerit</a><br>
+        <span>3.3. </span><a href="#alustavat-vaatimukset">Alustavat vaatimukset</a><br>
+        <span>3.4. </span><a href="#vertailu-ja-aputaulukko">Vertailu- ja aputaulukko</a><br>
   </ol>
   <li><a href="#midpoint">Midpoint</a></li>
   <ol>
-      <li><a href="#esivalmistelut">Esivalmistelut</a></li>
+      <span>4.1. </span><a href="#esivalmistelut">Esivalmistelut</a><br>
       <ol>
-          <li><a href="#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön</a></li>
+          <span>4.1.1. </span><a href="#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön</a><br>
           <ol>
-                <li><a href="#palvelimen-perusmaaritykset">Palvelimen perusmääritykset</a></li>
+                <span>4.1.1.1. </span><a href="#palvelimen-perusmaaritykset">Palvelimen perusmääritykset</a><br>
           </ol>
-          <li><a href="#windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon">Windows Server 2016 asennus ja konfigurointi "WINDOWSSERVER" -keskusyksikköön</a></li>
+          <span>4.1.2. </span><a href="#windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon">Windows Server 2016 asennus ja konfigurointi "WINDOWSSERVER" -keskusyksikköön</a><br>
           <ol>
-                <li><a href="#windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</a></li>
-                <li><a href="#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</a></li>
-                <li><a href="#openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen</a></li>
-                <li><a href="#phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</a></li>
-                <li><a href="#suojatun-yhteyden-maaritys">Suojatun yhteyden määritys</a></li>
+                <span>4.1.2.1. </span><a href="#windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</a><br>
+                <span>4.1.2.2. </span><a href="#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</a><br>
+                <span>4.1.2.3. </span><a href="#openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen</a><br>
+                <span>4.1.2.4. </span><a href="#phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</a><br>
+                <span>4.1.2.5. </span><a href="#suojatun-yhteyden-maaritys">Suojatun yhteyden määritys</a><br>
           </ol>
-          <li><a href="#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</a></li>
+          <span>4.1.3. </span><a href="#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</a><br>
           <ol>
-                <li><a href="#phpVirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi">phpVirtualbox -web-käyttöliittymän asennus ja konfigurointi</a></li>
-                <li><a href="#suojatun-yhteyden-maaritys">Suojatun yhteyden määritys</a></li>
+                <span>4.1.3.1. </span><a href="#phpVirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi">phpVirtualbox -web-käyttöliittymän asennus ja konfigurointi</a><br>
+                <span>4.1.3.2. </span><a href="#suojatun-yhteyden-maaritys">Suojatun yhteyden määritys</a><br>
           </ol>
-          <li><a href="#testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi">Testityöasemien sekä testipalvelimen asennus ja konfigurointi</a></li>
+          <span>4.1.4. </span><a href="#testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi">Testityöasemien sekä testipalvelimen asennus ja konfigurointi</a><br>
           <ol>
-                <li><a href="#windows-10-testipc1">Windows 10 (TESTIPC1)</a></li>
-                <li><a href="#ubuntu-desktop-18041-lts-testipc2">Ubuntu Desktop 18.04.1 LTS (TESTIPC2)</a></li>
-                <li><a href="#ubuntu-server-16045-lts-testipalvelin">Ubuntu Server 16.04.5 LTS (TESTIPALVELIN)</a></li>
+                <span>4.1.4.1. </span><a href="#windows-10-testipc1">Windows 10 (TESTIPC1)</a><br>
+                <span>4.1.4.2. </span><a href="#ubuntu-desktop-18041-lts-testipc2">Ubuntu Desktop 18.04.1 LTS (TESTIPC2)</a><br>
+                <span>4.1.4.3. </span><a href="#ubuntu-server-16045-lts-testipalvelin">Ubuntu Server 16.04.5 LTS (TESTIPALVELIN)</a><br>
           </ol>
       </ol>
-      <li><a href="#asennus">Asennus</a></li>
-      <li><a href="#konfigurointi">Konfigurointi</a></li>
+      <span>4.2. </span><a href="#asennus">Asennus</a><br>
+      <span>4.3. </span><a href="#konfigurointi">Konfigurointi</a><br>
       <ol>
-          <li><a href="#tietokannan-maarittaminen">Tietokannan määrittäminen</a></li>
-          <li><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a></li>
-          <li><a href="#suojatun-yhteyden-konfigurointi">Suojatun yhteyden konfigurointi</a></li>
+          <span>4.3.1. </span><a href="#tietokannan-maarittaminen">Tietokannan määrittäminen</a><br>
+          <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
+          <span>4.3.3. </span><a href="#suojatun-yhteyden-konfigurointi">Suojatun yhteyden konfigurointi</a><br>
       </ol>
       </ol>
- <li><a href="#testaus">Testaus</a></li>
- <li><a href="#yhteenveto">Yhteenveto</a></li>
- <li><a href="#lahteet">Lähteet</a></li>
+ <span>5. </span><a href="#testaus">Testaus</a><br>
+ <span>6. </span><a href="#yhteenveto">Yhteenveto</a><br>
+ <span>7. </span><a href="#lahteet">Lähteet</a><br>
 </ol>
 
 <h2 id="johdanto">Johdanto</h2>
