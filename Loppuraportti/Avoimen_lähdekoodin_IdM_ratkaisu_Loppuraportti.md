@@ -1504,6 +1504,71 @@ Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvel
  
 <h3 id="asennus">Asennus</h3>
 
+Päivitettiin Ubuntu Server 16.04.5 LTS 64-bit.
+
+    $ sudo apt-get update
+    $ sudo apt-get upgrade
+
+Asennettiin openjdk8
+
+    $ sudo apt-get -y install openjdk-8-jdk
+
+Asennettiin openjre8
+
+    $ sudo apt-get -y install openjdk-8-jre
+
+Mentiin kansioon /opt.
+
+    $ cd /opt
+
+Ladattiin midpoint 3.8 (watt) midPointin sivuilta.
+
+![midPoint 3.8 (Watt) - Download](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint%203.8%20(Watt)%20-%20Download.PNG?raw=true)
+
+    $ sudo wget https://evolveum.com/downloads/midpoint/3.8/midpoint-3.8-dist.tar.gz
+
+Purettiin ladattu tervapallo (midpoint-3.8-dist.tar.gz)
+
+    $ sudo tar -xvzf midpoint-3.8-dist.tar.gz
+
+Vaihettiin kansio midpoint-3.8-dist kansioksi midpoint.
+
+    $ mv /opt/midpoint-3.8-dist /opt/midpoint
+
+<a href="https://wiki.evolveum.com/display/midPoint/Running+midPoint+with+systemd">"Running midPoint with systemd"</a>. Laitettiin midpoint käynnistymään palvelimen käynnistymisen yhteydessä automaattisesti.
+
+Tehtiin uusi tiedosto /etc/systemd/system/midpoint.service, jonne laitettiin tämä sisältö:
+
+    midpoint.service
+
+    [Unit]
+    Description=MidPoint Standalone Service
+    ###Requires=postgresql.service
+    ###After=postgresql.service
+    [Service]
+    User=root
+    WorkingDirectory=/opt/midpoint
+    ExecStart=/usr/bin/java -Xmx2048m -Dmidpoint.home=/opt/midpoint/var -jar /opt/midpoint/lib/midpoint.war
+    SuccessExitStatus=143
+    ###TimeoutStopSec=120s
+    [Install]
+    WantedBy=multi-user.target
+
+Laitettiin midPoint palvelu päälle:
+
+    $ sudo systemctl daemon-reload
+    $ sudo systemctl enable midpoint
+
+Laitettiin midPoint systemd palveluksi:
+
+    $ sudo systemctl start midpoint
+
+Sitten käynnistettiin palvelin uudelleen.
+
+    $ sudo reboot
+
+Tämän jälkeen midPoint oli asennettu.
+
 <h3 id="konfigurointi">Konfigurointi</h3>
  
 <h4 id="tietokannan-maarittaminen">Tietokannan määrittäminen</h4>
