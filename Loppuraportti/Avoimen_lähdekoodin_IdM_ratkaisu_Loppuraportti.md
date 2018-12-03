@@ -2154,7 +2154,7 @@ Käynnistyksen jälkeen testattiin Apachen toimivuutta. Kirjoitettiin selaimeen:
 https://*palvelimen IP-osoite*
 ```
 Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitettiin herja Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
-![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
+![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/chrome_https.PNG?raw=true)
 
 Kokeilimme myös uudelleenohjauksen toimivuutta. Kirjoitettiin selaimeen ```http://*palvelimen IP-osoite*```
 Selain uudelleenohjasi suojattuun sivustoon: ```https://*palvelimen IP-osoite*```
