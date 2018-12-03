@@ -715,7 +715,413 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
 
 Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
 
-1. 
+1. Aloitimme OpenLDAP:n asennuksen komennoilla:
+    ```
+    sudo apt-get update
+    sudo apt-get install slapd ldap-utils -y
+    ```
+    Jokaisen komennon jälkeen painoimme Enter. Lataus ja asennus alkoi. Ohjatun asennuksen aikana kysyttiin luomaan järjestelmänvalvojan salasanan LDAP-hakemistolle. Loimme sen ruudussa olevien ohjeiden mukaan. Asennuksessa ei kestänyt kauan.
+ 
+2. Muokkasimme tiedostoa "ldap.conf" -tiedostoa komennolla:
+    ```
+    sudoedit /etc/ldap/ldap.conf
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui Nano -ohjelmaan.
+    
+    Poistimme olemassa olevat pois ja laitoimme tiedostoon tämän tilalle:
+    ```
+    #
+    # LDAP Defaults
+    #
+
+    # See ldap.conf(5) for details
+    # This file should be world readable but not world writable.
+
+    BASE    dc=ldap,dc=pisnismiehet,dc=local
+    URI     ldap://localhost
+
+    #SIZELIMIT      12
+    #TIMELIMIT      15
+    #DEREF          never
+
+    # TLS certificates (needed for GnuTLS)
+    TLS_CACERT      /etc/ldap/ca_certs.pem
+    # TLS_CACERT    /etc/ssl/certs/ca-certificates.crt
+
+    SSL start_tls
+    TLS_REQCERT never
+    ```
+    Suljimme ja tallensimme tiedoston lopuksi.
+     
+3. Seuraavaksi aloitimme LDAP:n konfiguroinnin komennolla:
+    ```
+    sudo dpkg-reconfigure slapd
+    ```
+    Komennon annon jälkeen painoimme Enter. Alkoi ohjattu LDAP:n konfigurointi. Laitoimme seuraavat määritykset:
+    - Omit OpenLDAP server configuration? No
+    - DNS domain name: ldap.pisnismiehet.local
+    - Organization name: pisnismiehet
+    - Administrator password: <aikaisemmin luotu LDAP:n pääkäyttäjän salasana>
+    - Confirm password: <aikaisemmin luotu LDAP:n pääkäyttäjän salasana>
+    - Database backend to use: MDB
+    - Do you want the database to be removed when slapd is purged? No
+    - Move old database? Yes
+    - Allow LDAPv2 protocol? No
+     
+    Konfigurointi oli valmis.
+     
+4. Asensimme seuraavaksi SSL-komponentit komennolla:
+    ```
+    sudo apt-get install gnutls-bin ssl-cert -y
+    ```
+    Komennon antamisen jälkeen painoimme Enter. Latauksessa ja asennuksessa kesti tovin.
+     
+5. Teimme kansion SSL-mallitiedostoille komennolla:
+    ```
+    sudo mkdir /etc/ssl/templates
+    ```
+    Komennon antamisen jälkeen painoimme Enter. Kansio luotiin haluttuun sijaintiin.
+ 
+6. Loimme "ca_server.conf" -tiedoston komennolla:
+    ```
+    sudo nano /etc/ssl/templates/ca_server.conf
+    ```
+    Kyseinen tiedosto avautui Nano -ohjelmassa.
+
+    Laitoimme tiedostoon seuraavat tiedot:
+    ```
+    cn = Pisnismiehet CA
+    ca
+    cert_signing_key
+    ```
+    Suljimme ja tallensimme lopuksi tiedoston.
+     
+7. Loimme "ldap_server.conf" -tiedoston komennolla:
+    ```
+    sudo nano /etc/ssl/templates/ldap_server.conf
+    ```
+    Kyseinen tiedosto avautui Nano -ohjelmassa.
+     
+    Laitoimme tiedostoon seuraavat tiedot:
+    ```
+    organization = "Pisnismiehet"
+    cn = ldap.pisnismiehet.local
+    tls_www_server
+    encryption_key
+    signing_key
+    expiration_days = 3652
+    ```
+    Suljimme ja tallensimme lopuksi tiedoston.
+ 
+8. Aloitimme yksityisen SSL-avaimen luonnin ```certtool``` työkalulla komennolla:
+    ```
+    sudo certtool -p --outfile /etc/ssl/private/ca_server.key
+    ```
+    Komennon antamisen jälkeen painoimme Enter. Avain luotiin.
+ 
+9. Kirjoitimme äsken tehdyn avaimen sijaintiin ```/etc/ssl/certs``` komennolla:
+    ```
+    sudo certtool -s --load-privkey /etc/ssl/private/ca_server.key --template /etc/ssl/templates/ca_server.conf --outfile /etc/ssl/certs/ca_server.pem
+    ```
+    Komennon antamisen jälkeen painoimme Enter. Tämä onnistui moitteetta.
+ 
+10. Loimme seuraavaksi yksityisen avaimen LDAP-palvelimelle komennolla:
+    ```
+    sudo certtool -p --sec-param high --outfile /etc/ssl/private/ldap_server.key
+    ```
+    Komennon antamisen jälkeen painoimme Enter. Tämäkin onnistui moitteetta.
+ 
+11. Kirjoitimme myös tämän avaimen ```/etc/ssl/certs``` sijaintiin komennolla:
+    ```
+    sudo certtool -c --load-privkey /etc/ssl/private/ldap_server.key --load-ca-certificate /etc/ssl/certs/ca_server.pem --load-ca-privkey /etc/ssl/private/ca_server.key --template /etc/ssl/templates/ldap_server.conf --outfile /etc/ssl/certs/ldap_server.pem
+    ```
+    Komennon antamisen jälkeen painoimme Enter. Tämäkin myös onnistui moitteetta.
+     
+12. Lisäsimme OpenLDAP:lle pääsyn LDAP palvelinavaimiin. Ensiksi sallimme ```openldap``` ryhmälle oikeaan ryhmään komennolla:
+    ```
+    sudo usermod -aG ssl-cert openldap
+    ```
+    Komennon annon jälkeen painoimme Enter.
+     
+12. Seuraavaksi määrittelimme ```openldap``` ryhmälle käyttöikeudet ```ldap_server.key``` -tiedostolle komennolla:
+    ```
+    sudo chown :ssl-cert /etc/ssl/private/ldap_server.key
+    ```
+    Komennon jälkeen painoimme Enter.
+     
+13. Annoimme seuraavaksi ```ssl-cert``` -ryhmälle lukuoikeudet samaiseen tiedostoon komennolla:
+    ```
+    sudo chmod 640 /etc/ssl/private/ldap_server.key
+    ```
+    Komennon jälkeen painoimme Enter.
+     
+14. Siiryimme seuraavaksi kotihakemistoon ja loimme tiedoston ```addcerts.ldif``` komennoilla:
+    ```
+    cd
+    nano addcerts.ldif
+    ```
+    Tiedosto avautui Nano -ohjelmaan. Lisäsimme seuraavat tiedostoon:
+    ```
+    dn: cn=config
+    changetype: modify
+    add: olcTLSCACertificateFile
+    olcTLSCACertificateFile: /etc/ssl/certs/ca_server.pem
+    -
+    add: olcTLSCertificateFile
+    olcTLSCertificateFile: /etc/ssl/certs/ldap_server.pem
+    -
+    add: olcTLSCertificateKeyFile
+    olcTLSCertificateKeyFile: /etc/ssl/private/ldap_server.key
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston.
+ 
+15. Laitoimme tehdyt muutokset OpenLDAP-järjestelmään komennolla:
+    ```
+    sudo ldapmodify -H ldapi:// -Y EXTERNAL -f addcerts.ldif
+    ```
+    Komennon jälkeen painoimme Enter.
+ 
+16. Käynnistimme OpenLDAP:n uudelleen komennolla:
+    ```
+    sudo service slapd force-reload
+    ```
+    Komennon jälkeen painoimme Enter.
+ 
+17. Kopioitiin seuraavaksi ```ca_certs.pem``` toisesta sijainnista toiseen komennolla:
+    ```
+    sudo cp /etc/ssl/certs/ca_server.pem /etc/ldap/ca_certs.pem
+    ```
+    Komennon jälkeen painoimme Enter.
+ 
+18. Kokeiltiin seuraavaksi toimiiko OpenLDAP:n yhteys komennolla:
+    ```
+    ldapwhoami -H ldap:// -x -ZZ
+    ```
+    Komennon jälkeen painoimme Enter. Tulokseksi tuli ```anonymous``` eli toisin sanoen yhteys toimi! Nyt on OpenLDAP asennettu, konfiguroitu ja suojattu LDAP-yhteys määritelty.
+
+Koska emme halua käyttää suojaamatonta LDAP-yhteyttä, pakotamme käyttämään suojattua yhteyttä:
+
+1. Kirjoitamme seuraavan komennon:
+    ```
+    sudo ldapsearch -H ldapi:// -Y EXTERNAL -b "cn=config" -LLL -Q "(olcSuffix=*)" dn olcSuffix
+    ```
+    Komennon jälkeen painoimme Enter. Tulokseksi tuli:
+    ```
+    dn: olcDatabase={1}mdb,cn=config
+    olcSuffix: dc=ldap,dc=pisnismiehet,dc=local
+    ```
+    Pidämme tämän muistissa myöhempää varten.
+ 
+2. Teimme kotihakemistoon ```forcetls.ldif``` -tiedoston komennolla:
+    ```
+    nano forcetls.ldif
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui Nano -ohjelmaan.
+    Laitoimme tiedostoon seuraavaa:
+    ```
+    dn: olcDatabase={1}mdb,cn=config
+    changetype: modify
+    add: olcSecurity
+    olcSecurity: tls=1
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston.
+ 
+3. Ajoimme edellä mainitun tiedoston OpenLDAP-järjestelmään komennolla:
+    ```
+    sudo ldapmodify -H ldapi:// -Y EXTERNAL -f forcetls.ldif
+    ```
+ 
+4. Käynnistimme OpenLDAP -palvelimen uudelleen komennolla:
+    ```
+    sudo service slapd force-reload
+    ```
+5. Kokeilimme yhteyttä komennolla: 
+    ```
+    ldapsearch -H ldap:// -x -b "dc=ldap,dc=pisnismiehet,dc=local" -LLL -Z dn
+    ```
+    Yhteys toimi!
+ 
+6. Kokeilimme lisäksi yhteyttä komennolla:
+    ```
+    ldapsearch -H ldap:// -x -b "dc=ldap,dc=pisnismiehet,dc=local" -LLL dn
+    ```
+     
+    Tuli seuraava ilmoitus merkkinä siitä, ettei yhteys toiminut:
+    ```
+    Confidentiality required (13)
+    Additional information: TLS confidentiality required
+    ```
+     
+    Tämän piti siis tulla, koska pakotimme äskön käyttämään suojattua LDAP-yhteyttä. Eli kaikki toimii niin kuin piti!
+
+MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota:
+
+1. Siirryimme root-käyttäjäksi komennolla:
+    ```
+    sudo su
+    ```
+
+2. Latasimme ensiksi seuraavat kirjastot komennolla:
+    ```
+    sudo apt-get install libnet-ldap-perl libauthen-sasl-perl libuuid-perl perl-doc -y
+    ```
+    Komennon jälkeen painoimme Enter. Latauksessa ja asennuksessa kesti tovin.
+ 
+3. Latasimme GitHubista slapdconf -työkalun komennolla:
+    ```
+    sudo wget https://raw.githubusercontent.com/Evolveum/slapdconf/master/slapdconf
+    ```
+    Komennon jälkeen painoimme Enter. 
+ 
+4. Siirsimme kyseisen työkalun haluttuun sijaintiin (```/usr/local/bin```) komennolla:
+    ```
+    sudo mv slapdconf /usr/local/bin
+    ```
+    Komennon jälkeen painoimme Enter.
+ 
+5. Käynnistimme palvelimen uudelleen komennolla:
+    ```
+    sudo reboot
+    ```
+ 
+6. Uudelleenkäynnistyksen jälkeen kirjauduimme takaisin sisälle. Avasimme ```40-slapd.conf``` -tiedoston komennolla:
+    ```
+    sudoedit /etc/rsyslog.d/40-slapd.conf
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui Nano -ohjelmaan. Lisäsimme tiedostoon seuraavaa:
+    ```
+    local4.*        -/var/log/slapd.log
+    & ~
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston.
+ 
+7. Asetettiin login taso haluttuun komennolla:
+    ```
+    slapdconf set-log-level stats
+    ```
+ 
+8. Avasimme palomuurista porttinumerot 389 ja 1389 komennolla:
+    ```
+    sudo ufw allow 389/tcp && sudo ufw allow 389 && sudo ufw allow 1389/tcp && sudo ufw allow 1389
+    ```
+    Komennon jälkeen painoimme Enter. 
+ 
+9. Avasimme tiedoston ```slapd``` komennolla:
+    ``` 
+    sudoedit /etc/default/slapd
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui Nano -ohjelmaan. Etsimme tiedostosta riviä ```SLAPD_SERVICES=``` ja laitoimme arvoksi seuraavaa:
+    ```
+    SLAPD_SERVICES="ldap:/// ldapi:///"
+    ```
+    Suljimme ja tallensimme lopuksi tiedoston.
+     
+10. Teimme seuraavaksi teknisen käyttäjän midPointtia varten. Teimme kotihakemistoon tiedoston ```admin.ldif``` komennolla:
+    ```
+    sudoedit admin.ldif
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui Nano-ohjelmassa.
+    ```
+    dn: ou=Administrators,dc=example,dc=com
+    objectclass: top
+    objectclass: organizationalunit
+    ou: Administrators
+    
+    dn: cn=idm,ou=Administrators,dc=example,dc=com
+    objectclass: top
+    objectclass: person
+    cn: idm
+    sn: IDM Administrator
+    description: Special LDAP acccount used by the IDM
+    to access the LDAP data.
+    userPassword: {SSHA}R5KF3K4X2FX5gkWKuDxm4M6gZyO0QgNF
+    ```
+    Suljimme ja tallensimme lopuksi tiedoston.
+     
+11. Lisäsimme edellä mainitun tiedoston OpenLDAP-järjestelmään komennolla:
+    ```
+    ldapadd -Y EXTERNAL -H ldapi:/// -f admin.ldif
+    ```
+    Komennon jälkeen painoimme Enter.
+ 
+12. Teimme seuraavaksi kotihakemistoon pääsynvalvontaa varten ```aci.ldif``` -tiedoston komennolla:
+    ```
+    sudoedit aci.ldif
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui Nano -ohjelmaan.
+    Laitoimme siihen seuraavaa:
+    ```
+    dn: olcDatabase={1}mdb,cn=config
+    changetype: modify
+    replace: olcAccess
+    olcAccess: to attrs=userPassword dn.subtree="ou=people,dc=ldap,dc=pisnismiehet,dc=local" filter="(midPointAccountStatus=disabled)" by dn.subtree="ou=unixgroups,dc=ldap,dc=pisnismiehet,dc=l$
+    olcAccess: to attrs=userPassword,shadowLastChange by dn="cn=idm,ou=Administrators,dc=ldap,dc=pisnismiehet,dc=local" write by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=aut$
+    olcAccess: to dn.base="" by * read
+    olcAccess: to dn.subtree="ou=people,dc=ldap,dc=pisnismiehet,dc=local" by dn="cn=idm,ou=Administrators,dc=ldap,dc=pisnismiehet,dc=local" write
+    olcAccess: to dn.subtree="ou=groups,dc=ldap,dc=pisnismiehet,dc=local" by dn="cn=idm,ou=Administrators,dc=ldap,dc=pisnismiehet,dc=local" write
+    olcAccess: to dn.subtree="ou=unixgroups,dc=ldap,dc=pisnismiehet,dc=local" by dn="cn=idm,ou=Administrators,dc=ldap,dc=pisnismiehet,dc=local" write
+    olcAccess: to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth write by dn="cn=idm,ou=Administrators,dc=ldap,dc=pisnismiehet,dc=local" read by self read by * none
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston. 
+ 
+13. Annoimme seuraavaksi seuraavan komennon:
+    ```
+    slapdconf set-suffix-prop dc=ldap,dc=pisnismiehet,dc=local 'olcLimits:dn.exact="cn=idm,ou=Administrators,dc=ldap,dc=pisnismiehet,dc=local" size.prtotal=unlimited'
+    ```
+    Komennon jällkeen painoimme Enter. Nyt oli rajat määritelty midPointtia varten.
+ 
+14. Määritimme salasanavaatimukset komennolla:
+    ```
+    slapdconf set-overlay-prop dc=ldap,dc=pisnismiehet,dc=local ppolicy olcPPolicyDefault:cn=pwpolicy,dc=ldap,dc=pisnismiehet,dc=local
+    ```
+    Komennon jälkeen painoimme Enter.
+
+OpenLDAP -palvelimelle suositeltiin kanssa lisätä uusi skeematiedosto ```midpoint.schema```. Tämän teimme seuraavanlaisesti root-käyttäjänä:
+ 
+1. Latasimme kyseisen skeematiedoston GitHubista komennolla:
+    ```
+    wget wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/resources/ldap/midpoint.schema
+    ```
+    Komennon jälkeen painoimme Enter. Skeema latautui kotihakemistoon.
+ 
+2. Kopioitiin tiedosto uuteen sijaintiin komennolla:
+    ``` 
+    sudo cp midpoint.schema /etc/ldap/schema/
+    ```
+ 
+3. Luotiin kansio ```openldapldif``` eri sijaintiin komennolla:
+    ```
+    mkdir /tmp/openldapldif
+    ```
+ 
+4. Luotiin seuraavaksi kyseiseen kansioon ```slapd.conf```:
+    ```
+    nano /tmp/openldapldif/slapd.conf
+    ```
+    Tiedosto avautui Nano -ohjelmaan. Lisättiin seuraavaksi kyseiseen tiedostoon seuraavaa:
+    ```
+    include /etc/ldap/schema/midpoint.schema
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston. 
+ 
+5. Ajettiin seuraavaksi seuraava komento:
+    ```
+    cd /tmp/openldapldif && slaptest -f slapd.conf -F .
+    ```
+    Tämä loi kansion ```cn=config``` ja tiedoston ```cn=config.ldif```
+ 
+6. Muokattiin seuraavaksi ```{5}midpoint.ldif``` -tiedostoa ja poistettiin turhia rivejä:
+    ```
+    cd /etc/ldap/slapd.d/cn=config/cn=schema
+    sudoedit sudoedit cn\=\{5\}midpoint.ldif
+    ```
+ 
+7. Seurattiin <a href="https://www.youtube.com/watch?v=qAedVMMunk8">ohjevideosta</a> mitä pitää poistaa (7:07 ->). Tallensimme tehdyt muutokset ja suljimme tiedoston.
+ 
+8. 
+
+
+
 
 <h4 id="virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</h4>
 
