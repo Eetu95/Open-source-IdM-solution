@@ -1857,6 +1857,72 @@ Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvel
  
 <h3 id="asennus">Asennus</h3>
 
+1. Asennettiin openjdk8:
+    ```
+    sudo apt-get -y install openjdk-8-jdk
+    ```
+2. Asennettiin openjre8:
+    ```
+    sudo apt-get -y install openjdk-8-jre
+    ```
+
+3. Mentiin kansioon /opt:
+    ```
+    cd /opt
+    ```
+
+4. Ladattiin midpoint 3.8 (watt) midPointin sivuilta:
+ 
+    ![midPoint 3.8 (Watt) - Download](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint%203.8%20(Watt)%20-%20Download.PNG?raw=true)
+ 
+    ```
+    sudo wget https://evolveum.com/downloads/midpoint/3.8/midpoint-3.8-dist.tar.gz
+    ```
+     
+5. Purettiin ladattu tervapallo (midpoint-3.8-dist.tar.gz):
+    ```
+    sudo tar -xvzf midpoint-3.8-dist.tar.gz
+    ```
+6. Vaihettiin kansio midpoint-3.8-dist kansioksi midpoint:
+    ```
+    mv /opt/midpoint-3.8-dist /opt/midpoint
+    ```
+7. Laitettiin midpoint <a href="https://wiki.evolveum.com/display/midPoint/Running+midPoint+with+systemd">käynnistymään palvelimen käynnistymisen yhteydessä automaattisesti</a>.
+ Tehtiin uusi tiedosto /etc/systemd/system/midpoint.service,jonne laitettiin tämä sisältö:
+    ```
+    midpoint.service
+    [Unit]
+    Description=MidPoint Standalone Service
+    ###Requires=postgresql.service
+    ###After=postgresql.service
+    [Service]
+    User=root
+    WorkingDirectory=/opt/midpoint
+    ExecStart=/usr/bin/java -Xmx2048m -Dmidpoint.home=/opt/midpoint/var -jar /opt/midpoint/lib/midpoint.war
+    SuccessExitStatus=143
+    ###TimeoutStopSec=120s
+    [Install]
+    WantedBy=multi-user.target
+    ```
+8. Laitettiin midPoint palvelu päälle:
+    ```
+    sudo systemctl daemon-reload
+    sudo systemctl enable midpoint
+    ```
+
+9. Laitettiin midPoint systemd palveluksi:
+    ```
+    sudo systemctl start midpoint
+    ```
+
+10. Sitten käynnistettiin palvelin uudelleen:
+    ```
+    sudo reboot
+    ```
+ 
+
+Tämän jälkeen midPoint oli asennettu.
+
 <h3 id="konfigurointi">Konfigurointi</h3>
  
 <h4 id="tietokannan-maarittaminen">Tietokannan määrittäminen</h4>
@@ -1952,7 +2018,6 @@ Komennon antamisen jälkeen painoimme Enter. Moduuli meni päälle.
 ```
 sudo service apache2 restart
 ```
- 
 4. Luodaan uusi sijainti itseallekitjoitetulle sertifikaatille:
 ```
 sudo mkdir /etc/apache2/ssl
@@ -2062,7 +2127,27 @@ sudo a2ensite default-ssl.conf
 ```
 sudo service apache2 restart
 ```
-15. Jouduimme lisäksi tekemään ```application.yml``` -tiedoston midPointin asennuskansioon sijaintiin.
+15. Jouduimme lisäksi tekemään ```application.yml``` -tiedoston midPointin asennuskansioon sijaintiin ```/opt/midpoint/var/``` komennolla:
+```
+sudoedit /opt/midpoint/var/application.yml
+```
+Komennon jälkeen painoimme Enter. Tiedosto avautui "Nano" -ohjelmassa.
+ 
+16. Lisättiin tiedostoon seuraavat konfiguraatiot:
+```
+server.address: 127.0.0.1
+server.port: 8080
+server.session.timeout: 60
+server.use-forward-hearders: true
+server.tomcat.internal-proxies: 127.0.0.1
+```
+Tallensimme ja lopuksi suljimme tiedoston.
+ 
+17. Käynnistettiin midPoint palvelimen uudelleen:
+```
+sudo reboot
+```
+ 
 
 Käynnistyksen jälkeen testattiin Apachen toimivuutta. Kirjoitettiin selaimeen:
 ```
