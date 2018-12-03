@@ -31,14 +31,15 @@ Päivämäärä: 28.11.2018
           <ol>
                 <span>4.1.2.1. </span><a href="#windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</a><br>
                 <span>4.1.2.2. </span><a href="#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</a><br>
-                <span>4.1.2.3. </span><a href="#openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen</a><br>
+                <span>4.1.2.3. </span><a href="#openldap-serverin-asennusja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</a><br>
                 <span>4.1.2.4. </span><a href="#phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</a><br>
-                <span>4.1.2.5. </span><a href="#suojatun-yhteyden-maaritys">Suojatun yhteyden määritys</a><br>
+                <span>4.1.2.5. </span><a href="#openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</a><br>
+                <span>4.1.2.6. </span><a href="#suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)</a><br>
           </ol>
           <span>4.1.3. </span><a href="#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</a><br>
           <ol>
                 <span>4.1.3.1. </span><a href="#phpVirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi">phpVirtualbox -web-käyttöliittymän asennus ja konfigurointi</a><br>
-                <span>4.1.3.2. </span><a href="#suojatun-yhteyden-maaritys">Suojatun yhteyden määritys</a><br>
+                <span>4.1.3.2. </span><a href="#suojatun-web-yhteyden-maaritys-https2">Suojatun web-yhteyden määritys (https)</a><br>
           </ol>
           <span>4.1.4. </span><a href="#testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi">Testityöasemien sekä testipalvelimen asennus ja konfigurointi</a><br>
           <ol>
@@ -52,7 +53,7 @@ Päivämäärä: 28.11.2018
       <ol>
           <span>4.3.1. </span><a href="#tietokannan-maarittaminen">Tietokannan määrittäminen</a><br>
           <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
-          <span>4.3.3. </span><a href="#suojatun-yhteyden-konfigurointi">Suojatun yhteyden konfigurointi</a><br>
+          <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
       </ol>
       </ol>
  <span>5. </span><a href="#testaus">Testaus</a><br>
@@ -711,18 +712,24 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     sudo reboot
     ```
 
-<h5 id="openldap-serverin-asennus-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus Hyper-V:n virtuaalipalvelimeen</h5>
+<h5 id="openldap-serverin-asennus-ja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</h5>
 
 Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
 
-1. Aloitimme OpenLDAP:n asennuksen komennoilla:
+1. Avasimme palomuurista porttinumerot 389, 1389, 636 ja 1636 komennolla:
+    ```
+    sudo ufw allow 389/tcp && sudo ufw allow 389 && sudo ufw allow 1389/tcp && sudo ufw allow 1389 && sudo ufw allow 636/tcp && sudo ufw allow 636 && sudo ufw allow 1636/tcp && sudo ufw allow 1636
+    ```
+    Komennon jälkeen painoimme Enter.
+ 
+2. Aloitimme OpenLDAP:n asennuksen komennoilla:
     ```
     sudo apt-get update
     sudo apt-get install slapd ldap-utils -y
     ```
     Jokaisen komennon jälkeen painoimme Enter. Lataus ja asennus alkoi. Ohjatun asennuksen aikana kysyttiin luomaan järjestelmänvalvojan salasanan LDAP-hakemistolle. Loimme sen ruudussa olevien ohjeiden mukaan. Asennuksessa ei kestänyt kauan.
  
-2. Muokkasimme tiedostoa "ldap.conf" -tiedostoa komennolla:
+3. Muokkasimme tiedostoa "ldap.conf" -tiedostoa komennolla:
     ```
     sudoedit /etc/ldap/ldap.conf
     ```
@@ -753,7 +760,7 @@ Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
     ```
     Suljimme ja tallensimme tiedoston lopuksi.
      
-3. Seuraavaksi aloitimme LDAP:n konfiguroinnin komennolla:
+4. Seuraavaksi aloitimme LDAP:n konfiguroinnin komennolla:
     ```
     sudo dpkg-reconfigure slapd
     ```
@@ -770,19 +777,19 @@ Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
      
     Konfigurointi oli valmis.
      
-4. Asensimme seuraavaksi SSL-komponentit komennolla:
+5. Asensimme seuraavaksi SSL-komponentit komennolla:
     ```
     sudo apt-get install gnutls-bin ssl-cert -y
     ```
     Komennon antamisen jälkeen painoimme Enter. Latauksessa ja asennuksessa kesti tovin.
      
-5. Teimme kansion SSL-mallitiedostoille komennolla:
+6. Teimme kansion SSL-mallitiedostoille komennolla:
     ```
     sudo mkdir /etc/ssl/templates
     ```
     Komennon antamisen jälkeen painoimme Enter. Kansio luotiin haluttuun sijaintiin.
  
-6. Loimme "ca_server.conf" -tiedoston komennolla:
+7. Loimme "ca_server.conf" -tiedoston komennolla:
     ```
     sudo nano /etc/ssl/templates/ca_server.conf
     ```
@@ -796,7 +803,7 @@ Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
     ```
     Suljimme ja tallensimme lopuksi tiedoston.
      
-7. Loimme "ldap_server.conf" -tiedoston komennolla:
+8. Loimme "ldap_server.conf" -tiedoston komennolla:
     ```
     sudo nano /etc/ssl/templates/ldap_server.conf
     ```
@@ -813,49 +820,49 @@ Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
     ```
     Suljimme ja tallensimme lopuksi tiedoston.
  
-8. Aloitimme yksityisen SSL-avaimen luonnin ```certtool``` työkalulla komennolla:
+9. Aloitimme yksityisen SSL-avaimen luonnin ```certtool``` työkalulla komennolla:
     ```
     sudo certtool -p --outfile /etc/ssl/private/ca_server.key
     ```
     Komennon antamisen jälkeen painoimme Enter. Avain luotiin.
  
-9. Kirjoitimme äsken tehdyn avaimen sijaintiin ```/etc/ssl/certs``` komennolla:
+10. Kirjoitimme äsken tehdyn avaimen sijaintiin ```/etc/ssl/certs``` komennolla:
     ```
     sudo certtool -s --load-privkey /etc/ssl/private/ca_server.key --template /etc/ssl/templates/ca_server.conf --outfile /etc/ssl/certs/ca_server.pem
     ```
     Komennon antamisen jälkeen painoimme Enter. Tämä onnistui moitteetta.
  
-10. Loimme seuraavaksi yksityisen avaimen LDAP-palvelimelle komennolla:
+11. Loimme seuraavaksi yksityisen avaimen LDAP-palvelimelle komennolla:
     ```
     sudo certtool -p --sec-param high --outfile /etc/ssl/private/ldap_server.key
     ```
     Komennon antamisen jälkeen painoimme Enter. Tämäkin onnistui moitteetta.
  
-11. Kirjoitimme myös tämän avaimen ```/etc/ssl/certs``` sijaintiin komennolla:
+12. Kirjoitimme myös tämän avaimen ```/etc/ssl/certs``` sijaintiin komennolla:
     ```
     sudo certtool -c --load-privkey /etc/ssl/private/ldap_server.key --load-ca-certificate /etc/ssl/certs/ca_server.pem --load-ca-privkey /etc/ssl/private/ca_server.key --template /etc/ssl/templates/ldap_server.conf --outfile /etc/ssl/certs/ldap_server.pem
     ```
     Komennon antamisen jälkeen painoimme Enter. Tämäkin myös onnistui moitteetta.
      
-12. Lisäsimme OpenLDAP:lle pääsyn LDAP palvelinavaimiin. Ensiksi sallimme ```openldap``` ryhmälle oikeaan ryhmään komennolla:
+13. Lisäsimme OpenLDAP:lle pääsyn LDAP palvelinavaimiin. Ensiksi sallimme ```openldap``` ryhmälle oikeaan ryhmään komennolla:
     ```
     sudo usermod -aG ssl-cert openldap
     ```
     Komennon annon jälkeen painoimme Enter.
      
-12. Seuraavaksi määrittelimme ```openldap``` ryhmälle käyttöikeudet ```ldap_server.key``` -tiedostolle komennolla:
+14. Seuraavaksi määrittelimme ```openldap``` ryhmälle käyttöikeudet ```ldap_server.key``` -tiedostolle komennolla:
     ```
     sudo chown :ssl-cert /etc/ssl/private/ldap_server.key
     ```
     Komennon jälkeen painoimme Enter.
      
-13. Annoimme seuraavaksi ```ssl-cert``` -ryhmälle lukuoikeudet samaiseen tiedostoon komennolla:
+15. Annoimme seuraavaksi ```ssl-cert``` -ryhmälle lukuoikeudet samaiseen tiedostoon komennolla:
     ```
     sudo chmod 640 /etc/ssl/private/ldap_server.key
     ```
     Komennon jälkeen painoimme Enter.
      
-14. Siiryimme seuraavaksi kotihakemistoon ja loimme tiedoston ```addcerts.ldif``` komennoilla:
+16. Siiryimme seuraavaksi kotihakemistoon ja loimme tiedoston ```addcerts.ldif``` komennoilla:
     ```
     cd
     nano addcerts.ldif
@@ -875,25 +882,25 @@ Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
     ```
     Tallensimme ja suljimme lopuksi tiedoston.
  
-15. Laitoimme tehdyt muutokset OpenLDAP-järjestelmään komennolla:
+17. Laitoimme tehdyt muutokset OpenLDAP-järjestelmään komennolla:
     ```
     sudo ldapmodify -H ldapi:// -Y EXTERNAL -f addcerts.ldif
     ```
     Komennon jälkeen painoimme Enter.
  
-16. Käynnistimme OpenLDAP:n uudelleen komennolla:
+18. Käynnistimme OpenLDAP:n uudelleen komennolla:
     ```
     sudo service slapd force-reload
     ```
     Komennon jälkeen painoimme Enter.
  
-17. Kopioitiin seuraavaksi ```ca_certs.pem``` toisesta sijainnista toiseen komennolla:
+19. Kopioitiin seuraavaksi ```ca_certs.pem``` toisesta sijainnista toiseen komennolla:
     ```
     sudo cp /etc/ssl/certs/ca_server.pem /etc/ldap/ca_certs.pem
     ```
     Komennon jälkeen painoimme Enter.
  
-18. Kokeiltiin seuraavaksi toimiiko OpenLDAP:n yhteys komennolla:
+20. Kokeiltiin seuraavaksi toimiiko OpenLDAP:n yhteys komennolla:
     ```
     ldapwhoami -H ldap:// -x -ZZ
     ```
@@ -954,6 +961,62 @@ Koska emme halua käyttää suojaamatonta LDAP-yhteyttä, pakotamme käyttämä�
      
     Tämän piti siis tulla, koska pakotimme äskön käyttämään suojattua LDAP-yhteyttä. Eli kaikki toimii niin kuin piti!
 
+<h5 id="phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</h5>
+ 
+Asensimme phpLDAPadmin -web-käyttöliittymän OpenLDAP-palvelimelle, jotta siihen pääsee näppärästi käsiksi graaffisen käyttöliittymän kautta.
+
+Teimme asennuksen ja konfiguroinnin seuraavanlaisesti:
+ 
+1. Asensimme phpLDAPadminin komennolla:
+    ```
+    sudo apt-get install phpldapadmin -y
+    ```
+    Komennon jälkeen painoimme Enter. Latauksessa ja asennuksessa kesti tovin.
+ 
+2. Seuraavaksi avasimme ```config.php``` -tiedoston komennolla:
+    ```
+    sudoedit /etc/phpldapadmin/config.php
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui Nano-ohjelmaan. Muutimme tiedostosta seuraavat rivit:
+    ```
+    /* Hide the warnings for invalid objectClasses/attributes in templates. */
+    $config->custom->appearance['hide_template_warning'] = true;
+     
+    /* Array of base DNs of your LDAP server. Leave this blank to have phpLDAPadmin
+    auto-detect it for you. */
+    $servers->setValue('server','base',array('dc=ldap,dc=pisnismiehet,dc=local'));
+
+    /* A convenient name that will appear in the tree viewer and throughout
+    phpLDAPadmin to identify this LDAP server to users. */
+    $servers->setValue('server','name','OpenLDAP Server');
+
+    /* Examples:
+   'ldap.example.com',
+   'ldaps://ldap.example.com/',
+   'ldapi://%2fusr%local%2fvar%2frun%2fldapi'
+    (Unix socket at /usr/local/var/run/ldap) */
+    $servers->setValue('server','host','ldap://172.28.171.15');
+
+    /* The port your LDAP server listens on (no quotes). 389 is standard. */
+    $servers->setValue('server','port',389);
+
+    /* Array of base DNs of your LDAP server. Leave this blank to have phpLDAPadmin
+    auto-detect it for you. */
+    $servers->setValue('server','base',array('dc=ldap,dc=pisnismiehet,dc=local'));
+
+    /* Use TLS (Transport Layer Security) to connect to the LDAP server. */
+    $servers->setValue('server','tls',true);
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston.
+3. Asetimme OpenLDAP:n kuuntelemaan kumpaakin porttia, jotta yhteys phpLDAPadmin web-käyttöliittymän ja OpenLDAP-hakemiston välillä toimisi komennolla:
+    ```
+    sudo slapd -H 'ldap://:389/ ldap://:1389/'
+    ```
+
+Nyt kun menemme sivulle http:://<ip-osoite>/phpldapadmin, pääsemme web-käyttöliittymään, joihin kirjaudutaan OpenLDAP:n asennusvaiheessa tehdyillä tunnuksilla.
+ 
+<h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
+ 
 MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota:
 
 1. Siirryimme root-käyttäjäksi komennolla:
@@ -1000,11 +1063,6 @@ MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota:
     slapdconf set-log-level stats
     ```
  
-8. Avasimme palomuurista porttinumerot 389 ja 1389 komennolla:
-    ```
-    sudo ufw allow 389/tcp && sudo ufw allow 389 && sudo ufw allow 1389/tcp && sudo ufw allow 1389
-    ```
-    Komennon jälkeen painoimme Enter. 
  
 9. Avasimme tiedoston ```slapd``` komennolla:
     ``` 
@@ -1130,6 +1188,148 @@ OpenLDAP -palvelimelle suositeltiin kanssa lisätä uusi skeematiedosto ```midpo
     Katsottiin ohjevideosta uudelleen mitä piti tulla tulokseksi ja saatiin sama eli onnistui skeeman laitto!
 
 
+<h5 id="suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)</h5>
+ 
+Suojattua yhteyttä tarvitaan, jotta  tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta web-käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
+
+Koska meillä ei ole rahallista budjettia meidän projektissa, emme voineet hankkia kunnollista sertifikaattia, koska se olisi maksanut jonkin verran. Näin ollen käytimme itseallekirjoitettua sertifikaattia.
+ 
+Suojatun yhtyeden määritys onnistui seuraavanlaisesti:
+
+1. Suojattua yhteyttä varten tarvitsi asentaa Apache2 komennoilla:
+
+```
+sudo apt-get update
+sudo apt-get install apache2 -y
+```
+Latauksessa ja asennuksessa kesti tovin.
+ 
+2. Laitettiin seuraavaksi Apache2:sta ssl-moduuli päälle komennolla:
+```
+sudo a2enmod ssl
+```
+Komennon antamisen jälkeen painoimme Enter. Moduuli meni päälle.
+ 
+3. Käynnistettiin Apache2 uudelleen komennolla:
+```
+sudo service apache2 restart
+```
+ 
+4. Luodaan uusi sijainti itseallekitjoitetulle sertifikaatille:
+```
+sudo mkdir /etc/apache2/ssl
+```
+Komennon antamisen jälkeen painoimme Enter. Uusi sijainti luotiin.
+ 
+5. Itseallekirjoitetun sertifikaatin loimme komennolla:
+```
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
+```
+Mitä komento tekee:
+
+<li>openssl = CLI työkalu, jolla luodaan ja hallitaan OpenSSL sertifikaatteja, avaimia ja muita tiedostoja.
+<li>req = alikomento, jolla kerrotaan että halutaan käyttää X.509 CSR:ää. X.509 on julkisenavaimen infrastruktuuri standardi, jota
+SSL ja TLS noudattavat. Teimme siis uuden X.509 sertin.
+<li>-x509 = modifioi aikaisempaa alikomentoa kertomalla apuohjelmalle, että halutaan tehdä itsekirjoitettu sertifikaatti sen sijaan että tehtäisiin
+sertifikaatin allekirjoitus pyyntö.
+<li>-nodes = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
+lukemaan tiedosto ilman, että käyttäjä puuttuu siihen silloin kun palvelin käynnistyy. Tunnuslause (passphrase)
+estäisi tämän toteutumisen, koska meidän pitäisi aina syöttää se jokaisen uudelleenkäynnistyksen yhteydessä.
+<li>-days 365 = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
+<li>-newkey rsa:2048 =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
+tehdä RSA avain, joka on 2048 bittiä pitkä.
+<li>-keyout = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
+<li>-out = Kertoo OpenSSL:lle minne sertifikaatti pistetään.
+
+Komentoon piti luoda tiedot meistä:
+```
+Country Name (2 letter code) [AU]:FI
+State or Province Name (full name) [Some-State]:Uusimaa
+Locality Name (eg, city) []:Helsinki
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Pisnismiehet
+Organizational Unit Name (eg, section) []:Projectgroup
+Common Name (e.g. server FQDN or YOUR name) []:*palvelimen IP-osoite*
+Email Address []:jan.parttimaa@myy.haaga-helia.fi
+```
+ 
+6. Siirryimme root -käyttäjäksi komennolla:
+```
+sudo su
+```
+ 
+7. Käänteistä välityspalvelinta varten joudumme sallimaan neljän eri moduulin käytön. Nämä sallimme komennoilla:
+```
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod proxy_balancer
+sudo a2enmod lbmethod_byrequests
+```
+ 
+8. Käynnistimme taas Apache2:sen uudelleen:
+```
+sudo systemctl restart apache2
+```
+9. Avasimme seuraavan tiedoston komennolla:
+```
+sudo nano /etc/apache2/sites-available/default-ssl.conf
+```
+Tiedosto avautui Nano- ohjelmassa.
+ 
+10. Muutimme "default-ssl.conf" -tiedostosta seuraavat kohdat:
+```
+ServerAdmin jan.parttimaa@myy.haaga-helia.fi
+# ServerName 172.28.171.15
+DocumentRoot /var/www/html
+
+#   SSL Engine Switch:
+#   Enable/Disable SSL for this virtual host.
+SSLEngine on
+
+#   A self-signed (snakeoil) certificate can be created by installing
+#   the ssl-cert package. See
+#   /usr/share/doc/apache2/README.Debian.gz for more info.
+#   If both key and certificate are stored in the same file, only the
+#   SSLCertificateFile directive is needed.
+SSLCertificateFile      /etc/apache2/ssl/apache.crt
+SSLCertificateKeyFile /etc/apache2/ssl/apache.key
+
+```
+Tallensimme ja suljimme lopuksi tiedoston.
+ 
+11. Avasimme tämän jälkeen seuraavan tiedoston:
+```
+sudoedit /etc/apache2/sites-available/000-default.conf
+```
+Tiedosto avautui myös Nano -ohjelmaan.
+ 
+12. Muutimme "000-default.conf" -tiedostosta seuraavat kohdat:
+```
+ServerName http://172.28.171.15
+Redirect /secure https://172.28.171.15/phpldapadmin
+Redirect permanent / https://172.28.171.15/phpldapadmin
+
+# ServerAdmin webmaster@localhost
+# DocumentRoot /var/www/html
+```
+Tallensimme ja suljimme lopuksi tiedoston.
+ 
+13. Aktivoimme Apachen SSL Virtuaalihostin komennolla:
+```
+sudo a2ensite default-ssl.conf
+```
+ 
+14. Käynnistimme lopuksi Apachen uudelleen komennolla:
+```
+sudo service apache2 restart
+```
+
+Käynnistyksen jälkeen testattiin Apachen toimivuutta. Kirjoitettiin selaimeen:
+```
+https://*palvelimen IP-osoite*
+```
+Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitin herjan Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
+ 
+![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
 
 
 <h4 id="virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</h4>
@@ -1396,9 +1596,149 @@ Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan sala
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxpassword.JPG)
  
-<h5 id="suojatun-yhteyden-maaritys-2">Suojatun yhteyden määritys</h5>
+<h5 id="suojatun-yhteyden-maaritys-https2">Suojatun web-yhteyden määritys (https)</h5>
+ 
+Suojattua yhteyttä tarvitaan, jotta  tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta web-käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
+
+Koska meillä ei ole rahallista budjettia meidän projektissa, emme voineet hankkia kunnollista sertifikaattia, koska se olisi maksanut jonkin verran. Näin ollen käytimme itseallekirjoitettua sertifikaattia.
+ 
+Suojatun yhtyeden määritys onnistui seuraavanlaisesti:
+
+1. Suojattua yhteyttä varten tarvitsi asentaa Apache2 komennoilla:
+
+```
+sudo apt-get update
+sudo apt-get install apache2 -y
+```
+Latauksessa ja asennuksessa kesti tovin.
+ 
+2. Laitettiin seuraavaksi Apache2:sta ssl-moduuli päälle komennolla:
+```
+sudo a2enmod ssl
+```
+Komennon antamisen jälkeen painoimme Enter. Moduuli meni päälle.
+ 
+3. Käynnistettiin Apache2 uudelleen komennolla:
+```
+sudo service apache2 restart
+```
+ 
+4. Luodaan uusi sijainti itseallekitjoitetulle sertifikaatille:
+```
+sudo mkdir /etc/apache2/ssl
+```
+Komennon antamisen jälkeen painoimme Enter. Uusi sijainti luotiin.
+ 
+5. Itseallekirjoitetun sertifikaatin loimme komennolla:
+```
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
+```
+Mitä komento tekee:
+
+<li>openssl = CLI työkalu, jolla luodaan ja hallitaan OpenSSL sertifikaatteja, avaimia ja muita tiedostoja.
+<li>req = alikomento, jolla kerrotaan että halutaan käyttää X.509 CSR:ää. X.509 on julkisenavaimen infrastruktuuri standardi, jota
+SSL ja TLS noudattavat. Teimme siis uuden X.509 sertin.
+<li>-x509 = modifioi aikaisempaa alikomentoa kertomalla apuohjelmalle, että halutaan tehdä itsekirjoitettu sertifikaatti sen sijaan että tehtäisiin
+sertifikaatin allekirjoitus pyyntö.
+<li>-nodes = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
+lukemaan tiedosto ilman, että käyttäjä puuttuu siihen silloin kun palvelin käynnistyy. Tunnuslause (passphrase)
+estäisi tämän toteutumisen, koska meidän pitäisi aina syöttää se jokaisen uudelleenkäynnistyksen yhteydessä.
+<li>-days 365 = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
+<li>-newkey rsa:2048 =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
+tehdä RSA avain, joka on 2048 bittiä pitkä.
+<li>-keyout = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
+<li>-out = Kertoo OpenSSL:lle minne sertifikaatti pistetään.
+
+Komentoon piti luoda tiedot meistä:
+```
+Country Name (2 letter code) [AU]:FI
+State or Province Name (full name) [Some-State]:Uusimaa
+Locality Name (eg, city) []:Helsinki
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Pisnismiehet
+Organizational Unit Name (eg, section) []:Projectgroup
+Common Name (e.g. server FQDN or YOUR name) []:*palvelimen IP-osoite*
+Email Address []:jan.parttimaa@myy.haaga-helia.fi
+```
+ 
+6. Siirryimme root -käyttäjäksi komennolla:
+```
+sudo su
+```
+ 
+7. Käänteistä välityspalvelinta varten joudumme sallimaan neljän eri moduulin käytön. Nämä sallimme komennoilla:
+```
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod proxy_balancer
+sudo a2enmod lbmethod_byrequests
+```
+ 
+8. Käynnistimme taas Apache2:sen uudelleen:
+```
+sudo systemctl restart apache2
+```
+9. Avasimme seuraavan tiedoston komennolla:
+```
+sudo nano /etc/apache2/sites-available/default-ssl.conf
+```
+Tiedosto avautui Nano- ohjelmassa.
+ 
+10. Muutimme "default-ssl.conf" -tiedostosta seuraavat kohdat:
+```
+ServerAdmin jan.parttimaa@myy.haaga-helia.fi
+# ServerName 172.28.175.26
+DocumentRoot /var/www/html
+
+#   SSL Engine Switch:
+#   Enable/Disable SSL for this virtual host.
+SSLEngine on
+
+#   A self-signed (snakeoil) certificate can be created by installing
+#   the ssl-cert package. See
+#   /usr/share/doc/apache2/README.Debian.gz for more info.
+#   If both key and certificate are stored in the same file, only the
+#   SSLCertificateFile directive is needed.
+SSLCertificateFile      /etc/apache2/ssl/apache.crt
+SSLCertificateKeyFile /etc/apache2/ssl/apache.key
+
+```
+Tallensimme ja suljimme lopuksi tiedoston.
+ 
+11. Avasimme tämän jälkeen seuraavan tiedoston:
+```
+sudoedit /etc/apache2/sites-available/000-default.conf
+```
+Tiedosto avautui myös Nano -ohjelmaan.
+ 
+12. Muutimme "000-default.conf" -tiedostosta seuraavat kohdat:
+```
+ServerName http://172.28.175.26
+Redirect /secure https://172.28.175.26/phpvirtualbox
+Redirect permanent / https://172.28.175.26/phpvirtualbox
+
+# ServerAdmin webmaster@localhost
+# DocumentRoot /var/www/html
+```
+Tallensimme ja suljimme lopuksi tiedoston.
+ 
+13. Aktivoimme Apachen SSL Virtuaalihostin komennolla:
+```
+sudo a2ensite default-ssl.conf
+```
+ 
+14. Käynnistimme lopuksi Apachen uudelleen komennolla:
+```
+sudo service apache2 restart
+```
+
+Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitin herjan Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
+ 
+![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
+
 
 <h4 id="testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi">Testityöasemien sekä testipalvelimen asennus ja konfigurointi</h4>
+ 
+Seuraavaksi aloimme asentelemaan ja konfiguroimaan testityöasemia ja palvelimia VirtualBox-palvelimelle.
 
 <h5 id="windows-10-testipc1">Windows 10 (TESTIPC1)</h5>
  
@@ -1406,34 +1746,36 @@ Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Wind
 
 Kirjauduimme SSH-yhteydellä VirtualBox_palvelimeen (VMSERVER) ja kirjaudumme sisään tunnuksilla, jotka teimme VMSERVERI:n asennuksen yhteydessä
 2. Latasimme TESTIPC1:sen modern.ie -sivulta komennolla:
-    ```
-    https://az792536.vo.msecnd.net/vms/VMBuild_20180425/VirtualBox/MSEdge/MSEdge.Win10.VirtualBox.zip
-    ```
-    Komennon jälkeen painoimme Enter. Virtuaalikonetta alettiin lataamaan ja siinä kesti tovin.
+ 
+    wget https://az792536.vo.msecnd.net/vms/VMBuild_20180425/VirtualBox/MSEdge/MSEdge.Win10.VirtualBox.zip
+
+Komennon jälkeen painoimme Enter. Virtuaalikonetta alettiin lataamaan ja siinä kesti tovin.
+
 3. Purkasimme kansion kotihakemistoon komennolla:
     ```
     unzip MSEdge.Win10.VirtualBox.zip
     ```
-5. Siirryimme seuraavaksi root- käyttäjäksi komennolla:
+4. Siirryimme seuraavaksi root- käyttäjäksi komennolla:
     ```
     sudo su
     ```
-6. Siirsimme virtuaalikoneen imagen ```vbox``` käyttäjän kotihakemistoon komennolla:
+5. Siirsimme virtuaalikoneen imagen ```vbox``` käyttäjän kotihakemistoon komennolla:
     ```
     mv 'MSEdge - Win10.ova' /home/vbox/
     ```
     Komennon jälkeen panoimme Enter. Virtuaalikoneen image siirtyi haluttuun sijaintiin. Kirjauduimme lopuksi pois root-käyttäjästä komennolla ```exit```.
 
-7. Kirjauduimme sisään VirtualBoxin web-käyttöliittymään ja valitsimme valikosta ```File -> Import Appliance... ``` Klikkattiin  avautuvasta ikkunasta kansion kuvaa
+6. Kirjauduimme sisään VirtualBoxin web-käyttöliittymään ja valitsimme valikosta ```File -> Import Appliance... ``` Klikkattiin  avautuvasta ikkunasta kansion kuvaa
  
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboximport.JPG)
 
  
-    ja haimme virtuaalikoneen imagen ````vbox```` käyttäjän kotihakemistosta. Lopuksi painoimme ```OK```.
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxselect.JPG)
+ja haimme virtuaalikoneen imagen ````vbox```` käyttäjän kotihakemistosta. Lopuksi painoimme ```OK```. 
+
+![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxselect.JPG)
      
-    Valtsimme se jälkeen ```Next >>``` ja katsoimme onko avautuvasta ikkunasta onko virtuaalikoneen asetukset ok. Muutimme nimeksi "TESTIPC1" ja laitoimme täpän kohtaan "Reinitialize the MAC address of all network cards". Lopuksi painoimme ```Import```. Testikone oli tuotu VirtualBox-palvelimelle onnistuneesti. Tämän jälkeen muutimme virtuaalikoneesta verkkokortin siltaavaksi, jotta se näkyy lähiverkossa muiden laitteiden joukossa. Teimme sen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Settings -> Network -> Adapter 1 ``` ja drop-down valikosta valitsemalla "Bridged Adapter". 
-    Tämän jälkeen sallimme etäyhteyden virtuaalikoneeseen. Valitsimme auki olevista asetuksista ```Display -> Remote Display``` Porttinumeroksi laitoimme 9000. Hyväksyimme muutoksen painamalla OK. Käynnistimme virtuaalikoneen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Start```.
+Valtsimme se jälkeen ```Next >>``` ja katsoimme onko avautuvasta ikkunasta onko virtuaalikoneen asetukset ok. Muutimme nimeksi "TESTIPC1" ja laitoimme täpän kohtaan "Reinitialize the MAC address of all network cards". Lopuksi painoimme ```Import```. Testikone oli tuotu VirtualBox-palvelimelle onnistuneesti. Tämän jälkeen muutimme virtuaalikoneesta verkkokortin siltaavaksi, jotta se näkyy lähiverkossa muiden laitteiden joukossa. Teimme sen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Settings -> Network -> Adapter 1```  ja drop-down valikosta valitsemalla "Bridged Adapter". 
+ Tämän jälkeen sallimme etäyhteyden virtuaalikoneeseen. Valitsimme auki olevista asetuksista ```Display -> Remote Display``` Porttinumeroksi laitoimme 9000. Hyväksyimme muutoksen painamalla OK. Käynnistimme virtuaalikoneen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Start```.
  TESTIPC1 oli päällä. Seuraavaksi teimme siihen seuraavat määritykset:
 <ul>
     <li>IPv6 pois päältä</li>
@@ -1451,7 +1793,7 @@ Valittiin täppä, että liitetään domainiin ja kirjoitettiin domain nimi. Seu
 
 Testattiin seuraavaksi, että Active Directory toimii. Windows palvelimella loimme uuden käyttäjän Active Directoryyn:
 ```
-Start -> Windows Administrative Tools -> Active Directory Users and Computers -> pisnismiehet.local - Users -> New -> User
+Start - Windows Administrative Tools - Active Directory Users and Computers - pisnismiehet.local - Users - New - User
 ```
 Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käyttäjästä sekä luotiin käyttäjälle salasana. Tämän jälkeen kun käyttäjä oli luotu niin testattiin kirjautua käyttäjälle testityöasemaa käyttäen. Kirjautuminen onnistui ja varmistuttiin siitä, että testityöasema on liitoksissa domainiin.
 
@@ -1510,73 +1852,10 @@ Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käytt�
 <h5 id="ubuntu-server-16045-lts-testipalvelin">Ubuntu Server 16.04.5 LTS</h5>
 
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBox -palvelimella. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. Asetimme myös tässäkin verkkokortin siltaavaksi kuten myös muiden testikoneiden osalta.
+
+
  
 <h3 id="asennus">Asennus</h3>
-
-Päivitettiin Ubuntu Server 16.04.5 LTS 64-bit.
-
-    $ sudo apt-get update
-    $ sudo apt-get upgrade
-
-Asennettiin openjdk8
-
-    $ sudo apt-get -y install openjdk-8-jdk
-
-Asennettiin openjre8
-
-    $ sudo apt-get -y install openjdk-8-jre
-
-Mentiin kansioon /opt.
-
-    $ cd /opt
-
-Ladattiin midpoint 3.8 (watt) midPointin sivuilta.
-
-![midPoint 3.8 (Watt) - Download](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint%203.8%20(Watt)%20-%20Download.PNG?raw=true)
-
-    $ sudo wget https://evolveum.com/downloads/midpoint/3.8/midpoint-3.8-dist.tar.gz
-
-Purettiin ladattu tervapallo (midpoint-3.8-dist.tar.gz)
-
-    $ sudo tar -xvzf midpoint-3.8-dist.tar.gz
-
-Vaihettiin kansio midpoint-3.8-dist kansioksi midpoint.
-
-    $ mv /opt/midpoint-3.8-dist /opt/midpoint
-
-<a href="https://wiki.evolveum.com/display/midPoint/Running+midPoint+with+systemd">"Running midPoint with systemd"</a>. Laitettiin midpoint käynnistymään palvelimen käynnistymisen yhteydessä automaattisesti.
-
-Tehtiin uusi tiedosto /etc/systemd/system/midpoint.service, jonne laitettiin tämä sisältö:
-
-    midpoint.service
-
-    [Unit]
-    Description=MidPoint Standalone Service
-    ###Requires=postgresql.service
-    ###After=postgresql.service
-    [Service]
-    User=root
-    WorkingDirectory=/opt/midpoint
-    ExecStart=/usr/bin/java -Xmx2048m -Dmidpoint.home=/opt/midpoint/var -jar /opt/midpoint/lib/midpoint.war
-    SuccessExitStatus=143
-    ###TimeoutStopSec=120s
-    [Install]
-    WantedBy=multi-user.target
-
-Laitettiin midPoint palvelu päälle:
-
-    $ sudo systemctl daemon-reload
-    $ sudo systemctl enable midpoint
-
-Laitettiin midPoint systemd palveluksi:
-
-    $ sudo systemctl start midpoint
-
-Sitten käynnistettiin palvelin uudelleen.
-
-    $ sudo reboot
-
-Tämän jälkeen midPoint oli asennettu.
 
 <h3 id="konfigurointi">Konfigurointi</h3>
  
@@ -1637,13 +1916,9 @@ Luotiin seuraavaksi jokaiselle meidän projektiryhmän jäsenelle käyttäjä mi
 Tarkistettiin seuraavaksi, että käyttäjät ovat todella tallentuneet MariaDB:n tietokantaan:
 ```
 $ sudo mysql -u root
-
 use midpoint;
-
 SHOW TABLES;
-
 SELECT * FROM m_user;
-
 SELECT fullName_norm,oid FROM m_user;
 ```
 ![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
@@ -1651,7 +1926,7 @@ Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 
 <h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
 
-<h4 id="suojatun-yhteyden-konfigurointi">Suojatun yhteyden konfigurointi</h4>
+<h4 id="suojatun-web-yhteyden-maaritys-https3">Suojatun web-yhteyden määritys (https)</h4>
 
 Suojattua yhteyttä tarvitaan, jotta midPointin tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston eli midPointin välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta midPointin käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
 
@@ -1787,6 +2062,7 @@ sudo a2ensite default-ssl.conf
 ```
 sudo service apache2 restart
 ```
+15. Jouduimme lisäksi tekemään ```application.yml``` -tiedoston midPointin asennuskansioon sijaintiin.
 
 Käynnistyksen jälkeen testattiin Apachen toimivuutta. Kirjoitettiin selaimeen:
 ```
@@ -1794,36 +2070,3 @@ https://*palvelimen IP-osoite*
 ```
 Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitin herjan Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
 ![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
-
-Kokeilimme myös uudelleenohjauksen toimivuutta. Kirjoitettiin selaimeen ```http://*palvelimen IP-osoite*```
-Selain uudelleenohjasi suojattuun sivustoon: ```https://*palvelimen IP-osoite*```
-
-15. Konfiguroimme seuraavaksi Apache2 toimimaan midPointin kanssa. Loimme uuden tiedoston, joka viittaa midPontiin:
-
-```
-sudoedit /opt/midpoint/var/application.yml
-```
-
-16. Lisättiin tiedostoon seuraavat konfiguraatiot:
-```
-server.address: 127.0.0.1
-server.port: 8080
-server.session.timeout: 60
-server.use-forward-hearders: true
-server.tomcat.internal-proxies: 127.0.0.1
-```
-
-Tallensimme ja lopuksi suljimme tiedoston.
-
-17. Käynnistettiin midPoint palvelimen uudelleen:
-```
-sudo reboot
-```
-
-Käynnistyksen jälkeen midPoint kirjoitettiin selaimeen: ```http://*palvelimen IP-osoite*```
-
-Avautui midPointin kirjautumisruutu. 
-![midPoint kirjautumisruutu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_kirjautumisruutu.PNG?raw=true)
-
-Uudelleenohjaus toimi. Selain uudelleenohjasi suojattuun midPointin kirjautumisruutuun. Myöskin aiempi tapa miten midPointin käyttöliittymään kirjaudutaan ei enää toimi. Eli ```http://*palvelimen IP-osoite*:8080/midpoint/``` ei enää toimi.
-
