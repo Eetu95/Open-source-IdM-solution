@@ -1118,7 +1118,16 @@ OpenLDAP -palvelimelle suositeltiin kanssa lisätä uusi skeematiedosto ```midpo
  
 7. Seurattiin <a href="https://www.youtube.com/watch?v=qAedVMMunk8">ohjevideosta</a> mitä pitää poistaa (7:07 ->). Tallensimme tehdyt muutokset ja suljimme tiedoston.
  
-8. 
+8. Ajoimme lopuksi tiedoston OpenLDAP-järjestelmään komennolla:
+    ```
+    ldapadd -Y EXTERNAL -H ldapi:/// -f cn\=\{0\}midpoint.ldif
+    ```
+ 
+9. Verifoitiin, että tiedosto varmasti meni järjestelmään läpi komennolla:
+    ```
+    ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config cn=*midpoint*
+    ```
+    Katsottiin ohjevideosta uudelleen mitä piti tulla tulokseksi ja saatiin sama eli onnistui skeeman laitto!
 
 
 
@@ -1442,7 +1451,7 @@ Valittiin täppä, että liitetään domainiin ja kirjoitettiin domain nimi. Seu
 
 Testattiin seuraavaksi, että Active Directory toimii. Windows palvelimella loimme uuden käyttäjän Active Directoryyn:
 ```
-Start - Windows Administrative Tools - Active Directory Users and Computers - pisnismiehet.local - Users - New - User
+Start -> Windows Administrative Tools -> Active Directory Users and Computers -> pisnismiehet.local - Users -> New -> User
 ```
 Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käyttäjästä sekä luotiin käyttäjälle salasana. Tämän jälkeen kun käyttäjä oli luotu niin testattiin kirjautua käyttäjälle testityöasemaa käyttäen. Kirjautuminen onnistui ja varmistuttiin siitä, että testityöasema on liitoksissa domainiin.
 
@@ -1628,9 +1637,13 @@ Luotiin seuraavaksi jokaiselle meidän projektiryhmän jäsenelle käyttäjä mi
 Tarkistettiin seuraavaksi, että käyttäjät ovat todella tallentuneet MariaDB:n tietokantaan:
 ```
 $ sudo mysql -u root
+
 use midpoint;
+
 SHOW TABLES;
+
 SELECT * FROM m_user;
+
 SELECT fullName_norm,oid FROM m_user;
 ```
 ![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
@@ -1781,3 +1794,36 @@ https://*palvelimen IP-osoite*
 ```
 Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitin herjan Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
 ![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
+
+Kokeilimme myös uudelleenohjauksen toimivuutta. Kirjoitettiin selaimeen ```http://*palvelimen IP-osoite*```
+Selain uudelleenohjasi suojattuun sivustoon: ```https://*palvelimen IP-osoite*```
+
+15. Konfiguroimme seuraavaksi Apache2 toimimaan midPointin kanssa. Loimme uuden tiedoston, joka viittaa midPontiin:
+
+```
+sudoedit /opt/midpoint/var/application.yml
+```
+
+16. Lisättiin tiedostoon seuraavat konfiguraatiot:
+```
+server.address: 127.0.0.1
+server.port: 8080
+server.session.timeout: 60
+server.use-forward-hearders: true
+server.tomcat.internal-proxies: 127.0.0.1
+```
+
+Tallensimme ja lopuksi suljimme tiedoston.
+
+17. Käynnistettiin midPoint palvelimen uudelleen:
+```
+sudo reboot
+```
+
+Käynnistyksen jälkeen midPoint kirjoitettiin selaimeen: ```http://*palvelimen IP-osoite*```
+
+Avautui midPointin kirjautumisruutu. 
+![midPoint kirjautumisruutu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_kirjautumisruutu.PNG?raw=true)
+
+Uudelleenohjaus toimi. Selain uudelleenohjasi suojattuun midPointin kirjautumisruutuun. Myöskin aiempi tapa miten midPointin käyttöliittymään kirjaudutaan ei enää toimi. Eli ```http://*palvelimen IP-osoite*:8080/midpoint/``` ei enää toimi.
+
