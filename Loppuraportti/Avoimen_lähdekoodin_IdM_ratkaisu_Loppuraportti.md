@@ -1118,7 +1118,16 @@ OpenLDAP -palvelimelle suositeltiin kanssa lisätä uusi skeematiedosto ```midpo
  
 7. Seurattiin <a href="https://www.youtube.com/watch?v=qAedVMMunk8">ohjevideosta</a> mitä pitää poistaa (7:07 ->). Tallensimme tehdyt muutokset ja suljimme tiedoston.
  
-8. 
+8. Ajoimme lopuksi tiedoston OpenLDAP-järjestelmään komennolla:
+    ```
+    ldapadd -Y EXTERNAL -H ldapi:/// -f cn\=\{0\}midpoint.ldif
+    ```
+ 
+9. Verifoitiin, että tiedosto varmasti meni järjestelmään läpi komennolla:
+    ```
+    ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config cn=*midpoint*
+    ```
+    Katsottiin ohjevideosta uudelleen mitä piti tulla tulokseksi ja saatiin sama eli onnistui skeeman laitto!
 
 
 
