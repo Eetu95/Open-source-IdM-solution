@@ -2770,3 +2770,7 @@ Selain uudelleenohjasi suojattuun sivustoon: ```https://*palvelimen IP-osoite*``
 Avautui midPointin kirjautumisruutu.
 ![midPoint kirjautumisruutu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_kirjautumisruutu.PNG?raw=true)
 Uudelleenohjaus toimi. Selain uudelleenohjasi suojattuun midPointin kirjautumisruutuun. Myöskin aiempi tapa miten midPointin käyttöliittymään kirjaudutaan ei enää toimi. Eli ```http://*palvelimen IP-osoite*:8080/midpoint/``` ei enää toimi.
+ 
+<h4 id="roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</h4>
+ 
+Nyt kun midPointin sekä kohdejärjestelmien välinen yhteys toimii, pitää meidän seuraavaksi määritellä midPointtiin roolit sekä muut tarvittavat objektit, joiden ansiosta provisiointi eli muutoksien ajaminen midPointista kohdejärjestelmiin onnistuu.
