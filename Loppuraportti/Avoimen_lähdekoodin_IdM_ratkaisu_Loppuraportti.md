@@ -2226,7 +2226,13 @@ Sitten lisäsimme metaroolin midPoint roolille. Tämä lisää ryhmänteko mahdo
 
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Käyttötapaus</h5>
 
+Tehtiin midPointissa uusi ryhmä (group) kohde Linux koneelle (Ubuntu Desktop 18.04). Ensin tehtiin uusi rooli midPointissa (Roles -> New Role). Lisättiin tiedot kenttiin "Name", 
 
+![unix-connector-basic](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-basic.PNG?raw=true)
+
+![unix-connector-projections](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-projections.PNG?raw=true)
+
+![unix-connector-assignments](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-assignments.PNG?raw=true)
 
 
 
