@@ -1799,7 +1799,7 @@ Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käytt�
 
 <h5 id="ubuntu-desktop-18041-lts-testipc2">Ubuntu Desktop 18.04.1 LTS (TESTIPC2)</h5>
  
-Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 18.04.1 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
+Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Aiomme myös myöhemmin liittää tämän testityöaseman OpenLDAP-palvelimen piiriin. Päätimme valita testiä varten Ubuntu Desktop 18.04.1 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
 
 <li>Tyyppi: Linux
 <li>Versio: Ubuntu (64-bit)
@@ -1846,16 +1846,11 @@ Ubuntu Desktop lähti asentumaan.
 
 ![asennus valmis](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(9).png)
 
-Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now.
-Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käyttöjärjestelmään liittyen.
+Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now. Tämän jälkeen kirjauduimme työasemalle sisälle samoilla tunnuksilla, jotka teimme asennusvaiheessa. Avasimme tämän jälkeen Terminaalin (Ctrl+Alt+T). Asensimme tämän jälkeen ainoastaan SSH:n sekä laitoimme palomuurin päälle komennolla: ```sudo apt-get install -y ssh && sudo ufw enable```
 
 Seuraavaksi halusimme piilottaa käyttäjälistauksen, joka näkyy kirjautumisruudussa. Teimme sen seuraavanlaisesti:
 
-1. Kirjauduimme työasemalle samoilla tunnuksilla, jotka teimme asennuvaiheessa.
- 
-2. Avasimme Terminaalin (Ctrl+Alt+T).
- 
-3. Teemme ```gdm``` -tiedoston sijaintiin ```/etc/dconf/profile/``` komennolla:
+1. Teemme ```gdm``` -tiedoston sijaintiin ```/etc/dconf/profile/``` komennolla:
     ```
     sudoedit /etc/dconf/profile/gdm
     ```
@@ -1867,7 +1862,7 @@ Seuraavaksi halusimme piilottaa käyttäjälistauksen, joka näkyy kirjautumisru
     ```
     Suljimme ja tallensimme lopuksi tiedoston.
 
-4. Avasimme seuraavaksi ```00-login-screen``` -tiedoston komennolla:
+2. Avasimme seuraavaksi ```00-login-screen``` -tiedoston komennolla:
     ```
     sudoedit /etc/dconf/db/gdm.d/00-login-screen
     ```
@@ -1879,7 +1874,7 @@ Seuraavaksi halusimme piilottaa käyttäjälistauksen, joka näkyy kirjautumisru
     ```
     Suljimme ja tallensimme lopuksi tiedoston.
  
-5. Lopuksi päivitimme tehdyt muutokset komennolla:
+3. Lopuksi päivitimme tehdyt muutokset komennolla:
     ```
     dconf update
     ```
