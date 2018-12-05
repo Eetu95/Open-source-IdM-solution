@@ -57,7 +57,7 @@ Päivämäärä: 28.11.2018
           <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
             <ol>
                 <span>4.3.2.1. </span><a href="#active-directory-connector">Active Directory connector</a><br>
-                <span>4.3.2.2. </span><a href="ldap-connector">LDAP-connector</a><br>
+                <span>4.3.2.2. </span><a href="#ldap-connector">LDAP-connector</a><br>
                 <span>4.3.2.3. </span><a href="#unix-connector">Unix-connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
@@ -2307,7 +2307,7 @@ LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin 
 
 4. Seuraavaksi haettiin XML-tiedosto painamalla "Choose File" (1.). Kun tiedosto oli haettu, painoimme lopuksi "Import object" (2.). Jos tulee ruudun yläpuolelle vihreä palkki, oli tuonti onnistunut. Jos tuli punainen, XML-tiedoston sisältämissä arvoissa ja määrityksissä on jokin virhe. Tällöin kannattaa katsoa virheilmoitukset huolella, jotka näkyvät siinä samalla.
     
-    ![]https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot2.JPG()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot2.JPG)
 
 5. Kun tuonti onnistui, siirryimme valikossa kohtaan ``` Resources -> List resources```
  
