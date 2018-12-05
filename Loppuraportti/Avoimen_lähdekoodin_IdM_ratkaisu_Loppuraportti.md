@@ -2291,7 +2291,6 @@ Seuraavaksi piti asentaa Certificate Authority rooli. Tämä tehtiin samalla kui
 <h5 id="ldap-connector">LDAP-connector</h5>
  
 LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin käyttöliittymässä pääkäyttäjätunnuksilla:
-
  
 1. Avattiin uusi välilehti selaimesta ja mentiin <a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/resources/ldap-posix.xml">GitHubiin></a>, josta tallennettiin (Ctrl+S) valmis XML-tiedostomalli omalle työpöydälle.
  
@@ -2305,36 +2304,41 @@ LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin 
  
 3. Avattiin selaimella midPoint ja kirjauduttiin siihen sisälle pääkäyttäjätunnuksilla. Valittiin midPointin vasemmasta valikosta "Import object"
  
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot1.JPG)
 
 4. Seuraavaksi haettiin XML-tiedosto painamalla "Choose File" (1.). Kun tiedosto oli haettu, painoimme lopuksi "Import object" (2.). Jos tulee ruudun yläpuolelle vihreä palkki, oli tuonti onnistunut. Jos tuli punainen, XML-tiedoston sisältämissä arvoissa ja määrityksissä on jokin virhe. Tällöin kannattaa katsoa virheilmoitukset huolella, jotka näkyvät siinä samalla.
- 
+    
+    ![]https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot2.JPG()
+
 5. Kun tuonti onnistui, siirryimme valikossa kohtaan ``` Resources -> List resources```
  
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot3.JPG)
  
 6. Valitsimme ruutuun avautuvasta listasta ```OpenLDAP (OPENLDAPSERVER)```
  
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot4.JPG)
  
 7. Avautuvan sivun alalaidasta valittiin "Edit configuration"
  
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot5.JPG)
  
 8. Avautui asetukset. Varmistettiin, että kuvassa korostetut kohdat on määritelty. Jos et näe kohtia, kannattaa painaa "Configuration" -otsikon viereisestä tyhjän boksin kuvasta, jolloin kaikki asetuksiin mahdollista määriteltävät kohdat tulee näkyviin. Etsi tällöin kuvassa korostetut kohdat. "Connection security" -kohdassa määritämme, että midPoint ottaa suojatun yhteyden (StartTLS) OpenLDAP -palvelimeen.
  
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot6.JPG)
  
 9. Kun kohta 8 oli hoidettu, kokeilimme yhteydenmuodostusta midPointin ja OpenLDAP-palvelimen välillä painamalla "Save and test connection".
  
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot7.JPG)
  
 10. Jos yhteys on toimiva, tulee vihreää kuten kuvassa. Jos ei toimi, tulee punaista ja virheilmoitus. Kannattaa tällöin tutkia virheilmoitusta ja korjata ongelma.
     
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot8.JPG)
  
 11. Lopuksi painoimme "Finish" ja päätimme onnistuneesti OpenLDAP-palvelimen liittämisen midPointin piiriin.
 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot9.JPG)
+     
+ 
 
 <h5 id="unix-connector">Unix-connector</h5>
 
