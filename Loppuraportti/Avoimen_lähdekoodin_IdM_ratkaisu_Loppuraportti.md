@@ -31,10 +31,12 @@ Päivämäärä: 28.11.2018
           <ol>
                 <span>4.1.2.1. </span><a href="#windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</a><br>
                 <span>4.1.2.2. </span><a href="#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</a><br>
-                <span>4.1.2.3. </span><a href="#openldap-serverin-asennusja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</a><br>
+                <span>4.1.2.3. </span><a href="#openldap-serverin-asennus-ja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</a><br>
                 <span>4.1.2.4. </span><a href="#phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</a><br>
-                <span>4.1.2.5. </span><a href="#openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</a><br>
-                <span>4.1.2.6. </span><a href="#suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)</a><br>
+                <span>4.1.2.5. </span><a href="#ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</a><br>
+                <span>4.1.2.6. </span><a href="#openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</a><br>
+                <span>4.1.2.7. </span><a href="#suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)
+                </a><br>
           </ol>
           <span>4.1.3. </span><a href="#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</a><br>
           <ol>
@@ -53,8 +55,11 @@ Päivämäärä: 28.11.2018
       <ol>
           <span>4.3.1. </span><a href="#tietokannan-maarittaminen">Tietokannan määrittäminen</a><br>
           <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
+                <ol>
+                <span>4.3.2.1. </span><a href="#unix-connector">Unix-connector</a><br> 
+                </ol>
           <ol>
-                <span>4.3.2.1. </span><a href="#unix-connector">Unix-connector</a><br>
+                <span>4.3.2.2. </span><a href="#active-directory-connector">Active Directory connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
       </ol>
@@ -1017,12 +1022,48 @@ Teimme asennuksen ja konfiguroinnin seuraavanlaisesti:
     ```
 
 Nyt kun menemme sivulle http:://<ip-osoite>/phpldapadmin, pääsemme web-käyttöliittymään, joihin kirjaudutaan OpenLDAP:n asennusvaiheessa tehdyillä tunnuksilla.
- 
-<h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
- 
-MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota:
 
-1. Siirryimme root-käyttäjäksi komennolla:
+<h5 id="ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</h5>
+
+ 
+Jotta OpenLDAP -palvelimen määritys sekä sen liittäminen midPointtiin olisi mahdollisimman helppoa, lisäsimme valmiiksi tarvittavat ryhmät OpenLDAP -palvelimeen graaffisen web-käyttöliittymän kautta. Meidän täytyi luoda seuraavat ryhmät:
+ 
+- people
+- services
+- groups
+- unixgroups
+ 
+Teimme tarvittavat toimenpiteet seuraavasti:
+ 
+1. Kirjauduimme selaimella OpenLDAP -palvelimen web-käyttöliittymään:
+    ```
+    http:://<ip-osoite>/phpldapadmin
+    ```
+    Kirjautumisikkunassa annoimme samat tunnukset, mitkä teimme OpenLDAP-palvelimen asennusvaiheessa (1.). Kirjauduimme sisään painamalla "Authenticate".
+     
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot1.JPG)
+     
+2. Vasemmasta valikosta avattiin puuhakemisto ja valittiin "Create new entry here".
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot2.JPG)
+ 
+3. Valitsimme avautuvasta valikosta luotava objekti. Koska haluttiin luoda ryhmä, valittiin "Generic: Posix Group"
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot3.JPG)
+ 
+4. Seuraavaksi avautui sivu, jossa meidän piti määrittää ryhmälle nimi. Laitoimme siihen halutun ryhmän nimen. Lopuksi valitsimme "Create Object".
+ 
+5. Hyväksyimme muutokset painamalla "Commit".
+ 
+6. Ryhmä luotiin onnistuneesti. Muut ryhmät tehtiin samalla tavalla kuten ensimmäinenkin luotu ryhmä.
+ 
+
+<h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
+
+ 
+MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota OpenLDAP-palvelimeen (OPENLDAPSERVER):
+
+1. Siirryimme terminaaliin root-käyttäjäksi komennolla:
     ```
     sudo su
     ```
@@ -2162,6 +2203,92 @@ SELECT fullName_norm,oid FROM m_user;
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 
 <h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
+
+<h5 id="active-directory-connector">Active Directory connector</h5>
+
+Active Directory connectorin avulla saadaan yhdistettyä midPoint Windows -äyttöjärjestelmän koneisiin. Active Directory connectoria varten tulee olla määritetty Windows Server, jossa on asennettuna Active Directory eli aktiivihakemisto. Active Directory asennus tehtiin jo Windows Serverin [esivalmisteluvaiheessa](#windows-palvelimen-perusmaaritykset). MidPointissa Active Directory connector oli jo valmiina asennettuna toisin kuin esimerkiksi Unix connectorissa. Ennen Active Directory connectorin toimivuutta tuli varmistaa, että Windows Serverin LDAP yhteys on suojattu. LDAP protokollaa käytetään Active Directoryn tiedonsiirroissa, josta suojattu protokolla on LDAPS. LDAP toimii portissa 389 ja LDAPS 636. LDAPS suojasta varten pitää asentaa konfiguroida Active Directory Lightweight Directory Services (AD LDS) sekä luoda sertifikaatti. AD LDS asennus:
+
+Server Managerista valitaan Manage - Add Roles and Features.
+![roles & features](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture.PNG?raw=true)
+
+Klikattiin Next.
+
+![role-based or feature-based](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture1.PNG?raw=true)
+
+Valittiin Role-based or feature-based installation. Klikattiin Next.
+
+![palvelimen valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture2.PNG?raw=true)
+
+Valitaan mäidän palvelimen (meillä ei ole kuin yksi Windows palvelin). Klikattiin Next.
+
+![AD LDS](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture3.PNG?raw=true)
+
+Seuraavaksi valittiin asennettavaksi Active Directory Lightweight Services (kuvassa se oli jo asennettu). Klikattiin Next.
+
+![ominaisuudet](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture4.PNG?raw=true)
+
+Ei valittu mitään ominaisuuksia. Klikattiin Next. 
+![AD LDS ilmoitus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture5.PNG?raw=true)
+
+Seuraavaksi tuli ilmoitus siitä, mitä ollaan asentamassa. Klikattiin Next.
+
+![vahvistus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture6.PNG?raw=true)
+
+Seuraavaksi tuli vahvistus asennettavasta roolista. Klikattiin Install. 
+
+![asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture7.PNG?raw=true)
+
+Asennuksen jälkeen lähdettiin konfiguroimaan AD LDS roolia. Klikattiin Run the Active Directory Lightweight Directory Services Setup Wizard.
+
+![AD LDS wizard](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture8.PNG?raw=true)
+
+Aukesi AD LDS konfigurointi-ikkuna. Klikattiin Next. 
+
+![instanssi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture9.PNG?raw=true)
+
+Valittin instansiksi unique instance. Klikattiin Next.
+
+Seuraavaksi piti määrittää instanssin nimi. Valittiin nimeksi PISNISMIEHET. Description kohtaan kirjoitettiin AD LDS instance. Klikattiin sitten Next.
+
+Seuraavaksi piti määritellä LDAP ja LDAPS portit. Valittiin oletukset 50000 ja 50001, koska oletusportit 389 & 636 ovat jo tulleet käytöön Active Directoryn asennuksen jälkeen. Klikattiin Next.
+
+Seuraavaksi piti määritellä Application Directory Partition. Valittiin uusi osiointi: Yes, create an application directory partition. Kirjoitetiin tähän CN=Midpoint,DC=PISNISMIEHET,DC=LOCAL
+Klikattiin sitten Next.
+
+Seuraavaksi kysyttiin mihin AD LDS data tallennetaan. Jätettiin oletukset ja klikattiin Next. 
+
+![AD LDS palvelun käyttäjä](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture10.PNG?raw=true)
+
+Seuraavaksi piti valitan käyttäjä AD LDS palveluun. Valittiin Network Service account ja klikattiin Next. Tuli varoitus vielä datan replikoinnista. Klikattiin vain Yes.
+
+Seuraavaksi piti määritellä administrator käyttäjä AD LDS palvelulle. Valittin nykyinen kirjautunut käyttäjä. Klikattiin Next.
+
+Seuraavaksi kysyttiin LDIF tiedostoja. Valittiin kaikki ja klikattiin Next. 
+
+![LDIF tiedostojen vahvistus](https://github.com/Eetu95/Open-source-IdM-solution/
+
+Seuraavaksi tuli vahvistus tiedostoista. Klikattiin Next.
+
+![AD LDS konfigurointi valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture12.PNG?raw=true)
+
+AD LDS konfigurointi oli nyt valmis. Klikattiin Finish.
+
+Seuraavaksi kokeilimme AD LDS instanssiin. Avattiin ADSI Edit:
+```
+Start - Windows Administrative Tools - ADSI Edit
+```
+
+Klikkasimme sovelluksesta ADSI Edit kansiosta - Connect To...
+Lisäsimme tähän seuraavat tiedot ja klikkasimme ok:
+
+![ADSI Edit Connect to](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture13.PNG?raw=true)
+
+AD LDS yhdistyi ja tämän jälkeen aukesi puunäkymä instassista.
+
+Seuraavaksi piti asentaa Certificate Authority rooli. Tämä tehtiin samalla kuin AD LDS asennus mutta valittiin rooliksi Certificate Authority.
+
+
+
 
 <h5 id="unix-connector">Unix-connector</h5>
 
