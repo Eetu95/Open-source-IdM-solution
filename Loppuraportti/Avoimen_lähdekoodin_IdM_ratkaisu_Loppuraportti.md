@@ -55,6 +55,12 @@ Päivämäärä: 28.11.2018
       <ol>
           <span>4.3.1. </span><a href="#tietokannan-maarittaminen">Tietokannan määrittäminen</a><br>
           <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
+                <ol>
+                <span>4.3.2.1. </span><a href="#unix-connector">Unix-connector</a><br> 
+                </ol>
+          <ol>
+                <span>4.3.2.2. </span><a href="#active-directory-connector">Active Directory connector</a><br>
+          </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
       </ol>
       </ol>
@@ -2195,6 +2201,180 @@ SELECT fullName_norm,oid FROM m_user;
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 
 <h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
+
+<h5 id="active-directory-connector">Active Directory connector</h5>
+
+Active Directory connectorin avulla saadaan yhdistettyä midPoint Windows -äyttöjärjestelmän koneisiin. Active Directory connectoria varten tulee olla määritetty Windows Server, jossa on asennettuna Active Directory eli aktiivihakemisto. Active Directory asennus tehtiin jo Windows Serverin [esivalmisteluvaiheessa](#windows-palvelimen-perusmaaritykset). MidPointissa Active Directory connector oli jo valmiina asennettuna toisin kuin esimerkiksi Unix connectorissa. Ennen Active Directory connectorin toimivuutta tuli varmistaa, että Windows Serverin LDAP yhteys on suojattu. LDAP protokollaa käytetään Active Directoryn tiedonsiirroissa, josta suojattu protokolla on LDAPS. LDAP toimii portissa 389 ja LDAPS 636. LDAPS suojasta varten pitää asentaa konfiguroida Active Directory Lightweight Directory Services (AD LDS) sekä luoda sertifikaatti. AD LDS asennus:
+
+Server Managerista valitaan Manage - Add Roles and Features.
+![roles & features](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture.PNG?raw=true)
+
+Klikattiin Next.
+
+![role-based or feature-based](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture1.PNG?raw=true)
+
+Valittiin Role-based or feature-based installation. Klikattiin Next.
+
+![palvelimen valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture2.PNG?raw=true)
+
+Valitaan mäidän palvelimen (meillä ei ole kuin yksi Windows palvelin). Klikattiin Next.
+
+![AD LDS](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture3.PNG?raw=true)
+
+Seuraavaksi valittiin asennettavaksi Active Directory Lightweight Services (kuvassa se oli jo asennettu). Klikattiin Next.
+
+![ominaisuudet](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture4.PNG?raw=true)
+
+Ei valittu mitään ominaisuuksia. Klikattiin Next. 
+![AD LDS ilmoitus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture5.PNG?raw=true)
+
+Seuraavaksi tuli ilmoitus siitä, mitä ollaan asentamassa. Klikattiin Next.
+
+![vahvistus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture6.PNG?raw=true)
+
+Seuraavaksi tuli vahvistus asennettavasta roolista. Klikattiin Install. 
+
+![asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture7.PNG?raw=true)
+
+Asennuksen jälkeen lähdettiin konfiguroimaan AD LDS roolia. Klikattiin Run the Active Directory Lightweight Directory Services Setup Wizard.
+
+![AD LDS wizard](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture8.PNG?raw=true)
+
+Aukesi AD LDS konfigurointi-ikkuna. Klikattiin Next. 
+
+![instanssi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture9.PNG?raw=true)
+
+Valittin instansiksi unique instance. Klikattiin Next.
+
+Seuraavaksi piti määrittää instanssin nimi. Valittiin nimeksi PISNISMIEHET. Description kohtaan kirjoitettiin AD LDS instance. Klikattiin sitten Next.
+
+Seuraavaksi piti määritellä LDAP ja LDAPS portit. Valittiin oletukset 50000 ja 50001, koska oletusportit 389 & 636 ovat jo tulleet käytöön Active Directoryn asennuksen jälkeen. Klikattiin Next.
+
+Seuraavaksi piti määritellä Application Directory Partition. Valittiin uusi osiointi: Yes, create an application directory partition. Kirjoitetiin tähän CN=Midpoint,DC=PISNISMIEHET,DC=LOCAL
+Klikattiin sitten Next.
+
+Seuraavaksi kysyttiin mihin AD LDS data tallennetaan. Jätettiin oletukset ja klikattiin Next. 
+
+![AD LDS palvelun käyttäjä](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture10.PNG?raw=true)
+
+Seuraavaksi piti valitan käyttäjä AD LDS palveluun. Valittiin Network Service account ja klikattiin Next. Tuli varoitus vielä datan replikoinnista. Klikattiin vain Yes.
+
+Seuraavaksi piti määritellä administrator käyttäjä AD LDS palvelulle. Valittin nykyinen kirjautunut käyttäjä. Klikattiin Next.
+
+Seuraavaksi kysyttiin LDIF tiedostoja. Valittiin kaikki ja klikattiin Next. 
+
+![LDIF tiedostojen vahvistus](https://github.com/Eetu95/Open-source-IdM-solution/
+
+Seuraavaksi tuli vahvistus tiedostoista. Klikattiin Next.
+
+![AD LDS konfigurointi valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture12.PNG?raw=true)
+
+AD LDS konfigurointi oli nyt valmis. Klikattiin Finish.
+
+Seuraavaksi kokeilimme AD LDS instanssiin. Avattiin ADSI Edit:
+```
+Start - Windows Administrative Tools - ADSI Edit
+```
+
+Klikkasimme sovelluksesta ADSI Edit kansiosta - Connect To...
+Lisäsimme tähän seuraavat tiedot ja klikkasimme ok:
+
+![ADSI Edit Connect to](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture13.PNG?raw=true)
+
+AD LDS yhdistyi ja tämän jälkeen aukesi puunäkymä instassista.
+
+Seuraavaksi piti asentaa Certificate Authority rooli. Tämä tehtiin samalla kuin AD LDS asennus mutta valittiin rooliksi Certificate Authority.
+
+
+
+
+<h5 id="unix-connector">Unix-connector</h5>
+
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asenna ja määritä unix-connector</h5>
+
+Kloonattiin git repository <a href="https://github.com/Evolveum/ConnIdUNIXBundle.git">https://github.com/Evolveum/ConnIdUNIXBundle.git</a> ~/unix-connector -kansioon:
+
+    $ sudo git clone https://github.com/Evolveum/ConnIdUNIXBundle.git
+
+Mentiin unix-xonnector kansioon:
+
+    $ cd ~/unix-connector
+
+Rakennettiin unix-connector:
+
+    $ sudo mvn clean package -DskipTests=true -P it
+
+kopioitiin ~/unix-connector/target/org.connid.bundles.unix-1.0.jar -tiedosto opt/midpoint/var/icf-connectors -kansioon:
+
+    $ sudo cp ~/unix-connector/target/org.connid.bundles.unix-1.0.jar  opt/midpoint/var/icf-connectors
+
+Tehtiin ~/icf-connectors -kansion sisään /lib -kansio:
+
+    $ sudo mkdir lib
+
+Kopioitiin ~/unix-connector/target/dependencies/jsch-0.1.53.jar -tiedosto opt/midpoint/var/icf-connectors/lib -kansion sisään:
+
+    $ sudo cp ~/unix-connector/target/dependencies/jsch-0.1.53.jar opt/midpoint/var/icf-connectors/lib
+
+Käynnistettiin palvelin uudestaan:
+
+    $ sudo reboot
+
+Tehtiin tekninen Linux Ubuntu Desktop 18.04 -käyttäjä midPointille. Otettiin Ubuntuun ensin ssh-yhteys:
+
+    $ sudo ssh pisnismiehet@(ip-osoite)
+
+Luotiin uusi tekninen käyttäjä:
+
+    $ sudo useradd -m midpoint
+    $ sudo passwd (salasanasi)
+
+Annettiin käyttäjälle "midpoint" oikeat oikeudet. Luotiin ensin tiedosto /etc/sudoers.d/midpoint, jonka sisään lisäsimme <a href="https://github.com/Evolveum/midpoint/blob/master/samples/resources/unix/midpoint-user-example.txt">midpointin GitHubista tämän</a> (GitHub -> Evolveum -> midpoint/samples/resources/unix/midpoint-user-example.txt):
+
+    Host_Alias HOST = ALL
+
+    midpoint HOST=(ALL) NOPASSWD: /usr/sbin/useradd,/usr/sbin/usermod,/usr/sbin/userdel,/usr/sbin/groupadd,/usr/sbin/groupmod,/usr/sbin/groupdel,/bin/mv,/usr/bin/passwd,/usr/bin/getent,/bin/echo,/usr/bin/tee,/bin/chown,/bin/chmod,/bin/mkdir,/usr/bin/groups,/usr/bin/id,/usr/bin/replace,/bin/rm,/bin/cat
+
+Tallennettiin ja suljettiin tiedosto. Sitten lisäsimme unix-connector resurssin midPointiin. Ensin latasimme <a href="https://github.com/Evolveum/midpoint/blob/master/samples/resources/unix/resource-unix-advanced.xml">resurssin midPointin GitHubista</a>. Vaihdoimme xml-tiedostosta hostname, username ja password oikeiksi. Tallennettiin ja suljettiin xml-tiedosto. Lisäsimme sen midPontiin -> Configuration -> Import Object -> Choose File -> Import Object.
+
+Sitten katsoimme asentuiko unix-connector oikein. Resource → List Resources → Unix -> Test connection.
+
+![unix-connector-test-connection](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-test-connection.PNG?raw=true)
+
+Yhteys toimi!
+
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Advanced scenarios</h5>
+
+Ladattiin konfiguraatiot <a href="https://github.com/Evolveum/midpoint/tree/master/samples/stories/unix-management">midPointin GitHubista</a>. Lisättiin xml-tiedosto, joka lisää "advanced scenarios" ominaisuuksia. Configuration -> Import Objects -> Choose File -> resource-unix-advanced.xml -> Import Object (On hyvä pistää "check" -merkki ennen lisäystä kohtiin "Keep oid" ja "Overwrite existing object".
+
+Sitten lisäsimme metaroolin midPoint roolille. Tämä lisää ryhmänteko mahdollisuuden kohde Linux-koneelle. Configuration -> Import Objects -> Choose File -> role-assignment-inducement-metarole.xml -> Import Object.
+
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Käyttötapaus</h5>
+
+
+
+
+
+And finally, how-to for some use cases
+
+Create group on the target linux machine
+Create new role in midPoint (Roles → New Role). Fill in:
+‘Name’ – has to be unique, e.g Group midpoint-admins on Unix,
+‘Group Name’ – is used for naming the group on target system
+‘Unix Permissions’ – is used for creating sudoers file for this group
+Assign previously imported metarole to the role:
+Go to the Assignments tab, click on the gear wheel and choose Assign Role
+Select meta role and confirm it by pressing Assign button (in popup dialog)
+Press Save button
+Create user on the target system, add him/her to the unix group and set the public key
+Create new user in midPoint (Users → New User). Fill in:
+‘Name’ – login name
+‘Public Key’ – copy&paste public key as a plain text
+Fill others attributes you want to provision
+Assign previously created role to this user (‘Group midpoint-admins on Unix’)
+Go to the Assignments tab, click on the gear wheel and choose Assign Role
+Select role (‘Group midpoint-admins on Unix’) and confirm it by pressing Assign button
+Press Save button
 
 <h4 id="suojatun-web-yhteyden-maaritys-https3">Suojatun web-yhteyden määritys (https)</h4>
 
