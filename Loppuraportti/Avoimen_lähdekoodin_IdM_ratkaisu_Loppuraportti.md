@@ -2414,7 +2414,7 @@ XML-tiedosto piti tarkistaa vielä kokonaisuudessaan läpi, koska XML tiedostoon
 
 Myös kohta @win.evolveum.com pitää vaihtaa -> @pisnismiehet.local
 
-Meidän valmis malli Active Directory connectoria varten löytyy meidän GitHubista valmiina ilman Windows Serverin IP-osoitetta host kohtaan ja Midpoint käyttäjän salasanaa clearValue -kohtaan: https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Connectorit/ad-ldap-medusa-medium.xml
+Meidän valmis malli Active Directory connectoria varten löytyy meidän GitHubista valmiina ilman Windows Serverin IP-osoitetta, joka tulisi <icfcldap:host> -kohtaan sekä Midpoint käyttäjän salasanaa, joka tulisi <t:clearValue> -kohtaan: https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Connectorit/ad-ldap-medusa-medium.xml
 
 Kun XML-tiedosto on muokattu niin klikattiin Import object. Seuraavaksi mentiin kohtaan Resources vasemmasta listauksesta. Klikattiin Active Directory connectoria eli Medusa Active Directory (LDAP). Alhaalta klikattiin Edit configuration ja tarkistettiin, että tiedot ovat oikein.
 
