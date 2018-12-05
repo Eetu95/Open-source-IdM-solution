@@ -31,10 +31,12 @@ Päivämäärä: 28.11.2018
           <ol>
                 <span>4.1.2.1. </span><a href="#windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</a><br>
                 <span>4.1.2.2. </span><a href="#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</a><br>
-                <span>4.1.2.3. </span><a href="#openldap-serverin-asennusja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</a><br>
+                <span>4.1.2.3. </span><a href="#openldap-serverin-asennus-ja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</a><br>
                 <span>4.1.2.4. </span><a href="#phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</a><br>
-                <span>4.1.2.5. </span><a href="#openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</a><br>
-                <span>4.1.2.6. </span><a href="#suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)</a><br>
+                <span>4.1.2.5. </span><a href="#ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</a><br>
+                <span>4.1.2.6. </span><a href="#openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</a><br>
+                <span>4.1.2.7. </span><a href="#suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)
+                </a><br>
           </ol>
           <span>4.1.3. </span><a href="#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</a><br>
           <ol>
@@ -1014,12 +1016,46 @@ Teimme asennuksen ja konfiguroinnin seuraavanlaisesti:
     ```
 
 Nyt kun menemme sivulle http:://<ip-osoite>/phpldapadmin, pääsemme web-käyttöliittymään, joihin kirjaudutaan OpenLDAP:n asennusvaiheessa tehdyillä tunnuksilla.
- 
-<h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
- 
-MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota:
 
-1. Siirryimme root-käyttäjäksi komennolla:
+<h5 id="ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</h5>
+
+ 
+Jotta OpenLDAP -palvelimen määritys sekä sen liittäminen midPointtiin olisi mahdollisimman helppoa, lisäsimme valmiiksi tarvittavat ryhmät OpenLDAP -palvelimeen graaffisen web-käyttöliittymän kautta. Meidän täytyi luoda seuraavat ryhmät:
+ 
+- people
+- services
+- groups
+- unixgroups
+ 
+Teimme tarvittavat toimenpiteet seuraavasti:
+ 
+1. Kirjauduimme selaimella OpenLDAP -palvelimen web-käyttöliittymään:
+    ```
+    http:://<ip-osoite>/phpldapadmin
+    ```
+    Kirjautumisikkunassa annoimme samat tunnukset, mitkä teimme OpenLDAP-palvelimen asennusvaiheessa (1.). Kirjauduimme sisään painamalla "Authenticate".
+     
+    ![]()
+     
+2. Vasemmasta valikosta avattiin puuhakemisto ja valittiin "Create new entry here".
+ 
+    ![]()
+ 
+3. Valitsimme avautuvasta valikosta luotava objekti. Koska haluttiin luoda ryhmä, valittiin "Generic: Posix Group"
+ 
+4. Seuraavaksi avautui sivu, jossa meidän piti määrittää ryhmälle nimi. Laitoimme siihen halutun ryhmän nimen. Lopuksi valitsimme "Create Object".
+ 
+5. Hyväksyimme muutokset painamalla "Commit".
+ 
+6. Ryhmä luotiin onnistuneesti. Muut ryhmät tehtiin samalla tavalla kuten ensimmäinenkin luotu ryhmä.
+ 
+
+<h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
+
+ 
+MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota OpenLDAP-palvelimeen (OPENLDAPSERVER):
+
+1. Siirryimme terminaaliin root-käyttäjäksi komennolla:
     ```
     sudo su
     ```
