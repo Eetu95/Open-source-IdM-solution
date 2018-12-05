@@ -2028,7 +2028,6 @@ Tulokseksi tuli ```anonymous```. Yhteys siis toimii.
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBox -palvelimella. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. Asetimme myös tässäkin verkkokortin siltaavaksi kuten myös muiden testikoneiden osalta.
 
 
- 
 <h3 id="asennus">Asennus</h3>
 
 1. Asennettiin openjdk8:
