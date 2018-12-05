@@ -4,7 +4,7 @@ Loppuraportti
 
 Tekijät: Jan Parttimaa, Eetu Pihamäki & Markus Nissinen
 
-Kurssi: Monialaprojekti
+Kurssi: Monialaprojekti 
  
 Päivämäärä: 28.11.2018
  
@@ -1802,7 +1802,7 @@ Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käytt�
 
 <h5 id="ubuntu-desktop-18041-lts-testipc2">Ubuntu Desktop 18.04.1 LTS (TESTIPC2)</h5>
  
-Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Päätimme valita tätä varten Ubuntu Desktop 18.04.1 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
+Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Aiomme myös myöhemmin liittää tämän testityöaseman OpenLDAP-palvelimen piiriin. Päätimme valita testiä varten Ubuntu Desktop 18.04.1 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
 
 <li>Tyyppi: Linux
 <li>Versio: Ubuntu (64-bit)
@@ -1849,15 +1849,183 @@ Ubuntu Desktop lähti asentumaan.
 
 ![asennus valmis](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(9).png)
 
-Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now.
-Tässä vaiheessa emme tehneet enempää esivalmisteluja Ubuntu Desktop -käyttöjärjestelmään liittyen.
+Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now. Tämän jälkeen kirjauduimme työasemalle sisälle samoilla tunnuksilla, jotka teimme asennusvaiheessa. Avasimme tämän jälkeen Terminaalin (Ctrl+Alt+T). Asensimme tämän jälkeen ainoastaan SSH:n sekä laitoimme palomuurin päälle komennolla: ```sudo apt update && sudo apt-get install -y ssh && sudo ufw enable```
+
+Seuraavaksi halusimme piilottaa käyttäjälistauksen, joka näkyy kirjautumisruudussa. Teimme sen seuraavanlaisesti:
+
+1. Teemme ```gdm``` -tiedoston sijaintiin ```/etc/dconf/profile/``` komennolla:
+    ```
+    sudoedit /etc/dconf/profile/gdm
+    ```
+    Komennon jälkeen painoimme Enter. Kyseinen tiedosto avautui "Nano" -ohjelmaan. Laitoimme kyseiseen tiedostoon seuraavaa:
+    ```
+    user-db:user
+    system-db:gdm
+    file-db:/usr/share/gdm/greeter-dconf-defaults
+    ```
+    Suljimme ja tallensimme lopuksi tiedoston.
+
+2. Avasimme seuraavaksi ```00-login-screen``` -tiedoston komennolla:
+    ```
+    sudoedit /etc/dconf/db/gdm.d/00-login-screen
+    ```
+    Komennon jälkeen painoimme Enter. Kyseinen tiedosto avautui myös "Nano" -ohjelmaan. Laitoimme tähän tiedostoon seuraavaa:
+    ```
+    [org/gnome/login-screen]
+    # Do not show the user list
+    disable-user-list=true
+    ```
+    Suljimme ja tallensimme lopuksi tiedoston.
+ 
+3. Lopuksi päivitimme tehdyt muutokset komennolla:
+    ```
+    dconf update
+    ```
+    Komennon jälkeen painoimme Enter. Muutokset päivitetty ja käyttäjälistaus ei enää näy työaseman käynnistyessä.
+
+Seuraavaksi aloimme liittämään työasemaan OpenLDAP -palvelimeen. Teimme tämän seuraavanlaisesti:
+ 
+1. Avasimme ensiksi ````hosts````-tiedoston komennolla:
+    ```
+    sudoedit /etc/hosts
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui. Lisäsimme riville numero 3 OpenLDAP -palvelimemme DNS-tiedot eli ip-osoite ja kirjallinen osoite mukaan lukien aliakset:
+    ```
+    172.28.171.15   ldap.pisnismiehet.local ldap
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston.
+ 
+2. Avasimme palomuurista porttinumerot 389 ja 636 komennolla:
+    ```
+    sudo ufw allow 389/tcp && sudo ufw allow 389 && sudo ufw allow 636/tcp && sudo ufw allow 636
+    ```
+    Komennon jälkeen painoimme Enter. Kyseiset portit avattiin.
+ 
+3. Asensimme LDAP Clientin komennolla:
+    ```
+    sudo apt update && sudo apt-get install -y libnss-ldap libpam-ldap ldap-utils nscd
+    ```
+    Komennon jälkeen painoimme Enter. Jonkin ajan kulttua tuli ohjattu asennus, johon laitoimme seuraavat määritykset:
+     
+    - LDAP server Uniform Resource Identifier: ldap://<ldap-palvelimen ip-osoite>
+    - Distinguished name of the search base: dc=ldap,dc=pisnismiehet,dc=local
+    - LDAP version to use: 3
+    - Make local root Database admin: Yes
+    - Does the LDAP database require login: No
+    - LDAP account for root: cn=admin,dc=ldap,dc=pisnismiehet,dc=local
+    - LDAP root account password: <admin/root käyttäjän salasana>
+ 
+4. Avattiin tiedosto ```nsswitch.conf``` komennolla:
+    ```
+    sudoedit /etc/nsswitch.conf
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui "Nano" -ohjelmassa. Muutimme tiedossa olevat tiedot seuraavanlaisiksi:
+    ```
+    # /etc/nsswitch.conf
+    #
+    # Example configuration of GNU Name Service Switch functionality.
+    # If you have the `glibc-doc-reference' and `info' packages installed, try:
+    # `info libc "Name Service Switch"' for information about this file.
+
+    passwd:         files systemd ldap
+    # passwd: files ldap
+    group:          files systemd ldap
+    # group: files ldap
+    shadow:         files ldap
+    # shadow: files ldap
+    gshadow:        files
+
+    #hosts:          files mdns4_minimal [NOTFOUND=return] dns myhostname
+    hosts:          files dns ldap
+    networks:       files ldap
+
+    protocols:      db files
+    services:       db files
+    ethers:         db files
+    rpc:            db files
+
+    # pre_auth-client-config # netgroup:       nis
+    netgroup: nis
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston.
+ 
+5. Seuraavaksi avasimme ```common-session``` -tiedoston komennolla:
+    ```
+    sudoedit /etc/pam.d/common-session
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui Nano -ohjelmaan. Varmistimme, että tiedoston lopussa on seuraavat tiedot, jotka huolehtivat muun muassa LDAP-käyttäjien kotihakemistojen luonnin automaattisesti:
+    ```
+    # and here are more per-package modules (the "Additional" block)
+    session required        pam_unix.so
+    session required        pam_mkhomedir.so umask=0022 skel=/etc/skel
+    session optional        pam_ldap.so
+    session optional        pam_systemd.so
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston.
+ 
+6. Avasimme seuraavaksi ```ldap.conf``` -tiedoston komennolla:
+    ```
+    sudoedit /etc/ldap.conf
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui myös Nano-ohjelmassa. Muutimme tiedostosta seuraavat arvot:
+    ```
+    pam_password md5
+    nss_base_group          ou=unixgroups,dc=ldap,dc=pisnismiehet,dc=local?sub
+    ssl start_tls
+    ```
+
+    Tallensimme ja suljimme lopuksi tiedoston. Seuraavaksi avasimme saman nimisen tiedoston mutta eri sijainnista komennolla:
+    ```
+    sudoedit /etc/ldap/ldap.conf
+    ```
+    Komennon jälkeen painoimme Enter. Tiedosto avautui myös Nano -ohjelmaan, johon muutimme sekä lisäsimme seuraavat tiedot:
+    ```
+    BASE    dc=ldap,dc=pisnismiehet,dc=local
+    URI     ldap://172.28.171.15/
+    TLS_CACERT      /etc/ldap/ca_certs.pem
+    TLS_REQCERT     allow
+    ```
+    Tallensimme ja suljimme lopuksi tiedoston.
+     
+Lopuksi siirsimme LDAP-palvelimen SSH-avaimet testityöasemaan seuraavanlaisesti:
+ 
+1. Kirjauduimme SSH-yhteydellä LDAP-palvelimelle.
+ 
+2. Aloitettiin SSH-agentti komennolla:
+    ```
+    sudo eval $(ssh-agent)
+    ```
+ 
+3. Lisäsimme SSH-avaimet agentille komennolla:
+    ```
+    ssh-add
+    ```
+ 
+4. Otimme seuraavaksi SSH-yhteyden TESTIPC2 -testityöasemaan komennolla:
+    ```
+    sudo ssh -A user@<TESTIPC2-ip-osoite>
+    ```
+ 
+5. Kopioitiin avaimet testityöasemalle komennolla:
+    ```
+    scp pisnismiehet@<TESTIPC2-ip-osoite>:/etc/ssl/certs/ca_server.pem ~/
+    cat ~/ca_server.pem | sudo tee -a /etc/ldap/ca_certs.pem
+    ```
+ 
+6. Suljettiin SSH-yhteys testityöasemaan.
+
+Lopuksi kokeilimme toimiiko yhteys TESTIPC2:sen ja OpenLDAP-palvelimen välillä komennolla:
+
+```
+ldapwhoami -H ldap://ldap.pisnismiehet.local -x -ZZ
+```
+Tulokseksi tuli ```anonymous```. Yhteys siis toimii.
 
 <h5 id="ubuntu-server-16045-lts-testipalvelin">Ubuntu Server 16.04.5 LTS</h5>
 
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBox -palvelimella. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. Asetimme myös tässäkin verkkokortin siltaavaksi kuten myös muiden testikoneiden osalta.
 
 
- 
 <h3 id="asennus">Asennus</h3>
 
 1. Asennettiin openjdk8:
