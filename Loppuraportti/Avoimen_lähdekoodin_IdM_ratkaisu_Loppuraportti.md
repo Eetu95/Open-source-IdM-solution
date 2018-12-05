@@ -1846,7 +1846,7 @@ Ubuntu Desktop lähti asentumaan.
 
 ![asennus valmis](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(9).png)
 
-Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now. Tämän jälkeen kirjauduimme työasemalle sisälle samoilla tunnuksilla, jotka teimme asennusvaiheessa. Avasimme tämän jälkeen Terminaalin (Ctrl+Alt+T). Asensimme tämän jälkeen ainoastaan SSH:n sekä laitoimme palomuurin päälle komennolla: ```sudo apt-get install -y ssh && sudo ufw enable```
+Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now. Tämän jälkeen kirjauduimme työasemalle sisälle samoilla tunnuksilla, jotka teimme asennusvaiheessa. Avasimme tämän jälkeen Terminaalin (Ctrl+Alt+T). Asensimme tämän jälkeen ainoastaan SSH:n sekä laitoimme palomuurin päälle komennolla: ```sudo apt update && sudo apt-get install -y ssh && sudo ufw enable```
 
 Seuraavaksi halusimme piilottaa käyttäjälistauksen, joka näkyy kirjautumisruudussa. Teimme sen seuraavanlaisesti:
 
