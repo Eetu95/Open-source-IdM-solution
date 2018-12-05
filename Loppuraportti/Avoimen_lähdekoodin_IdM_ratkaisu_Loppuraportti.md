@@ -55,11 +55,10 @@ Päivämäärä: 28.11.2018
       <ol>
           <span>4.3.1. </span><a href="#tietokannan-maarittaminen">Tietokannan määrittäminen</a><br>
           <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
-                <ol>
-                <span>4.3.2.1. </span><a href="#unix-connector">Unix-connector</a><br> 
-                </ol>
-          <ol>
-                <span>4.3.2.2. </span><a href="#active-directory-connector">Active Directory connector</a><br>
+            <ol>
+                <span>4.3.2.1. </span><a href="#active-directory-connector">Active Directory connector</a><br>
+                <span>4.3.2.2. </span><a href="ldap-connector">LDAP-connector</a><br>
+                <span>4.3.2.3. </span><a href="#unix-connector">Unix-connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
       </ol>
@@ -2292,7 +2291,7 @@ Seuraavaksi piti asentaa Certificate Authority rooli. Tämä tehtiin samalla kui
  
 LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin käyttöliittymässä pääkäyttäjätunnuksilla:
  
-1. Avattiin uusi välilehti selaimesta ja mentiin <a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/resources/ldap-posix.xml">GitHubiin></a>, josta tallennettiin (Ctrl+S) valmis XML-tiedostomalli omalle työpöydälle.
+1. Avattiin uusi välilehti selaimesta ja mentiin <a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/resources/ldap-posix.xml">GitHubiin</a> , josta tallennettiin (Ctrl+S) valmis XML-tiedostomalli omalle työpöydälle.
  
 2. Avattiin XML-tiedosto esimerkiksi Notepad++ -ohjelmalla, johon teimme seuraavat muutokset:
     - ```dc=example,dc=com``` rivit korvattiin laittamalla näiden tilalle ```dc=ldap,dc=pisnismiehet,dc=local```
