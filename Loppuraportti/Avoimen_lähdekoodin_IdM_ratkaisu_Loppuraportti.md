@@ -2573,32 +2573,6 @@ Ladattiin konfiguraatiot <a href="https://github.com/Evolveum/midpoint/tree/mast
 
 Sitten lisäsimme metaroolin midPoint roolille. Tämä lisää ryhmänteko mahdollisuuden kohde Linux-koneelle. Configuration -> Import Objects -> Choose File -> role-assignment-inducement-metarole.xml -> Import Object.
 
-<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Käyttötapaus</h5>
-
-
-
-
-
-And finally, how-to for some use cases
-
-Create group on the target linux machine
-Create new role in midPoint (Roles → New Role). Fill in:
-‘Name’ – has to be unique, e.g Group midpoint-admins on Unix,
-‘Group Name’ – is used for naming the group on target system
-‘Unix Permissions’ – is used for creating sudoers file for this group
-Assign previously imported metarole to the role:
-Go to the Assignments tab, click on the gear wheel and choose Assign Role
-Select meta role and confirm it by pressing Assign button (in popup dialog)
-Press Save button
-Create user on the target system, add him/her to the unix group and set the public key
-Create new user in midPoint (Users → New User). Fill in:
-‘Name’ – login name
-‘Public Key’ – copy&paste public key as a plain text
-Fill others attributes you want to provision
-Assign previously created role to this user (‘Group midpoint-admins on Unix’)
-Go to the Assignments tab, click on the gear wheel and choose Assign Role
-Select role (‘Group midpoint-admins on Unix’) and confirm it by pressing Assign button
-Press Save button
 
 <h4 id="suojatun-web-yhteyden-maaritys-https3">Suojatun web-yhteyden määritys (https)</h4>
 
@@ -2771,6 +2745,7 @@ Avautui midPointin kirjautumisruutu.
 ![midPoint kirjautumisruutu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_kirjautumisruutu.PNG?raw=true)
 Uudelleenohjaus toimi. Selain uudelleenohjasi suojattuun midPointin kirjautumisruutuun. Myöskin aiempi tapa miten midPointin käyttöliittymään kirjaudutaan ei enää toimi. Eli ```http://*palvelimen IP-osoite*:8080/midpoint/``` ei enää toimi.
  
+ 
 <h4 id="roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</h4>
  
-Nyt kun midPointin sekä kohdejärjestelmien välinen yhteys toimii, pitää meidän seuraavaksi määritellä midPointtiin roolit sekä muut tarvittavat objektit, joiden ansiosta provisiointi eli muutoksien ajaminen midPointista kohdejärjestelmiin onnistuu.
+Nyt kun midPointin sekä kohdejärjestelmien välinen yhteys toimii, pitää meidän seuraavaksi määritellä midPointtiin roolit sekä muut tarvittavat objektit, joiden ansiosta provisiointi eli muutoksien ajaminen midPointista kohdejärjestelmiin onnistuu. 
