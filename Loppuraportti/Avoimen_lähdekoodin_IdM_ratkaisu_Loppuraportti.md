@@ -53,6 +53,9 @@ Päivämäärä: 28.11.2018
       <ol>
           <span>4.3.1. </span><a href="#tietokannan-maarittaminen">Tietokannan määrittäminen</a><br>
           <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
+          <ol>
+                <span>4.3.2.1. </span><a href="#unix-connector">Unix-connector</a><br>
+          </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
       </ol>
       </ol>
@@ -1991,6 +1994,94 @@ SELECT fullName_norm,oid FROM m_user;
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 
 <h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
+
+<h5 id="unix-connector">Unix-connector</h5>
+
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asenna ja määritä unix-connector</h5>
+
+Kloonattiin git repository <a href="https://github.com/Evolveum/ConnIdUNIXBundle.git">https://github.com/Evolveum/ConnIdUNIXBundle.git</a> ~/unix-connector -kansioon:
+
+    $ sudo git clone https://github.com/Evolveum/ConnIdUNIXBundle.git
+
+Mentiin unix-xonnector kansioon:
+
+    $ cd ~/unix-connector
+
+Rakennettiin unix-connector:
+
+    $ sudo mvn clean package -DskipTests=true -P it
+
+kopioitiin ~/unix-connector/target/org.connid.bundles.unix-1.0.jar -tiedosto opt/midpoint/var/icf-connectors -kansioon:
+
+    $ sudo cp ~/unix-connector/target/org.connid.bundles.unix-1.0.jar  opt/midpoint/var/icf-connectors
+
+Tehtiin ~/icf-connectors -kansion sisään /lib -kansio:
+
+    $ sudo mkdir lib
+
+Kopioitiin ~/unix-connector/target/dependencies/jsch-0.1.53.jar -tiedosto opt/midpoint/var/icf-connectors/lib -kansion sisään:
+
+    $ sudo cp ~/unix-connector/target/dependencies/jsch-0.1.53.jar opt/midpoint/var/icf-connectors/lib
+
+Käynnistettiin palvelin uudestaan:
+
+    $ sudo reboot
+
+Tehtiin tekninen Linux Ubuntu Desktop 18.04 -käyttäjä midPointille. Otettiin Ubuntuun ensin ssh-yhteys:
+
+    $ sudo ssh pisnismiehet@(ip-osoite)
+
+Luotiin uusi tekninen käyttäjä:
+
+    $ sudo useradd -m midpoint
+    $ sudo passwd (salasanasi)
+
+Annettiin käyttäjälle "midpoint" oikeat oikeudet. Luotiin ensin tiedosto /etc/sudoers.d/midpoint, jonka sisään lisäsimme <a href="https://github.com/Evolveum/midpoint/blob/master/samples/resources/unix/midpoint-user-example.txt">midpointin GitHubista tämän</a> (GitHub -> Evolveum -> midpoint/samples/resources/unix/midpoint-user-example.txt):
+
+    Host_Alias HOST = ALL
+
+    midpoint HOST=(ALL) NOPASSWD: /usr/sbin/useradd,/usr/sbin/usermod,/usr/sbin/userdel,/usr/sbin/groupadd,/usr/sbin/groupmod,/usr/sbin/groupdel,/bin/mv,/usr/bin/passwd,/usr/bin/getent,/bin/echo,/usr/bin/tee,/bin/chown,/bin/chmod,/bin/mkdir,/usr/bin/groups,/usr/bin/id,/usr/bin/replace,/bin/rm,/bin/cat
+
+Tallennettiin ja suljettiin tiedosto. Sitten lisäsimme unix-connector resurssin midPointiin. Ensin latasimme <a href="https://github.com/Evolveum/midpoint/blob/master/samples/resources/unix/resource-unix-advanced.xml">resurssin midPointin GitHubista</a>. Vaihdoimme xml-tiedostosta hostname, username ja password oikeiksi. Tallennettiin ja suljettiin xml-tiedosto. Lisäsimme sen midPontiin -> Configuration -> Import Object -> Choose File -> Import Object.
+
+Sitten katsoimme asentuiko unix-connector oikein. Resource → List Resources → Unix -> Test connection.
+
+![unix-connector-test-connection](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-test-connection.PNG?raw=true)
+
+Yhteys toimi!
+
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Advanced scenarios</h5>
+
+Ladattiin konfiguraatiot <a href="https://github.com/Evolveum/midpoint/tree/master/samples/stories/unix-management">midPointin GitHubista</a>. Lisättiin xml-tiedosto, joka lisää "advanced scenarios" ominaisuuksia. Configuration -> Import Objects -> Choose File -> resource-unix-advanced.xml -> Import Object (On hyvä pistää "check" -merkki ennen lisäystä kohtiin "Keep oid" ja "Overwrite existing object".
+
+Sitten lisäsimme metaroolin midPoint roolille. Tämä lisää ryhmänteko mahdollisuuden kohde Linux-koneelle. Configuration -> Import Objects -> Choose File -> role-assignment-inducement-metarole.xml -> Import Object.
+
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Käyttötapaus</h5>
+
+
+
+
+
+And finally, how-to for some use cases
+
+Create group on the target linux machine
+Create new role in midPoint (Roles → New Role). Fill in:
+‘Name’ – has to be unique, e.g Group midpoint-admins on Unix,
+‘Group Name’ – is used for naming the group on target system
+‘Unix Permissions’ – is used for creating sudoers file for this group
+Assign previously imported metarole to the role:
+Go to the Assignments tab, click on the gear wheel and choose Assign Role
+Select meta role and confirm it by pressing Assign button (in popup dialog)
+Press Save button
+Create user on the target system, add him/her to the unix group and set the public key
+Create new user in midPoint (Users → New User). Fill in:
+‘Name’ – login name
+‘Public Key’ – copy&paste public key as a plain text
+Fill others attributes you want to provision
+Assign previously created role to this user (‘Group midpoint-admins on Unix’)
+Go to the Assignments tab, click on the gear wheel and choose Assign Role
+Select role (‘Group midpoint-admins on Unix’) and confirm it by pressing Assign button
+Press Save button
 
 <h4 id="suojatun-web-yhteyden-maaritys-https3">Suojatun web-yhteyden määritys (https)</h4>
 
