@@ -2202,6 +2202,8 @@ SELECT fullName_norm,oid FROM m_user;
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 
 <h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
+ 
+Jotta yrityksen järjestelmä voidaan tuoda IdM:n piirii, pitää se lisätä käyttämällä välikappaletta (Englanniksi: Connector). Välikappale (tai kuten viittaamme myöhemmin sanalla connector) ei ole fyysinen vaan koodattu pikku ohjelma. Seuraavassa kohdassa kerromme, kuinka lisäsimme TESTIPALVELIN, OPENLDAPSERVER sekä WINDOWSSERVER midPointin piiriin. Liitimme TESTIPALVELIN -palvelimen käyttämällä Unix-connectoria, OPENLDAPSERVERin sekä WINDOWSSERVERin käyttämällä LDAP-connectoria.
 
 <h5 id="active-directory-connector">Active Directory connector</h5>
 
