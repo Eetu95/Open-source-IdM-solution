@@ -61,7 +61,7 @@ Päivämäärä: 28.11.2018
                 <span>4.3.2.3. </span><a href="#unix-connector">Unix-connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
-      </ol>
+          <span>4.3.4. </span><a href="#roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</a><br>
       </ol>
  <span>5. </span><a href="#testaus">Testaus</a><br>
  <span>6. </span><a href="#yhteenveto">Yhteenveto</a><br>
