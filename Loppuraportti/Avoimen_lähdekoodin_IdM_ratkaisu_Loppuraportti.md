@@ -31,10 +31,12 @@ Päivämäärä: 28.11.2018
           <ol>
                 <span>4.1.2.1. </span><a href="#windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</a><br>
                 <span>4.1.2.2. </span><a href="#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</a><br>
-                <span>4.1.2.3. </span><a href="#openldap-serverin-asennusja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</a><br>
+                <span>4.1.2.3. </span><a href="#openldap-serverin-asennus-ja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</a><br>
                 <span>4.1.2.4. </span><a href="#phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</a><br>
-                <span>4.1.2.5. </span><a href="#openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</a><br>
-                <span>4.1.2.6. </span><a href="#suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)</a><br>
+                <span>4.1.2.5. </span><a href="#ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</a><br>
+                <span>4.1.2.6. </span><a href="#openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</a><br>
+                <span>4.1.2.7. </span><a href="#suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)
+                </a><br>
           </ol>
           <span>4.1.3. </span><a href="#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</a><br>
           <ol>
@@ -53,11 +55,10 @@ Päivämäärä: 28.11.2018
       <ol>
           <span>4.3.1. </span><a href="#tietokannan-maarittaminen">Tietokannan määrittäminen</a><br>
           <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
-                <ol>
-                <span>4.3.2.1. </span><a href="#unix-connector">Unix-connector</a><br> 
-                </ol>
-          <ol>
-                <span>4.3.2.2. </span><a href="#active-directory-connector">Active Directory connector</a><br>
+            <ol>
+                <span>4.3.2.1. </span><a href="#active-directory-connector">Active Directory connector</a><br>
+                <span>4.3.2.2. </span><a href="#ldap-connector">LDAP-connector</a><br>
+                <span>4.3.2.3. </span><a href="#unix-connector">Unix-connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
       </ol>
@@ -1020,12 +1021,48 @@ Teimme asennuksen ja konfiguroinnin seuraavanlaisesti:
     ```
 
 Nyt kun menemme sivulle http:://<ip-osoite>/phpldapadmin, pääsemme web-käyttöliittymään, joihin kirjaudutaan OpenLDAP:n asennusvaiheessa tehdyillä tunnuksilla.
- 
-<h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
- 
-MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota:
 
-1. Siirryimme root-käyttäjäksi komennolla:
+<h5 id="ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</h5>
+
+ 
+Jotta OpenLDAP -palvelimen määritys sekä sen liittäminen midPointtiin olisi mahdollisimman helppoa, lisäsimme valmiiksi tarvittavat ryhmät OpenLDAP -palvelimeen graaffisen web-käyttöliittymän kautta. Meidän täytyi luoda seuraavat ryhmät:
+ 
+- people
+- services
+- groups
+- unixgroups
+ 
+Teimme tarvittavat toimenpiteet seuraavasti:
+ 
+1. Kirjauduimme selaimella OpenLDAP -palvelimen web-käyttöliittymään:
+    ```
+    http:://<ip-osoite>/phpldapadmin
+    ```
+    Kirjautumisikkunassa annoimme samat tunnukset, mitkä teimme OpenLDAP-palvelimen asennusvaiheessa (1.). Kirjauduimme sisään painamalla "Authenticate".
+     
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot1.JPG)
+     
+2. Vasemmasta valikosta avattiin puuhakemisto ja valittiin "Create new entry here".
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot2.JPG)
+ 
+3. Valitsimme avautuvasta valikosta luotava objekti. Koska haluttiin luoda ryhmä, valittiin "Generic: Posix Group"
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot3.JPG)
+ 
+4. Seuraavaksi avautui sivu, jossa meidän piti määrittää ryhmälle nimi. Laitoimme siihen halutun ryhmän nimen. Lopuksi valitsimme "Create Object".
+ 
+5. Hyväksyimme muutokset painamalla "Commit".
+ 
+6. Ryhmä luotiin onnistuneesti. Muut ryhmät tehtiin samalla tavalla kuten ensimmäinenkin luotu ryhmä.
+ 
+
+<h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
+
+ 
+MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota OpenLDAP-palvelimeen (OPENLDAPSERVER):
+
+1. Siirryimme terminaaliin root-käyttäjäksi komennolla:
     ```
     sudo su
     ```
@@ -2421,6 +2458,57 @@ Kirjauduttiin luoduilla tunniksilla. Kun käyttäjällä kirjauduttiin ensimmäi
 Tarkistettiin vielä, että käyttäjä on todella lisätty Active Directoryyn. Kirjauduttiin Windows Serverille ja avattiin Active Directory Users and Computers. Kohdasta Users nähtiin, että käyttäjä on Active Directoryssa.
 
 ![active directory](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/active_directory.PNG?raw=true)
+<h5 id="ldap-connector">LDAP-connector</h5>
+ 
+LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin käyttöliittymässä pääkäyttäjätunnuksilla:
+ 
+1. Avattiin uusi välilehti selaimesta ja mentiin <a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/resources/ldap-posix.xml">GitHubiin</a> , josta tallennettiin (Ctrl+S) valmis XML-tiedostomalli omalle työpöydälle.
+ 
+2. Avattiin XML-tiedosto esimerkiksi Notepad++ -ohjelmalla, johon teimme seuraavat muutokset:
+    - ```dc=example,dc=com``` rivit korvattiin laittamalla näiden tilalle ```dc=ldap,dc=pisnismiehet,dc=local```
+    - ```<name>OpenLDAP posix</name>``` arvo muutettiin arvoksi ```<name>OpenLDAP (OPENLDAPSERVER)</name>```
+    - ```<icfcldap:host>localhost</icfcldap:host>``` arvon "localhost" tilalle laitettiin OPENLDAPSERVERin ip-osoite.
+    - ```<clearValue>secret</clearValue>``` arvon "secret" tilalle muutettiin käyttäjän "idm" salasana, jos salasanaa on muutettu aikaisemmin joksikin muuksi. Esimerkiksi, jos uusi salasana on "HeiPoika91" tulee XML-arvoksi ```<clearValue>HeiPoika91</clearValue>```.
+
+    Tallennettiin tehdyt muutokset.
+ 
+3. Avattiin selaimella midPoint ja kirjauduttiin siihen sisälle pääkäyttäjätunnuksilla. Valittiin midPointin vasemmasta valikosta "Import object"
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot1.JPG)
+
+4. Seuraavaksi haettiin XML-tiedosto painamalla "Choose File" (1.). Kun tiedosto oli haettu, painoimme lopuksi "Import object" (2.). Jos tulee ruudun yläpuolelle vihreä palkki, oli tuonti onnistunut. Jos tuli punainen, XML-tiedoston sisältämissä arvoissa ja määrityksissä on jokin virhe. Tällöin kannattaa katsoa virheilmoitukset huolella, jotka näkyvät siinä samalla.
+    
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot2.JPG)
+
+5. Kun tuonti onnistui, siirryimme valikossa kohtaan ``` Resources -> List resources```
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot3.JPG)
+ 
+6. Valitsimme ruutuun avautuvasta listasta ```OpenLDAP (OPENLDAPSERVER)```
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot4.JPG)
+ 
+7. Avautuvan sivun alalaidasta valittiin "Edit configuration"
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot5.JPG)
+ 
+8. Avautui asetukset. Varmistettiin, että kuvassa korostetut kohdat on määritelty. Jos et näe kohtia, kannattaa painaa "Configuration" -otsikon viereisestä tyhjän boksin kuvasta, jolloin kaikki asetuksiin mahdollista määriteltävät kohdat tulee näkyviin. Etsi tällöin kuvassa korostetut kohdat. "Connection security" -kohdassa määritämme, että midPoint ottaa suojatun yhteyden (StartTLS) OpenLDAP -palvelimeen.
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot6.JPG)
+ 
+9. Kun kohta 8 oli hoidettu, kokeilimme yhteydenmuodostusta midPointin ja OpenLDAP-palvelimen välillä painamalla "Save and test connection".
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot7.JPG)
+ 
+10. Jos yhteys on toimiva, tulee vihreää kuten kuvassa. Jos ei toimi, tulee punaista ja virheilmoitus. Kannattaa tällöin tutkia virheilmoitusta ja korjata ongelma.
+    
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot8.JPG)
+ 
+11. Lopuksi painoimme "Finish" ja päätimme onnistuneesti OpenLDAP-palvelimen liittämisen midPointin piiriin.
+
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot9.JPG)
+     
+ 
 
 <h5 id="unix-connector">Unix-connector</h5>
 
