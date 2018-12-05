@@ -57,7 +57,7 @@ Päivämäärä: 28.11.2018
           <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
             <ol>
                 <span>4.3.2.1. </span><a href="#active-directory-connector">Active Directory connector</a><br>
-                <span>4.3.2.2. </span><a href="ldap-connector">LDAP-connector</a><br>
+                <span>4.3.2.2. </span><a href="#ldap-connector">LDAP-connector</a><br>
                 <span>4.3.2.3. </span><a href="#unix-connector">Unix-connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
