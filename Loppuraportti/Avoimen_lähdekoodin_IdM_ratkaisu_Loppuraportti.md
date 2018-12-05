@@ -2168,7 +2168,9 @@ Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 
 <h5 id="active-directory-connector">Active Directory connector</h5>
 
-Active Directory connectorin avulla saadaan yhdistettyä midPoint Windows -äyttöjärjestelmän koneisiin. Active Directory connectoria varten tulee olla määritetty Windows Server, jossa on asennettuna Active Directory eli aktiivihakemisto. Active Directory asennus tehtiin jo Windows Serverin [esivalmisteluvaiheessa](#windows-palvelimen-perusmaaritykset). MidPointissa Active Directory connector oli jo valmiina asennettuna toisin kuin esimerkiksi Unix connectorissa. Ennen Active Directory connectorin toimivuutta tuli varmistaa, että Windows Serverin LDAP yhteys on suojattu. LDAP protokollaa käytetään Active Directoryn tiedonsiirroissa, josta suojattu protokolla on LDAPS. LDAP toimii portissa 389 ja LDAPS 636. LDAPS suojasta varten pitää asentaa konfiguroida Active Directory Lightweight Directory Services (AD LDS) sekä luoda sertifikaatti. AD LDS asennus:
+Active Directory connectorin avulla saadaan yhdistettyä midPoint Windows -käyttöjärjestelmän koneisiin. Active Directory connectoria varten tulee olla määritetty Windows Server, jossa on asennettuna Active Directory Domain services eli aktiivihakemisto. Active Directory asennus tehtiin jo Windows Serverin [esivalmisteluvaiheessa](#windows-palvelimen-perusmaaritykset). MidPointissa Active Directory connector oli jo valmiina asennettuna toisin kuin esimerkiksi Unix connectorissa. Ennen Active Directory connectorin toimivuutta tuli varmistaa, että Windows Serverin LDAP yhteys on suojattu. LDAP protokollaa käytetään Active Directoryn tiedonsiirroissa, josta suojattu protokolla on LDAPS. LDAP toimii portissa 389 ja LDAPS portissa 636. LDAPS suojasta varten pitää asentaa konfiguroida Active Directory Lightweight Directory Services (AD LDS) sekä luoda sertifikaatti Certification Authority roolin avulla. 
+
+<h5>Active Directory Lightweight Directory Services asennus</h5>
 
 Server Managerista valitaan Manage - Add Roles and Features.
 ![roles & features](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture.PNG?raw=true)
@@ -2227,7 +2229,7 @@ Seuraavaksi piti määritellä administrator käyttäjä AD LDS palvelulle. Vali
 
 Seuraavaksi kysyttiin LDIF tiedostoja. Valittiin kaikki ja klikattiin Next. 
 
-![LDIF tiedostojen vahvistus](https://github.com/Eetu95/Open-source-IdM-solution/
+![LDIF tiedostojen vahvistus](https://github.com/Eetu95/Open-source-IdM-solution)
 
 Seuraavaksi tuli vahvistus tiedostoista. Klikattiin Next.
 
@@ -2247,10 +2249,178 @@ Lisäsimme tähän seuraavat tiedot ja klikkasimme ok:
 
 AD LDS yhdistyi ja tämän jälkeen aukesi puunäkymä instassista.
 
-Seuraavaksi piti asentaa Certificate Authority rooli. Tämä tehtiin samalla kuin AD LDS asennus mutta valittiin rooliksi Certificate Authority.
+<h5>Certification Authority asennus ja konfigurointi</h5>
 
+Seuraavaksi piti asentaa Certificate Authority rooli, jotta saadaan tehtyä sertifikaatti. Tämä tehtiin samalla kuin AD LDS asennus, mutta valittiin rooliksi Active Directory Certificate Services eikä valittu muita ominaisuuksia. Valittiin Active Directory Certificate Services rooliksi Certification Authority:
 
+![CA](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture.PNG?raw=true)
 
+Seuraavaksi asennettiin rooli.
+
+![AD CS asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture1.PNG?raw=true)
+
+Asennuksen jälkeen konfiguroimme sertifikaatti palvelun eli klikkasimme configure Active Directory Certificate Services on the destination server. Aukesi konfigurointi wizard. 
+
+Valitsimme oletus tunnukset (credentials) Credentials -välilehdeltä. Klikattiin sitten Next. 
+
+![Role Services](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture2.png?raw=true)
+
+Tämän jälkeen Role Services välilehdeltä valittiin Certification Authority.
+
+Seuraavaksi Setup Type välilehdeltä valittiin tyypiksi Enterprise CA, koska tietokone on domainissa ja Active Directory Domain Services on asennettuna. 
+
+![CA tyyppi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture4.png?raw=true)
+
+Seuraavalla välilehdellä eli CA Type valittiin CA tyypiksi Root CA.
+
+![](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture5.png?raw=true)
+
+Seuraavaksi piti määritellä avain Private Key välilehdellä. Valitsimme Create a new private key ja klikkasimme Next.
+
+![avaimen kryptaus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture6.png?raw=true)
+
+Seuraavaksi piti määritellä avaimen kryptaus Cryptography välilehdellä. Valitsimme kryptauksen toimittajaksi RSA#Microsoft Software Key Storage Provider, algoritmiksi SHA256 ja pituudeksi 2048.
+
+CA Name välilehdellä valitsimme Distinguished name suffixiksi: CN=Midpoint,DC=PISNISMIEHET,DC=LOCAL
+
+Klikattiin sitten Next.
+
+Validity Period välilehdellä valittiin avaimen voimassaoloajaksi 5 vuotta. Klikattiin sitten Next. 
+
+Certificate Database välilehdeltä valittiin oletustietokannan sijainnit. Klikattiin Next.
+
+Seuraavaksi Confirmation välilehellä hyväksyttiin konfiguraatiot ja klikattiin Configure. Kun konfiguraatio valmistui onnistuneesti, klikkasimme vain Close.
+
+<h5>Sertifikaatin luonti</h5>
+
+Kun CA on nyt asennettu ja konfiguroitu, lähdimme luomaan uuden SSL-sertifikaatin. Kirjoitimme Windowsin hakuun Manage computer certificates ja klikkasimme tätä asetusta.
+
+Seuraavaksi klikkasimme puunäkymästä Personal - Certificates eli menimme tähän kyseiseen kansioon. Täällä näimme, että luotu sertifikaatti on voimassa.
+
+Seuraavaksi varmistetaan, että tietokoneet, jotka ovat Domainissa pääsevät käsiksi luotuun yksityiseen avaimeen. Avattiin komentokehotteen (Command Prompt) admin-oikeuksilla ja kirjoitettiin komentokehotteeseen seuraava komento:
+
+    certutil -verifystore MY
+
+![cmd komento](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture7.PNG?raw=true)
+
+Tämän saadun tuloksen perusteella mentiin nyt kansioon C:\ProgramData\Microsoft\Crypto\Keys\
+Täältä löytyy nyt uusi luotu avain kryptatussa muodossa. Hiiren oikealla painikkeella klikattiin Properties ja välilehdeltä Security lisäsimme Luku ja ajo-oikeudet NETWORK SERVICE ryhmälle:
+
+![oikeudet](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture8.PNG?raw=true)
+
+Tmän jälkeen menille takasin Manage computer certificates asetuksiin. Personal - Certificates kansiosta hiiren oikealla painikkeella klikkasimme meidän sertifikaatin nimeä ja valitsimme All Tasks - Export...
+
+![Export certificate](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture9.png?raw=true)
+
+Aukesi sertifikaatin vienti-ikkuna. Klikkasimme Next.
+
+![private key](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture10.png?raw=true)
+
+Emme exportanneet yksityistä avainta eli valitsimme No, do not export the private key. Klikkasimme Next.
+
+![formaatti](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture11.png?raw=true)
+
+Seuraavaksi piti valita sertifikaatin formaatti. Valitsimme Base-64 encoded X.509 (.CER). Klikkattiin sitten Next.
+
+Tämän jälkeen kysyttiin sijaintia mihin sertifikaatti viedään. Valitsimme tähän työpöydän. Klikattiin sitten Next.
+
+Sertifikaatin vieminen oli nyt valmis. Klikattiin Finish.
+
+Seuraavaksi piti viedä sertifikaatti JRE Keystoreen, joka sijaitsi meidän tapauksessa täällä: ‪C:\Program Files\Java\jre1.8.0_191\bin\keytool.exe
+
+Avasimme komentokehotteen polussa: C:\Program Files\Java\jre1.8.0_191\bin\ ja annoimme komennon:
+
+    keytool -importcert -alias "pisnismiehet" -keystore "C:\Program Files\Java\jre1.8.0_191\lib\security\cacerts" -storepass changeit -file "C:\Users\azureuser\Desktop\pisnismiehet.cer"
+
+Luotimme tähän sertifikaattiin: kirjoitimme "yes", jolloin sertifikaatti lisättiin JRE keystoreen. Nyt voidaan kokeilla LDAPS yhteyttä.
+
+Kirjoitimme Windowsin hakuun ldp.exe. Tällä ohjelmalla voimme testata LDAPS yhteyttä. Klikattiin Connection ja testattiin yhteyttä.
+
+![LDAPS yhteys](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture12.PNG?raw=true)
+
+Kirjoitettiin Server kohtaan localhost ja portiksi 636 sekä SSL täppä päälle.
+
+![LDAPS yhteys toimii](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture13.PNG?raw=true) 
+
+Se mitä ldp.exe ohjelma tuottaa tulokseksi viittaa siihen, että yhteys toimi. Jos ei toimisi niin näkyisi virheilmoitus.
+
+<h5>Connectorin lisääminen</h5>
+
+Kun LDAPS yhteys on saatu nyt toimimaan niin voidaan lisätä Active Directory connector midPointiin. Kirjauimme midPoint käyttöliittymään ja menimme kohtaan Import object ja valitsimme Embedded editor.
+
+Seuraavaksi kopioimme midPointin dokumentaatiosta löytyvällä ohjeella seuraavan XLM-tiedoston, joka liittää Active Directory connectorin midPointiin: https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/resources/ad-ldap/ad-ldap-medusa-medium.xml
+
+Kopioimme koko tämän sisällön tiedoston sisällön midPointin GitHubista ja liitimme sen midPoint käyttöliittymään Embedded editor kohtaan.
+
+Kun tiedosto kokonaisuudessaan on liitetty tekstikenttään sitä tulee muokata. Muun muassa <connectorConfiguration> tägien sisään tulee lisätä omat tiedot. Esimerkki:
+
+    <connectorConfiguration xmlns:icfc="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/connector-schema-3">
+        <icfc:configurationProperties xmlns:icfcldap="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/bundle/com.evolveum.polygon.connector-ldap/com.evolveum.polygon.connector.ldap.ad.AdLdapConnector">
+            <icfcldap:host>172.28.171.60</icfcldap:host>
+            <icfcldap:port>636</icfcldap:port>
+            <icfcldap:baseContext>DC=pisnismiehet,DC=local</icfcldap:baseContext>
+            <icfcldap:bindDn>CN=midpoint,CN=Users,DC=pisnismiehet,DC=local</icfcldap:bindDn>
+            <icfcldap:connectionSecurity>ssl</icfcldap:connectionSecurity>
+            <icfcldap:bindPassword>
+                <t:clearValue>********</t:clearValue>
+            </icfcldap:bindPassword>
+            <icfcldap:pagingBlockSize>5</icfcldap:pagingBlockSize> <!-- ridiculously small, just to test paging -->
+        </icfc:configurationProperties>
+        <icfc:resultsHandlerConfiguration>
+			<icfc:enableNormalizingResultsHandler>false</icfc:enableNormalizingResultsHandler>
+			<icfc:enableFilteredResultsHandler>false</icfc:enableFilteredResultsHandler>
+			<icfc:enableAttributesToGetSearchResultsHandler>false</icfc:enableAttributesToGetSearchResultsHandler>
+		</icfc:resultsHandlerConfiguration>
+    </connectorConfiguration>
+
+XML-tiedosto piti tarkistaa vielä kokonaisuudessaan läpi, koska XML tiedostoon pitää tehdä muitakin muutoksia. Kaikki kohdat, jossa lukee DC=win,DC=evolveum,DC=com tulee vaihtaa omiin domain tunnisteeseen, joka meidän tapauksessa oli DC=pisnismiehet,DC=local
+
+Myös kohta @win.evolveum.com pitää vaihtaa -> @pisnismiehet.local
+
+Meidän valmis malli Active Directory connectoria varten löytyy meidän GitHubista valmiina ilman Windows Serverin IP-osoitetta host kohtaan ja Midpoint käyttäjän salasanaa clearValue -kohtaan: https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Connectorit/ad-ldap-medusa-medium.xml
+
+Kun XML-tiedosto on muokattu niin klikattiin Import object. Seuraavaksi mentiin kohtaan Resources vasemmasta listauksesta. Klikattiin Active Directory connectoria eli Medusa Active Directory (LDAP). Alhaalta klikattiin Edit configuration ja tarkistettiin, että tiedot ovat oikein.
+
+![AD connector](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_ad_connector.PNG?raw=true)
+
+Tämän jälkeen klikattiin Save and test connection.
+
+![connection ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_connection_ok.PNG?raw=true)
+
+Yhteys toimii. Nyt Resources valikosta näkyy, että Active Directory connector on muuttunut vihreäksi, mikä tarkoittaa sitä, että connector toimii. 
+
+Seuraavaksi tehtiin uusi käyttäjä midPoint käyttöliittymässä. Mentiin valikosta kohtaan Users - New User. Täytettiin kentät:
+<li>Name: ville
+<li>Full name: Ville Varakas
+<li>Given Name: Ville
+<li>Family name: Varakas
+<li>Administrative status: Enabled
+<li>Valid from: 11/1/2018 5:00 PM
+<li>Password value: **************
+
+Tämän jälkeen tallennettiin käyttäjä. 
+
+![käyttäjän luonti](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPonit_k%C3%A4ytt%C3%A4j%C3%A4n_luonti.PNG?raw=true)
+
+Klikattiin Save.
+
+![käyttäjä luotu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_k%C3%A4ytt%C3%A4j%C3%A4_luotu.PNG?raw=true)
+
+Tuli ilmoitus, että käyttäjä luotiin. Seuraavaksi klikattiin kyseistä käyttäjää ja Projections välilehdeltä klikattiiin Add projection ja lisättiin käyttäjä Active Directory connectoriin.
+
+![midPoint projections](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_projections.PNG?raw=true)
+
+Tämän jälkeen kun valittin Active Directory connector listasta ja klikattiin Add, voitiin käyttäjä tallentaa uudestaan.
+
+Tallennus onnistui. Kokeiltiin seuraavaksi kirjautua kyseisellä käyttäjällä Windows työasemalle. Työasema on virtuaalinen ja se sijaitsee meidän phpVirtualBox -palvelimella. Otettiin tähän koneeseen Remote Desktop yhteys. 
+
+![windows kirjautuminen](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/windows_kirjautuminen.PNG?raw=true)
+
+Kirjauduttiin luoduilla tunniksilla. Kun käyttäjällä kirjauduttiin ensimmäistä kertaa joutui hetken odottaa ennen kuin kaikki oli valmista. Käyttäjällä ei ole admin-oikeuksia.
+
+Tarkistettiin vielä, että käyttäjä on todella lisätty Active Directoryyn. Kirjauduttiin Windows Serverille ja avattiin Active Directory Users and Computers. Kohdasta Users nähtiin, että käyttäjä on Active Directoryssa.
+
+![active directory](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/active_directory.PNG?raw=true)
 
 <h5 id="unix-connector">Unix-connector</h5>
 
