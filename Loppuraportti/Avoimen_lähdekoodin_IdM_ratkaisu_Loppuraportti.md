@@ -2475,7 +2475,7 @@ LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin 
     - ```<icfcldap:host>localhost</icfcldap:host>``` arvon "localhost" tilalle laitettiin OPENLDAPSERVERin ip-osoite.
     - ```<clearValue>secret</clearValue>``` arvon "secret" tilalle muutettiin käyttäjän "idm" salasana, jos salasanaa on muutettu aikaisemmin joksikin muuksi. Esimerkiksi, jos uusi salasana on "HeiPoika91" tulee XML-arvoksi ```<clearValue>HeiPoika91</clearValue>```.
 
-    Tallennettiin tehdyt muutokset.
+    Tallennettiin tehdyt muutokset. (Esimerkkitiedosto on myös saatavilla <a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/ldap-posix.xml">meidän GitHubista</a>).
  
 3. Avattiin selaimella midPoint ja kirjauduttiin siihen sisälle pääkäyttäjätunnuksilla. Valittiin midPointin vasemmasta valikosta "Import object"
  
