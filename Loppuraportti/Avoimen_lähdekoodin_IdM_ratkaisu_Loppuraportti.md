@@ -62,6 +62,9 @@ Päivämäärä: 28.11.2018
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
           <span>4.3.4. </span><a href="#roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</a><br>
+          <ol>
+                <span>4.3.4.1 </span><a href="#openldap">OpenLDAP</a><br>
+          </ol>
       </ol>
  <span>5. </span><a href="#testaus">Testaus</a><br>
  <span>6. </span><a href="#yhteenveto">Yhteenveto</a><br>
@@ -2748,4 +2751,157 @@ Uudelleenohjaus toimi. Selain uudelleenohjasi suojattuun midPointin kirjautumisr
  
 <h4 id="roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</h4>
  
-Nyt kun midPointin sekä kohdejärjestelmien välinen yhteys toimii, pitää meidän seuraavaksi määritellä midPointtiin roolit sekä muut tarvittavat objektit, joiden ansiosta provisiointi eli muutoksien ajaminen midPointista kohdejärjestelmiin onnistuu. 
+Nyt kun midPointin sekä kohdejärjestelmien välinen yhteys toimii, pitää meidän seuraavaksi määritellä midPointtiin roolit sekä muut tarvittavat objektit, joiden ansiosta provisiointi eli muutoksien ajaminen midPointista kohdejärjestelmiin onnistuu.
+ 
+<h5 id="openldap">OpenLDAP</h5>
+ 
+Jouduimme tuomaan midPointtiin seuraavat tiedostot (nämä löytyvät myös meidän GitHub -sivuilta):
+
+- extension-posix.xsd (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-management/extension-unix.xsd">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/extension-posix.xsd">Meidän GitHub</a>)
+    - Tämä tiedoston ansiosta midPoint tukee Unix-järjestelmissä käytettyjä GID ja UID -arvoja.
+- role-meta-ldapgroup.xml (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/roles/role-meta-ldapgroup.xml">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/role-meta-ldapgroup.xml">Meidän GitHub</a>)
+    - Tiedoston ansiosta LDAP-ryhmien teko muihin kuin Unix-järjestelmiin on mahdollista. Tämä luo ```Roles -> List roles``` sijainnin alle uuden ryhmän nimeltään "LDAP Group Metarole".
+- role-meta-unix-group.xml (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/roles/role-meta-unix-group.xml">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/role-meta-unix-group.xml">Meidän GitHub</a>)
+    - Tiedoston ansiosta LDAP-ryhmien teko Unix-järjestelmiin on mahdollista. Tämä luo ```Roles -> List roles``` sijainnin alle uuden ryhmän nimeltään "LDAP Unix Group Metarole".
+- sequence-gidnumber.xml (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/other/sequence-gidnumber.xml">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/sequence-gidnumber.xml">Meidän GitHub</a>)
+    - Tiedoston ansiosta midPoint osaa generoida automaattisesti GID-arvoja.
+- sequence-uidnumber.xml (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/other/sequence-uidnumber.xml">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/sequence-uidnumber.xml">Meidän GitHub</a>)
+    - Tiedoston ansiosta midPoint osaa generoida automaattisesti UID-arvoista.
+ 
+Aloitimme ensimmäisenä tuomaan "extension-posix.xsd" -tiedoston midPointtiin seuraavanlaisesti:
+
+1. Otimme SSH-yhteyden "MIDPOINTIDM" -palvelimeen. Kirjauduimme sisälle pääkäyttäjän tunnuksilla.
+
+2. Siirryimme seuraavaksi root -käyttäjäksi komennolla:
+    ```
+    sudo su
+    ```
+    Komennon jälkeen painoimme Enter. 
+ 
+3. Menimme sijaintiin ```/opt/midpoint/var/schema``` komennolla:
+    ```
+    cd /opt/midpoint/var/schema
+    ```
+    Komennon jälkeen painoimme Enter. Siirryttiin uuteen sijaintiin.
+ 
+4. Ladattiin ```extension-posix.xsd``` midPointin kehittäjän Evolveumin GitHub -sivuilta komennolla:
+    ```
+    wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-management/extension-unix.xsd
+    ```
+    Komennon jälkeen painoimme Enter. Tiedoston latauksessa kesti tovin.
+ 
+5. Käynnistimme "MIDPOINTIDM" -palvelimen uudelleen komennolla:
+    ```
+    sudo reboot
+    ```
+    Komennon jälkeen painoimme Enter. Palvelin aloitti uudelleen käynnistyksen ja tiedosto on tuotu midPointtiin onnistuneesti!
+
+Toimme muut tiedostot midPointtiin seuraavanlaisesti:
+
+1. Ladattiin jokainen tiedosto omalle tietokoneelle talteen.
+2. Avattiin selain ja mentiin midPointin sivulle. Kirjauduttiin sisälle pääkäyttäjän tunnuksilla.
+3. Vasemmasta valikosta valittiin "import object".
+4. Seuraavaksi haettiin haluttu tiedosto painamalla "Choose File". Kun tiedosto oli haettu, painoimme lopuksi "Import object".
+5. Tiedosto tuotiin onnistuneesti.
+ 
+Loimme seuraavaksi uuden ryhmän Unix-järjestelmän pääkäyttäjiä varten (sudo), johon halutut henkilöt liitetään lopuksi. Ryhmän nimi oli "sudoers".
+
+Valitsimme midPointin vasemmasta valikosta ```Roles -> New role```.
+
+Tämän jälkeen teimme seuraavat määrityset:
+ 
+**"Basic" -välilehti**
+
+Properties
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Name | sudoers |
+| Display name | Pääkäyttäjät |
+| Description | OpenLDAP:n pääkäyttäjät (Unix/Linux). Lisää käyttäjä tähän ryhmään, jos haluat sille pääkäyttäjäoikeudet *nix -järjestelmiin. |
+| Subtype | sudo |
+| Identifier | sudo |
+
+Options
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Force | (Kohta valittu) |
+| Execute afrer all approvals | (Kohta valittu)
+ 
+
+**"Assigments" -välilehti**
+
+Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
+
+
+Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
+ 
+<br>
+ 
+Loimme seuraavaksi peruskäyttäjille oman ryhmän nimeltään "openldap_basic_users_unix":
+
+**"Basic" -välilehti**
+
+Properties
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Name | openldap_basic_users_unix |
+| Display name | OpenLDAP peruskäyttäjät - Unix/Linux |
+| Description | OpenLDAP:n peruskäyttäjät (Unix/Linux). Lisää käyttäjä tähän ryhmään, jos haluat sille perus käyttäjäoikeudet *nix -järjestelmiin. |
+| Subtype | openldap_basic_users_unix |
+| Identifier | openldap_basic_users_unix |
+
+Options
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Force | (Kohta valittu) |
+| Execute afrer all approvals | (Kohta valittu)
+ 
+
+**"Assigments" -välilehti**
+
+Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
+ 
+Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu. 
+ 
+<br>
+
+Jokaiselle käyttäjälle täytyy myös luoda oma henkilökohtainen ryhmä. Tämä vaaditaan, jos halutaan kirjautua *nix -järjestelmiin (Unix & Linux).
+
+Henkilökohtainen ryhmä tehtiin seuraavanlaisesti (HUOMIO! PALAA TÄHÄN KOHTAAN MYÖHEMMIN, JOS ET OLE LISÄNNYT VIELÄ HALUTTUJA KÄYTTÄJIÄ MIDPOINTTIIN!):
+
+**"Basic" -välilehti**
+
+Properties
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Name | (käyttäjän käyttäjänimi eli username) |
+| Display name | (käyttäjän käyttäjänimi eli username) |
+| Description | Käyttäjäryhmä käyttäjälle (käyttäjän nimi eli name) (Käyttäjätunnus:(käyttäjän käyttäjätunnus eli username)). Ryhmäliitosta tarvitaan ainakin silloin, jos kirjaudutaan Linux työasemalle tai palvelimelle graaffisesta käyttöliittymästä käsin. HUOMIO: TÄMÄ RYHMÄLIITOS EI MÄÄRITTELE KÄYTTÄJÄN KÄYTTÖOIKEUKSIA! |
+| Subtype | (käyttäjän käyttäjänimi eli username) |
+| Identifier | (käyttäjän käyttäjänimi eli username) |
+| gidNumber | (sama mikä käyttäjälle määritelty uid-arvo on)
+
+Activation
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Administrative status | Enabled |
+
+Options
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Force | (Kohta valittu) |
+| Execute afrer all approvals | (Kohta valittu)
+
+
+**"Assigments" -välilehti**
+
+Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
+ 
+Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu. 
