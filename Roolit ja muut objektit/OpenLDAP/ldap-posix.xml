@@ -17,7 +17,7 @@
 		 
     <resource oid="9d5d62a6-49bb-11e6-ac4d-3c970e44b9e2">
 
-        <name>OpenLDAP posix</name>
+        <name>OpenLDAP (OPENLDAPSERVER)</name>
 	<description>OpenLDAP with posixAccount and posixGroup support</description>
         <connectorRef type="ConnectorType">
             <filter>
