@@ -59,6 +59,7 @@ Päivämäärä: 28.11.2018
                 <span>4.3.2.1. </span><a href="#active-directory-connector">Active Directory connector</a><br>
                 <span>4.3.2.2. </span><a href="#ldap-connector">LDAP-connector</a><br>
                 <span>4.3.2.3. </span><a href="#unix-connector">Unix-connector</a><br>
+                <span>4.3.2.4. </span><a href="#csv-connector">CSV-connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
           <span>4.3.4. </span><a href="#roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</a><br>
@@ -2576,6 +2577,61 @@ Ladattiin konfiguraatiot <a href="https://github.com/Evolveum/midpoint/tree/mast
 
 Sitten lisäsimme metaroolin midPoint roolille. Tämä lisää ryhmänteko mahdollisuuden kohde Linux-koneelle. Configuration -> Import Objects -> Choose File -> role-assignment-inducement-metarole.xml -> Import Object.
 
+<h5 id="csv-connector">CSV-connector</h5>
+
+CSV-connectorin avulla voidaan lisätä paljon käyttäjiä nopeasti midPoint IdM-järjestelmän piiriin. CSV connector lisättiin midPointiin XML-tiedoston avulla. MidPointin GitHubista hain CSV-connectorin XML-tiedoston ja kopioin sen leikepöydälle: https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/resource-csv-hr.xml
+
+Seuraavaksi liitin kopioidun midPointin käyttöliittymään. klikattiin Import object - Embedded editor, johon sitten liitettiin XML-tiedoston sisältö. Kun XML-tiedosto oli liitetty tekstikenttään, klikattiin Import object.
+
+Resources kohdasta näkyy nyt, että CSV-connector on lisätty, nimi on HR System. Tämän jälkeen haettiin esimerkki CSV-tiedosto midPoint palvelimelle (MIDPOINTIDM), midPointin kotikansioon.
+
+1. Otettiin SSH-yhteys MIDPOINTIDM palvelimelle.
+
+2. Mentiin midPointin kotikansioon: 
+
+```
+$ cd /opt/midpoint/var
+```
+
+3. Haettiin esimerkki CSV-tiedosto wget-komennolla:
+
+```
+$ sudo wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/hr.csv
+```
+
+4. Kopioitiin tiedostopolku, johon CSV-tiedosto vietiin:
+
+```
+$ pwd
+
+/opt/midpoint/var
+```
+
+5. Muokattiin HR System resurssia midPointin käyttöliittymässä. Mentiin kohtaan Recourses - HR System - Edit configuration.
+
+6. Edit configutration kohdasta muutettiin tiedostopolku (File Path):
+
+```
+/opt/midpoint/var
+```
+
+![HR Sytem konfiguraatio](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_configuration.PNG?raw=true)
+
+7. Tallennettiin konfiguraatio ja testattiin yhteys. Klikattiiin Save and Test Connection. Tämän jälkeen klikattiin Finish.
+
+![HR System yhteys ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_connection_ok.PNG?raw=true)
+
+8. HR System resurssin välilehdeltä Accounts - Repository päästään lisämään käyttäjiä CSV-tiedostosta midPointin käyttöliittymään. Klikattiin esimerkkikäyttäjän asetuksia ja valittiin Import.
+
+![HR System import](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_import.PNG?raw=true)
+
+9. Importtauksen jälkeen tuli ilmoitus onnistuneesta viedystä käyttäjästä. Kyseinen käyttäjä muuttui myös LINKED tilaan.
+
+![HR System import ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_import_ok.PNG?raw=true)
+
+10. Importattu käyttäjä näkyy nyt midPointin Users -kohdassa.
+
+![HR uusi käyttäjä](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_user.PNG?raw=true)
 
 <h4 id="suojatun-web-yhteyden-maaritys-https3">Suojatun web-yhteyden määritys (https)</h4>
 
