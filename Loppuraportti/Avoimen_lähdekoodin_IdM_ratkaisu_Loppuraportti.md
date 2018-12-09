@@ -2960,4 +2960,193 @@ Options
 
 Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
  
-Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu. 
+Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
+ 
+
+<h2 id="testaus">Testaus</h2>
+ 
+Aloitimme testaamisen luomalla ensimmäiseksi käyttäjätunnuksen, sekä henkilökohtaisen käyttäjäryhmän midPointtiin. Tämän jälkeen liitimme sen aiemmin luotuihin connectoreiden rooleihin. Tämän jälkeen kokeilimme kirjautumista kohdejärjestelmiin.
+
+Lopuksi kokeilimme jäädyttää käyttäjä midPointissa ja kuinka se vaikuttaa mahdollisuuteen kirjatua haluttuihin kohdejärjestelmiin.
+
+Kirjauduimme sisään midPointtiin verkkoselaimen kautta pääkäyttäjän tunnuksilla.
+ 
+<h3 id="kayttajan-luonti-midpointtiin">Käyttäjän luonti midPointtiin</h3>
+ 
+Käyttäjä luotoon midPointtiin seuraavalaisesti:
+ 
+1. Käyttöliittymän vasemman puoleisesta valikosta valittiin ```Users -> New user```
+ 
+    ![]()
+ 
+2. Määriteltiin ruudussa näkyviin kohtiin ainakin seuraavat kohdat:
+
+    Properties
+
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Name (Käyttäjänimi) | ullanieminen |
+    | Description (Kuvaus) | Pääkäyttäjä. |
+    | Subtype (Alityyppi) | ullanieminen |
+    | Full name (Koko nimi) | Ulla Nieminen |
+    | Given name (Etunimi) | Ulla |
+    | Family name (Sukunimi) | Nieminen |
+    | Title (Titteli) | Suunnittelija |
+    | Email (Sähköpostiosoite) | ulla.nieminen@testiposti.fi |
+    | Telephone (Puhelinnumero) | +358123456789 |
+     
+    ![]()
+     
+
+    Activation
+
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Administrative status (Käyttäjän status) | Enabled (Aktiivinen) |
+    | Valid from (Voimassa alkaen) | <Tämän hetkinen aika 12-tunnin muodossa ja päivämäärä>
+     
+    Password
+
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Value (Arvo) | <Käyttäjälle haluttu salasana>
+
+    Options
+
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Force (Pakota) | <Rasti boksissa> |
+    | Execute after all approvals (Suorita kaikkien suoritusten jälkeen) | <Rasti boksissa>
+
+    ![]()
+
+3. Katsottiin tehtävät muutokset painamalla "Preview changes". Muutokset vaikuttivat ihan ok. 
+
+    ![]()
+Lopuksi painettiin sivun alhaalta "Save".
+
+    ![]()
+ 
+Käyttäjä luotiin onnistuneesti!
+ 
+<h3 id="kayttajan-liittaminen-active-directoryn-kayttajaksi">Käyttäjän liittäminen Active Directoryn käyttäjäksi</h3>
+
+Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seuraavanlaisesti:
+ 
+1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
+ 
+2. Käyttäjälistauksesta valittiin "ullanieminen"
+
+    ![]()
+
+3. Valittiin välilehdestä "Projections" (1.). Tämän jälkeen painettiin rattaan kuvaa (2.) ja lopuksi "Add projection" (3.).
+
+    ![]()
+ 
+4. Valittiin avautuneesta "Choose object" -ikkunasta "Medusa Active Directory (LDAP) (1.) ja kuitattiin valinta painamalla "Add" (2.).
+
+    ![]()
+ 
+5. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty Active Directoryn piiriin onnistuneesti!
+
+    ![]()
+     
+ 
+<h3 id="kayttajan-liittaminen-testipalvelin-palvelimeen-unix-connector">Käyttäjän liittäminen TESTIPALVELIN -palvelimeen (Unix Connector)</h3>
+ 
+Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen käyttäjäksi seuraavanlaisesti:
+ 
+1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
+ 
+2. Käyttäjälistauksesta valittiin "ullanieminen"
+
+    ![]()
+ 
+3. Valittiin välilehdestä "Assignments".
+ 
+4. Seuraavaksi painettiin vihreää nappia.
+ 
+5. Avautui "Select object(s)" -ikkuna. Koska Ulla oli pääkäyttäjä, valitsimme listasta rooli nimeltään "sudo" ja painettiin listan lopusta "Add" -painiketta.
+ 
+6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty TESTIPALVELIN -palvelimen käyttäjäksi onnistuneesti!
+
+    ![]()
+ 
+
+ 
+<h3 id="kayttajan-liittaminen-openldapn-kayttajaksi">Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</h3>
+ 
+Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
+ 
+1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
+ 
+2. Käyttäjälistauksesta valittiin "ullanieminen"
+
+    ![]()
+ 
+3. Valittiin välilehdestä "Assignments".
+ 
+4. Seuraavaksi painettiin vihreää nappia.
+ 
+5. Avautui "Select object(s)" -ikkuna. Koska Ulla oli pääkäyttäjä, valitsimme listasta rooli nimeltään "sudoers" ja painettiin listan lopusta "Add" -painiketta.
+
+6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.).
+
+    ![]()
+ 
+7. Valittiin uudelleen käyttäjälistauksesta "ullanieminen"
+ 
+8. Otettiin itselle talteen "Basic" -välilehdeltä näkyvän "Unix UID number" arvon. Tässä tapauksessa se oli 1114.
+ 
+9. Valittiin midPointin vasemmasta valikosta ```Roles -> New role```
+ 
+10. Luotiin Ulalle oma henkilökohtainen ryhmä. Laitoimme seuraavat arvot:
+
+    **"Basic" -välilehti**
+
+    Properties
+    
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Name | ullanieminen |
+    | Display name | ullanieminen |
+    | Description | Käyttäjäryhmä käyttäjälle Ulla Nieminen (Käyttäjätunnus: ullanieminen). Ryhmäliitosta tarvitaan ainakin silloin, jos kirjaudutaan Linux työasemalle tai palvelimelle graaffisesta käyttöliittymästä käsin. HUOMIO: TÄMÄ RYHMÄLIITOS EI MÄÄRITTELE KÄYTTÄJÄN KÄYTTÖOIKEUKSIA! |
+    | Subtype | ullanieminen |
+    | Identifier | ullanieminen |
+    | gidNumber | 114 |
+
+    Activation
+
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Administrative status | Enabled |
+
+    Options
+    
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Force | (Kohta valittu) |
+    | Execute afrer all approvals | (Kohta valittu)
+
+
+    **"Assigments" -välilehti**
+
+    Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
+    
+    Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
+     
+11. midPointin vasemmasta valikosta valittiin ```Users -> List users```
+ 
+12. Käyttäjälistauksesta valittiin "ullanieminen"
+
+    ![]()
+ 
+13. Valittiin välilehdestä "Assignments".
+ 
+14. Seuraavaksi painettiin vihreää nappia.
+ 
+15. Avautui "Select object(s)" -ikkuna. Valitsimme listasta henkilökohtainen ryhmä nimeltään "ullanieminen" ja painettiin listan lopusta "Add" -painiketta.
+ 
+16. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty OpenLDAP -palvelimen käyttäjäksi onnistuneesti!
+
+    ![]()
