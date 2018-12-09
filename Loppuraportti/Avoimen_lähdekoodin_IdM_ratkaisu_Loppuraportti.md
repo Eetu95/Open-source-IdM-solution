@@ -3323,4 +3323,4 @@ Kokeilimme käyttäjätunnuksen jäädytyksen vaikutuksia kohdejärjestelmin kir
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(11).png)
  
-Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ei onnistunut, kirjautuminen TESTIPC2:seen ei onnistunut. Tämä siksi, koska OpenLDAP:ssa ei ole tunnusten jäädytysmahdollisuutta. Tämä ongelma on myös midPointin kehittäjän <a href=""https://wiki.evolveum.com/display/midPoint/LDAP+Servers+Summary>Evolveumin tiedossa.</a> Tässä tapauksessa kannattaa poistaa käyttäjä OpenLDAP:n roolit ja käydä poistamassa OpenLDAP-palvelimelta tunnukset manuaalisesti.
+Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ei onnistunut, kirjautuminen TESTIPC2:seen ei onnistunut. Tämä siksi, koska OpenLDAP:ssa ei ole tunnusten jäädytysmahdollisuutta. Tämä ongelma on myös midPointin kehittäjän <a href=""https://wiki.evolveum.com/display/midPoint/LDAP+Servers+Summary>Evolveumin tiedossa.</a> Tässä tapauksessa kannattaa poistaa käyttäjältä OpenLDAP:n roolit kohdasta "Assignments".
