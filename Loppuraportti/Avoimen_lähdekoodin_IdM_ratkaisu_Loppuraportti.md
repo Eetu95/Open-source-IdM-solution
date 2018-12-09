@@ -65,9 +65,17 @@ Päivämäärä: 28.11.2018
           <span>4.3.4. </span><a href="#roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</a><br>
           <ol>
                 <span>4.3.4.1 </span><a href="#openldap">OpenLDAP</a><br>
+                <span>4.3.4.2 </span><a href="#unix">Unix (Unix -connector)</a><br>
           </ol>
       </ol>
  <span>5. </span><a href="#testaus">Testaus</a><br>
+ <ol>
+        <span>5.1 </span><a href="#kayttajien-luonti-midpointtiin">Käyttäjien luonti midPointtiin</a><br>
+        <span>5.2 </span><a href="#kayttajan-liittaminen-active-directoryn-kayttajaksi">Käyttäjän liittäminen Active Directoryn käyttäjäksi</a><br>
+        <span>5.3 </span><a href="#kayttajan-liittaminen-testipalvelin-palvelimeen-unix-connector">Käyttäjän liittäminen TESTIPALVELIN -palvelimeen (Unix Connector)</a><br>
+        <span>5.4 </span><a href="#kayttajan-liittaminen-openldapn-kayttajaksi">Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</a><br>
+        <span>5.5 </span><a href="#kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin kayttöliittymään</a><br>
+        <span>5.6 </span><a href="#havaintoja-testauksesta">Havaintoja testauksesta</a><br>
  <span>6. </span><a href="#yhteenveto">Yhteenveto</a><br>
  <span>7. </span><a href="#lahteet">Lähteet</a><br>
 </ol>
