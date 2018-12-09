@@ -3290,6 +3290,7 @@ Options
 
  
 Kohta 15:ssa Matti liitettiin ryhmään "mattinieminen". 
+
 <br>
 
 <h3 id="kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin käyttöliittymään</h3>
@@ -3311,3 +3312,15 @@ Teimme tämän seuraavanlaisesti:
 6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjälle oli määritetty oikeanlaiset käyttöoikeudet midPointin käyttöliittymään.
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+     
+<br>
+
+<h3 id="havaintoja-testauksesta">Havaintoja testauksesta</h3>
+ 
+Kaikkiin haluttuihin järjestelmiin pääsi kirjautumaan sisälle määritellyillä oikeuksilla. Jos nimessä on ääkkösiä, ne eivät näy nimessä LDAP-käyttäjien osalta. Tämä siksi, koska OpenLDAP:n "gecos" -määritys ei salli ääkkösiä.
+
+Kokeilimme käyttäjätunnuksen jäädytyksen vaikutuksia kohdejärjestelmin kirjautumisiin. Jäädytimme Ulla Niemisen tunnukset menemällä midPointin vasemmassa valikosta valitsemalla ```Users -> List users```. Etsimme käyttäjälistauksesta Ullan ja painoimme alinapista (1.) ja valitsimme "Disable" (2.). 
+
+![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(11).png)
+ 
+Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ei onnistunut, kirjautuminen TESTIPC2:seen ei onnistunut. Tämä siksi, koska OpenLDAP:ssa ei ole tunnusten jäädytysmahdollisuutta. Tämä ongelma on myös midPointin kehittäjän <a href=""https://wiki.evolveum.com/display/midPoint/LDAP+Servers+Summary>Evolveumin tiedossa.</a> Tässä tapauksessa kannattaa poistaa käyttäjä OpenLDAP:n roolit ja käydä poistamassa OpenLDAP-palvelimelta tunnukset manuaalisesti.
