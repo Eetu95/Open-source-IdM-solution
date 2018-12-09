@@ -2961,7 +2961,71 @@ Options
 Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
  
 Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
+
+<br>
+
+<h5 id="unix">Unix (Unix -connector)</h5>
  
+Loimme midPointtiin roolin pääkäyttäjiä varten nimeltään "sudo" ja peruskäyttäjiä varten nimeltään "user".
+
+Aloitimme tekemään ensimmäiseksi "sudo" -roolin. Valitsimme midPointin vasemmasta valikosta ```Roles -> New role```.
+
+Tämän jälkeen teimme seuraavat määrityset:
+ 
+**"Basic" -välilehti**
+
+Properties
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Name | sudo |
+| Display name | sudo |
+| Description | Linux -pääkäyttäjäoikeudet (UNIX-connector). Lisää käyttäjä tähän ryhmään, jos haluat sille pääkäyttäjäoikeudet testipalvelimeen. |
+| Subtype | root |
+| Subtype | sudo |
+
+Options
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Force | (Kohta valittu) |
+| Execute afrer all approvals | (Kohta valittu)
+ 
+
+**"Assigments" -välilehti**
+
+Lisättiin ryhmä "Assignemnt & Inducement UNIX Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
+
+
+Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
+ 
+Seuraavaksi loimme "user" -roolin. Valitsimme midPointin vasemmasta valikosta ```Roles -> New role```.
+
+Tämän jälkeen teimme seuraavat määrityset:
+ 
+**"Basic" -välilehti**
+
+Properties
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Name | user |
+| Display name | user |
+| Description | Linux -peruskäyttäjäryhmä (UNIX-connector).Lisää käyttäjä tähän ryhmään, jos haluat sille perus käyttöoikeudet testipalvelimeen. |
+
+Options
+ 
+| Kohta  | Arvo  |
+| --- | --- |
+| Force | (Kohta valittu) |
+| Execute afrer all approvals | (Kohta valittu)
+ 
+
+**"Assigments" -välilehti**
+
+Lisättiin ryhmä "Assignemnt & Inducement UNIX Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
+ 
+<br>
 
 <h2 id="testaus">Testaus</h2>
  
@@ -2970,6 +3034,8 @@ Aloitimme testaamisen luomalla ensimmäiseksi käyttäjätunnuksen, sekä henkil
 Lopuksi kokeilimme jäädyttää käyttäjä midPointissa ja kuinka se vaikuttaa mahdollisuuteen kirjatua haluttuihin kohdejärjestelmiin.
 
 Kirjauduimme sisään midPointtiin verkkoselaimen kautta pääkäyttäjän tunnuksilla.
+ 
+<br>
  
 <h3 id="kayttajien-luonti-midpointtiin">Käyttäjien luonti midPointtiin</h3>
  
