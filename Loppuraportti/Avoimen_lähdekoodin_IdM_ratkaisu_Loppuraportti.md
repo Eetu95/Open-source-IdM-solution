@@ -76,6 +76,7 @@ Päivämäärä: 28.11.2018
         <span>5.4 </span><a href="#kayttajan-liittaminen-openldapn-kayttajaksi">Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</a><br>
         <span>5.5 </span><a href="#kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin kayttöliittymään</a><br>
         <span>5.6 </span><a href="#havaintoja-testauksesta">Havaintoja testauksesta</a><br>
+ </ol>
  <span>6. </span><a href="#yhteenveto">Yhteenveto</a><br>
  <span>7. </span><a href="#lahteet">Lähteet</a><br>
 </ol>
