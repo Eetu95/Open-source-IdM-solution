@@ -2971,13 +2971,13 @@ Lopuksi kokeilimme jäädyttää käyttäjä midPointissa ja kuinka se vaikuttaa
 
 Kirjauduimme sisään midPointtiin verkkoselaimen kautta pääkäyttäjän tunnuksilla.
  
-<h3 id="kayttajan-luonti-midpointtiin">Käyttäjän luonti midPointtiin</h3>
+<h3 id="kayttajien-luonti-midpointtiin">Käyttäjien luonti midPointtiin</h3>
  
-Käyttäjä luotoon midPointtiin seuraavalaisesti:
+Käyttäjät luotiin midPointtiin seuraavalaisesti:
  
 1. Käyttöliittymän vasemman puoleisesta valikosta valittiin ```Users -> New user```
  
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(1).png)
  
 2. Määriteltiin ruudussa näkyviin kohtiin ainakin seuraavat kohdat:
 
@@ -2995,7 +2995,7 @@ Käyttäjä luotoon midPointtiin seuraavalaisesti:
     | Email (Sähköpostiosoite) | ulla.nieminen@testiposti.fi |
     | Telephone (Puhelinnumero) | +358123456789 |
      
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(2).png)
      
 
     Activation
@@ -3018,16 +3018,57 @@ Käyttäjä luotoon midPointtiin seuraavalaisesti:
     | Force (Pakota) | <Rasti boksissa> |
     | Execute after all approvals (Suorita kaikkien suoritusten jälkeen) | <Rasti boksissa>
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(3).png)
 
 3. Katsottiin tehtävät muutokset painamalla "Preview changes". Muutokset vaikuttivat ihan ok. 
 
-    ![]()
-Lopuksi painettiin sivun alhaalta "Save".
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(4).png)
+    Lopuksi painettiin sivun alhaalta "Save".
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(5).png)
  
-Käyttäjä luotiin onnistuneesti!
+    Ullan käyttäjätunnus luotiin onnistuneesti!
+ 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(6).png)
+ 
+
+Teimme Matti Nimeiselle tunnukset samalla tavalla paitsi kohta 2 tehtiin seuraavanlaisesti:
+
+Properties
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Name (Käyttäjänimi) | mattinieminen |
+| Description (Kuvaus) | Pääkäyttäjä. |
+| Subtype (Alityyppi) | mattinieminen |
+| Full name (Koko nimi) | Matti Nieminen |
+| Given name (Etunimi) | Matti |
+| Family name (Sukunimi) | Nieminen |
+| Title (Titteli) | Testaaja |
+| Email (Sähköpostiosoite) | matti.nieminen@testiposti.fi |
+| Telephone (Puhelinnumero) | +358129876543 |
+
+Activation
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Administrative status (Käyttäjän status) | Enabled (Aktiivinen) |
+| Valid from (Voimassa alkaen) | <Tämän hetkinen aika 12-tunnin muodossa ja päivämäärä>
+    
+Password
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Value (Arvo) | <Käyttäjälle haluttu salasana>
+
+Options
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Force (Pakota) | <Rasti boksissa> |
+| Execute after all approvals (Suorita kaikkien suoritusten jälkeen) | <Rasti boksissa>
+
+<br>
  
 <h3 id="kayttajan-liittaminen-active-directoryn-kayttajaksi">Käyttäjän liittäminen Active Directoryn käyttäjäksi</h3>
 
@@ -3037,30 +3078,32 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
  
 2. Käyttäjälistauksesta valittiin "ullanieminen"
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
 
 3. Valittiin välilehdestä "Projections" (1.). Tämän jälkeen painettiin rattaan kuvaa (2.) ja lopuksi "Add projection" (3.).
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(8).png)
  
 4. Valittiin avautuneesta "Choose object" -ikkunasta "Medusa Active Directory (LDAP) (1.) ja kuitattiin valinta painamalla "Add" (2.).
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(9).png)
  
 5. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty Active Directoryn piiriin onnistuneesti!
 
-    ![]()
-     
- 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+
+Matti Nieminen liitettiin samalla tavalla Active Directoryyn.
+ <br>
+
 <h3 id="kayttajan-liittaminen-testipalvelin-palvelimeen-unix-connector">Käyttäjän liittäminen TESTIPALVELIN -palvelimeen (Unix Connector)</h3>
  
-Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen käyttäjäksi seuraavanlaisesti:
+Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen pääkäyttäjäksi ja Matti Niemisen seuraavanlaisesti:
  
 1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
  
 2. Käyttäjälistauksesta valittiin "ullanieminen"
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
  
 3. Valittiin välilehdestä "Assignments".
  
@@ -3070,9 +3113,11 @@ Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen käyttäjäksi seuraavanlaisest
  
 6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty TESTIPALVELIN -palvelimen käyttäjäksi onnistuneesti!
 
-    ![]()
- 
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
 
+Matti Nieminen lisättiin peruskäyttäjäksi samalla tavalla paitsi kohdassa 5 valittiin sen sijaan rooliksi "user".
+ 
+<br>
  
 <h3 id="kayttajan-liittaminen-openldapn-kayttajaksi">Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</h3>
  
@@ -3082,7 +3127,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
  
 2. Käyttäjälistauksesta valittiin "ullanieminen"
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
  
 3. Valittiin välilehdestä "Assignments".
  
@@ -3092,7 +3137,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 
 6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.).
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
  
 7. Valittiin uudelleen käyttäjälistauksesta "ullanieminen"
  
@@ -3113,7 +3158,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
     | Description | Käyttäjäryhmä käyttäjälle Ulla Nieminen (Käyttäjätunnus: ullanieminen). Ryhmäliitosta tarvitaan ainakin silloin, jos kirjaudutaan Linux työasemalle tai palvelimelle graaffisesta käyttöliittymästä käsin. HUOMIO: TÄMÄ RYHMÄLIITOS EI MÄÄRITTELE KÄYTTÄJÄN KÄYTTÖOIKEUKSIA! |
     | Subtype | ullanieminen |
     | Identifier | ullanieminen |
-    | gidNumber | 114 |
+    | gidNumber | 1114 |
 
     Activation
 
@@ -3139,7 +3184,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
  
 12. Käyttäjälistauksesta valittiin "ullanieminen"
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
  
 13. Valittiin välilehdestä "Assignments".
  
@@ -3149,4 +3194,54 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
  
 16. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty OpenLDAP -palvelimen käyttäjäksi onnistuneesti!
 
-    ![]()
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+
+Matti Nieminen lisättiin peruskäyttäjäksi samalla tavalla paitsi kohdassa 5 valittiin sen sijaan rooliksi "openldap_basic_users_unix", kohta 10 oli seuraava:
+
+Properties
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Name | mattinieminen |
+| Display name | mattinieminen |
+| Description | Käyttäjäryhmä käyttäjälle Matti Nieminen (Käyttäjätunnus: mattinieminen). Ryhmäliitosta tarvitaan ainakin silloin, jos kirjaudutaan Linux työasemalle tai palvelimelle graaffisesta käyttöliittymästä käsin. HUOMIO: TÄMÄ RYHMÄLIITOS EI MÄÄRITTELE KÄYTTÄJÄN KÄYTTÖOIKEUKSIA! |
+| Subtype | mattinieminen |
+| Identifier | mattinieminen |
+| gidNumber | 1115 |
+
+Activation
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Administrative status | Enabled |
+
+Options
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Force | (Kohta valittu) |
+| Execute afrer all approvals | (Kohta valittu)
+
+ 
+Kohta 15:ssa Matti liitettiin ryhmään "mattinieminen". 
+<br>
+
+<h3 id="kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin käyttöliittymään</h3>
+ 
+Määritimme Ulalle ja Matille oikeudet midPointin käyttöliittymän osalta. Emme haluneet heistä pääkäyttäjiä siihen, koska silloin kummatkin pystyisivät hallitsemaan myös muita käyttäjiä. Teimme heistä sen sijaan loppukäyttäjän (End user). Tällöin kummatkin pääsevät ainoastaan vaihtamaan salasanan, jättämään pääkäyttäjälle pyynnön saada käyttö-oikeus tiettyyn järjestelmän sekä näkemään kumpiekin tämän hetkiset oikeudet järjestelmiin ilman mahdollisuutta muokata niitä.
+
+Teimme tämän seuraavanlaisesti:
+
+1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
+ 
+2. Käyttäjälistauksesta valittiin haluttu käyttäjä.
+
+3. Valittiin välilehdestä "Assignments".
+ 
+4. Seuraavaksi painettiin vihreää nappia.
+ 
+5. Avautui "Select object(s)" -ikkuna. Valitsimme listasta henkilökohtainen ryhmä nimeltään "End user" ja painettiin listan lopusta "Add" -painiketta.
+ 
+6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjälle oli määritetty oikeanlaiset käyttöoikeudet midPointin käyttöliittymään.
+
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
