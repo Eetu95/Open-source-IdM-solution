@@ -3344,6 +3344,8 @@ Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ja TESTIPC1:s
  
 <h3 id="lahteet">Lähteet</h3>
  
+Ask Ubuntu. 2016. How to find path to java?. Luettavissa: <a href="https://askubuntu.com/questions/772235/how-to-find-path-to-java">https://askubuntu.com/questions/772235/how-to-find-path-to-java</a>. Luettu: 29.10.2018
+
 Ask Ubuntu. 2017. OpenLDAP error configuring StartTLS: ldap_modify: Other (e.g., implementation specific) error (80). Luettavissa: <a href="https://askubuntu.com/questions/936382/openldap-error-configuring-starttls-ldap-modify-other-e-g-implementation-sp">https://askubuntu.com/questions/936382/openldap-error-configuring-starttls-ldap-modify-other-e-g-implementation-sp</a>. Luettu: 14.11.2018.
  
 Ellingwood, J. 2014. How To Create a SSL Certificate on Apache for Ubuntu 14.04. Luettavissa: <a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-14-04">https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-14-04</a>. Luettu: 14.11.2018.
@@ -3363,6 +3365,8 @@ Httpd Wiki. 2017. Redirect Request to SSL. Luettavissa: <a href="https://wiki.ap
 Huculak, M. 2017. How to create a Linux virtual machine on Windows 10 using Hyper-V. Luettavissa: <a href="https://www.windowscentral.com/how-run-linux-distros-windows-10-using-hyper-v">https://www.windowscentral.com/how-run-linux-distros-windows-10-using-hyper-v</a>. Luettu: 31.10.2018.
  
 KnowITFree, 2017. How to add a new schema to openLDAP 2.4. Katsottavissa: <a href="https://www.youtube.com/watch?v=qAedVMMunk8">https://www.youtube.com/watch?v=qAedVMMunk8</a>. Katsottu: 2.11.2018.
+
+LinOxide. 2018. How to Hide Grub Menu in Boot of your Linux Machine. Luettavissa: <a href="https://linoxide.com/linux-how-to/hide-grub-boot-linux/">https://linoxide.com/linux-how-to/hide-grub-boot-linux/</a>. Luettu: 8.10.2018.
  
 Lumina Networks. 2017. Installing Zip and Unzip for Ubuntu. Luettavissa: <a href="https://www.luminanetworks.com/docs-lsc-610/Topics/SDN_Controller_Software_Installation_Guide/Appendix/Installing_Zip_and_Unzip_for_Ubuntu_1.html">https://www.luminanetworks.com/docs-lsc-610/Topics/SDN_Controller_Software_Installation_Guide/Appendix/Installing_Zip_and_Unzip_for_Ubuntu_1.html</a>. Luettu: 26.10.2018.
  
@@ -3382,6 +3386,8 @@ Papiernik, M. 2017. How To Use Apache as a Reverse Proxy with mod_proxy on Ubunt
 
 Raj. 2017. Configure LDAP Client on Ubuntu 16.04 / Debian 8. Luettavissa: <a href="https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/configure-ldap-client-on-ubuntu-16-04-debian-8.html">https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/configure-ldap-client-on-ubuntu-16-04-debian-8.html</a>. Luettu: 21.11.2018.
  
+Semancik, R. 2017. Trying MidPoint. Luettavissa: <a href="https://wiki.evolveum.com/display/midPoint/Trying+MidPoint">https://wiki.evolveum.com/display/midPoint/Trying+MidPoint</a>. Luettu: 1.10.2018
+
 SK. 2015. Install OpenLDAP In Ubuntu 15.10 And Debian 8. Luettavissa: <a href="https://www.unixmen.com/install-openldap-in-ubuntu-15-10-and-debian-8/">https://www.unixmen.com/install-openldap-in-ubuntu-15-10-and-debian-8/</a>. Luettu: 31.10.2018.
  
 Ubuntu Documentation. 2018. OpenLDAP Server. Luettavissa: <a href="https://help.ubuntu.com/lts/serverguide/openldap-server.html.en">https://help.ubuntu.com/lts/serverguide/openldap-server.html.en</a>. Luettu: 31.10.2018.
