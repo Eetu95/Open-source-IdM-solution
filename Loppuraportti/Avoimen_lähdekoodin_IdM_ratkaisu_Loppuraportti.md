@@ -2442,3 +2442,201 @@ Lokit voi avata, jolloin niistä saa  tarkempaa tietoa. Mm. Timestamp, Event ide
 Lokeista näkyy mm. käyttäjien luonnit/poistamiset, roolien lisäykset, tehtävänannot, istunnot jne.
 
 
+<<<<<<< HEAD
+=======
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+ 
+7. Valittiin uudelleen käyttäjälistauksesta "ullanieminen"
+ 
+8. Otettiin itselle talteen "Basic" -välilehdeltä näkyvän "Unix UID number" arvon. Tässä tapauksessa se oli 1114.
+ 
+9. Valittiin midPointin vasemmasta valikosta ```Roles -> New role```
+ 
+10. Luotiin Ulalle oma henkilökohtainen ryhmä. Laitoimme seuraavat arvot:
+
+    **"Basic" -välilehti**
+
+    Properties
+    
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Name | ullanieminen |
+    | Display name | ullanieminen |
+    | Description | Käyttäjäryhmä käyttäjälle Ulla Nieminen (Käyttäjätunnus: ullanieminen). Ryhmäliitosta tarvitaan ainakin silloin, jos kirjaudutaan Linux työasemalle tai palvelimelle graaffisesta käyttöliittymästä käsin. HUOMIO: TÄMÄ RYHMÄLIITOS EI MÄÄRITTELE KÄYTTÄJÄN KÄYTTÖOIKEUKSIA! |
+    | Subtype | ullanieminen |
+    | Identifier | ullanieminen |
+    | gidNumber | 1114 |
+
+    Activation
+
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Administrative status | Enabled |
+
+    Options
+    
+    | Kohta  | Arvo  |
+    | --- | --- |
+    | Force | (Kohta valittu) |
+    | Execute afrer all approvals | (Kohta valittu)
+
+
+    **"Assigments" -välilehti**
+
+    Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
+    
+    Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
+     
+11. midPointin vasemmasta valikosta valittiin ```Users -> List users```
+ 
+12. Käyttäjälistauksesta valittiin "ullanieminen"
+
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
+ 
+13. Valittiin välilehdestä "Assignments".
+ 
+14. Seuraavaksi painettiin vihreää nappia.
+ 
+15. Avautui "Select object(s)" -ikkuna. Valitsimme listasta henkilökohtainen ryhmä nimeltään "ullanieminen" ja painettiin listan lopusta "Add" -painiketta.
+ 
+16. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty OpenLDAP -palvelimen käyttäjäksi onnistuneesti!
+
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+
+Matti Nieminen lisättiin peruskäyttäjäksi samalla tavalla paitsi kohdassa 5 valittiin sen sijaan rooliksi "openldap_basic_users_unix", kohta 10 oli seuraava:
+
+Properties
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Name | mattinieminen |
+| Display name | mattinieminen |
+| Description | Käyttäjäryhmä käyttäjälle Matti Nieminen (Käyttäjätunnus: mattinieminen). Ryhmäliitosta tarvitaan ainakin silloin, jos kirjaudutaan Linux työasemalle tai palvelimelle graaffisesta käyttöliittymästä käsin. HUOMIO: TÄMÄ RYHMÄLIITOS EI MÄÄRITTELE KÄYTTÄJÄN KÄYTTÖOIKEUKSIA! |
+| Subtype | mattinieminen |
+| Identifier | mattinieminen |
+| gidNumber | 1115 |
+
+Activation
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Administrative status | Enabled |
+
+Options
+
+| Kohta  | Arvo  |
+| --- | --- |
+| Force | (Kohta valittu) |
+| Execute afrer all approvals | (Kohta valittu)
+
+ 
+Kohta 15:ssa Matti liitettiin ryhmään "mattinieminen". 
+
+<br>
+
+<h3 id="kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin käyttöliittymään</h3>
+ 
+Määritimme Ulalle ja Matille oikeudet midPointin käyttöliittymän osalta. Emme haluneet heistä pääkäyttäjiä siihen, koska silloin kummatkin pystyisivät hallitsemaan myös muita käyttäjiä. Teimme heistä sen sijaan loppukäyttäjän (End user). Tällöin kummatkin pääsevät ainoastaan vaihtamaan salasanan, jättämään pääkäyttäjälle pyynnön saada käyttö-oikeus tiettyyn järjestelmän sekä näkemään kumpiekin tämän hetkiset oikeudet järjestelmiin ilman mahdollisuutta muokata niitä.
+
+Teimme tämän seuraavanlaisesti:
+
+1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
+ 
+2. Käyttäjälistauksesta valittiin haluttu käyttäjä.
+
+3. Valittiin välilehdestä "Assignments".
+ 
+4. Seuraavaksi painettiin vihreää nappia.
+ 
+5. Avautui "Select object(s)" -ikkuna. Valitsimme listasta henkilökohtainen ryhmä nimeltään "End user" ja painettiin listan lopusta "Add" -painiketta.
+ 
+6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjälle oli määritetty oikeanlaiset käyttöoikeudet midPointin käyttöliittymään.
+
+    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+     
+<br>
+
+<h3 id="havaintoja-testauksesta">Havaintoja testauksesta</h3>
+ 
+Kaikkiin haluttuihin järjestelmiin pääsi kirjautumaan sisälle määritellyillä oikeuksilla lukuun ottamatta Active Directory. Siinä emme kerenneet aikataulullisista syistä tekemään roolia, joka tekee järjestelmänvalvojan tunnukset joten AD:lle määrittyy ainoastaan käyttäjä perusoikeuksilla. 
+
+Jos nimessä on ääkkösiä, ne eivät näy nimessä LDAP-käyttäjien osalta. Tämä siksi, koska OpenLDAP:n "gecos" -määritys ei salli ääkkösiä.
+
+Kokeilimme käyttäjätunnuksen jäädytyksen vaikutuksia kohdejärjestelmin kirjautumisiin. Jäädytimme Ulla Niemisen tunnukset menemällä midPointin vasemmassa valikosta valitsemalla ```Users -> List users```. Etsimme käyttäjälistauksesta Ullan ja painoimme alinapista (1.) ja valitsimme "Disable" (2.). 
+
+![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(11).png)
+ 
+Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ja TESTIPC1:seen ei onnistunut, kirjautuminen TESTIPC2:seen kuitenkin onnistui. Tämä siksi, koska OpenLDAP:ssa ei ole tunnusten jäädytysmahdollisuutta. Tämä ongelma on myös midPointin kehittäjän <a href=""https://wiki.evolveum.com/display/midPoint/LDAP+Servers+Summary>Evolveumin tiedossa.</a> Tässä tapauksessa kannattaa poistaa käyttäjältä OpenLDAP:n roolit kohdasta "Assignments". ei myöskään pääse kirjautumaan jäädytyksen jälkeen sisälle.
+ 
+<br>
+ 
+<h3 id="yhteenveto">Yhteenveto</h3>
+ 
+<br>
+ 
+<h3 id="lahteet">Lähteet</h3>
+ 
+Ask Ubuntu. 2016. How to find path to java?. Luettavissa: <a href="https://askubuntu.com/questions/772235/how-to-find-path-to-java">https://askubuntu.com/questions/772235/how-to-find-path-to-java</a>. Luettu: 29.10.2018
+
+Ask Ubuntu. 2017. OpenLDAP error configuring StartTLS: ldap_modify: Other (e.g., implementation specific) error (80). Luettavissa: <a href="https://askubuntu.com/questions/936382/openldap-error-configuring-starttls-ldap-modify-other-e-g-implementation-sp">https://askubuntu.com/questions/936382/openldap-error-configuring-starttls-ldap-modify-other-e-g-implementation-sp</a>. Luettu: 14.11.2018.
+ 
+Ellingwood, J. 2014. How To Create a SSL Certificate on Apache for Ubuntu 14.04. Luettavissa: <a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-14-04">https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-14-04</a>. Luettu: 14.11.2018.
+ 
+Ellingwood, J. 2014. How To Encrypt OpenLDAP Connections Using STARTTLS. Luettavissa: <a href="https://www.digitalocean.com/community/tutorials/how-to-encrypt-openldap-connections-using-starttls">https://www.digitalocean.com/community/tutorials/how-to-encrypt-openldap-connections-using-starttls</a>. Luettu: 14.11.2018. 
+
+Gnome. 2018. Disable the user list. Luettavissa: <a href="https://help.gnome.org/admin/system-admin-guide/stable/login-userlist-disable.html.en">https://help.gnome.org/admin/system-admin-guide/stable/login-userlist-disable.html.en</a>. Luettu: 21.11.2018.
+ 
+Hoffman, C. 2012. How To Customize Ubuntu’s Message of the Day. Luettavissa: <a href="https://www.howtogeek.com/104708/how-to-customize-ubuntus-message-of-the-day/">https://www.howtogeek.com/104708/how-to-customize-ubuntus-message-of-the-day/</a>. Luettu: 8.10.2018.
+ 
+Horsfall, D. 2007. Re: Listening on multiple ports for openldap 2.3.33. Luettavissa: <a href="https://www.openldap.org/lists/openldap-software/200702/msg00196.html">https://www.openldap.org/lists/openldap-software/200702/msg00196.html</a>. Luettu: 14.11.2018.
+ 
+HowtoForge. 2018. Managing a Headless VirtualBox Installation with phpvirtualbox (Ubuntu 16.04 LTS). Luettavissa: <a href="https://www.howtoforge.com/tutorial/managing-a-headless-virtualbox-installation-with-phpvirtualbox-on-ubuntu-16.04/">https://www.howtoforge.com/tutorial/managing-a-headless-virtualbox-installation-with-phpvirtualbox-on-ubuntu-16.04/</a>. Luettu: 29.10.2018. 
+ 
+Httpd Wiki. 2017. Redirect Request to SSL. Luettavissa: <a href="https://wiki.apache.org/httpd/RedirectSSL">https://wiki.apache.org/httpd/RedirectSSL</a>. Luettu: 14.11.2018.
+ 
+Huculak, M. 2017. How to create a Linux virtual machine on Windows 10 using Hyper-V. Luettavissa: <a href="https://www.windowscentral.com/how-run-linux-distros-windows-10-using-hyper-v">https://www.windowscentral.com/how-run-linux-distros-windows-10-using-hyper-v</a>. Luettu: 31.10.2018.
+ 
+KnowITFree, 2017. How to add a new schema to openLDAP 2.4. Katsottavissa: <a href="https://www.youtube.com/watch?v=qAedVMMunk8">https://www.youtube.com/watch?v=qAedVMMunk8</a>. Katsottu: 2.11.2018.
+
+LinOxide. 2018. How to Hide Grub Menu in Boot of your Linux Machine. Luettavissa: <a href="https://linoxide.com/linux-how-to/hide-grub-boot-linux/">https://linoxide.com/linux-how-to/hide-grub-boot-linux/</a>. Luettu: 8.10.2018.
+ 
+Lumina Networks. 2017. Installing Zip and Unzip for Ubuntu. Luettavissa: <a href="https://www.luminanetworks.com/docs-lsc-610/Topics/SDN_Controller_Software_Installation_Guide/Appendix/Installing_Zip_and_Unzip_for_Ubuntu_1.html">https://www.luminanetworks.com/docs-lsc-610/Topics/SDN_Controller_Software_Installation_Guide/Appendix/Installing_Zip_and_Unzip_for_Ubuntu_1.html</a>. Luettu: 26.10.2018.
+ 
+Microsoft. 2016. Install the Hyper-V role on Windows Server. Luettavissa: <a href="https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server">https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server</a>. Luettu: 31.10.2018.
+
+monline. 2012. How to configure phpLDAPadmin to connect to an LDAP server via SSL (ie. ldaps). Luettavissa: <a href="http://muzso.hu/2012/03/29/how-to-configure-phpldapadmin-to-connect-to-an-ldap-server-via-ssl-ie.-ldaps">http://muzso.hu/2012/03/29/how-to-configure-phpldapadmin-to-connect-to-an-ldap-server-via-ssl-ie.-ldaps</a>. Luettu: 14.11.2017.
+ 
+Nissinen, M. 2018. AVOIMEN LÄHDEKOODIN IDM-JÄRJESTELMÄN VERTAILU (6/7). Luettavissa: <a href="https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-3/">https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-3/</a>. Luettu: 3.10.2018.
+
+Noris, I. 2016. LDAP PosixAccount and PosixGroup Management. Luettavissa: <a href="https://wiki.evolveum.com/display/midPoint/LDAP+PosixAccount+and+PosixGroup+Management#LDAPPosixAccountandPosixGroupManagement-Setup">https://wiki.evolveum.com/display/midPoint/LDAP+PosixAccount+and+PosixGroup+Management#LDAPPosixAccountandPosixGroupManagement-Setup</a>. Luettu: 9.11.2018.
+
+Oracle. 2018. Download VirtualBox. Luettavissa. <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a>. Luettu: 29.10.2018.
+ 
+Parttimaa, J. 2018. AVOIMEN LÄHDEKOODIN IDM-JÄRJESTELMÄN VERTAILU (4/7). Luettavissa: <a href="https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-4-7/">https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-4-7/</a>. Luettu: 3.10.2018.
+ 
+Papiernik, M. 2017. How To Use Apache as a Reverse Proxy with mod_proxy on Ubuntu 16.04. Luettavissa: <a href="https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04">https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04</a>. Luettu: 14.11.2018.
+
+Raj. 2017. Configure LDAP Client on Ubuntu 16.04 / Debian 8. Luettavissa: <a href="https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/configure-ldap-client-on-ubuntu-16-04-debian-8.html">https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/configure-ldap-client-on-ubuntu-16-04-debian-8.html</a>. Luettu: 21.11.2018.
+ 
+Semancik, R. 2017. Trying MidPoint. Luettavissa: <a href="https://wiki.evolveum.com/display/midPoint/Trying+MidPoint">https://wiki.evolveum.com/display/midPoint/Trying+MidPoint</a>. Luettu: 1.10.2018
+
+SK. 2015. Install OpenLDAP In Ubuntu 15.10 And Debian 8. Luettavissa: <a href="https://www.unixmen.com/install-openldap-in-ubuntu-15-10-and-debian-8/">https://www.unixmen.com/install-openldap-in-ubuntu-15-10-and-debian-8/</a>. Luettu: 31.10.2018.
+ 
+Ubuntu Documentation. 2018. OpenLDAP Server. Luettavissa: <a href="https://help.ubuntu.com/lts/serverguide/openldap-server.html.en">https://help.ubuntu.com/lts/serverguide/openldap-server.html.en</a>. Luettu: 31.10.2018.
+ 
+Vultr.com. 2015. Setting an SSH Motd on Ubuntu 14.04. Luettavissa: <a href="https://www.vultr.com/docs/setting-an-ssh-motd-on-ubuntu-14-04">https://www.vultr.com/docs/setting-an-ssh-motd-on-ubuntu-14-04</a>. Luettu: 8.10.2018.
+
+Wallem, J. 2017. How to install OpenLDAP and phpLDAPadmin on Ubuntu 16.04. Luettavissa: <a htef="https://www.techrepublic.com/article/how-to-install-openldap-and-phpldapadmin-on-ubuntu-16-04/">https://www.techrepublic.com/article/how-to-install-openldap-and-phpldapadmin-on-ubuntu-16-04/"></a>. Luettu: 31.10.2018.
+ 
+Wallen, J. 2016. How to install phpVirtualBox for cloud-based VirtualBox management. Luettavissa: <a href="https://www.techrepublic.com/article/how-to-install-phpvirtualbox-for-cloud-based-virtualbox-management/">https://www.techrepublic.com/article/how-to-install-phpvirtualbox-for-cloud-based-virtualbox-management/</a>. Luettu: 31.10.2018.
+ 
+Wallen, J. 2018. How to install phpLDAPadmin on Ubuntu 18.04. Luettavissa: <a href="https://www.techrepublic.com/article/how-to-install-phpldapadmin-on-ubuntu-18-04/">https://www.techrepublic.com/article/how-to-install-phpldapadmin-on-ubuntu-18-04/</a>. Luettu: 31.10.2018.
+
+Wallen, J. 2016. How to populate an LDAP server with users and groups via phpLDAPadmin. Luettavissa: <a href="https://www.techrepublic.com/article/how-to-populate-an-ldap-server-with-users-and-groups-via-phpldapadmin/">https://www.techrepublic.com/article/how-to-populate-an-ldap-server-with-users-and-groups-via-phpldapadmin/</a>. Luettu: 31.10.2018.
+ 
+weichbrodt.me. 2018. Install and configure OpenLDAP on Debian 8 (Jessie). Luettavissa: <a href="https://weichbrodt.me/tutorial:ldap:installopenldap">https://weichbrodt.me/tutorial:ldap:installopenldap</a>. Luettu: 31.10.2018.
+ 
+!robot. 2018. Manage Headless VirtualBox Host On Ubuntu 16.04 LTS With PhpVirtualBox, Apache2 And PHP 7.1. Luettavissa: <a href="https://websiteforstudents.com/manage-headless-virtualbox-host-on-ubuntu-16-04-lts-with-phpvirtualbox-apache2-and-php-7-1/">https://websiteforstudents.com/manage-headless-virtualbox-host-on-ubuntu-16-04-lts-with-phpvirtualbox-apache2-and-php-7-1/</a>. Luettu: 29.10.2018.
+ 
+!robot. 2018. VirtualBox 5.2 On Ubuntu 16.04 LTS Server (Headless). Luettavissa: <a href="https://websiteforstudents.com/virtualbox-5-2-on-ubuntu-16-04-lts-server-headless/">https://websiteforstudents.com/virtualbox-5-2-on-ubuntu-16-04-lts-server-headless/</a>. Luettu: 29.10.2018.
+>>>>>>> 6ccf27d4c64a65e9b74aa8a901550a33a672fbb1
