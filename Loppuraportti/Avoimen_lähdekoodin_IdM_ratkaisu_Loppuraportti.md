@@ -31,12 +31,10 @@ Päivämäärä: 28.11.2018
           <ol>
                 <span>4.1.2.1. </span><a href="#windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</a><br>
                 <span>4.1.2.2. </span><a href="#hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</a><br>
-                <span>4.1.2.3. </span><a href="#openldap-serverin-asennus-ja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</a><br>
+                <span>4.1.2.3. </span><a href="#openldap-serverin-asennusja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</a><br>
                 <span>4.1.2.4. </span><a href="#phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</a><br>
-                <span>4.1.2.5. </span><a href="#ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</a><br>
-                <span>4.1.2.6. </span><a href="#openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</a><br>
-                <span>4.1.2.7. </span><a href="#suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)
-                </a><br>
+                <span>4.1.2.5. </span><a href="#openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</a><br>
+                <span>4.1.2.6. </span><a href="#suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)</a><br>
           </ol>
           <span>4.1.3. </span><a href="#virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</a><br>
           <ol>
@@ -55,28 +53,17 @@ Päivämäärä: 28.11.2018
       <ol>
           <span>4.3.1. </span><a href="#tietokannan-maarittaminen">Tietokannan määrittäminen</a><br>
           <span>4.3.2. </span><a href="#connectoreiden-maarittaminen">Connectoreiden määrittäminen</a><br>
-            <ol>
-                <span>4.3.2.1. </span><a href="#active-directory-connector">Active Directory connector</a><br>
-                <span>4.3.2.2. </span><a href="#ldap-connector">LDAP-connector</a><br>
-                <span>4.3.2.3. </span><a href="#unix-connector">Unix-connector</a><br>
-                <span>4.3.2.4. </span><a href="#csv-connector">CSV-connector</a><br>
+          <ol>
+                <span>4.3.2.1. </span><a href="#unix-connector">Unix-connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
-          <span>4.3.4. </span><a href="#roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</a><br>
-          <ol>
-                <span>4.3.4.1 </span><a href="#openldap">OpenLDAP</a><br>
-                <span>4.3.4.2 </span><a href="#unix">Unix (Unix -connector)</a><br>
-          </ol>
       </ol>
+      </ol>
+      <ol>
+      <span>4.4. </span><a href="#Lokitus">Lokitus</a><br>
+      </ol>
+    
  <span>5. </span><a href="#testaus">Testaus</a><br>
- <ol>
-        <span>5.1 </span><a href="#kayttajien-luonti-midpointtiin">Käyttäjien luonti midPointtiin</a><br>
-        <span>5.2 </span><a href="#kayttajan-liittaminen-active-directoryn-kayttajaksi">Käyttäjän liittäminen Active Directoryn käyttäjäksi</a><br>
-        <span>5.3 </span><a href="#kayttajan-liittaminen-testipalvelin-palvelimeen-unix-connector">Käyttäjän liittäminen TESTIPALVELIN -palvelimeen (Unix Connector)</a><br>
-        <span>5.4 </span><a href="#kayttajan-liittaminen-openldapn-kayttajaksi">Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</a><br>
-        <span>5.5 </span><a href="#kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin kayttöliittymään</a><br>
-        <span>5.6 </span><a href="#havaintoja-testauksesta">Havaintoja testauksesta</a><br>
- </ol>
  <span>6. </span><a href="#yhteenveto">Yhteenveto</a><br>
  <span>7. </span><a href="#lahteet">Lähteet</a><br>
 </ol>
@@ -1034,48 +1021,12 @@ Teimme asennuksen ja konfiguroinnin seuraavanlaisesti:
     ```
 
 Nyt kun menemme sivulle http:://<ip-osoite>/phpldapadmin, pääsemme web-käyttöliittymään, joihin kirjaudutaan OpenLDAP:n asennusvaiheessa tehdyillä tunnuksilla.
-
-<h5 id="ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</h5>
-
  
-Jotta OpenLDAP -palvelimen määritys sekä sen liittäminen midPointtiin olisi mahdollisimman helppoa, lisäsimme valmiiksi tarvittavat ryhmät OpenLDAP -palvelimeen graaffisen web-käyttöliittymän kautta. Meidän täytyi luoda seuraavat ryhmät:
- 
-- people
-- services
-- groups
-- unixgroups
- 
-Teimme tarvittavat toimenpiteet seuraavasti:
- 
-1. Kirjauduimme selaimella OpenLDAP -palvelimen web-käyttöliittymään:
-    ```
-    http:://<ip-osoite>/phpldapadmin
-    ```
-    Kirjautumisikkunassa annoimme samat tunnukset, mitkä teimme OpenLDAP-palvelimen asennusvaiheessa (1.). Kirjauduimme sisään painamalla "Authenticate".
-     
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot1.JPG)
-     
-2. Vasemmasta valikosta avattiin puuhakemisto ja valittiin "Create new entry here".
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot2.JPG)
- 
-3. Valitsimme avautuvasta valikosta luotava objekti. Koska haluttiin luoda ryhmä, valittiin "Generic: Posix Group"
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot3.JPG)
- 
-4. Seuraavaksi avautui sivu, jossa meidän piti määrittää ryhmälle nimi. Laitoimme siihen halutun ryhmän nimen. Lopuksi valitsimme "Create Object".
- 
-5. Hyväksyimme muutokset painamalla "Commit".
- 
-6. Ryhmä luotiin onnistuneesti. Muut ryhmät tehtiin samalla tavalla kuten ensimmäinenkin luotu ryhmä.
- 
-
 <h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
-
  
-MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota OpenLDAP-palvelimeen (OPENLDAPSERVER):
+MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota:
 
-1. Siirryimme terminaaliin root-käyttäjäksi komennolla:
+1. Siirryimme root-käyttäjäksi komennolla:
     ```
     sudo su
     ```
@@ -2215,315 +2166,6 @@ SELECT fullName_norm,oid FROM m_user;
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
 
 <h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
- 
-Jotta yrityksen järjestelmä voidaan tuoda IdM:n piirii, pitää se lisätä käyttämällä välikappaletta (Englanniksi: Connector). Välikappale (tai kuten viittaamme myöhemmin sanalla connector) ei ole fyysinen vaan koodattu pikku ohjelma. Seuraavassa kohdassa kerromme, kuinka lisäsimme TESTIPALVELIN, OPENLDAPSERVER sekä WINDOWSSERVER midPointin piiriin. Liitimme TESTIPALVELIN -palvelimen käyttämällä Unix-connectoria, OPENLDAPSERVERin sekä WINDOWSSERVERin käyttämällä LDAP-connectoria.
-
-<h5 id="active-directory-connector">Active Directory connector</h5>
-
-Active Directory connectorin avulla saadaan yhdistettyä midPoint Windows -käyttöjärjestelmän koneisiin. Active Directory connectoria varten tulee olla määritetty Windows Server, jossa on asennettuna Active Directory Domain services eli aktiivihakemisto. Active Directory asennus tehtiin jo Windows Serverin [esivalmisteluvaiheessa](#windows-palvelimen-perusmaaritykset). MidPointissa Active Directory connector oli jo valmiina asennettuna toisin kuin esimerkiksi Unix connectorissa. Ennen Active Directory connectorin toimivuutta tuli varmistaa, että Windows Serverin LDAP yhteys on suojattu. LDAP protokollaa käytetään Active Directoryn tiedonsiirroissa, josta suojattu protokolla on LDAPS. LDAP toimii portissa 389 ja LDAPS portissa 636. LDAPS suojasta varten pitää asentaa konfiguroida Active Directory Lightweight Directory Services (AD LDS) sekä luoda sertifikaatti Certification Authority roolin avulla. 
-
-<h5>Active Directory Lightweight Directory Services asennus</h5>
-
-Server Managerista valitaan Manage - Add Roles and Features.
-![roles & features](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture.PNG?raw=true)
-
-Klikattiin Next.
-
-![role-based or feature-based](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture1.PNG?raw=true)
-
-Valittiin Role-based or feature-based installation. Klikattiin Next.
-
-![palvelimen valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture2.PNG?raw=true)
-
-Valitaan mäidän palvelimen (meillä ei ole kuin yksi Windows palvelin). Klikattiin Next.
-
-![AD LDS](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture3.PNG?raw=true)
-
-Seuraavaksi valittiin asennettavaksi Active Directory Lightweight Services (kuvassa se oli jo asennettu). Klikattiin Next.
-
-![ominaisuudet](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture4.PNG?raw=true)
-
-Ei valittu mitään ominaisuuksia. Klikattiin Next. 
-![AD LDS ilmoitus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture5.PNG?raw=true)
-
-Seuraavaksi tuli ilmoitus siitä, mitä ollaan asentamassa. Klikattiin Next.
-
-![vahvistus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture6.PNG?raw=true)
-
-Seuraavaksi tuli vahvistus asennettavasta roolista. Klikattiin Install. 
-
-![asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture7.PNG?raw=true)
-
-Asennuksen jälkeen lähdettiin konfiguroimaan AD LDS roolia. Klikattiin Run the Active Directory Lightweight Directory Services Setup Wizard.
-
-![AD LDS wizard](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture8.PNG?raw=true)
-
-Aukesi AD LDS konfigurointi-ikkuna. Klikattiin Next. 
-
-![instanssi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture9.PNG?raw=true)
-
-Valittin instansiksi unique instance. Klikattiin Next.
-
-Seuraavaksi piti määrittää instanssin nimi. Valittiin nimeksi PISNISMIEHET. Description kohtaan kirjoitettiin AD LDS instance. Klikattiin sitten Next.
-
-Seuraavaksi piti määritellä LDAP ja LDAPS portit. Valittiin oletukset 50000 ja 50001, koska oletusportit 389 & 636 ovat jo tulleet käytöön Active Directoryn asennuksen jälkeen. Klikattiin Next.
-
-Seuraavaksi piti määritellä Application Directory Partition. Valittiin uusi osiointi: Yes, create an application directory partition. Kirjoitetiin tähän CN=Midpoint,DC=PISNISMIEHET,DC=LOCAL
-Klikattiin sitten Next.
-
-Seuraavaksi kysyttiin mihin AD LDS data tallennetaan. Jätettiin oletukset ja klikattiin Next. 
-
-![AD LDS palvelun käyttäjä](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture10.PNG?raw=true)
-
-Seuraavaksi piti valitan käyttäjä AD LDS palveluun. Valittiin Network Service account ja klikattiin Next. Tuli varoitus vielä datan replikoinnista. Klikattiin vain Yes.
-
-Seuraavaksi piti määritellä administrator käyttäjä AD LDS palvelulle. Valittin nykyinen kirjautunut käyttäjä. Klikattiin Next.
-
-Seuraavaksi kysyttiin LDIF tiedostoja. Valittiin kaikki ja klikattiin Next. 
-
-![LDIF tiedostojen vahvistus](https://github.com/Eetu95/Open-source-IdM-solution)
-
-Seuraavaksi tuli vahvistus tiedostoista. Klikattiin Next.
-
-![AD LDS konfigurointi valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture12.PNG?raw=true)
-
-AD LDS konfigurointi oli nyt valmis. Klikattiin Finish.
-
-Seuraavaksi kokeilimme AD LDS instanssiin. Avattiin ADSI Edit:
-```
-Start - Windows Administrative Tools - ADSI Edit
-```
-
-Klikkasimme sovelluksesta ADSI Edit kansiosta - Connect To...
-Lisäsimme tähän seuraavat tiedot ja klikkasimme ok:
-
-![ADSI Edit Connect to](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture13.PNG?raw=true)
-
-AD LDS yhdistyi ja tämän jälkeen aukesi puunäkymä instassista.
-
-<h5>Certification Authority asennus ja konfigurointi</h5>
-
-Seuraavaksi piti asentaa Certificate Authority rooli, jotta saadaan tehtyä sertifikaatti. Tämä tehtiin samalla kuin AD LDS asennus, mutta valittiin rooliksi Active Directory Certificate Services eikä valittu muita ominaisuuksia. Valittiin Active Directory Certificate Services rooliksi Certification Authority:
-
-![CA](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture.PNG?raw=true)
-
-Seuraavaksi asennettiin rooli.
-
-![AD CS asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture1.PNG?raw=true)
-
-Asennuksen jälkeen konfiguroimme sertifikaatti palvelun eli klikkasimme configure Active Directory Certificate Services on the destination server. Aukesi konfigurointi wizard. 
-
-Valitsimme oletus tunnukset (credentials) Credentials -välilehdeltä. Klikattiin sitten Next. 
-
-![Role Services](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture2.png?raw=true)
-
-Tämän jälkeen Role Services välilehdeltä valittiin Certification Authority.
-
-Seuraavaksi Setup Type välilehdeltä valittiin tyypiksi Enterprise CA, koska tietokone on domainissa ja Active Directory Domain Services on asennettuna. 
-
-![CA tyyppi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture4.png?raw=true)
-
-Seuraavalla välilehdellä eli CA Type valittiin CA tyypiksi Root CA.
-
-![](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture5.png?raw=true)
-
-Seuraavaksi piti määritellä avain Private Key välilehdellä. Valitsimme Create a new private key ja klikkasimme Next.
-
-![avaimen kryptaus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture6.png?raw=true)
-
-Seuraavaksi piti määritellä avaimen kryptaus Cryptography välilehdellä. Valitsimme kryptauksen toimittajaksi RSA#Microsoft Software Key Storage Provider, algoritmiksi SHA256 ja pituudeksi 2048.
-
-CA Name välilehdellä valitsimme Distinguished name suffixiksi: CN=Midpoint,DC=PISNISMIEHET,DC=LOCAL
-
-Klikattiin sitten Next.
-
-Validity Period välilehdellä valittiin avaimen voimassaoloajaksi 5 vuotta. Klikattiin sitten Next. 
-
-Certificate Database välilehdeltä valittiin oletustietokannan sijainnit. Klikattiin Next.
-
-Seuraavaksi Confirmation välilehellä hyväksyttiin konfiguraatiot ja klikattiin Configure. Kun konfiguraatio valmistui onnistuneesti, klikkasimme vain Close.
-
-<h5>Sertifikaatin luonti</h5>
-
-Kun CA on nyt asennettu ja konfiguroitu, lähdimme luomaan uuden SSL-sertifikaatin. Kirjoitimme Windowsin hakuun Manage computer certificates ja klikkasimme tätä asetusta.
-
-Seuraavaksi klikkasimme puunäkymästä Personal - Certificates eli menimme tähän kyseiseen kansioon. Täällä näimme, että luotu sertifikaatti on voimassa.
-
-Seuraavaksi varmistetaan, että tietokoneet, jotka ovat Domainissa pääsevät käsiksi luotuun yksityiseen avaimeen. Avattiin komentokehotteen (Command Prompt) admin-oikeuksilla ja kirjoitettiin komentokehotteeseen seuraava komento:
-
-    certutil -verifystore MY
-
-![cmd komento](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture7.PNG?raw=true)
-
-Tämän saadun tuloksen perusteella mentiin nyt kansioon C:\ProgramData\Microsoft\Crypto\Keys\
-Täältä löytyy nyt uusi luotu avain kryptatussa muodossa. Hiiren oikealla painikkeella klikattiin Properties ja välilehdeltä Security lisäsimme Luku ja ajo-oikeudet NETWORK SERVICE ryhmälle:
-
-![oikeudet](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture8.PNG?raw=true)
-
-Tmän jälkeen menille takasin Manage computer certificates asetuksiin. Personal - Certificates kansiosta hiiren oikealla painikkeella klikkasimme meidän sertifikaatin nimeä ja valitsimme All Tasks - Export...
-
-![Export certificate](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture9.png?raw=true)
-
-Aukesi sertifikaatin vienti-ikkuna. Klikkasimme Next.
-
-![private key](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture10.png?raw=true)
-
-Emme exportanneet yksityistä avainta eli valitsimme No, do not export the private key. Klikkasimme Next.
-
-![formaatti](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture11.png?raw=true)
-
-Seuraavaksi piti valita sertifikaatin formaatti. Valitsimme Base-64 encoded X.509 (.CER). Klikkattiin sitten Next.
-
-Tämän jälkeen kysyttiin sijaintia mihin sertifikaatti viedään. Valitsimme tähän työpöydän. Klikattiin sitten Next.
-
-Sertifikaatin vieminen oli nyt valmis. Klikattiin Finish.
-
-Seuraavaksi piti viedä sertifikaatti JRE Keystoreen, joka sijaitsi meidän tapauksessa täällä: ‪C:\Program Files\Java\jre1.8.0_191\bin\keytool.exe
-
-Avasimme komentokehotteen polussa: C:\Program Files\Java\jre1.8.0_191\bin\ ja annoimme komennon:
-
-    keytool -importcert -alias "pisnismiehet" -keystore "C:\Program Files\Java\jre1.8.0_191\lib\security\cacerts" -storepass changeit -file "C:\Users\azureuser\Desktop\pisnismiehet.cer"
-
-Luotimme tähän sertifikaattiin: kirjoitimme "yes", jolloin sertifikaatti lisättiin JRE keystoreen. Nyt voidaan kokeilla LDAPS yhteyttä.
-
-Kirjoitimme Windowsin hakuun ldp.exe. Tällä ohjelmalla voimme testata LDAPS yhteyttä. Klikattiin Connection ja testattiin yhteyttä.
-
-![LDAPS yhteys](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture12.PNG?raw=true)
-
-Kirjoitettiin Server kohtaan localhost ja portiksi 636 sekä SSL täppä päälle.
-
-![LDAPS yhteys toimii](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture13.PNG?raw=true) 
-
-Se mitä ldp.exe ohjelma tuottaa tulokseksi viittaa siihen, että yhteys toimi. Jos ei toimisi niin näkyisi virheilmoitus.
-
-<h5>Connectorin lisääminen</h5>
-
-Kun LDAPS yhteys on saatu nyt toimimaan niin voidaan lisätä Active Directory connector midPointiin. Kirjauimme midPoint käyttöliittymään ja menimme kohtaan Import object ja valitsimme Embedded editor.
-
-Seuraavaksi kopioimme midPointin dokumentaatiosta löytyvällä ohjeella seuraavan XLM-tiedoston, joka liittää Active Directory connectorin midPointiin: https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/resources/ad-ldap/ad-ldap-medusa-medium.xml
-
-Kopioimme koko tämän sisällön tiedoston sisällön midPointin GitHubista ja liitimme sen midPoint käyttöliittymään Embedded editor kohtaan.
-
-Kun tiedosto kokonaisuudessaan on liitetty tekstikenttään sitä tulee muokata. Muun muassa <connectorConfiguration> tägien sisään tulee lisätä omat tiedot. Esimerkki:
-
-    <connectorConfiguration xmlns:icfc="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/connector-schema-3">
-        <icfc:configurationProperties xmlns:icfcldap="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/bundle/com.evolveum.polygon.connector-ldap/com.evolveum.polygon.connector.ldap.ad.AdLdapConnector">
-            <icfcldap:host>172.28.171.60</icfcldap:host>
-            <icfcldap:port>636</icfcldap:port>
-            <icfcldap:baseContext>DC=pisnismiehet,DC=local</icfcldap:baseContext>
-            <icfcldap:bindDn>CN=midpoint,CN=Users,DC=pisnismiehet,DC=local</icfcldap:bindDn>
-            <icfcldap:connectionSecurity>ssl</icfcldap:connectionSecurity>
-            <icfcldap:bindPassword>
-                <t:clearValue>********</t:clearValue>
-            </icfcldap:bindPassword>
-            <icfcldap:pagingBlockSize>5</icfcldap:pagingBlockSize> <!-- ridiculously small, just to test paging -->
-        </icfc:configurationProperties>
-        <icfc:resultsHandlerConfiguration>
-			<icfc:enableNormalizingResultsHandler>false</icfc:enableNormalizingResultsHandler>
-			<icfc:enableFilteredResultsHandler>false</icfc:enableFilteredResultsHandler>
-			<icfc:enableAttributesToGetSearchResultsHandler>false</icfc:enableAttributesToGetSearchResultsHandler>
-		</icfc:resultsHandlerConfiguration>
-    </connectorConfiguration>
-
-XML-tiedosto piti tarkistaa vielä kokonaisuudessaan läpi, koska XML tiedostoon pitää tehdä muitakin muutoksia. Kaikki kohdat, jossa lukee DC=win,DC=evolveum,DC=com tulee vaihtaa omiin domain tunnisteeseen, joka meidän tapauksessa oli DC=pisnismiehet,DC=local
-
-Myös kohta @win.evolveum.com pitää vaihtaa -> @pisnismiehet.local
-
-Meidän valmis malli Active Directory connectoria varten löytyy meidän GitHubista valmiina ilman Windows Serverin IP-osoitetta, joka tulisi <icfcldap:host> -kohtaan sekä Midpoint käyttäjän salasanaa, joka tulisi <t:clearValue> -kohtaan: https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Connectorit/ad-ldap-medusa-medium.xml
-
-Kun XML-tiedosto on muokattu niin klikattiin Import object. Seuraavaksi mentiin kohtaan Resources vasemmasta listauksesta. Klikattiin Active Directory connectoria eli Medusa Active Directory (LDAP). Alhaalta klikattiin Edit configuration ja tarkistettiin, että tiedot ovat oikein.
-
-![AD connector](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_ad_connector.PNG?raw=true)
-
-Tämän jälkeen klikattiin Save and test connection.
-
-![connection ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_connection_ok.PNG?raw=true)
-
-Yhteys toimii. Nyt Resources valikosta näkyy, että Active Directory connector on muuttunut vihreäksi, mikä tarkoittaa sitä, että connector toimii. 
-
-Seuraavaksi tehtiin uusi käyttäjä midPoint käyttöliittymässä. Mentiin valikosta kohtaan Users - New User. Täytettiin kentät:
-<li>Name: ville
-<li>Full name: Ville Varakas
-<li>Given Name: Ville
-<li>Family name: Varakas
-<li>Administrative status: Enabled
-<li>Valid from: 11/1/2018 5:00 PM
-<li>Password value: **************
-
-Tämän jälkeen tallennettiin käyttäjä. 
-
-![käyttäjän luonti](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPonit_k%C3%A4ytt%C3%A4j%C3%A4n_luonti.PNG?raw=true)
-
-Klikattiin Save.
-
-![käyttäjä luotu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_k%C3%A4ytt%C3%A4j%C3%A4_luotu.PNG?raw=true)
-
-Tuli ilmoitus, että käyttäjä luotiin. Seuraavaksi klikattiin kyseistä käyttäjää ja Projections välilehdeltä klikattiiin Add projection ja lisättiin käyttäjä Active Directory connectoriin.
-
-![midPoint projections](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_projections.PNG?raw=true)
-
-Tämän jälkeen kun valittin Active Directory connector listasta ja klikattiin Add, voitiin käyttäjä tallentaa uudestaan.
-
-Tallennus onnistui. Kokeiltiin seuraavaksi kirjautua kyseisellä käyttäjällä Windows työasemalle. Työasema on virtuaalinen ja se sijaitsee meidän phpVirtualBox -palvelimella. Otettiin tähän koneeseen Remote Desktop yhteys. 
-
-![windows kirjautuminen](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/windows_kirjautuminen.PNG?raw=true)
-
-Kirjauduttiin luoduilla tunniksilla. Kun käyttäjällä kirjauduttiin ensimmäistä kertaa joutui hetken odottaa ennen kuin kaikki oli valmista. Käyttäjällä ei ole admin-oikeuksia.
-
-Tarkistettiin vielä, että käyttäjä on todella lisätty Active Directoryyn. Kirjauduttiin Windows Serverille ja avattiin Active Directory Users and Computers. Kohdasta Users nähtiin, että käyttäjä on Active Directoryssa.
-
-![active directory](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/active_directory.PNG?raw=true)
-<h5 id="ldap-connector">LDAP-connector</h5>
- 
-LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin käyttöliittymässä pääkäyttäjätunnuksilla:
- 
-1. Avattiin uusi välilehti selaimesta ja mentiin <a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/resources/ldap-posix.xml">GitHubiin</a> , josta tallennettiin (Ctrl+S) valmis XML-tiedostomalli omalle työpöydälle.
- 
-2. Avattiin XML-tiedosto esimerkiksi Notepad++ -ohjelmalla, johon teimme seuraavat muutokset:
-    - ```dc=example,dc=com``` rivit korvattiin laittamalla näiden tilalle ```dc=ldap,dc=pisnismiehet,dc=local```
-    - ```<name>OpenLDAP posix</name>``` arvo muutettiin arvoksi ```<name>OpenLDAP (OPENLDAPSERVER)</name>```
-    - ```<icfcldap:host>localhost</icfcldap:host>``` arvon "localhost" tilalle laitettiin OPENLDAPSERVERin ip-osoite.
-    - ```<clearValue>secret</clearValue>``` arvon "secret" tilalle muutettiin käyttäjän "idm" salasana, jos salasanaa on muutettu aikaisemmin joksikin muuksi. Esimerkiksi, jos uusi salasana on "HeiPoika91" tulee XML-arvoksi ```<clearValue>HeiPoika91</clearValue>```.
-
-    Tallennettiin tehdyt muutokset. (Esimerkkitiedosto on myös saatavilla <a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/ldap-posix.xml">meidän GitHubista</a>).
- 
-3. Avattiin selaimella midPoint ja kirjauduttiin siihen sisälle pääkäyttäjätunnuksilla. Valittiin midPointin vasemmasta valikosta "Import object"
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot1.JPG)
-
-4. Seuraavaksi haettiin XML-tiedosto painamalla "Choose File" (1.). Kun tiedosto oli haettu, painoimme lopuksi "Import object" (2.). Jos tulee ruudun yläpuolelle vihreä palkki, oli tuonti onnistunut. Jos tuli punainen, XML-tiedoston sisältämissä arvoissa ja määrityksissä on jokin virhe. Tällöin kannattaa katsoa virheilmoitukset huolella, jotka näkyvät siinä samalla.
-    
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot2.JPG)
-
-5. Kun tuonti onnistui, siirryimme valikossa kohtaan ``` Resources -> List resources```
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot3.JPG)
- 
-6. Valitsimme ruutuun avautuvasta listasta ```OpenLDAP (OPENLDAPSERVER)```
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot4.JPG)
- 
-7. Avautuvan sivun alalaidasta valittiin "Edit configuration"
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot5.JPG)
- 
-8. Avautui asetukset. Varmistettiin, että kuvassa korostetut kohdat on määritelty. Jos et näe kohtia, kannattaa painaa "Configuration" -otsikon viereisestä tyhjän boksin kuvasta, jolloin kaikki asetuksiin mahdollista määriteltävät kohdat tulee näkyviin. Etsi tällöin kuvassa korostetut kohdat. "Connection security" -kohdassa määritämme, että midPoint ottaa suojatun yhteyden (StartTLS) OpenLDAP -palvelimeen.
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot6.JPG)
- 
-9. Kun kohta 8 oli hoidettu, kokeilimme yhteydenmuodostusta midPointin ja OpenLDAP-palvelimen välillä painamalla "Save and test connection".
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot7.JPG)
- 
-10. Jos yhteys on toimiva, tulee vihreää kuten kuvassa. Jos ei toimi, tulee punaista ja virheilmoitus. Kannattaa tällöin tutkia virheilmoitusta ja korjata ongelma.
-    
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot8.JPG)
- 
-11. Lopuksi painoimme "Finish" ja päätimme onnistuneesti OpenLDAP-palvelimen liittämisen midPointin piiriin.
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot9.JPG)
-     
- 
 
 <h5 id="unix-connector">Unix-connector</h5>
 
@@ -2586,61 +2228,27 @@ Ladattiin konfiguraatiot <a href="https://github.com/Evolveum/midpoint/tree/mast
 
 Sitten lisäsimme metaroolin midPoint roolille. Tämä lisää ryhmänteko mahdollisuuden kohde Linux-koneelle. Configuration -> Import Objects -> Choose File -> role-assignment-inducement-metarole.xml -> Import Object.
 
-<h5 id="csv-connector">CSV-connector</h5>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Käyttötapaus</h5>
 
-CSV-connectorin avulla voidaan lisätä paljon käyttäjiä nopeasti midPoint IdM-järjestelmän piiriin. CSV connector lisättiin midPointiin XML-tiedoston avulla. MidPointin GitHubista hain CSV-connectorin XML-tiedoston ja kopioin sen leikepöydälle: https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/resource-csv-hr.xml
+Tehtiin midPointissa uusi ryhmä (group) kohde Linux koneelle (Ubuntu Desktop 18.04). Ensin tehtiin uusi rooli nimeltä "sudo" midPointissa (Roles -> New Role). Lisättiin tiedot kenttiin "Name", "Group Name", "Unix Permissions". Määritettiin importattu metarooli roolille: Assignments -> klikkaa "ratasta" -> Assign Role -> Meta Role -> Assign -> Save.
 
-Seuraavaksi liitin kopioidun midPointin käyttöliittymään. klikattiin Import object - Embedded editor, johon sitten liitettiin XML-tiedoston sisältö. Kun XML-tiedosto oli liitetty tekstikenttään, klikattiin Import object.
+![unix-connector-basic](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-basic.PNG?raw=true)
 
-Resources kohdasta näkyy nyt, että CSV-connector on lisätty, nimi on HR System. Tämän jälkeen haettiin esimerkki CSV-tiedosto midPoint palvelimelle (MIDPOINTIDM), midPointin kotikansioon.
+![unix-connector-projections](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-projections.PNG?raw=true)
 
-1. Otettiin SSH-yhteys MIDPOINTIDM palvelimelle.
+![unix-connector-assignments](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-assignments.PNG?raw=true)
 
-2. Mentiin midPointin kotikansioon: 
+Tehtiin käyttäjä kohde järjestelmään. Users -> New User. Lisättiin haluamamme tiedot kuten "Name", "Full Name", "Administrative status" jne. Sitten lisättiin aiemmin tehty rooli "sudo" käyttäjälle "mattimeikalainen" -> Assign -> Save.
 
-```
-$ cd /opt/midpoint/var
-```
+![unix-connector-users-basic](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-users-basic.PNG?raw=true)
 
-3. Haettiin esimerkki CSV-tiedosto wget-komennolla:
+![unix-connector-users-projections](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-users-projections.PNG?raw=true)
 
-```
-$ sudo wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/hr.csv
-```
+![unix-connector-users-assignments](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-users-assignments.PNG?raw=true)
 
-4. Kopioitiin tiedostopolku, johon CSV-tiedosto vietiin:
+![mattimeikalainen-kirjautuneena](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/mattimeikalainen-kirjautuneena.PNG?raw=true)
 
-```
-$ pwd
-
-/opt/midpoint/var
-```
-
-5. Muokattiin HR System resurssia midPointin käyttöliittymässä. Mentiin kohtaan Recourses - HR System - Edit configuration.
-
-6. Edit configutration kohdasta muutettiin tiedostopolku (File Path):
-
-```
-/opt/midpoint/var
-```
-
-![HR Sytem konfiguraatio](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_configuration.PNG?raw=true)
-
-7. Tallennettiin konfiguraatio ja testattiin yhteys. Klikattiiin Save and Test Connection. Tämän jälkeen klikattiin Finish.
-
-![HR System yhteys ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_connection_ok.PNG?raw=true)
-
-8. HR System resurssin välilehdeltä Accounts - Repository päästään lisämään käyttäjiä CSV-tiedostosta midPointin käyttöliittymään. Klikattiin esimerkkikäyttäjän asetuksia ja valittiin Import.
-
-![HR System import](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_import.PNG?raw=true)
-
-9. Importtauksen jälkeen tuli ilmoitus onnistuneesta viedystä käyttäjästä. Kyseinen käyttäjä muuttui myös LINKED tilaan.
-
-![HR System import ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_import_ok.PNG?raw=true)
-
-10. Importattu käyttäjä näkyy nyt midPointin Users -kohdassa.
-
-![HR uusi käyttäjä](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_user.PNG?raw=true)
+Mattimeikalainen kirjautuneena Linux Ubuntu Server 16.04.5 LTS 64-bit.
 
 <h4 id="suojatun-web-yhteyden-maaritys-https3">Suojatun web-yhteyden määritys (https)</h4>
 
@@ -2812,524 +2420,25 @@ Selain uudelleenohjasi suojattuun sivustoon: ```https://*palvelimen IP-osoite*``
 Avautui midPointin kirjautumisruutu.
 ![midPoint kirjautumisruutu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_kirjautumisruutu.PNG?raw=true)
 Uudelleenohjaus toimi. Selain uudelleenohjasi suojattuun midPointin kirjautumisruutuun. Myöskin aiempi tapa miten midPointin käyttöliittymään kirjaudutaan ei enää toimi. Eli ```http://*palvelimen IP-osoite*:8080/midpoint/``` ei enää toimi.
- 
- 
-<h4 id="roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</h4>
- 
-Nyt kun midPointin sekä kohdejärjestelmien välinen yhteys toimii, pitää meidän seuraavaksi määritellä midPointtiin roolit sekä muut tarvittavat objektit, joiden ansiosta provisiointi eli muutoksien ajaminen midPointista kohdejärjestelmiin onnistuu.
- 
-<h5 id="openldap">OpenLDAP</h5>
- 
-Jouduimme tuomaan midPointtiin seuraavat tiedostot (nämä löytyvät myös meidän GitHub -sivuilta):
 
-- extension-posix.xsd (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-management/extension-unix.xsd">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/extension-posix.xsd">Meidän GitHub</a>)
-    - Tämä tiedoston ansiosta midPoint tukee Unix-järjestelmissä käytettyjä GID ja UID -arvoja.
-- role-meta-ldapgroup.xml (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/roles/role-meta-ldapgroup.xml">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/role-meta-ldapgroup.xml">Meidän GitHub</a>)
-    - Tiedoston ansiosta LDAP-ryhmien teko muihin kuin Unix-järjestelmiin on mahdollista. Tämä luo ```Roles -> List roles``` sijainnin alle uuden ryhmän nimeltään "LDAP Group Metarole".
-- role-meta-unix-group.xml (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/roles/role-meta-unix-group.xml">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/role-meta-unix-group.xml">Meidän GitHub</a>)
-    - Tiedoston ansiosta LDAP-ryhmien teko Unix-järjestelmiin on mahdollista. Tämä luo ```Roles -> List roles``` sijainnin alle uuden ryhmän nimeltään "LDAP Unix Group Metarole".
-- sequence-gidnumber.xml (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/other/sequence-gidnumber.xml">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/sequence-gidnumber.xml">Meidän GitHub</a>)
-    - Tiedoston ansiosta midPoint osaa generoida automaattisesti GID-arvoja.
-- sequence-uidnumber.xml (<a href="https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-ldap/other/sequence-uidnumber.xml">Valmistajan GitHub</a>) (<a href="https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Roolit%20ja%20muut%20objektit/OpenLDAP/sequence-uidnumber.xml">Meidän GitHub</a>)
-    - Tiedoston ansiosta midPoint osaa generoida automaattisesti UID-arvoista.
- 
-Aloitimme ensimmäisenä tuomaan "extension-posix.xsd" -tiedoston midPointtiin seuraavanlaisesti:
+<h3 id="Lokitus">Lokitus</h3>
 
-1. Otimme SSH-yhteyden "MIDPOINTIDM" -palvelimeen. Kirjauduimme sisälle pääkäyttäjän tunnuksilla.
+<h4 id="Eclipse midPoint Log Viewer">Log Viewer</h4>
 
-2. Siirryimme seuraavaksi root -käyttäjäksi komennolla:
-    ```
-    sudo su
-    ```
-    Komennon jälkeen painoimme Enter. 
- 
-3. Menimme sijaintiin ```/opt/midpoint/var/schema``` komennolla:
-    ```
-    cd /opt/midpoint/var/schema
-    ```
-    Komennon jälkeen painoimme Enter. Siirryttiin uuteen sijaintiin.
- 
-4. Ladattiin ```extension-posix.xsd``` midPointin kehittäjän Evolveumin GitHub -sivuilta komennolla:
-    ```
-    wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/stories/unix-management/extension-unix.xsd
-    ```
-    Komennon jälkeen painoimme Enter. Tiedoston latauksessa kesti tovin.
- 
-5. Käynnistimme "MIDPOINTIDM" -palvelimen uudelleen komennolla:
-    ```
-    sudo reboot
-    ```
-    Komennon jälkeen painoimme Enter. Palvelin aloitti uudelleen käynnistyksen ja tiedosto on tuotu midPointtiin onnistuneesti!
+MidPoint on kehittänyt työkalun nimeltä <a href="https://wiki.evolveum.com/display/midPoint/Log+Viewer">"Log Viewer"</a>, jolla pystyy helposti tutkimaan suuria lokitiedostoja. Log Viewer on Eclipse plugini, joka näyttää loki tiedostot hyvin järjestettynä, käyttämällä Eclipse "Outline" ja "Problems" näkymiä.
 
-Toimme muut tiedostot midPointtiin seuraavanlaisesti:
+Eclipse midPoint Log Viewerin ominaisuuksiin kuuluu mm. "Showing log outline", "Showing error, warning and information messages", "Folding (collapse + expand)", "Permanently removing unnecessary lines", "Objects and threads dictionary", "OID highlighting and associated information display", "Logfile preprocessing: LogTrimmer tool", "Logfile erasing: Tuncater tool", "Performance tuning".
 
-1. Ladattiin jokainen tiedosto omalle tietokoneelle talteen.
-2. Avattiin selain ja mentiin midPointin sivulle. Kirjauduttiin sisälle pääkäyttäjän tunnuksilla.
-3. Vasemmasta valikosta valittiin "import object".
-4. Seuraavaksi haettiin haluttu tiedosto painamalla "Choose File". Kun tiedosto oli haettu, painoimme lopuksi "Import object".
-5. Tiedosto tuotiin onnistuneesti.
- 
-Loimme seuraavaksi uuden ryhmän Unix-järjestelmän pääkäyttäjiä varten (sudo), johon halutut henkilöt liitetään lopuksi. Ryhmän nimi oli "sudoers".
+<h4 id="Audit Log Viewer">Audit Log Viewer</h4>
 
-Valitsimme midPointin vasemmasta valikosta ```Roles -> New role```.
+![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer1.PNG?raw=true)
 
-Tämän jälkeen teimme seuraavat määrityset:
- 
-**"Basic" -välilehti**
+MidPointista löytyy "Audit Log Viewer" -näkymä, jossa näkee kaikki midPointin lokit. Lokeja pystyy suodattamaan mm. ajakajakson, tapahtumatyypin, kohteen, aloittajan yms. mukaan.
 
-Properties
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Name | sudoers |
-| Display name | Pääkäyttäjät |
-| Description | OpenLDAP:n pääkäyttäjät (Unix/Linux). Lisää käyttäjä tähän ryhmään, jos haluat sille pääkäyttäjäoikeudet *nix -järjestelmiin. |
-| Subtype | sudo |
-| Identifier | sudo |
+![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer2.PNG?raw=true)
 
-Options
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Force | (Kohta valittu) |
-| Execute afrer all approvals | (Kohta valittu)
- 
+Lokit voi avata, jolloin niistä saa  tarkempaa tietoa. Mm. Timestamp, Event identifier, Event Type, Event Stage, Initiator, Target ref., Outcome, Session Identifier, Resource name, Object Name, Execution result jne.
 
-**"Assigments" -välilehti**
+Lokeista näkyy mm. käyttäjien luonnit/poistamiset, roolien lisäykset, tehtävänannot, istunnot jne.
 
-Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
 
-
-Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
- 
-<br>
- 
-Loimme seuraavaksi peruskäyttäjille oman ryhmän nimeltään "openldap_basic_users_unix":
-
-**"Basic" -välilehti**
-
-Properties
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Name | openldap_basic_users_unix |
-| Display name | OpenLDAP peruskäyttäjät - Unix/Linux |
-| Description | OpenLDAP:n peruskäyttäjät (Unix/Linux). Lisää käyttäjä tähän ryhmään, jos haluat sille perus käyttäjäoikeudet *nix -järjestelmiin. |
-| Subtype | openldap_basic_users_unix |
-| Identifier | openldap_basic_users_unix |
-
-Options
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Force | (Kohta valittu) |
-| Execute afrer all approvals | (Kohta valittu)
- 
-
-**"Assigments" -välilehti**
-
-Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
- 
-Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu. 
- 
-<br>
-
-Jokaiselle käyttäjälle täytyy myös luoda oma henkilökohtainen ryhmä. Tämä vaaditaan, jos halutaan kirjautua *nix -järjestelmiin (Unix & Linux).
-
-Henkilökohtainen ryhmä tehtiin seuraavanlaisesti (HUOMIO! PALAA TÄHÄN KOHTAAN MYÖHEMMIN, JOS ET OLE LISÄNNYT VIELÄ HALUTTUJA KÄYTTÄJIÄ MIDPOINTTIIN!):
-
-**"Basic" -välilehti**
-
-Properties
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Name | (käyttäjän käyttäjänimi eli username) |
-| Display name | (käyttäjän käyttäjänimi eli username) |
-| Description | Käyttäjäryhmä käyttäjälle (käyttäjän nimi eli name) (Käyttäjätunnus:(käyttäjän käyttäjätunnus eli username)). Ryhmäliitosta tarvitaan ainakin silloin, jos kirjaudutaan Linux työasemalle tai palvelimelle graaffisesta käyttöliittymästä käsin. HUOMIO: TÄMÄ RYHMÄLIITOS EI MÄÄRITTELE KÄYTTÄJÄN KÄYTTÖOIKEUKSIA! |
-| Subtype | (käyttäjän käyttäjänimi eli username) |
-| Identifier | (käyttäjän käyttäjänimi eli username) |
-| gidNumber | (sama mikä käyttäjälle määritelty uid-arvo on)
-
-Activation
-
-| Kohta  | Arvo  |
-| --- | --- |
-| Administrative status | Enabled |
-
-Options
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Force | (Kohta valittu) |
-| Execute afrer all approvals | (Kohta valittu)
-
-
-**"Assigments" -välilehti**
-
-Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
- 
-Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
-
-<br>
-
-<h5 id="unix">Unix (Unix -connector)</h5>
- 
-Loimme midPointtiin roolin pääkäyttäjiä varten nimeltään "sudo" ja peruskäyttäjiä varten nimeltään "user".
-
-Aloitimme tekemään ensimmäiseksi "sudo" -roolin. Valitsimme midPointin vasemmasta valikosta ```Roles -> New role```.
-
-Tämän jälkeen teimme seuraavat määrityset:
- 
-**"Basic" -välilehti**
-
-Properties
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Name | sudo |
-| Display name | sudo |
-| Description | Linux -pääkäyttäjäoikeudet (UNIX-connector). Lisää käyttäjä tähän ryhmään, jos haluat sille pääkäyttäjäoikeudet testipalvelimeen. |
-| Subtype | root |
-| Subtype | sudo |
-
-Options
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Force | (Kohta valittu) |
-| Execute afrer all approvals | (Kohta valittu)
- 
-
-**"Assigments" -välilehti**
-
-Lisättiin ryhmä "Assignemnt & Inducement UNIX Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
-
-
-Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
- 
-Seuraavaksi loimme "user" -roolin. Valitsimme midPointin vasemmasta valikosta ```Roles -> New role```.
-
-Tämän jälkeen teimme seuraavat määrityset:
- 
-**"Basic" -välilehti**
-
-Properties
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Name | user |
-| Display name | user |
-| Description | Linux -peruskäyttäjäryhmä (UNIX-connector).Lisää käyttäjä tähän ryhmään, jos haluat sille perus käyttöoikeudet testipalvelimeen. |
-
-Options
- 
-| Kohta  | Arvo  |
-| --- | --- |
-| Force | (Kohta valittu) |
-| Execute afrer all approvals | (Kohta valittu)
- 
-
-**"Assigments" -välilehti**
-
-Lisättiin ryhmä "Assignemnt & Inducement UNIX Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
- 
-<br>
-
-<h2 id="testaus">Testaus</h2>
- 
-Aloitimme testaamisen luomalla ensimmäiseksi käyttäjätunnuksen, sekä henkilökohtaisen käyttäjäryhmän midPointtiin. Tämän jälkeen liitimme sen aiemmin luotuihin connectoreiden rooleihin. Tämän jälkeen kokeilimme kirjautumista kohdejärjestelmiin.
-
-Lopuksi kokeilimme jäädyttää käyttäjä midPointissa ja kuinka se vaikuttaa mahdollisuuteen kirjatua haluttuihin kohdejärjestelmiin.
-
-Kirjauduimme sisään midPointtiin verkkoselaimen kautta pääkäyttäjän tunnuksilla.
- 
-<br>
- 
-<h3 id="kayttajien-luonti-midpointtiin">Käyttäjien luonti midPointtiin</h3>
- 
-Käyttäjät luotiin midPointtiin seuraavalaisesti:
- 
-1. Käyttöliittymän vasemman puoleisesta valikosta valittiin ```Users -> New user```
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(1).png)
- 
-2. Määriteltiin ruudussa näkyviin kohtiin ainakin seuraavat kohdat:
-
-    Properties
-
-    | Kohta  | Arvo  |
-    | --- | --- |
-    | Name (Käyttäjänimi) | ullanieminen |
-    | Description (Kuvaus) | Pääkäyttäjä. |
-    | Subtype (Alityyppi) | ullanieminen |
-    | Full name (Koko nimi) | Ulla Nieminen |
-    | Given name (Etunimi) | Ulla |
-    | Family name (Sukunimi) | Nieminen |
-    | Title (Titteli) | Suunnittelija |
-    | Email (Sähköpostiosoite) | ulla.nieminen@testiposti.fi |
-    | Telephone (Puhelinnumero) | +358123456789 |
-     
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(2).png)
-     
-
-    Activation
-
-    | Kohta  | Arvo  |
-    | --- | --- |
-    | Administrative status (Käyttäjän status) | Enabled (Aktiivinen) |
-    | Valid from (Voimassa alkaen) | <Tämän hetkinen aika 12-tunnin muodossa ja päivämäärä>
-     
-    Password
-
-    | Kohta  | Arvo  |
-    | --- | --- |
-    | Value (Arvo) | <Käyttäjälle haluttu salasana>
-
-    Options
-
-    | Kohta  | Arvo  |
-    | --- | --- |
-    | Force (Pakota) | <Rasti boksissa> |
-    | Execute after all approvals (Suorita kaikkien suoritusten jälkeen) | <Rasti boksissa>
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(3).png)
-
-3. Katsottiin tehtävät muutokset painamalla "Preview changes". Muutokset vaikuttivat ihan ok. 
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(4).png)
-    Lopuksi painettiin sivun alhaalta "Save".
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(5).png)
- 
-    Ullan käyttäjätunnus luotiin onnistuneesti!
- 
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(6).png)
- 
-
-Teimme Matti Nimeiselle tunnukset samalla tavalla paitsi kohta 2 tehtiin seuraavanlaisesti:
-
-Properties
-
-| Kohta  | Arvo  |
-| --- | --- |
-| Name (Käyttäjänimi) | mattinieminen |
-| Description (Kuvaus) | Pääkäyttäjä. |
-| Subtype (Alityyppi) | mattinieminen |
-| Full name (Koko nimi) | Matti Nieminen |
-| Given name (Etunimi) | Matti |
-| Family name (Sukunimi) | Nieminen |
-| Title (Titteli) | Testaaja |
-| Email (Sähköpostiosoite) | matti.nieminen@testiposti.fi |
-| Telephone (Puhelinnumero) | +358129876543 |
-
-Activation
-
-| Kohta  | Arvo  |
-| --- | --- |
-| Administrative status (Käyttäjän status) | Enabled (Aktiivinen) |
-| Valid from (Voimassa alkaen) | <Tämän hetkinen aika 12-tunnin muodossa ja päivämäärä>
-    
-Password
-
-| Kohta  | Arvo  |
-| --- | --- |
-| Value (Arvo) | <Käyttäjälle haluttu salasana>
-
-Options
-
-| Kohta  | Arvo  |
-| --- | --- |
-| Force (Pakota) | <Rasti boksissa> |
-| Execute after all approvals (Suorita kaikkien suoritusten jälkeen) | <Rasti boksissa>
-
-<br>
- 
-<h3 id="kayttajan-liittaminen-active-directoryn-kayttajaksi">Käyttäjän liittäminen Active Directoryn käyttäjäksi</h3>
-
-Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seuraavanlaisesti:
- 
-1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
- 
-2. Käyttäjälistauksesta valittiin "ullanieminen"
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
-
-3. Valittiin välilehdestä "Projections" (1.). Tämän jälkeen painettiin rattaan kuvaa (2.) ja lopuksi "Add projection" (3.).
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(8).png)
- 
-4. Valittiin avautuneesta "Choose object" -ikkunasta "Medusa Active Directory (LDAP) (1.) ja kuitattiin valinta painamalla "Add" (2.).
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(9).png)
- 
-5. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty Active Directoryn piiriin onnistuneesti!
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
-
-Matti Nieminen liitettiin samalla tavalla Active Directoryyn.
- <br>
-
-<h3 id="kayttajan-liittaminen-testipalvelin-palvelimeen-unix-connector">Käyttäjän liittäminen TESTIPALVELIN -palvelimeen (Unix Connector)</h3>
- 
-Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen pääkäyttäjäksi ja Matti Niemisen seuraavanlaisesti:
- 
-1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
- 
-2. Käyttäjälistauksesta valittiin "ullanieminen"
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
- 
-3. Valittiin välilehdestä "Assignments".
- 
-4. Seuraavaksi painettiin vihreää nappia.
- 
-5. Avautui "Select object(s)" -ikkuna. Koska Ulla oli pääkäyttäjä, valitsimme listasta rooli nimeltään "sudo" ja painettiin listan lopusta "Add" -painiketta.
- 
-6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty TESTIPALVELIN -palvelimen käyttäjäksi onnistuneesti!
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
-
-Matti Nieminen lisättiin peruskäyttäjäksi samalla tavalla paitsi kohdassa 5 valittiin sen sijaan rooliksi "user".
- 
-<br>
- 
-<h3 id="kayttajan-liittaminen-openldapn-kayttajaksi">Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</h3>
- 
-Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
- 
-1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
- 
-2. Käyttäjälistauksesta valittiin "ullanieminen"
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
- 
-3. Valittiin välilehdestä "Assignments".
- 
-4. Seuraavaksi painettiin vihreää nappia.
- 
-5. Avautui "Select object(s)" -ikkuna. Koska Ulla oli pääkäyttäjä, valitsimme listasta rooli nimeltään "sudoers" ja painettiin listan lopusta "Add" -painiketta.
-
-6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.).
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
- 
-7. Valittiin uudelleen käyttäjälistauksesta "ullanieminen"
- 
-8. Otettiin itselle talteen "Basic" -välilehdeltä näkyvän "Unix UID number" arvon. Tässä tapauksessa se oli 1114.
- 
-9. Valittiin midPointin vasemmasta valikosta ```Roles -> New role```
- 
-10. Luotiin Ulalle oma henkilökohtainen ryhmä. Laitoimme seuraavat arvot:
-
-    **"Basic" -välilehti**
-
-    Properties
-    
-    | Kohta  | Arvo  |
-    | --- | --- |
-    | Name | ullanieminen |
-    | Display name | ullanieminen |
-    | Description | Käyttäjäryhmä käyttäjälle Ulla Nieminen (Käyttäjätunnus: ullanieminen). Ryhmäliitosta tarvitaan ainakin silloin, jos kirjaudutaan Linux työasemalle tai palvelimelle graaffisesta käyttöliittymästä käsin. HUOMIO: TÄMÄ RYHMÄLIITOS EI MÄÄRITTELE KÄYTTÄJÄN KÄYTTÖOIKEUKSIA! |
-    | Subtype | ullanieminen |
-    | Identifier | ullanieminen |
-    | gidNumber | 1114 |
-
-    Activation
-
-    | Kohta  | Arvo  |
-    | --- | --- |
-    | Administrative status | Enabled |
-
-    Options
-    
-    | Kohta  | Arvo  |
-    | --- | --- |
-    | Force | (Kohta valittu) |
-    | Execute afrer all approvals | (Kohta valittu)
-
-
-    **"Assigments" -välilehti**
-
-    Lisättiin ryhmä "LDAP Unix Group Metarole" -ryhmä painamalla vihreää "+" -painiketta ja valittiin edellä mainittu ryhmä avautuvasta listasta ja painettiin "Add".
-    
-    Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
-     
-11. midPointin vasemmasta valikosta valittiin ```Users -> List users```
- 
-12. Käyttäjälistauksesta valittiin "ullanieminen"
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
- 
-13. Valittiin välilehdestä "Assignments".
- 
-14. Seuraavaksi painettiin vihreää nappia.
- 
-15. Avautui "Select object(s)" -ikkuna. Valitsimme listasta henkilökohtainen ryhmä nimeltään "ullanieminen" ja painettiin listan lopusta "Add" -painiketta.
- 
-16. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty OpenLDAP -palvelimen käyttäjäksi onnistuneesti!
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
-
-Matti Nieminen lisättiin peruskäyttäjäksi samalla tavalla paitsi kohdassa 5 valittiin sen sijaan rooliksi "openldap_basic_users_unix", kohta 10 oli seuraava:
-
-Properties
-
-| Kohta  | Arvo  |
-| --- | --- |
-| Name | mattinieminen |
-| Display name | mattinieminen |
-| Description | Käyttäjäryhmä käyttäjälle Matti Nieminen (Käyttäjätunnus: mattinieminen). Ryhmäliitosta tarvitaan ainakin silloin, jos kirjaudutaan Linux työasemalle tai palvelimelle graaffisesta käyttöliittymästä käsin. HUOMIO: TÄMÄ RYHMÄLIITOS EI MÄÄRITTELE KÄYTTÄJÄN KÄYTTÖOIKEUKSIA! |
-| Subtype | mattinieminen |
-| Identifier | mattinieminen |
-| gidNumber | 1115 |
-
-Activation
-
-| Kohta  | Arvo  |
-| --- | --- |
-| Administrative status | Enabled |
-
-Options
-
-| Kohta  | Arvo  |
-| --- | --- |
-| Force | (Kohta valittu) |
-| Execute afrer all approvals | (Kohta valittu)
-
- 
-Kohta 15:ssa Matti liitettiin ryhmään "mattinieminen". 
-
-<br>
-
-<h3 id="kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin käyttöliittymään</h3>
- 
-Määritimme Ulalle ja Matille oikeudet midPointin käyttöliittymän osalta. Emme haluneet heistä pääkäyttäjiä siihen, koska silloin kummatkin pystyisivät hallitsemaan myös muita käyttäjiä. Teimme heistä sen sijaan loppukäyttäjän (End user). Tällöin kummatkin pääsevät ainoastaan vaihtamaan salasanan, jättämään pääkäyttäjälle pyynnön saada käyttö-oikeus tiettyyn järjestelmän sekä näkemään kumpiekin tämän hetkiset oikeudet järjestelmiin ilman mahdollisuutta muokata niitä.
-
-Teimme tämän seuraavanlaisesti:
-
-1. midPointin vasemmasta valikosta valittiin ```Users -> List users```
- 
-2. Käyttäjälistauksesta valittiin haluttu käyttäjä.
-
-3. Valittiin välilehdestä "Assignments".
- 
-4. Seuraavaksi painettiin vihreää nappia.
- 
-5. Avautui "Select object(s)" -ikkuna. Valitsimme listasta henkilökohtainen ryhmä nimeltään "End user" ja painettiin listan lopusta "Add" -painiketta.
- 
-6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjälle oli määritetty oikeanlaiset käyttöoikeudet midPointin käyttöliittymään.
-
-    ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
-     
-<br>
-
-<h3 id="havaintoja-testauksesta">Havaintoja testauksesta</h3>
- 
-Kaikkiin haluttuihin järjestelmiin pääsi kirjautumaan sisälle määritellyillä oikeuksilla. Jos nimessä on ääkkösiä, ne eivät näy nimessä LDAP-käyttäjien osalta. Tämä siksi, koska OpenLDAP:n "gecos" -määritys ei salli ääkkösiä.
-
-Kokeilimme käyttäjätunnuksen jäädytyksen vaikutuksia kohdejärjestelmin kirjautumisiin. Jäädytimme Ulla Niemisen tunnukset menemällä midPointin vasemmassa valikosta valitsemalla ```Users -> List users```. Etsimme käyttäjälistauksesta Ullan ja painoimme alinapista (1.) ja valitsimme "Disable" (2.). 
-
-![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(11).png)
- 
-Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ei onnistunut, kirjautuminen TESTIPC2:seen ei onnistunut. Tämä siksi, koska OpenLDAP:ssa ei ole tunnusten jäädytysmahdollisuutta. Tämä ongelma on myös midPointin kehittäjän <a href=""https://wiki.evolveum.com/display/midPoint/LDAP+Servers+Summary>Evolveumin tiedossa.</a> Tässä tapauksessa kannattaa poistaa käyttäjältä OpenLDAP:n roolit kohdasta "Assignments".
