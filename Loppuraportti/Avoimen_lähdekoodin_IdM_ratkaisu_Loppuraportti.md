@@ -77,8 +77,9 @@ Päivämäärä: 28.11.2018
         <span>5.5 </span><a href="#kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin kayttöliittymään</a><br>
         <span>5.6 </span><a href="#havaintoja-testauksesta">Havaintoja testauksesta</a><br>
  </ol>
- <span>6. </span><a href="#yhteenveto">Yhteenveto</a><br>
- <span>7. </span><a href="#lahteet">Lähteet</a><br>
+ <span>6. </span><a href="#lokitus">Lokitus</a><br>
+ <span>7. </span><a href="#yhteenveto">Yhteenveto</a><br>
+ <span>8. </span><a href="#lahteet">Lähteet</a><br>
 </ol>
 
 <h2 id="johdanto">Johdanto</h2>
