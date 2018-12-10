@@ -3356,6 +3356,8 @@ Hoffman, C. 2012. How To Customize Ubuntu’s Message of the Day. Luettavissa: <
  
 Horsfall, D. 2007. Re: Listening on multiple ports for openldap 2.3.33. Luettavissa: <a href="https://www.openldap.org/lists/openldap-software/200702/msg00196.html">https://www.openldap.org/lists/openldap-software/200702/msg00196.html</a>. Luettu: 14.11.2018.
  
+HowtoForge. 2018. Managing a Headless VirtualBox Installation with phpvirtualbox (Ubuntu 16.04 LTS). Luettavissa: <a href="https://www.howtoforge.com/tutorial/managing-a-headless-virtualbox-installation-with-phpvirtualbox-on-ubuntu-16.04/">https://www.howtoforge.com/tutorial/managing-a-headless-virtualbox-installation-with-phpvirtualbox-on-ubuntu-16.04/</a>. Luettu: 29.10.2018. 
+ 
 Httpd Wiki. 2017. Redirect Request to SSL. Luettavissa: <a href="https://wiki.apache.org/httpd/RedirectSSL">https://wiki.apache.org/httpd/RedirectSSL</a>. Luettu: 14.11.2018.
  
 Huculak, M. 2017. How to create a Linux virtual machine on Windows 10 using Hyper-V. Luettavissa: <a href="https://www.windowscentral.com/how-run-linux-distros-windows-10-using-hyper-v">https://www.windowscentral.com/how-run-linux-distros-windows-10-using-hyper-v</a>. Luettu: 31.10.2018.
@@ -3367,8 +3369,14 @@ Lumina Networks. 2017. Installing Zip and Unzip for Ubuntu. Luettavissa: <a href
 Microsoft. 2016. Install the Hyper-V role on Windows Server. Luettavissa: <a href="https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server">https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server</a>. Luettu: 31.10.2018.
 
 monline. 2012. How to configure phpLDAPadmin to connect to an LDAP server via SSL (ie. ldaps). Luettavissa: <a href="http://muzso.hu/2012/03/29/how-to-configure-phpldapadmin-to-connect-to-an-ldap-server-via-ssl-ie.-ldaps">http://muzso.hu/2012/03/29/how-to-configure-phpldapadmin-to-connect-to-an-ldap-server-via-ssl-ie.-ldaps</a>. Luettu: 14.11.2017.
+ 
+Nissinen, M. 2018. AVOIMEN LÄHDEKOODIN IDM-JÄRJESTELMÄN VERTAILU (6/7). Luettavissa: <a href="https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-3/">https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-3/</a>. Luettu: 3.10.2018.
 
 Noris, I. 2016. LDAP PosixAccount and PosixGroup Management. Luettavissa: <a href="https://wiki.evolveum.com/display/midPoint/LDAP+PosixAccount+and+PosixGroup+Management#LDAPPosixAccountandPosixGroupManagement-Setup">https://wiki.evolveum.com/display/midPoint/LDAP+PosixAccount+and+PosixGroup+Management#LDAPPosixAccountandPosixGroupManagement-Setup</a>. Luettu: 9.11.2018.
+
+Oracle. 2018. Download VirtualBox. Luettavissa. <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a>. Luettu: 29.10.2018.
+ 
+Parttimaa, J. 2018. AVOIMEN LÄHDEKOODIN IDM-JÄRJESTELMÄN VERTAILU (4/7). Luettavissa: <a href="https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-4-7/">https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-4-7/</a>. Luettu: 3.10.2018.
  
 Papiernik, M. 2017. How To Use Apache as a Reverse Proxy with mod_proxy on Ubuntu 16.04. Luettavissa: <a href="https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04">https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04</a>. Luettu: 14.11.2018.
 
