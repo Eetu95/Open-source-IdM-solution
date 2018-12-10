@@ -3388,10 +3388,8 @@ Wallen, J. 2018. How to install phpLDAPadmin on Ubuntu 18.04. Luettavissa: <a hr
 
 Wallen, J. 2016. How to populate an LDAP server with users and groups via phpLDAPadmin. Luettavissa: <a href="https://www.techrepublic.com/article/how-to-populate-an-ldap-server-with-users-and-groups-via-phpldapadmin/">https://www.techrepublic.com/article/how-to-populate-an-ldap-server-with-users-and-groups-via-phpldapadmin/</a>. Luettu: 31.10.2018.
  
-weichbrodt.me. 2018. Install and configure OpenLDAP on Debian 8 (Jessie). Luettavissa: <a href="https://weichbrodt.me/tutorial:ldap:installopenldap"></a>. Luettu: 31.10.2018.
+weichbrodt.me. 2018. Install and configure OpenLDAP on Debian 8 (Jessie). Luettavissa: <a href="https://weichbrodt.me/tutorial:ldap:installopenldap">https://weichbrodt.me/tutorial:ldap:installopenldap</a>. Luettu: 31.10.2018.
  
 !robot. 2018. Manage Headless VirtualBox Host On Ubuntu 16.04 LTS With PhpVirtualBox, Apache2 And PHP 7.1. Luettavissa: <a href="https://websiteforstudents.com/manage-headless-virtualbox-host-on-ubuntu-16-04-lts-with-phpvirtualbox-apache2-and-php-7-1/">https://websiteforstudents.com/manage-headless-virtualbox-host-on-ubuntu-16-04-lts-with-phpvirtualbox-apache2-and-php-7-1/</a>. Luettu: 29.10.2018.
  
 !robot. 2018. VirtualBox 5.2 On Ubuntu 16.04 LTS Server (Headless). Luettavissa: <a href="https://websiteforstudents.com/virtualbox-5-2-on-ubuntu-16-04-lts-server-headless/">https://websiteforstudents.com/virtualbox-5-2-on-ubuntu-16-04-lts-server-headless/</a>. Luettu: 29.10.2018.
- 
-
