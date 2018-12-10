@@ -2361,7 +2361,7 @@ Täältä löytyy nyt uusi luotu avain kryptatussa muodossa. Hiiren oikealla pai
 
 ![oikeudet](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture8.PNG?raw=true)
 
-Tmän jälkeen menille takasin Manage computer certificates asetuksiin. Personal - Certificates kansiosta hiiren oikealla painikkeella klikkasimme meidän sertifikaatin nimeä ja valitsimme All Tasks - Export...
+Tämän jälkeen menimme takaisin Manage computer certificates asetuksiin. Personal - Certificates kansiosta hiiren oikealla painikkeella klikkasimme meidän sertifikaatin nimeä ja valitsimme All Tasks - Export...
 
 ![Export certificate](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture9.png?raw=true)
 
