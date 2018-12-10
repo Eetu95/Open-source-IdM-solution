@@ -3374,12 +3374,20 @@ Projektia varten Haaga-Helia tarjosi meille fyysiset palvelinkoneet Servulasta, 
 Ask Ubuntu. 2016. How to find path to java?. Luettavissa: <a href="https://askubuntu.com/questions/772235/how-to-find-path-to-java">https://askubuntu.com/questions/772235/how-to-find-path-to-java</a>. Luettu: 29.10.2018
 
 Ask Ubuntu. 2017. OpenLDAP error configuring StartTLS: ldap_modify: Other (e.g., implementation specific) error (80). Luettavissa: <a href="https://askubuntu.com/questions/936382/openldap-error-configuring-starttls-ldap-modify-other-e-g-implementation-sp">https://askubuntu.com/questions/936382/openldap-error-configuring-starttls-ldap-modify-other-e-g-implementation-sp</a>. Luettu: 14.11.2018.
+
+Chandrasekaran, R. 2017. Step by Step Guide to Setup LDAPS on Windows Server. Luettavissa: <a href=https://blogs.msdn.microsoft.com/microsoftrservertigerteam/2017/04/10/step-by-step-guide-to-setup-ldaps-on-windows-server/>https://blogs.msdn.microsoft.com/microsoftrservertigerteam/2017/04/10/step-by-step-guide-to-setup-ldaps-on-windows-server/</a>. Luettu 5.11.2018.
+
+cyberciti.biz. 2017. How to see/get a list of MySQL/MariaDB users accounts. Luettavissa: <a href=https://www.cyberciti.biz/faq/how-to-show-list-users-in-a-mysql-mariadb-database/>https://www.cyberciti.biz/faq/how-to-show-list-users-in-a-mysql-mariadb-database/</a>. Luettu 10.10.2018.
  
 Ellingwood, J. 2014. How To Create a SSL Certificate on Apache for Ubuntu 14.04. Luettavissa: <a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-14-04">https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-14-04</a>. Luettu: 14.11.2018.
  
-Ellingwood, J. 2014. How To Encrypt OpenLDAP Connections Using STARTTLS. Luettavissa: <a href="https://www.digitalocean.com/community/tutorials/how-to-encrypt-openldap-connections-using-starttls">https://www.digitalocean.com/community/tutorials/how-to-encrypt-openldap-connections-using-starttls</a>. Luettu: 14.11.2018. 
+Ellingwood, J. 2014. How To Encrypt OpenLDAP Connections Using STARTTLS. Luettavissa: <a href="https://www.digitalocean.com/community/tutorials/how-to-encrypt-openldap-connections-using-starttls">https://www.digitalocean.com/community/tutorials/how-to-encrypt-openldap-connections-using-starttls</a>. Luettu: 14.11.2018.
+
+Evolveum. 2017. How to connect a Resource in midPoint 3.6. Luettavissa: <a href="https://www.youtube.com/watch?v=HBYZpZ22fDo">https://www.youtube.com/watch?v=HBYZpZ22fDo</a>. Luettu 29.10.2018.
 
 Gnome. 2018. Disable the user list. Luettavissa: <a href="https://help.gnome.org/admin/system-admin-guide/stable/login-userlist-disable.html.en">https://help.gnome.org/admin/system-admin-guide/stable/login-userlist-disable.html.en</a>. Luettu: 21.11.2018.
+
+Heddings, L. 2006. Change Ubuntu Server from DHCP to a Static IP Address. Luettavissa: <a href=https://www.howtogeek.com/howto/ubuntu/change-ubuntu-server-from-dhcp-to-a-static-ip-address/>https://www.howtogeek.com/howto/ubuntu/change-ubuntu-server-from-dhcp-to-a-static-ip-address/</a>. Luettu 5.10.2018.
  
 Hoffman, C. 2012. How To Customize Ubuntu’s Message of the Day. Luettavissa: <a href="https://www.howtogeek.com/104708/how-to-customize-ubuntus-message-of-the-day/">https://www.howtogeek.com/104708/how-to-customize-ubuntus-message-of-the-day/</a>. Luettu: 8.10.2018.
  
@@ -3400,10 +3408,14 @@ Lumina Networks. 2017. Installing Zip and Unzip for Ubuntu. Luettavissa: <a href
 Microsoft. 2016. Install the Hyper-V role on Windows Server. Luettavissa: <a href="https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server">https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server</a>. Luettu: 31.10.2018.
 
 monline. 2012. How to configure phpLDAPadmin to connect to an LDAP server via SSL (ie. ldaps). Luettavissa: <a href="http://muzso.hu/2012/03/29/how-to-configure-phpldapadmin-to-connect-to-an-ldap-server-via-ssl-ie.-ldaps">http://muzso.hu/2012/03/29/how-to-configure-phpldapadmin-to-connect-to-an-ldap-server-via-ssl-ie.-ldaps</a>. Luettu: 14.11.2017.
+
+Mounir, N. 2017. How to create a domain on Windows Server. Luettavissa: <a href=https://win10faq.com/create-domain-windows-server/>https://win10faq.com/create-domain-windows-server/</a>. Luettu 22.10.2018.
  
 Nissinen, M. 2018. AVOIMEN LÄHDEKOODIN IDM-JÄRJESTELMÄN VERTAILU (6/7). Luettavissa: <a href="https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-3/">https://opensourceidm.wordpress.com/2018/10/03/avoimen-lahdekoodin-idm-jarjestelman-vertailu-3/</a>. Luettu: 3.10.2018.
 
 Noris, I. 2016. LDAP PosixAccount and PosixGroup Management. Luettavissa: <a href="https://wiki.evolveum.com/display/midPoint/LDAP+PosixAccount+and+PosixGroup+Management#LDAPPosixAccountandPosixGroupManagement-Setup">https://wiki.evolveum.com/display/midPoint/LDAP+PosixAccount+and+PosixGroup+Management#LDAPPosixAccountandPosixGroupManagement-Setup</a>. Luettu: 9.11.2018.
+
+Noris, I. 2017. MariaDB. Luettavissa: <a href=https://wiki.evolveum.com/display/midPoint/MariaDB>https://wiki.evolveum.com/display/midPoint/MariaDB</a> Luettu: 10.10.2018.
 
 Oracle. 2018. Download VirtualBox. Luettavissa. <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a>. Luettu: 29.10.2018.
  
@@ -3411,9 +3423,16 @@ Parttimaa, J. 2018. AVOIMEN LÄHDEKOODIN IDM-JÄRJESTELMÄN VERTAILU (4/7). Luet
  
 Papiernik, M. 2017. How To Use Apache as a Reverse Proxy with mod_proxy on Ubuntu 16.04. Luettavissa: <a href="https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04">https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04</a>. Luettu: 14.11.2018.
 
+Patankar, M. 2017. SHA-256 Self Signed Certificate for Windows Server 2012 R2. Luettavissa: <a href=https://blogs.msdn.microsoft.com/mayurpatankar/2017/09/01/sha-256-self-signed-certificate-for-windows-server-2012-r2/>https://blogs.msdn.microsoft.com/mayurpatankar/2017/09/01/sha-256-self-signed-certificate-for-windows-server-2012-r2/</a>. Luettu 9.11.2018.
+
 Raj. 2017. Configure LDAP Client on Ubuntu 16.04 / Debian 8. Luettavissa: <a href="https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/configure-ldap-client-on-ubuntu-16-04-debian-8.html">https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/configure-ldap-client-on-ubuntu-16-04-debian-8.html</a>. Luettu: 21.11.2018.
  
-Semancik, R. 2017. Trying MidPoint. Luettavissa: <a href="https://wiki.evolveum.com/display/midPoint/Trying+MidPoint">https://wiki.evolveum.com/display/midPoint/Trying+MidPoint</a>. Luettu: 1.10.2018
+Semancik, R. 2017. Trying MidPoint. Luettavissa: <a href="https://wiki.evolveum.com/display/midPoint/Trying+MidPoint">https://wiki.evolveum.com/display/midPoint/Trying+MidPoint</a>. Luettu: 1.10.2018.
+
+Semancik, R. 2018. Practical Identity
+Management with midPoint. Luettavissa: <a href=https://evolveum.com/wp-content/uploads/2018/04/practical-idm-with-midpoint-1.1.pdf>https://evolveum.com/wp-content/uploads/2018/04/practical-idm-with-midpoint-1.1.pdf</a>. Luettu 29.10.2018. 
+
+Semancik, R. 2018. Active Directory with LDAP connector. Luettavissa: <a href="https://wiki.evolveum.com/display/midPoint/Active+Directory+with+LDAP+connector#ActiveDirectorywithLDAPconnector-RecommendedConnector">https://wiki.evolveum.com/display/midPoint/Active+Directory+with+LDAP+connector#ActiveDirectorywithLDAPconnector-RecommendedConnector</a>. Luettu: 2.11.2018.
 
 SK. 2015. Install OpenLDAP In Ubuntu 15.10 And Debian 8. Luettavissa: <a href="https://www.unixmen.com/install-openldap-in-ubuntu-15-10-and-debian-8/">https://www.unixmen.com/install-openldap-in-ubuntu-15-10-and-debian-8/</a>. Luettu: 31.10.2018.
  
