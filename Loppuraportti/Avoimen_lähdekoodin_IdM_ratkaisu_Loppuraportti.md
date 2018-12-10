@@ -3337,6 +3337,26 @@ Kokeilimme käyttäjätunnuksen jäädytyksen vaikutuksia kohdejärjestelmin kir
 Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ja TESTIPC1:seen ei onnistunut, kirjautuminen TESTIPC2:seen kuitenkin onnistui. Tämä siksi, koska OpenLDAP:ssa ei ole tunnusten jäädytysmahdollisuutta. Tämä ongelma on myös midPointin kehittäjän <a href=""https://wiki.evolveum.com/display/midPoint/LDAP+Servers+Summary>Evolveumin tiedossa.</a> Tässä tapauksessa kannattaa poistaa käyttäjältä OpenLDAP:n roolit kohdasta "Assignments". ei myöskään pääse kirjautumaan jäädytyksen jälkeen sisälle.
  
 <br>
+
+<h3 id="Lokitus">Lokitus</h3>
+
+<h4 id="Eclipse midPoint Log Viewer">Log Viewer</h4>
+
+MidPoint on kehittänyt työkalun nimeltä <a href="https://wiki.evolveum.com/display/midPoint/Log+Viewer">"Log Viewer"</a>, jolla pystyy helposti tutkimaan suuria lokitiedostoja. Log Viewer on Eclipse plugini, joka näyttää loki tiedostot hyvin järjestettynä, käyttämällä Eclipse "Outline" ja "Problems" näkymiä.
+
+Eclipse midPoint Log Viewerin ominaisuuksiin kuuluu mm. "Showing log outline", "Showing error, warning and information messages", "Folding (collapse + expand)", "Permanently removing unnecessary lines", "Objects and threads dictionary", "OID highlighting and associated information display", "Logfile preprocessing: LogTrimmer tool", "Logfile erasing: Tuncater tool", "Performance tuning".
+
+<h4 id="Audit Log Viewer">Audit Log Viewer</h4>
+
+![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer1.PNG?raw=true)
+
+MidPointista löytyy "Audit Log Viewer" -näkymä, jossa näkee kaikki midPointin lokit. Lokeja pystyy suodattamaan mm. ajakajakson, tapahtumatyypin, kohteen, aloittajan yms. mukaan.
+
+![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer2.PNG?raw=true)
+
+Lokit voi avata, jolloin niistä saa  tarkempaa tietoa. Mm. Timestamp, Event identifier, Event Type, Event Stage, Initiator, Target ref., Outcome, Session Identifier, Resource name, Object Name, Execution result jne.
+
+Lokeista näkyy mm. käyttäjien luonnit/poistamiset, roolien lisäykset, tehtävänannot, istunnot jne.
  
 <h3 id="yhteenveto">Yhteenveto</h3>
  
