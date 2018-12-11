@@ -104,8 +104,8 @@ sekä muutamat testikoneet.
 - Järjestelmä on monipuolinen, ilmainen ja avoimeen lähdekoodiin perustuva.
 - IdM-järjestelmiä on vertailtu monipuolisesti sekä vertailussa otetaan
 huomioon vaatimukset. Lopputuloksena vertailusta Excel-taulukko
-sekä lista ennalta määritellyistä vaatimuksista.<br>
- 
+sekä lista ennalta määritellyistä vaatimuksista.
+<br>
  
 Asetimme myös seuraavia oppimistavoitteita:  
 - Oppia IdM-järjestelmistä sekä niiden yhteyksistä muihin järjestelmiin
