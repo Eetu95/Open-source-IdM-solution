@@ -84,10 +84,10 @@ Päivämäärä: 28.11.2018
 
 <h2 id="johdanto">Johdanto</h2>
  
-Tässä raportissa kerromme kuinka avoimen lähdekoodiin perustuvan Identiteetinhallintajärjestelmän saa käyttöön (asennus ja määritys) sekä kuinka sillä voidaan hallita Unix/Linux -palvelien, OpenLDAP-palvelimen sekä Windows -domainin käyttäjiä. Käytämme projektissa Evolveumin "midPoint" nimistä avoimen lähdekoodin identiteetinhallintajärjestelmää.
+Tässä raportissa kerromme kuinka avoimen lähdekoodiin perustuvan Identiteetinhallintajärjestelmän saa käyttöön (asennus ja määritys) sekä kuinka sillä voidaan hallita Unix/Linux -palvelimien, OpenLDAP-palvelimen sekä Windows -domainin käyttäjiä. Käytämme projektissa Evolveumin <a href="https://evolveum.com/midpoint/">"midPoint"</a> nimistä avoimen lähdekoodin identiteetinhallintajärjestelmää.
 
 Käynnistimme projektin kyseisestä aiheesta, koska muutamat projektiryhmän jäsenet ovat työssään joutuneet tekemään
-töitä Iddentiteetinhallintajärjestelmien parissa. Yleensä kyseiset järjestelmät, jotka ovat yrityksissä
+töitä Identiteetinhallintajärjestelmien parissa. Yleensä kyseiset järjestelmät, jotka ovat yrityksissä
 käytössä ovat suljetun lähdekoodin järjestelmiä, jonka vuoksi yritykset
 joutuvat maksamaan järjestelmän käytöstä lisenssimaksua. Tämän lisäksi
 järjestelmän ylläpidosta, tuesta sekä päivityksistä joudutaan yleensä
@@ -95,9 +95,9 @@ maksamaan useita tuhansia euroja. Projektityön ideana oli lähteä vertailemaan
 markkinoilla saatavilla olevia avoimen lähdekoodin Identiteetinhallintajärjestelmiä,
 vertailla niiden ominaisuuksia sekä laatua. Laatua päästiin kokeilemaan esimerkiksi verkossa saatavilla olevilla demoversioilla.
 
-Projektimme tehtävänä oli vertaa avoimen lähdekoodin Identiteetinhallintajärjestelmiä, joista valitsemme parhaan ja testaamme sen toimivuutta testiympäristössä.
+Projektimme tehtävänä oli vertaa avoimen lähdekoodin Identiteetinhallintajärjestelmiä, joista valitsemme parhaan ja testata sen toimivuutta testiympäristössä.
 
-Asetimme projektille tavoitteet, jotka olivat seuraavat: 
+Asetimme projektille seuraavat tavoitteet: 
 - IdM-järjestelmä on toimiva ja luotettava. Testaamme järjestelmää testiympäristössä.
 Lopputuloksena on asennettu IdM-järjestelmän Master-kone
 sekä muutamat testikoneet.
@@ -105,7 +105,8 @@ sekä muutamat testikoneet.
 - IdM-järjestelmiä on vertailtu monipuolisesti sekä vertailussa otetaan
 huomioon vaatimukset. Lopputuloksena vertailusta Excel-taulukko
 sekä lista ennalta määritellyistä vaatimuksista.
-
+ 
+ 
 Asetimme myös oppimistavoitteita, jotka olivat seuraavat:
 - Oppia IdM-järjestelmistä sekä niiden yhteyksistä muihin järjestelmiin
 ja rajapintoihin.
