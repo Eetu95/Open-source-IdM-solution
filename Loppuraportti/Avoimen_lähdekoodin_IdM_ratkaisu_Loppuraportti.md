@@ -3522,7 +3522,7 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(1).png)
     <br>
-    Kuva 117: Ruudunkaappaus valikosta.
+    Kuva 123: Ruudunkaappaus valikosta.
     <br>
     <br>
  
@@ -3544,7 +3544,7 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
      
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(2).png)
     <br>
-    Kuva 123: Ruudunkaappaus määrityksistä (1/2).
+    Kuva 124: Ruudunkaappaus määrityksistä (1/2).
     <br>
     <br>
      
@@ -3571,7 +3571,7 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(3).png)
     <br>
-    Kuva 124: Ruudunkaappaus määrityksistä (2/2).
+    Kuva 125: Ruudunkaappaus määrityksistä (2/2).
     <br>
     <br>
 
@@ -3579,14 +3579,14 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(4).png)
     <br>
-    Kuva 125: Ruudunkaappaus esikatselusta (1/2).
+    Kuva 126: Ruudunkaappaus esikatselusta (1/2).
     <br>
     <br>
     Lopuksi painettiin sivun alhaalta "Save".
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(5).png)
     <br>
-    Kuva 126: Ruudunkaappaus esikatselusta (2/2).
+    Kuva 127: Ruudunkaappaus esikatselusta (2/2).
     <br>
     <br>
  
@@ -3594,7 +3594,7 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(6).png)
     <br>
-    Kuva 127: Ruudunkaappaus ilmoituksesta.
+    Kuva 128: Ruudunkaappaus ilmoituksesta.
     <br>
     <br> 
 
@@ -3646,7 +3646,7 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
     <br>
-    Kuva 128: Ruudunkaappaus listauksesta.
+    Kuva 129: Ruudunkaappaus listauksesta.
     <br>
     <br> 
 
@@ -3654,7 +3654,7 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(8).png)
     <br>
-    Kuva 129: Ruudunkaappaus.
+    Kuva 130: Ruudunkaappaus.
     <br>
     <br> 
  
@@ -3662,7 +3662,7 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(9).png)
     <br>
-    Kuva 130: Ruudunkaappaus listauksesta.
+    Kuva 131: Ruudunkaappaus listauksesta.
     <br>
     <br> 
  
@@ -3670,7 +3670,7 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 131: Ruudunkaappaus kohdasta.
+    Kuva 132: Ruudunkaappaus kohdasta.
     <br>
     <br> 
 
@@ -3687,7 +3687,7 @@ Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen pääkäyttäjäksi ja Matti Ni
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
     <br>
-    Kuva 132: Ruudunkaappaus listauksesta.
+    Kuva 133: Ruudunkaappaus listauksesta.
     <br>
     <br> 
  
@@ -3701,7 +3701,7 @@ Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen pääkäyttäjäksi ja Matti Ni
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 133: Ruudunkaappaus kohdasta.
+    Kuva 134: Ruudunkaappaus kohdasta.
     <br>
     <br> 
 
@@ -3719,7 +3719,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
     <br>
-    Kuva 134: Ruudunkaappaus listauksesta.
+    Kuva 135: Ruudunkaappaus listauksesta.
     <br>
     <br> 
  
@@ -3733,7 +3733,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 135: Ruudunkaappaus kohdasta.
+    Kuva 136: Ruudunkaappaus kohdasta.
     <br>
     <br> 
  
@@ -3784,7 +3784,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
     <br>
-    Kuva 136: Ruudunkaappaus listasta.
+    Kuva 137: Ruudunkaappaus listasta.
     <br>
     <br> 
  
@@ -3798,7 +3798,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 137: Ruudunkaappaus kohdasta.
+    Kuva 138: Ruudunkaappaus kohdasta.
     <br>
     <br> 
 
@@ -3853,7 +3853,7 @@ Teimme tämän seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 138: Ruudunkaappaus kohdasta.
+    Kuva 139: Ruudunkaappaus kohdasta.
     <br>
     <br> 
      
@@ -3869,7 +3869,7 @@ Kokeilimme käyttäjätunnuksen jäädytyksen vaikutuksia kohdejärjestelmin kir
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(11).png)
 <br>
-Kuva 139: Ruudunkaappaus listasta.
+Kuva 140: Ruudunkaappaus listasta.
 <br>
 <br> 
  
@@ -3895,7 +3895,7 @@ Eclipse midPoint Log Viewerin ominaisuuksiin kuuluu mm. "Showing log outline", "
 
 ![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer1.PNG?raw=true)
 <br>
-Kuva 140: Audit Log Viewer.
+Kuva 141: Audit Log Viewer.
 <br>
 <br>
 
@@ -3903,7 +3903,7 @@ MidPointista löytyy "Audit Log Viewer" -näkymä, jossa näkee kaikki midPointi
 
 ![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer2.PNG?raw=true)
 <br>
-Kuva 141: Audit Log Viewer.
+Kuva 142: Audit Log Viewer.
 <br>
 <br>
 
@@ -3921,7 +3921,7 @@ Projektia varten Haaga-Helia tarjosi meille fyysiset palvelinkoneet Servulasta, 
 
 ![Järjestelmäkartta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/J%C3%A4rjestelm%C3%A4kartta.jpg?raw=true)
 <br>
-Kuva 142: Järjestelmäkartta projektista.
+Kuva 143: Järjestelmäkartta projektista.
 <br>
 <br>
 
