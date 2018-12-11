@@ -121,6 +121,7 @@ ja rajapintoihin.
 IdM-järjestelmä (Englanniksi: Identity Management System, Suomeksi: Identiteetinhallintajärjestelmä) on järjestelmä, jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä, palveluita, tietokantoja, ohjelmistoja sekä ohjelmien käyttöoikeuksia että pääsynhallintaa. IdM:n ansiosta yritys pystyy helposti pitämään huolen siitä ketkä työntekijät pääsevät käyttämään mitäkin tietojärjestelmiä sekä palveluita ja ketkä taas eivät. IdM-järjestelmiä on olemassa hyvin erilaisia ja hyvin erilaisina kokonaisuuksina.
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/IdM_esimerkki.jpg)
+ 
 Kuva 1: Havainnollistava esimerkki Indentiteetinhallintajärjestelmästä (IdM).
  
 <br>
@@ -346,148 +347,206 @@ Tämän lisäksi asenamme WINDOWSSERVER -palvelimeen OpenLDAP -virtuaalipalvelim
 
 Ensimmäisenä esivalmisteluvaiheena oli Linux palvelimen käyttöjärjestelmän asennus ja konfigurointi. MidPoint järjestelmä asennetaan tähän käyttöjärjestelmään. Valitsimme palvelimeksi Ubuntu Server 16.04.5 LTS 64-bittisen version. Asensimme käyttöjärjestelmän fyysiselle tietokoneelle USB-livetikun avulla. Valitsimme tietokoneesta käynnistystavaksi USB boottauksen, jolloin pääsimme asentamaan käyttöjärjestelmää.
 
-![käyttöjärjestelmän kielen valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(01).png?raw=true)
+![käyttöjärjestelmän kielen valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(01).png?raw=true) 
+<br>
 Kuva 4: Käyttöjärjestelmän kielen valinta.
+<br>
 <br>
 Heti ensimmäiseksi ”USB-boottauksen” jälkeen ja kun tuli asennusruutu näkyviin, painoimme F2:sta (1.) ja valitsimme käyttöjärjestelmän kieleksi englannin (2.). Hyväksyimme valinnan painamalla Enter.
 
 ![näppäimistön kieli](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(02).png?raw=true)
+<br>
 Kuva 5: Näppäimistön kieli.
+<br>
 <br>
 Tämän jälkeen painoimme F3:sta (1.) ja valitsimme näppäimistön kieleksi suomen (2.). Hyväksyimme valinnan painamalla Enter.
 
 ![ubuntu server asennus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(03).png?raw=true)
+<br>
 Kuva 6: Ubuntu Server asennus.
+<br>
 <br>
 Aloitimme tänän jälkeen asennuksen valitsemalla ”Install Ubuntu Server” nuolinäppäimillä ja hyväksymällä valinnan painamalla Enter.
 
 ![palvelimen kieli](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(04).png?raw=true)
+<br>
 Kuva 7: Palvelimen kieli.
+<br>
 <br>
 Avautui ohjattu asennus. Valitsimme nuolinäppäimillä palvelimen kieleksi englannin eli ”English”. Hyväksyimme valinnan painamalla Enter.
 
 ![sijainti](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(05).png?raw=true)
+<br>
 Kuva 8: Sijainti.
+<br>
 <br>
 Seuraavassa kohdassa piti valita sijainti. Koska sijaintimme on Suomi, valitsimme ”other”. Jatkoimme eteenpäin painamalla Enter.
 
 ![sijainti_europe](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(06).png?raw=true)
+<br>
 Kuva 9: Sijainti "Europe".
+<br>
 <br>
 Sitten valitsimme ”Europe”. Hyväksyimme sen painamalla Enter.
 
 ![sijainti_finland](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(07).png?raw=true)
+<br>
 Kuva 10: Sijainti "Finland".
+<br>
 <br>
 Lopulta valitsimme "Finland". Hyväksyimme tämänkin painamalla Enter.
 
 ![näppäimistön kieli_UTF-8](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(08).png?raw=true)
+<br>
 Kuva 11: Näppäimistön kieli "UTF-8".
+<br>
 <br>
 Koska valitsemamme maa ja kieli eivät muka sopineet yhteen, jouduimme valitsemaan ”United States – en_US.UTF-8”. Hyväksyimme valinnan painamalla Enter.
 
 ![hostname](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(09).png?raw=true)
+<br>
 Kuva 12: Hostname.
+<br>
 <br>
 Annoimme järjestelmän hostnameksi ”MIDPOINTIDM” (1.). Jatkoimme tämän jälkeen eteenpäin valitsemalla tabilla ”Continue” (2.) ja hyväksymällä valinta painamalla Enter.
 
 ![pääkäyttäjän nimi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(10).png?raw=true)
+<br>
 Kuva 13: Pääkäyttäjän nimi.
+<br>
 <br>
 Seuraavaksi piti kertoa luotavan pääkäyttäjän koko nimi. Laitoimme nimeksi projektiryhmämme nimen eli ”Pisnismiehet” (1.). Kun olimme tämän kirjoittanut, valitsimme tabilla ”Continue” (2.) ja hyväksyimme valinnan painamalla Enter.
 
 ![käyttäjätunnus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(11).png?raw=true)
+<br>
 Kuva 14: Käyttäjätunnus.
+<br>
 <br>
 Käyttäjätunnukseksi ehdotettiin kuvan mukaisesti projektiryhmämme nimeä ilman isoa alkukirjainta (1.). Jatkoimme eteenpäin valitsemalla tabilla ”Continue” (2.) ja hyväksyimme valinnan painamalla Enter.
 
 ![salasana](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(12).png?raw=true)
+<br>
 Kuva 15: Salasana.
+<br>
 <br>
 Seuraavaksi loimme hyvän salasanan käyttäjälle ”pisnismiehet” (1.). Jatkoimme eteenpäin valitsemalla tabilla ”Continue” (2.) ja hyväksyimme valinnan painamalla Enter.
 
 ![salasanan toisto](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(13).png?raw=true)
+<br>
 Kuva 16: Salasanan vaihto.
+<br>
 <br>
 Toistimme seuraavaksi salasanan (1.). Jatkoimme eteenpäin valitsemalla tabilla ”Continue” (2.) ja hyväksyimme valinnan painamalla Enter.
 
 ![kotihakemiston kryptaus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(14).png?raw=true)
+<br>
 Kuva 17: Kotihakemiston kryptaus.
+<br>
 <br>
 Seuraavaksi kysyttiin, halutaanko kotihakemisto kryptata. Koska halusimme näin tehdä tietoturvallisuuden parentamiseksi valitsimme nuolinäppäimillä valinnan ”Yes” ja hyväksyimme valinnan painamalla Enter.
 
 ![aikavyöhyke](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(15).png?raw=true)
+<br>
 Kuva 18: Aikavyöhyke.
+<br>
 <br>
 Asennusohjelma ehdotti aikavyöhykkeeksi ”Europe/Helsinki”. Se oli oikein ja valitsimme nuolinäppäimillä ”Yes” ja hyväksyimme sen painamalla Enter.
 
 ![kiintolevyn osiointi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(16).png?raw=true)
+<br>
 Kuva 19: Kiintolevyn osiointi.
+<br>
 <br>
 Seuraavaksi kysyttiin palvelimen kiintolevyn osioinnista, mitä sille tehdään. Meillä ei ollut tarvetta alkaa kryptaamaan levyä, joten valitsimme nuolinäppäimillä  ”Guided – use entire disk and set up LVM” ja painoimme Enter.Toinen syy sille miksi emme lähteneet kryptaamaan levyä oli se, että tällöin SSH-yhteydenotto palvelimen uudelleenkäynnistyksen yhteydessä ei olisi onnistunut ilman fyysistä käyntiä palvelimella. Tällöin olisimme joutuneet antamaan fyysisesti palvelimelle kryptauksen salasanan.
 
 ![osioitava kiintolevy](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(17).png?raw=true)
+<br>
 Kuva 20: Osioitava kiintolevy.
+<br>
 <br>
 Seuraavaksi kysyttiin osioitavaa kiintolevyä.  Valitsimme haluamamme ja jatkoimme eteenpäin painamalla Enter. (Kuvassa näkyvä levy ei ole aivan oikea, sillä imitoimme asennusta Oracle VM VirtualBoxissa kuvankaappausten takia.)
 
 ![hyväksytään muutokset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(18).png?raw=true)
+<br>
 Kuva 21: Hyväksytään muutokset.
+<br>
 <br>
 Hyväksyimme kirjoitettavat muutokset liittyen osiointiin valitsemalla nuolinäppäimillä ”Yes” ja kuittaamalla valinta painamalla Enter.
 
 ![kiintolevyn osioinnin koko](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(19).png?raw=true)
+<br>
 Kuva 22: Kiintolevyn osioinnin koko.
+<br>
 <br>
 Seuraavaksi jouduimme kertomaan kuinka suuren osan kiintolevystä halusimme osioida. Valitsimme koko levyn koon eli kirjoitimme ”max” (1.). Tämän jälkeen valitsimme tabilla ”Continue” (2.) ja hyväksyimme sen painamalla Enter.
 
 ![yhteenveto](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(20).png?raw=true)
+<br>
 Kuva 23: Yhteenveto.
+<br>
 <br>
 Hyväksyimme yhteenvedon tehtävistä muutoksista liittyen kiintolevyyn osiointiin valitsemalla nuolinäppäimillä ”Yes” ja hyväksymällä valinta painamalla Enter.
 
 ![asennus käynnistyy](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(21).png?raw=true)
+<br>
 Kuva 24: Asennus käynnistyy.
+<br>
 <br>
 Dataa aletaan kopioimaan levylle.
 
 ![proxy](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(22).png?raw=true)
+<br>
 Kuva 25: Proxy.
+<br>
 <br>
 Seuraavaksi kysyttiin välityspalvelimen (proxy) osoitetta. Emme tarvitse valityspalvelinta, joten jätimme kohdan tyhjäksi ja valitsimme tabilla ”Continue” ja hyväksyimme valinnan painamalla Enter.
 
 ![päivitykset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(23).png?raw=true)
+<br>
 Kuva 26: Päivitykset.
+<br>
 <br>
 Seuraavaksi kysyttiin kuinka halumme hallita palvelimelle tulevia päivityksiä. Halusimme, että tietoturvapäivitykset asentuu automaattisesti, joten valitsimme nuolinäppäimillä ”Install security updates automatically” ja painoimme sitten Enter.
 
 ![ohjelmat](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(24).png?raw=true)
+<br>
 Kuva 27: Ohjelmat.
+<br>
 <br>
 Tuli listaus mitä ohjelmia halutaan meidän asentavan palvelimelle. Valitsimme, että palvelimelle asennetaan standardeja järjestelmän hyötyohjelmia (esimerkiksi palomuuri) ja OpenSSH server, jotta voimme ottaa palvelimeen SSH-yhteyden (1.). Valinnan jälkeen jatkoimme eteenpäin valitsemalla ”Continue” (2.) ja hyväksymällä se painamalla Enter.
 
 ![ohjelmien asennus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(25).png?raw=true)
+<br>
 Kuva 28: Ohjelmien asennus.
+<br>
 <br>
 Haluttuja ohjelmia alettiin asentamaan. Tässä ei kestänyt kauan.
 
 ![grub lataaja](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(26).png?raw=true)
+<br>
 Kuva 29: "Grub" -lataaja.
+<br>
 <br>
 Kun halutut ohjelmat oli asennettu, alettiin asentamaan GRUB -käynnistyksen lataajaa, jonka ansioista voidaan palvelin käynnistää asennettuun käyttöjärjestelmäämme.
 
 ![grub käynnistyksenlataaja](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(27).png?raw=true)
+<br>
 Kuva 30: "Grub" -käynnistyksenlataaja.
+<br>
 <br>
 Tuli ilmoitus, jossa kysyttiin, että halutaanko GRUB asentaa pääasialliseksi käynnistyksenlataajaksi. Valitsimme ”Yes” eli kyllä ja hyväksyimme valinnan painamalla ”Enter”.
 
 ![asennuksen viimeistely](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(28).png?raw=true)
+<br>
 Kuva 31: Asennuksen viimeistely.
+<br>
 <br>
 Asennusta viimeisteltiin.
 
 ![valmis asennus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Ubuntu%20Server%2016.04.5%20LTS%20asennuksen%20ruutukaappaukset/Vaihe%20(29).png?raw=true)
+<br>
 Kuva 32: Valmis asennus.
+<br>
 <br>
 Asennus oli valmis! Käynnistimme palvelimen uudelleen valitsemalla nuolinäppäimillä ”Continue” ja hyväksymällä se painamalla Enter. Palvelin käynnistyi uudelleen ja irroitimme USB-asennustikun palvelinlaitteesta.
 
@@ -500,6 +559,8 @@ Kirjauduimme palvelimelle sisään pääkäyttäjänä, jonka jälkeen teimme he
 - Laitoimme palomuurin päälle .
 - Teimme palomuurin säännön, joka sallii SSH-yhteyden. 
 - Latasimme ja asensimme kaikki päivitykset, jonka jälkeen käynnistimme palvelimen uudelleen.
+<br>
+<br>
 
 Teimme nämä seuraavalla komentoskriptillä:
 
@@ -516,6 +577,7 @@ sudoedit /etc/network/interfaces
 Avautui ”interfaces” -tiedosto, johon laitoimme seuraavat määritykset:
 
 ![interfaces määritykset](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/etc_network_interfaces.png?raw=true)
+<br>
 Kuva 33: "Interfaces" -määritykset.
  
 <br>
@@ -529,126 +591,195 @@ Seuraavaksi asensimme Windows Server 2016 Datacenter, 64-bittisen version fyysis
 Aloitimme Windows Server 2016 Datacenter 64-bittisen version asennuksen fyysiselle tietokoneelle USB-livetikun avulla.
 
 ![kielen ja ajan valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Screenshot%20(1).png?raw=true)
+<br>
 Kuva 34: Kielen ja ajan valinta.
+<br>
 <br>
 Valitsimme asennusnäkymästä käyttöjärjestelmän kieleksi englannin [English (United States)]. Ajan ja valuutan määritykseksi valittiin suomenkieliset määritteet [Finnish (Finland)]. Näppäimistön kieleksi valittiin Suomi (Finnish).
 Seuraavaksi klikattiin Next.
 
 ![lisenssin ehdot](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Screenshot%20(2).png?raw=true)
+<br>
 Kuva 35: Lisenssin ehdot.
+<br>
 <br>
 Hyväksyimme lisenssin ehdot laittomalla täpän kohtaan "I accept the license terms" ja klikkasimme Next.
 
 ![käyttöjärjestelmän valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Screenshot%20(3).png?raw=true)  
+<br>
 Kuva 36: Käyttöjärjestelmän valinta.
+<br>
 <br>
 Seuraavaksi piti valita haluttu käyttöjärjestelmä. Vaihtoehtoina oli Windows Server 2016 Datacenter versio käyttöliittymällä tai ilman. Valitsimme käyttöjärjestelmän käyttöliittymällä [Windows Server 2016 Datacenter (Desktop Experience)] ja klikkasimme Next.
 
 ![asennustyypin valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Screenshot%20(4).png?raw=true)
+<br>
 Kuva 37: Asennustyypin valinta.
+<br>
 <br>
 Seuraavaksi asennusvaiheessa piti valita asennustyypin valinta. Valitsimme ensimmäisen vaihtoehdon: "Upgrade: Install Windows and keep files, settings, and applications". Vaikka meillä ei ollut ennestään asennettuna Windows käyttöjärjestelmää tietokoneella, niin tämä valinta ei haittaa, koska kyseisessä valinnassa on maininta, että nämä tiedostot, asetukset ja sovellukset säilyvät vain jos Windows käyttöjärjestelmä on valmiiksi asennettuna. 
 
 ![kiintolevylle asennus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Screenshot%20(5).png?raw=true)
+<br>
 Kuva 38: Kiintolevyn asennus.
 <br>
+<br>
 Seuraavaksi piti valita levy, jolle käyttöjärjestelmä asennetaan (tässä ei näy oikeaa levyä, koska imitoimme asennusta VirtualBoxissa). Valitsimme levyn ja klikkasimme Next.
-
+ 
+<br>
+ 
 <h5 id="windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</h5>
 
 Asennettuamme Windows Server 2016 Datacenter 64-bittisen version fyysiselle koneelle, aktivoimme aluksi Windowsin. Windowsin voi aktivoida seuraavasti antamalla tuoteavaimen:
 ```
 Settings - Update & Security - Activation
 ```
-<br>
+ 
+<br> 
+ 
 Tämän jälkeen asetimme palvelimelle staattisen IP-osoiteen:
+ 
 ```
 Network and Sharing Center - Connections: - Properties - Internet Protocol Version 4 - Properties 
 ```
+
 <br>
+ 
 Lisättyämme IP-osoitteen, verkkomaskin ja oletusyhdyskäytävän osoitteen staattiseksi asetimme DNS-osoitteiksi Haaga-Helian omat DNS-osoitteet, koska teimme projektia Haaga-Helian tiloissa. Otimme myös IPv6 kokonaan pois käytöstä kohdasta Internet Protocol Version 6 ottamalla täpän siitä pois.
 
 Seuraavaksi laitoimme Network Discoveryn päälle, jotta testityöasemat löytävät palvelimen:
+ 
 ```
 File Explorer - Network - Network discovery is turned off. - Turn On Network Discovery
 ```
+ 
 <br>
+ 
 Tämän jälkeen vaihdoimme tietokoneen nimeksi WINDOWSSERVER ja laitoimme Remote Desktop yhteyden päälle: 
 ```
 System - Change settings - Change 
 ```
+ 
+<br>
+ 
 ```
 System - Remote settings - Allow remote connections to this computer
 ```
+ 
 <br>
+ 
 Käynnistimme koneen tässä vaiheessa uudestaan. Näiden perusmääritysten jälkeen ryhdyimme asentamaan Active Directorya. Avasimme Server Managerin, josta klikkasimme Manage - Add roles and Features.
 
 ![add roles and features](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture1.PNG?raw=true)
+<br>
 Kuva 39: Add Roles and Features.
+<br>
 <br>
 Aukesi asennusohjelma. Klikattiin Next. 
 
 ![role-based or feature-based installation](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture2.PNG?raw=true)
+<br>
 Kuva 40: Role-based or feature-based installation
+<br>
 <br>
 Seuraavaksi valitsimme kohdan Role-based or feature-based installation ja klikkasimme Next. 
 
 ![palvelimen valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture3.PNG?raw=true)
+<br>
 Kuva 41: Palvelimen valinta.
+<br>
 <br>
 Seuraavaksi piti valita tietokone, johon rooli aiotaan asentaan. Meille ei ollut muita kuin yksi vaihtoehto. Klikattiin Next.
 
 ![server roles](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture4.PNG?raw=true)
+<br>
 Kuva 42: Server Roles.
+<br>
 <br>
 Seuraavaksi piti valita haluttu rooli, joka halutaan asentaa. Valitsimme Active Directory Domain Services, jonka jälkeen tuli pop-up, josta piti valita Add Features. 
 
 ![ad domain services](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture5.PNG?raw=true)
-
+<br>
+Kuva 43: Active Directory Domain Services.
+<br>
+<br>
 Klikattiin seuraavaksi Next kun Active Directory Domain Services oli valittu.
 
 ![group policy management](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture6.PNG?raw=true)
-
+<br>
+Kuva 44: Group Policy Management.
+<br>
+<br>
 Seuraavassa vaiheessa varmistettiin, että Group Policy Management ominaisuus oli valittuna. Tämän jälkeen klikattiiin Next.
 
 ![AD DS](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture7.PNG?raw=true) 
-
+<br>
+Kuva 45: AD DS.
+<br>
+<br>
 Seuraavaksi tuli tietoa kyseisestä roolista. Klikattiin Next.
 
 ![confirmation](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture8.PNG?raw=true)
-
+<br>
+Kuva 46: Confirmation.
+<br>
+<br>
 Varmistettiin seuraavaksi, että halutut ominaisuudet ja roolit tuli valittua. Näin olikin ja varmistettiin, että ei käynnistetä tietokonetta uudelleen vielä. Llikattiin Install.
 
 ![asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture9.PNG?raw=true)
-
+<br>
+Kuva 47: Asennus valmis.
+<br>
+<br>
 Asennuksen jälkeen tuli vahvistus asennuksen onnistumisesta. Haluttiin konfiguroida domain controller heti, joten valittiin kohta "Promote this server to a domain controller"
 
 ![domain controller määritys](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture10.PNG?raw=true)
-
+<br>
+Kuva 48: Domain Controller -määritys.
+<br>
+<br>
 Aukesi uusi määritysikkuna. Valitsimme uuden domain nimen: Add a new forest - pisnismiehet.local. Tämän jälkeen klikattiin Next.
 
 ![DSRM](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture11.PNG?raw=true)
-
+<br>
+Kuva 49: DSRM.
+<br>
+<br>
 Seuraavaksi piti antaa salasana domainille, jos halutaan palauttaa Domain Controller. Annettiin salasana ja klikattiiin Next. 
 
 ![DNS delegation](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture12.PNG?raw=true)
-
+<br>
+Kuva 50: DNS Delegation
+<br>
+<br>
 Seuraavaksi kysyttiin, että halutaanko luoda DNS delegation. Emme halunneet, joten klikkasimme Next.
 
 ![NetBIOS nimi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture13.PNG?raw=true)
-
+<br>
+Kuva 51: NetBIOS -nimi.
+<br>
+<br>
 Seuraavaksi määritysikkuna ehdotti NetBIOS nimeä. Hyväksyimme tämän ja klikkasimme Next.
 
 ![AD DS tietokanta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture14.PNG?raw=true) 
-
+<br>
+Kuva 52: AD DS -tietokanta.
+<br>
+<br>
 Seuraavaksi ehdotettiin kansioita, johon tiedostot tallennetaan. Meille sopivat nämä ja klikkasimme Next.
 
 ![tarkastelu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture15.PNG?raw=true)
-
+<br>
+Kuva 53: Tarkastelu.
+<br>
+<br>
 Seuraavaksi tuli määriteltyjen asetusten tarkasteluruutu. Kaikki oli OK eli klikkasimme Next. 
 
 ![edellytykset AD DS](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/Capture16.PNG?raw=true)
-
+<br>
+Kuva 54: Edellytykset (AD DS).
+<br>
+<br>
 Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin.
  
 <h5 id="hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</h5>
@@ -791,7 +922,9 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
     ```
     sudo reboot
     ```
-
+ 
+<br>
+ 
 <h5 id="openldap-serverin-asennus-ja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</h5>
 
 Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
@@ -1040,7 +1173,9 @@ Koska emme halua käyttää suojaamatonta LDAP-yhteyttä, pakotamme käyttämä�
     ```
      
     Tämän piti siis tulla, koska pakotimme äskön käyttämään suojattua LDAP-yhteyttä. Eli kaikki toimii niin kuin piti!
-
+ 
+<br>
+ 
 <h5 id="phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</h5>
  
 Asensimme phpLDAPadmin -web-käyttöliittymän OpenLDAP-palvelimelle, jotta siihen pääsee näppärästi käsiksi graaffisen käyttöliittymän kautta.
@@ -1093,8 +1228,10 @@ Teimme asennuksen ja konfiguroinnin seuraavanlaisesti:
     sudo slapd -H 'ldap://:389/ ldap://:1389/'
     ```
 
-Nyt kun menemme sivulle http:://<ip-osoite>/phpldapadmin, pääsemme web-käyttöliittymään, joihin kirjaudutaan OpenLDAP:n asennusvaiheessa tehdyillä tunnuksilla.
-
+Nyt kun menemme sivulle http://<ip-osoite>/phpldapadmin, pääsemme web-käyttöliittymään, joihin kirjaudutaan OpenLDAP:n asennusvaiheessa tehdyillä tunnuksilla.
+ 
+<br>
+ 
 <h5 id="ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</h5>
 
  
@@ -1114,14 +1251,26 @@ Teimme tarvittavat toimenpiteet seuraavasti:
     Kirjautumisikkunassa annoimme samat tunnukset, mitkä teimme OpenLDAP-palvelimen asennusvaiheessa (1.). Kirjauduimme sisään painamalla "Authenticate".
      
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot1.JPG)
+    <br>
+    Kuva 55: Kirjautumisikkuna (phpLDAPadmin)
+    <br>
+    <br>
      
 2. Vasemmasta valikosta avattiin puuhakemisto ja valittiin "Create new entry here".
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot2.JPG)
+    <br>
+    Kuva 56: "Create new entry here".
+    <br>
+    <br>
  
 3. Valitsimme avautuvasta valikosta luotava objekti. Koska haluttiin luoda ryhmä, valittiin "Generic: Posix Group"
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpldapadmin/Screenshot3.JPG)
+    <br>
+    Kuva 57: "Templates" -valikko.
+    <br>
+    <br>
  
 4. Seuraavaksi avautui sivu, jossa meidän piti määrittää ryhmälle nimi. Laitoimme siihen halutun ryhmän nimen. Lopuksi valitsimme "Create Object".
  
@@ -1129,7 +1278,8 @@ Teimme tarvittavat toimenpiteet seuraavasti:
  
 6. Ryhmä luotiin onnistuneesti. Muut ryhmät tehtiin samalla tavalla kuten ensimmäinenkin luotu ryhmä.
  
-
+<br>
+ 
 <h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
 
  
@@ -1302,8 +1452,9 @@ OpenLDAP -palvelimelle suositeltiin kanssa lisätä uusi skeematiedosto ```midpo
     ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config cn=*midpoint*
     ```
     Katsottiin ohjevideosta uudelleen mitä piti tulla tulokseksi ja saatiin sama eli onnistui skeeman laitto!
-
-
+ 
+<br>
+ 
 <h5 id="suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)</h5>
  
 Suojattua yhteyttä tarvitaan, jotta  tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta web-käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
@@ -1343,19 +1494,19 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ss
 ```
 Mitä komento tekee:
 
-<li>openssl = CLI työkalu, jolla luodaan ja hallitaan OpenSSL sertifikaatteja, avaimia ja muita tiedostoja.
-<li>req = alikomento, jolla kerrotaan että halutaan käyttää X.509 CSR:ää. X.509 on julkisenavaimen infrastruktuuri standardi, jota
+- openssl = CLI työkalu, jolla luodaan ja hallitaan OpenSSL sertifikaatteja, avaimia ja muita tiedostoja.
+- req = alikomento, jolla kerrotaan että halutaan käyttää X.509 CSR:ää. X.509 on julkisenavaimen infrastruktuuri standardi, jota
 SSL ja TLS noudattavat. Teimme siis uuden X.509 sertin.
-<li>-x509 = modifioi aikaisempaa alikomentoa kertomalla apuohjelmalle, että halutaan tehdä itsekirjoitettu sertifikaatti sen sijaan että tehtäisiin
+- "-x509" = modifioi aikaisempaa alikomentoa kertomalla apuohjelmalle, että halutaan tehdä itsekirjoitettu sertifikaatti sen sijaan että tehtäisiin
 sertifikaatin allekirjoitus pyyntö.
-<li>-nodes = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
+- "-nodes" = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
 lukemaan tiedosto ilman, että käyttäjä puuttuu siihen silloin kun palvelin käynnistyy. Tunnuslause (passphrase)
 estäisi tämän toteutumisen, koska meidän pitäisi aina syöttää se jokaisen uudelleenkäynnistyksen yhteydessä.
-<li>-days 365 = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
-<li>-newkey rsa:2048 =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
+' "-days 365" = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
+- "-newkey rsa:2048" =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
 tehdä RSA avain, joka on 2048 bittiä pitkä.
-<li>-keyout = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
-<li>-out = Kertoo OpenSSL:lle minne sertifikaatti pistetään.
+- "-keyout" = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
+- "-out" = Kertoo OpenSSL:lle minne sertifikaatti pistetään.
 
 Komentoon piti luoda tiedot meistä:
 ```
@@ -1445,9 +1596,14 @@ https://*palvelimen IP-osoite*
 ```
 Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitin herjan Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
  
-![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
-
-
+![https Chrome](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/chrome_https.PNG)
+<br>
+Kuva 58: Sertifikaattivaroitus (Chrome).
+<br>
+<br>
+ 
+<br>
+ 
 <h4 id="virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</h4>
 
 Asensimme "VMSERVER" -keskusyksikköön Linux -käyttöjärjestelmään pohjautuvan 64-bittisen Ubuntu Server 16.04.5 LTS -käyttöjärjestelmän samalla tavalla kuten se asennettiin "MIDPOINTIDM" -keskusyksikköön <a href="#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">aiemmassa kappaleessa</a>. Muuten tehdään siis samalla tavalla mutta asennusvaiheessa annetaan palvelimen nimeksi "VMSERVER" eikä "MIDPOINTIDM". Loimme myös samat käyttäjätunnukset asennusvaiheessa. Suositeltavaa tosin olisi tehdä erit käyttäjätunnukset.
@@ -1610,6 +1766,8 @@ Teimme VirtualBoxin asennuksen seuraavanlaisesti:
     Why unusable:
     ```
     Onnistuneesti oli asennettu.
+
+<br> 
  
 <h4 id="phpvirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi">phpVirtualBox -web-käyttöliittymän asennus ja konfigurointi</h4>
 
@@ -1707,10 +1865,20 @@ Nyt on phpvirtualbox asennettu. Menimme verkkoselaimella osoitteeseen ```http://
 Avautui kirjautumisikkuna. Oletuskäyttäjätunnus (Username) on ```admin``` ja salasana (Password) on ```admin```. Kirjauduimme näillä painamalla "Log in".
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxlogin.JPG)
+<br>
+Kuva 59: Kirjautumisruutu (phpVirtualBox).
+<br>
+<br>
 
 Pääsimme sisään. Seuraavaksi vaihdamme oletussalasanan omaan, parempaan salasanaan. Se onnistuu valitsemalla käyttliittymän valikosta ```File -> Change Password```. Avautuu ikkuna, johon pitää kertoa sekä vanha salasana, että uusi salasana kahdesti. Lopuksi hyväksytään muutokset painamalla OK.
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxpassword.JPG)
+<br>
+Kuva 60: Salasanan vaihto (phpVirtualbox).
+<br>
+<br>
+ 
+<br>
  
 <h5 id="suojatun-yhteyden-maaritys-https2">Suojatun web-yhteyden määritys (https)</h5>
  
@@ -1751,19 +1919,19 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ss
 ```
 Mitä komento tekee:
 
-<li>openssl = CLI työkalu, jolla luodaan ja hallitaan OpenSSL sertifikaatteja, avaimia ja muita tiedostoja.
-<li>req = alikomento, jolla kerrotaan että halutaan käyttää X.509 CSR:ää. X.509 on julkisenavaimen infrastruktuuri standardi, jota
+- openssl = CLI työkalu, jolla luodaan ja hallitaan OpenSSL sertifikaatteja, avaimia ja muita tiedostoja.
+- req = alikomento, jolla kerrotaan että halutaan käyttää X.509 CSR:ää. X.509 on julkisenavaimen infrastruktuuri standardi, jota
 SSL ja TLS noudattavat. Teimme siis uuden X.509 sertin.
-<li>-x509 = modifioi aikaisempaa alikomentoa kertomalla apuohjelmalle, että halutaan tehdä itsekirjoitettu sertifikaatti sen sijaan että tehtäisiin
+- "-x509" = modifioi aikaisempaa alikomentoa kertomalla apuohjelmalle, että halutaan tehdä itsekirjoitettu sertifikaatti sen sijaan että tehtäisiin
 sertifikaatin allekirjoitus pyyntö.
-<li>-nodes = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
+- "-nodes" = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
 lukemaan tiedosto ilman, että käyttäjä puuttuu siihen silloin kun palvelin käynnistyy. Tunnuslause (passphrase)
 estäisi tämän toteutumisen, koska meidän pitäisi aina syöttää se jokaisen uudelleenkäynnistyksen yhteydessä.
-<li>-days 365 = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
-<li>-newkey rsa:2048 =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
+- "-days 365" = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
+- "-newkey rsa:2048" =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
 tehdä RSA avain, joka on 2048 bittiä pitkä.
-<li>-keyout = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
-<li>-out = Kertoo OpenSSL:lle minne sertifikaatti pistetään.
+- "-keyout" = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
+- "-out" = Kertoo OpenSSL:lle minne sertifikaatti pistetään.
 
 Komentoon piti luoda tiedot meistä:
 ```
@@ -1849,9 +2017,14 @@ sudo service apache2 restart
 
 Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitin herjan Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
  
-![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/https_chrome.PNG?raw=true)
-
-
+![https Chrome](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/chrome_https.PNG)
+<br>
+Kuva 61: Sertifikaattivaroitus (Chrome)
+<br>
+<br>
+ 
+<br>
+ 
 <h4 id="testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi">Testityöasemien sekä testipalvelimen asennus ja konfigurointi</h4>
  
 Seuraavaksi aloimme asentelemaan ja konfiguroimaan testityöasemia ja palvelimia VirtualBox-palvelimelle.
@@ -1884,11 +2057,19 @@ Komennon jälkeen painoimme Enter. Virtuaalikonetta alettiin lataamaan ja siinä
 6. Kirjauduimme sisään VirtualBoxin web-käyttöliittymään ja valitsimme valikosta ```File -> Import Appliance... ``` Klikkattiin  avautuvasta ikkunasta kansion kuvaa
  
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboximport.JPG)
+<br>
+Kuva 62: Virtuaalikoneen ohjattu tuonti.
+<br>
+<br>
 
  
 ja haimme virtuaalikoneen imagen ````vbox```` käyttäjän kotihakemistosta. Lopuksi painoimme ```OK```. 
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/phpvirtualboxselect.JPG)
+<br>
+Kuva 63: Virtuaalikoneen valinta.
+<br>
+<br>
      
 Valtsimme se jälkeen ```Next >>``` ja katsoimme onko avautuvasta ikkunasta onko virtuaalikoneen asetukset ok. Muutimme nimeksi "TESTIPC1" ja laitoimme täpän kohtaan "Reinitialize the MAC address of all network cards". Lopuksi painoimme ```Import```. Testikone oli tuotu VirtualBox-palvelimelle onnistuneesti. Tämän jälkeen muutimme virtuaalikoneesta verkkokortin siltaavaksi, jotta se näkyy lähiverkossa muiden laitteiden joukossa. Teimme sen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Settings -> Network -> Adapter 1```  ja drop-down valikosta valitsemalla "Bridged Adapter". 
  Tämän jälkeen sallimme etäyhteyden virtuaalikoneeseen. Valitsimme auki olevista asetuksista ```Display -> Remote Display``` Porttinumeroksi laitoimme 9000. Hyväksyimme muutoksen painamalla OK. Käynnistimme virtuaalikoneen klikkaamalla hiiren oikealla virtuaalikonetta ja valitsemalla ```Start```.
@@ -1912,55 +2093,92 @@ Testattiin seuraavaksi, että Active Directory toimii. Windows palvelimella loim
 Start - Windows Administrative Tools - Active Directory Users and Computers - pisnismiehet.local - Users - New - User
 ```
 Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käyttäjästä sekä luotiin käyttäjälle salasana. Tämän jälkeen kun käyttäjä oli luotu niin testattiin kirjautua käyttäjälle testityöasemaa käyttäen. Kirjautuminen onnistui ja varmistuttiin siitä, että testityöasema on liitoksissa domainiin.
-
+ 
+<br>
+ 
 <h5 id="ubuntu-desktop-18041-lts-testipc2">Ubuntu Desktop 18.04.1 LTS (TESTIPC2)</h5>
  
 Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Aiomme myös myöhemmin liittää tämän testityöaseman OpenLDAP-palvelimen piiriin. Päätimme valita testiä varten Ubuntu Desktop 18.04.1 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
 
-<li>Tyyppi: Linux
-<li>Versio: Ubuntu (64-bit)
-<li>RAM-muistia: 2048 MB
-<li>Hard disk: Create a virtual hard disk now
-<li>Hard disk tyyppi: VDI | Dynamically allocated
-<li>Kiintolevyn koko: 50 GB
+- Tyyppi: Linux
+- Versio: Ubuntu (64-bit)
+- RAM-muistia: 2048 MB
+- Hard disk: Create a virtual hard disk now
+- Hard disk tyyppi: VDI | Dynamically allocated
+- Kiintolevyn koko: 50 GB
 
 Tämän jälkeen muokkasimme virtuaalikoneen asetuksia: Settings -> Storage -> Empty -> levyn kohdasta valittiin Choose Virtual Optical Disk File... ja lisättiin .ISO tiedosto tähän ```vbox``` käyttäjän kotihakemistosta (```/home/vbox)```. Tämän jälkeen laitettiin vielä verkkokortti siltaavaksi. Nyt virtuaalikone oli valmis asennettavaksi. Käynnistettiin virtuaalikone. 
 
 Ensimmäiseksi aukesi asennusruutu:
 
 ![Ubuntu Desktop asennus](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(1).png)
-
+<br>
+Kuva 64: Ubuntu Desktop asennus.
+<br>
+<br>
 Valittiin käyttöjärjestelmän kieliksi English (1.) ja klikattiin "Install Ubuntu" (2.).
 
 ![Näppäimistön layout](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(2).png)
+<br>
+Kuva 65: Näppäimistön valinta.
+<br>
+<br>
 
 Seuraavaksi kysyttiin näppäimistön kieliasetuksia. Valittiin "Finnish" (1. ja 2.) ja klikattiin "Continue" (3.).
 
 ![Asennus tyyppi 1/2](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(3).png)
+<br>
+Kuva 66: Asennus tyyppi (1/2).
+<br>
+<br>
 
 Seuraavaksi kysyttiin halutaanko tehdä normaali asennus vai minimaalinen asennus. Koska emme halunneet mitään ylimääräistä asennettavan, valitsimme minimaalisen asennuksen (1.). Halusimme myös asentaa tarvittavat päivitykset (2.) sekä kolmannen osapuolen välttämättömät ohjelmat (3.). Jatkoimme eteenpäin klikkaamalla "Continue" (4.).
 
 ![Asennus tyyppi 2/2](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(4).png)
+<br>
+Kuva 67: Asennus tyyppi (2/2).
+<br>
+<br>
 
 Asennustyypiksi valittiin ensimmäinen vaihtoehto eli tyhjennetään koko kiintolevy ja asennetaan siihen Ubuntu (1.). Aloitimme asennuksen painamalla "Install Now" (2.).
 
 ![Varmistus](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(5).png)
+<br>
+Kuva 68: Varmistus.
+<br>
+<br>
 
 Hyväksyttiin tehtävät muutokset kiintolevylle painamalla "Continue" (1.).
 
 ![Sijainti](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(6).png)
+<br>
+Kuva 69: Sijainti.
+<br>
+<br>
 
 Sijainniksi valittiin "Helsinki" (1.) ja mentiin eteenpäin valitsemalla "Continue" (2.).
 
 ![käyttäjän luominen](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(7).png)
+<br>
+Kuva 70: Käyttäjän luominen.
+<br>
+<br>
 
 Seuraavaksi kysyttiin tietokoneen nimeä, käyttäjätunnusta ja salasanaa. Kirjoitimme nämä (1.) ja klikattiin Continue (2.).
 
 ![Ubuntu Desktop asennus](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(8).png)
+<br>
+Kuva 71: Ubuntu Desktop asennus.
+<br>
+<br>
 
 Ubuntu Desktop lähti asentumaan.
 
 ![asennus valmis](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Ubuntu%20Desktop/Screenshot%20(9).png)
+<br>
+Kuva 72: Asennus valmis.
+<br>
+<br>
 
 Asennus tuli valmiiksi ja virtuaalikone piti käynnistää uudelleen. Klikattiin Restart Now. Tämän jälkeen kirjauduimme työasemalle sisälle samoilla tunnuksilla, jotka teimme asennusvaiheessa. Avasimme tämän jälkeen Terminaalin (Ctrl+Alt+T). Asensimme tämän jälkeen ainoastaan SSH:n sekä laitoimme palomuurin päälle komennolla: ```sudo apt update && sudo apt-get install -y ssh && sudo ufw enable```
 
@@ -1995,6 +2213,8 @@ Seuraavaksi halusimme piilottaa käyttäjälistauksen, joka näkyy kirjautumisru
     dconf update
     ```
     Komennon jälkeen painoimme Enter. Muutokset päivitetty ja käyttäjälistaus ei enää näy työaseman käynnistyessä.
+ 
+<br>
 
 Seuraavaksi aloimme liittämään työasemaan OpenLDAP -palvelimeen. Teimme tämän seuraavanlaisesti:
  
@@ -2099,7 +2319,9 @@ Seuraavaksi aloimme liittämään työasemaan OpenLDAP -palvelimeen. Teimme täm
     TLS_REQCERT     allow
     ```
     Tallensimme ja suljimme lopuksi tiedoston.
-     
+ 
+<br>
+ 
 Lopuksi siirsimme LDAP-palvelimen SSH-avaimet testityöasemaan seuraavanlaisesti:
  
 1. Kirjauduimme SSH-yhteydellä LDAP-palvelimelle.
@@ -2126,19 +2348,24 @@ Lopuksi siirsimme LDAP-palvelimen SSH-avaimet testityöasemaan seuraavanlaisesti
     ```
  
 6. Suljettiin SSH-yhteys testityöasemaan.
-
+ 
+<br>
+ 
 Lopuksi kokeilimme toimiiko yhteys TESTIPC2:sen ja OpenLDAP-palvelimen välillä komennolla:
 
 ```
 ldapwhoami -H ldap://ldap.pisnismiehet.local -x -ZZ
 ```
 Tulokseksi tuli ```anonymous```. Yhteys siis toimii.
-
+ 
+<br>
+ 
 <h5 id="ubuntu-server-16045-lts-testipalvelin">Ubuntu Server 16.04.5 LTS</h5>
 
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBox -palvelimella. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. Asetimme myös tässäkin verkkokortin siltaavaksi kuten myös muiden testikoneiden osalta.
-
-
+ 
+<br>
+ 
 <h3 id="asennus">Asennus</h3>
 
 1. Asennettiin openjdk8:
@@ -2158,6 +2385,10 @@ Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvel
 4. Ladattiin midpoint 3.8 (watt) midPointin sivuilta:
  
     ![midPoint 3.8 (Watt) - Download](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint%203.8%20(Watt)%20-%20Download.PNG?raw=true)
+    <br>
+    Kuva 73: Ruudunkaappaus midPointin sivuilta.
+    <br>
+    <br>
  
     ```
     sudo wget https://evolveum.com/downloads/midpoint/3.8/midpoint-3.8-dist.tar.gz
@@ -2206,8 +2437,15 @@ Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvel
  
 
 Tämän jälkeen midPoint oli asennettu.
+ 
+<br>
+ 
 
 <h3 id="konfigurointi">Konfigurointi</h3>
+ 
+Seuraavaksi aloimme konfiguroimaan midPointtia käyttövalmiiksi.
+ 
+<br>
  
 <h4 id="tietokannan-maarittaminen">Tietokannan määrittäminen</h4>
  
@@ -2244,6 +2482,10 @@ Lisättiin config.xml tiedostoon seuraavat rivit repositoryn kohdalle, jotka lö
 <jdbcUrl>jdbc:mariadb://localhost:3306/midpoint?characterEncoding=utf8</jdbcUrl><!– it seems that jdbc://mysql works as well –>
 ```
 ![config.xml mariadb](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb.png?raw=true)
+<br>
+Kuva 74: Ruudunkaappaus xml-tiedostosta.
+<br>
+<br>
 Tallennettiin tiedoston muokkaukset. Seuraavaksi ajettiin SQL scriptti, jotta MariaDB yhdistyy midPoint palvelimelle:
 ```
 $ cd /opt/midpoint/doc/config/sql/_all
@@ -2261,6 +2503,10 @@ $ sudo reboot
 Käynnistyksen jälkeen midPoint toimii selaimella: ”IP-osoite”:8080/midpoint
 Kirjauduttiin sisään ja tarkistettiin, että MariaDB on yhdistynyt midPoint palvelimeen. Sen pystyi tarkistaa kohdasta About.
 ![midPoint tietoja](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_about.png?raw=true)
+<br>
+Kuva 75: Ruudunkaappaus midPointin -käyttöliittymästä.
+<br>
+<br>
 Repository URL kohdasta nähdään, mitä tietokantaa midPoint käyttää. MariaDB:n liittäminen midPointiin onnistui.
 Luotiin seuraavaksi jokaiselle meidän projektiryhmän jäsenelle käyttäjä midPoint käyttöliittymästä: Users – New user.
 Tarkistettiin seuraavaksi, että käyttäjät ovat todella tallentuneet MariaDB:n tietokantaan:
@@ -2272,11 +2518,19 @@ SELECT * FROM m_user;
 SELECT fullName_norm,oid FROM m_user;
 ```
 ![MariaDB käyttäjät](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/mariadb_k%C3%A4ytt%C3%A4j%C3%A4t.png?raw=true)
+<br>
+Kuva 76: Kuvankaappaus MariaDB:n käyttäjistä.
+<br>
+<br>
 Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
-
+ 
+<br>
+ 
 <h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
  
 Jotta yrityksen järjestelmä voidaan tuoda IdM:n piirii, pitää se lisätä käyttämällä välikappaletta (Englanniksi: Connector). Välikappale (tai kuten viittaamme myöhemmin sanalla connector) ei ole fyysinen vaan koodattu pikku ohjelma. Seuraavassa kohdassa kerromme, kuinka lisäsimme TESTIPALVELIN, OPENLDAPSERVER sekä WINDOWSSERVER midPointin piiriin. Liitimme TESTIPALVELIN -palvelimen käyttämällä Unix-connectoria, OPENLDAPSERVERin sekä WINDOWSSERVERin käyttämällä LDAP-connectoria.
+ 
+<br>
 
 <h5 id="active-directory-connector">Active Directory connector</h5>
 
@@ -2286,41 +2540,80 @@ Active Directory connectorin avulla saadaan yhdistettyä midPoint Windows -käyt
 
 Server Managerista valitaan Manage - Add Roles and Features.
 ![roles & features](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture.PNG?raw=true)
+<br>
+Kuva 77: Roles & Features.
+<br>
+<br>
 
 Klikattiin Next.
 
 ![role-based or feature-based](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture1.PNG?raw=true)
-
+<br>
+Kuva 78: Role-based or Feature-based
+<br>
+<br>
 Valittiin Role-based or feature-based installation. Klikattiin Next.
 
 ![palvelimen valinta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture2.PNG?raw=true)
+<br>
+Kuva 79: Palvelimen valinta.
+<br>
+<br>
 
 Valitaan mäidän palvelimen (meillä ei ole kuin yksi Windows palvelin). Klikattiin Next.
 
 ![AD LDS](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture3.PNG?raw=true)
+<br>
+Kuva 80: AD LDS.
+<br>
+<br>
 
 Seuraavaksi valittiin asennettavaksi Active Directory Lightweight Services (kuvassa se oli jo asennettu). Klikattiin Next.
 
 ![ominaisuudet](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture4.PNG?raw=true)
+<br>
+Kuva 81: Ominaisuudet.
+<br>
+<br>
 
 Ei valittu mitään ominaisuuksia. Klikattiin Next. 
 ![AD LDS ilmoitus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture5.PNG?raw=true)
+<br>
+Kuva 82: AD LDS ilmoitus.
+<br>
+<br>
 
 Seuraavaksi tuli ilmoitus siitä, mitä ollaan asentamassa. Klikattiin Next.
 
 ![vahvistus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture6.PNG?raw=true)
+<br>
+Kuva 83: Vahvistus.
+<br>
+<br>
 
 Seuraavaksi tuli vahvistus asennettavasta roolista. Klikattiin Install. 
 
 ![asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture7.PNG?raw=true)
+<br>
+Kuva 84: Asennus valmis.
+<br>
+<br>
 
 Asennuksen jälkeen lähdettiin konfiguroimaan AD LDS roolia. Klikattiin Run the Active Directory Lightweight Directory Services Setup Wizard.
 
 ![AD LDS wizard](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture8.PNG?raw=true)
+<br>
+Kuva 85: AD LDS wizard.
+<br>
+<br>
 
 Aukesi AD LDS konfigurointi-ikkuna. Klikattiin Next. 
 
 ![instanssi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture9.PNG?raw=true)
+<br>
+Kuva 86: Instanssi.
+<br>
+<br>
 
 Valittin instansiksi unique instance. Klikattiin Next.
 
@@ -2334,6 +2627,10 @@ Klikattiin sitten Next.
 Seuraavaksi kysyttiin mihin AD LDS data tallennetaan. Jätettiin oletukset ja klikattiin Next. 
 
 ![AD LDS palvelun käyttäjä](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture10.PNG?raw=true)
+<br>
+Kuva 87: AD LDS palvelun käyttäjä.
+<br>
+<br>
 
 Seuraavaksi piti valitan käyttäjä AD LDS palveluun. Valittiin Network Service account ja klikattiin Next. Tuli varoitus vielä datan replikoinnista. Klikattiin vain Yes.
 
@@ -2342,10 +2639,18 @@ Seuraavaksi piti määritellä administrator käyttäjä AD LDS palvelulle. Vali
 Seuraavaksi kysyttiin LDIF tiedostoja. Valittiin kaikki ja klikattiin Next. 
 
 ![LDIF tiedostojen vahvistus](https://github.com/Eetu95/Open-source-IdM-solution)
+<br>
+Kuva 88: LDIF -tiedtostojen vahvistus.
+<br>
+<br>
 
 Seuraavaksi tuli vahvistus tiedostoista. Klikattiin Next.
 
 ![AD LDS konfigurointi valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture12.PNG?raw=true)
+<br>
+Kuva 89: AD LDS konfigurointi valmis.
+<br>
+<br>
 
 AD LDS konfigurointi oli nyt valmis. Klikattiin Finish.
 
@@ -2358,38 +2663,68 @@ Klikkasimme sovelluksesta ADSI Edit kansiosta - Connect To...
 Lisäsimme tähän seuraavat tiedot ja klikkasimme ok:
 
 ![ADSI Edit Connect to](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/AD%20LDS/Capture13.PNG?raw=true)
+<br>
+Kuva 90: ADSI Edit Connect to.
+<br>
+<br>
 
 AD LDS yhdistyi ja tämän jälkeen aukesi puunäkymä instassista.
-
+ 
+<br>
+ 
 <h5>Certification Authority asennus ja konfigurointi</h5>
 
 Seuraavaksi piti asentaa Certificate Authority rooli, jotta saadaan tehtyä sertifikaatti. Tämä tehtiin samalla kuin AD LDS asennus, mutta valittiin rooliksi Active Directory Certificate Services eikä valittu muita ominaisuuksia. Valittiin Active Directory Certificate Services rooliksi Certification Authority:
 
 ![CA](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture.PNG?raw=true)
+<br>
+Kuva 91: CA
+<br>
+<br>
 
 Seuraavaksi asennettiin rooli.
 
 ![AD CS asennus valmis](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture1.PNG?raw=true)
+<br>
+Kuva 92: AD CS asennus valmis.
+<br>
+<br>
 
 Asennuksen jälkeen konfiguroimme sertifikaatti palvelun eli klikkasimme configure Active Directory Certificate Services on the destination server. Aukesi konfigurointi wizard. 
 
 Valitsimme oletus tunnukset (credentials) Credentials -välilehdeltä. Klikattiin sitten Next. 
 
 ![Role Services](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture2.png?raw=true)
+<br>
+Kuva 93: Role Services.
+<br>
+<br>
 
 Tämän jälkeen Role Services välilehdeltä valittiin Certification Authority.
 
 Seuraavaksi Setup Type välilehdeltä valittiin tyypiksi Enterprise CA, koska tietokone on domainissa ja Active Directory Domain Services on asennettuna. 
 
 ![CA tyyppi](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture4.png?raw=true)
+<br>
+Kuva 94: CA tyyppi.
+<br>
+<br>
 
 Seuraavalla välilehdellä eli CA Type valittiin CA tyypiksi Root CA.
 
 ![](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture5.png?raw=true)
+<br>
+Kuva 95: Root CA.
+<br>
+<br>
 
 Seuraavaksi piti määritellä avain Private Key välilehdellä. Valitsimme Create a new private key ja klikkasimme Next.
 
 ![avaimen kryptaus](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture6.png?raw=true)
+<br>
+Kuva 96: Avaimen kryptaus.
+<br>
+<br>
 
 Seuraavaksi piti määritellä avaimen kryptaus Cryptography välilehdellä. Valitsimme kryptauksen toimittajaksi RSA#Microsoft Software Key Storage Provider, algoritmiksi SHA256 ja pituudeksi 2048.
 
@@ -2402,6 +2737,8 @@ Validity Period välilehdellä valittiin avaimen voimassaoloajaksi 5 vuotta. Kli
 Certificate Database välilehdeltä valittiin oletustietokannan sijainnit. Klikattiin Next.
 
 Seuraavaksi Confirmation välilehellä hyväksyttiin konfiguraatiot ja klikattiin Configure. Kun konfiguraatio valmistui onnistuneesti, klikkasimme vain Close.
+ 
+<br>
 
 <h5>Sertifikaatin luonti</h5>
 
@@ -2414,23 +2751,44 @@ Seuraavaksi varmistetaan, että tietokoneet, jotka ovat Domainissa pääsevät k
     certutil -verifystore MY
 
 ![cmd komento](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture7.PNG?raw=true)
+<br>
+Kuva 97: cmd -komento.
+<br>
+<br>
+
 
 Tämän saadun tuloksen perusteella mentiin nyt kansioon C:\ProgramData\Microsoft\Crypto\Keys\
 Täältä löytyy nyt uusi luotu avain kryptatussa muodossa. Hiiren oikealla painikkeella klikattiin Properties ja välilehdeltä Security lisäsimme Luku ja ajo-oikeudet NETWORK SERVICE ryhmälle:
 
 ![oikeudet](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture8.PNG?raw=true)
+<br>
+Kuva 98: Oikeudet.
+<br>
+<br>
 
 Tämän jälkeen menimme takaisin Manage computer certificates asetuksiin. Personal - Certificates kansiosta hiiren oikealla painikkeella klikkasimme meidän sertifikaatin nimeä ja valitsimme All Tasks - Export...
 
 ![Export certificate](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture9.png?raw=true)
+<br>
+Kuva 99: Export Certificate.
+<br>
+<br>
 
 Aukesi sertifikaatin vienti-ikkuna. Klikkasimme Next.
 
 ![private key](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture10.png?raw=true)
+<br>
+Kuva 100: Private Key.
+<br>
+<br>
 
 Emme exportanneet yksityistä avainta eli valitsimme No, do not export the private key. Klikkasimme Next.
 
 ![formaatti](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture11.png?raw=true)
+<br>
+Kuva 101: Formaatti.
+<br>
+<br>
 
 Seuraavaksi piti valita sertifikaatin formaatti. Valitsimme Base-64 encoded X.509 (.CER). Klikkattiin sitten Next.
 
@@ -2449,12 +2807,22 @@ Luotimme tähän sertifikaattiin: kirjoitimme "yes", jolloin sertifikaatti lisä
 Kirjoitimme Windowsin hakuun ldp.exe. Tällä ohjelmalla voimme testata LDAPS yhteyttä. Klikattiin Connection ja testattiin yhteyttä.
 
 ![LDAPS yhteys](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture12.PNG?raw=true)
+<br>
+Kuva 102: LDAPS -yhteys.
+<br>
+<br>
 
 Kirjoitettiin Server kohtaan localhost ja portiksi 636 sekä SSL täppä päälle.
 
-![LDAPS yhteys toimii](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture13.PNG?raw=true) 
+![LDAPS yhteys toimii](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/CA/Capture13.PNG?raw=true)
+<br>
+Kuva 103: LDAPS yhteys toimii.
+<br>
+<br>
 
 Se mitä ldp.exe ohjelma tuottaa tulokseksi viittaa siihen, että yhteys toimi. Jos ei toimisi niin näkyisi virheilmoitus.
+ 
+<br>
 
 <h5>Connectorin lisääminen</h5>
 
@@ -2494,45 +2862,22 @@ Meidän valmis malli Active Directory connectoria varten löytyy meidän GitHubi
 Kun XML-tiedosto on muokattu niin klikattiin Import object. Seuraavaksi mentiin kohtaan Resources vasemmasta listauksesta. Klikattiin Active Directory connectoria eli Medusa Active Directory (LDAP). Alhaalta klikattiin Edit configuration ja tarkistettiin, että tiedot ovat oikein.
 
 ![AD connector](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_ad_connector.PNG?raw=true)
+<br>
+Kuva 104: AD Connector.
+<br>
+<br>
 
 Tämän jälkeen klikattiin Save and test connection.
 
 ![connection ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_connection_ok.PNG?raw=true)
+<br>
+Kuva 105: Connection OK.
+<br>
+<br>
 
-Yhteys toimii. Nyt Resources valikosta näkyy, että Active Directory connector on muuttunut vihreäksi, mikä tarkoittaa sitä, että connector toimii. 
-
-Seuraavaksi tehtiin uusi käyttäjä midPoint käyttöliittymässä. Mentiin valikosta kohtaan Users - New User. Täytettiin kentät:
-<li>Name: ville
-<li>Full name: Ville Varakas
-<li>Given Name: Ville
-<li>Family name: Varakas
-<li>Administrative status: Enabled
-<li>Valid from: 11/1/2018 5:00 PM
-<li>Password value: **************
-
-Tämän jälkeen tallennettiin käyttäjä. 
-
-![käyttäjän luonti](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPonit_k%C3%A4ytt%C3%A4j%C3%A4n_luonti.PNG?raw=true)
-
-Klikattiin Save.
-
-![käyttäjä luotu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_k%C3%A4ytt%C3%A4j%C3%A4_luotu.PNG?raw=true)
-
-Tuli ilmoitus, että käyttäjä luotiin. Seuraavaksi klikattiin kyseistä käyttäjää ja Projections välilehdeltä klikattiiin Add projection ja lisättiin käyttäjä Active Directory connectoriin.
-
-![midPoint projections](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_projections.PNG?raw=true)
-
-Tämän jälkeen kun valittin Active Directory connector listasta ja klikattiin Add, voitiin käyttäjä tallentaa uudestaan.
-
-Tallennus onnistui. Kokeiltiin seuraavaksi kirjautua kyseisellä käyttäjällä Windows työasemalle. Työasema on virtuaalinen ja se sijaitsee meidän phpVirtualBox -palvelimella. Otettiin tähän koneeseen Remote Desktop yhteys. 
-
-![windows kirjautuminen](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%2010%20VM/windows_kirjautuminen.PNG?raw=true)
-
-Kirjauduttiin luoduilla tunniksilla. Kun käyttäjällä kirjauduttiin ensimmäistä kertaa joutui hetken odottaa ennen kuin kaikki oli valmista. Käyttäjällä ei ole admin-oikeuksia.
-
-Tarkistettiin vielä, että käyttäjä on todella lisätty Active Directoryyn. Kirjauduttiin Windows Serverille ja avattiin Active Directory Users and Computers. Kohdasta Users nähtiin, että käyttäjä on Active Directoryssa.
-
-![active directory](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Windows%20Server/active_directory.PNG?raw=true)
+ 
+<br>
+ 
 <h5 id="ldap-connector">LDAP-connector</h5>
  
 LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin käyttöliittymässä pääkäyttäjätunnuksilla:
@@ -2550,44 +2895,80 @@ LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin 
 3. Avattiin selaimella midPoint ja kirjauduttiin siihen sisälle pääkäyttäjätunnuksilla. Valittiin midPointin vasemmasta valikosta "Import object"
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot1.JPG)
+    <br>
+    Kuva 106: Valikko.
+    <br>
+    <br>
 
 4. Seuraavaksi haettiin XML-tiedosto painamalla "Choose File" (1.). Kun tiedosto oli haettu, painoimme lopuksi "Import object" (2.). Jos tulee ruudun yläpuolelle vihreä palkki, oli tuonti onnistunut. Jos tuli punainen, XML-tiedoston sisältämissä arvoissa ja määrityksissä on jokin virhe. Tällöin kannattaa katsoa virheilmoitukset huolella, jotka näkyvät siinä samalla.
     
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot2.JPG)
+    <br>
+    Kuva 107: Haetaan XML -tiedosto.
+    <br>
+    <br>
 
 5. Kun tuonti onnistui, siirryimme valikossa kohtaan ``` Resources -> List resources```
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot3.JPG)
+    <br>
+    Kuva 108: Ruudunkaappaus valikosta.
+    <br>
+    <br>
  
 6. Valitsimme ruutuun avautuvasta listasta ```OpenLDAP (OPENLDAPSERVER)```
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot4.JPG)
+    <br>
+    Kuva 109: Ruudunkaappaus listasta.
+    <br>
+    <br>
  
 7. Avautuvan sivun alalaidasta valittiin "Edit configuration"
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot5.JPG)
+    <br>
+    Kuva 110: Ruudunkaappaus sivun alalaidasta.
+    <br>
+    <br>
  
 8. Avautui asetukset. Varmistettiin, että kuvassa korostetut kohdat on määritelty. Jos et näe kohtia, kannattaa painaa "Configuration" -otsikon viereisestä tyhjän boksin kuvasta, jolloin kaikki asetuksiin mahdollista määriteltävät kohdat tulee näkyviin. Etsi tällöin kuvassa korostetut kohdat. "Connection security" -kohdassa määritämme, että midPoint ottaa suojatun yhteyden (StartTLS) OpenLDAP -palvelimeen.
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot6.JPG)
+    <br>
+    Kuva 111: Ruudunkaappaus määrityksistä.
+    <br>
+    <br>
  
 9. Kun kohta 8 oli hoidettu, kokeilimme yhteydenmuodostusta midPointin ja OpenLDAP-palvelimen välillä painamalla "Save and test connection".
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot7.JPG)
+    <br>
+    Kuva 112: Ruudunkaappaus.
+    <br>
+    <br>
  
 10. Jos yhteys on toimiva, tulee vihreää kuten kuvassa. Jos ei toimi, tulee punaista ja virheilmoitus. Kannattaa tällöin tutkia virheilmoitusta ja korjata ongelma.
     
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot8.JPG)
+    <br>
+    Kuva 113: Yhteys toimii!
+    <br>
+    <br>
  
 11. Lopuksi painoimme "Finish" ja päätimme onnistuneesti OpenLDAP-palvelimen liittämisen midPointin piiriin.
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/ldap-connector/Screenshot9.JPG)
-     
+    <br>
+    Kuva 114: Määrityksen lopettelua.
  
+<br>
 
 <h5 id="unix-connector">Unix-connector</h5>
+ 
+Seuraavaksi aloimme asentamaan ja määrittämään Unix-connectoria TESTIPALVELIN -testipalvelimen liittäistä varten.
 
-<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asenna ja määritä unix-connector</h5>
+<h5>Asennus ja määritys</h5>
 
 Kloonattiin git repository <a href="https://github.com/Evolveum/ConnIdUNIXBundle.git">https://github.com/Evolveum/ConnIdUNIXBundle.git</a> ~/unix-connector -kansioon:
 
@@ -2637,71 +3018,15 @@ Tallennettiin ja suljettiin tiedosto. Sitten lisäsimme unix-connector resurssin
 Sitten katsoimme asentuiko unix-connector oikein. Resource → List Resources → Unix -> Test connection.
 
 ![unix-connector-test-connection](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-test-connection.PNG?raw=true)
+<br>
+Kuva 115: Unix -connectorin yhetyden testaus.
+<br>
+<br>
 
 Yhteys toimi!
-
-<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Advanced scenarios</h5>
-
-Ladattiin konfiguraatiot <a href="https://github.com/Evolveum/midpoint/tree/master/samples/stories/unix-management">midPointin GitHubista</a>. Lisättiin xml-tiedosto, joka lisää "advanced scenarios" ominaisuuksia. Configuration -> Import Objects -> Choose File -> resource-unix-advanced.xml -> Import Object (On hyvä pistää "check" -merkki ennen lisäystä kohtiin "Keep oid" ja "Overwrite existing object".
-
-Sitten lisäsimme metaroolin midPoint roolille. Tämä lisää ryhmänteko mahdollisuuden kohde Linux-koneelle. Configuration -> Import Objects -> Choose File -> role-assignment-inducement-metarole.xml -> Import Object.
-
-<h5 id="csv-connector">CSV-connector</h5>
-
-CSV-connectorin avulla voidaan lisätä paljon käyttäjiä nopeasti midPoint IdM-järjestelmän piiriin. CSV connector lisättiin midPointiin XML-tiedoston avulla. MidPointin GitHubista hain CSV-connectorin XML-tiedoston ja kopioin sen leikepöydälle: https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/resource-csv-hr.xml
-
-Seuraavaksi liitin kopioidun midPointin käyttöliittymään. klikattiin Import object - Embedded editor, johon sitten liitettiin XML-tiedoston sisältö. Kun XML-tiedosto oli liitetty tekstikenttään, klikattiin Import object.
-
-Resources kohdasta näkyy nyt, että CSV-connector on lisätty, nimi on HR System. Tämän jälkeen haettiin esimerkki CSV-tiedosto midPoint palvelimelle (MIDPOINTIDM), midPointin kotikansioon.
-
-1. Otettiin SSH-yhteys MIDPOINTIDM palvelimelle.
-
-2. Mentiin midPointin kotikansioon: 
-
-```
-$ cd /opt/midpoint/var
-```
-
-3. Haettiin esimerkki CSV-tiedosto wget-komennolla:
-
-```
-$ sudo wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/hr.csv
-```
-
-4. Kopioitiin tiedostopolku, johon CSV-tiedosto vietiin:
-
-```
-$ pwd
-
-/opt/midpoint/var
-```
-
-5. Muokattiin HR System resurssia midPointin käyttöliittymässä. Mentiin kohtaan Recourses - HR System - Edit configuration.
-
-6. Edit configutration kohdasta muutettiin tiedostopolku (File Path):
-
-```
-/opt/midpoint/var
-```
-
-![HR Sytem konfiguraatio](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_configuration.PNG?raw=true)
-
-7. Tallennettiin konfiguraatio ja testattiin yhteys. Klikattiiin Save and Test Connection. Tämän jälkeen klikattiin Finish.
-
-![HR System yhteys ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_connection_ok.PNG?raw=true)
-
-8. HR System resurssin välilehdeltä Accounts - Repository päästään lisämään käyttäjiä CSV-tiedostosta midPointin käyttöliittymään. Klikattiin esimerkkikäyttäjän asetuksia ja valittiin Import.
-
-![HR System import](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_import.PNG?raw=true)
-
-9. Importtauksen jälkeen tuli ilmoitus onnistuneesta viedystä käyttäjästä. Kyseinen käyttäjä muuttui myös LINKED tilaan.
-
-![HR System import ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_import_ok.PNG?raw=true)
-
-10. Importattu käyttäjä näkyy nyt midPointin Users -kohdassa.
-
-![HR uusi käyttäjä](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_user.PNG?raw=true)
-
+ 
+<br>
+ 
 <h4 id="suojatun-web-yhteyden-maaritys-https3">Suojatun web-yhteyden määritys (https)</h4>
 
 Suojattua yhteyttä tarvitaan, jotta midPointin tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston eli midPointin välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta midPointin käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
@@ -2740,19 +3065,19 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ss
 ```
 Mitä komento tekee:
 
-<li>openssl = CLI työkalu, jolla luodaan ja hallitaan OpenSSL sertifikaatteja, avaimia ja muita tiedostoja.
-<li>req = alikomento, jolla kerrotaan että halutaan käyttää X.509 CSR:ää. X.509 on julkisenavaimen infrastruktuuri standardi, jota
+- openssl = CLI työkalu, jolla luodaan ja hallitaan OpenSSL sertifikaatteja, avaimia ja muita tiedostoja.
+- req = alikomento, jolla kerrotaan että halutaan käyttää X.509 CSR:ää. X.509 on julkisenavaimen infrastruktuuri standardi, jota
 SSL ja TLS noudattavat. Teimme siis uuden X.509 sertin.
-<li>-x509 = modifioi aikaisempaa alikomentoa kertomalla apuohjelmalle, että halutaan tehdä itsekirjoitettu sertifikaatti sen sijaan että tehtäisiin
+- "-x509" = modifioi aikaisempaa alikomentoa kertomalla apuohjelmalle, että halutaan tehdä itsekirjoitettu sertifikaatti sen sijaan että tehtäisiin
 sertifikaatin allekirjoitus pyyntö.
-<li>-nodes = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
+- "-nodes" = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
 lukemaan tiedosto ilman, että käyttäjä puuttuu siihen silloin kun palvelin käynnistyy. Tunnuslause (passphrase)
 estäisi tämän toteutumisen, koska meidän pitäisi aina syöttää se jokaisen uudelleenkäynnistyksen yhteydessä.
-<li>-days 365 = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
-<li>-newkey rsa:2048 =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
+- "-days 365" = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
+- "-newkey rsa":2048 =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
 tehdä RSA avain, joka on 2048 bittiä pitkä.
-<li>-keyout = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
-<li>-out = Kertoo OpenSSL:lle minne sertifikaatti pistetään.
+- "-keyout" = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
+- "-out" = Kertoo OpenSSL:lle minne sertifikaatti pistetään.
 
 Komentoon piti luoda tiedot meistä:
 ```
@@ -2865,18 +3190,29 @@ https://*palvelimen IP-osoite*
 ```
 Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitettiin herja Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
 ![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/chrome_https.PNG?raw=true)
+<br>
+Kuva 116: Sertifikaattivaroitus (Chrome)
+<br>
+<br>
 
 Kokeilimme myös uudelleenohjauksen toimivuutta. Kirjoitettiin selaimeen ```http://*palvelimen IP-osoite*```
 Selain uudelleenohjasi suojattuun sivustoon: ```https://*palvelimen IP-osoite*```
 
 Avautui midPointin kirjautumisruutu.
 ![midPoint kirjautumisruutu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_kirjautumisruutu.PNG?raw=true)
+<br>
+Kuva 117: midPointin kirjautumisruutu.
+<br>
+<br>
 Uudelleenohjaus toimi. Selain uudelleenohjasi suojattuun midPointin kirjautumisruutuun. Myöskin aiempi tapa miten midPointin käyttöliittymään kirjaudutaan ei enää toimi. Eli ```http://*palvelimen IP-osoite*:8080/midpoint/``` ei enää toimi.
  
+<br>
  
 <h4 id="roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</h4>
  
 Nyt kun midPointin sekä kohdejärjestelmien välinen yhteys toimii, pitää meidän seuraavaksi määritellä midPointtiin roolit sekä muut tarvittavat objektit, joiden ansiosta provisiointi eli muutoksien ajaminen midPointista kohdejärjestelmiin onnistuu.
+ 
+<br>
  
 <h5 id="openldap">OpenLDAP</h5>
  
@@ -3035,7 +3371,13 @@ Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
 
 <h5 id="unix">Unix (Unix -connector)</h5>
  
-Loimme midPointtiin roolin pääkäyttäjiä varten nimeltään "sudo" ja peruskäyttäjiä varten nimeltään "user".
+Toimme ensiksi roolin, jonka avulla voimme myöhemmin tehdä roolit pää- ja peruskäyttäjiä varten.
+ 
+Ladattiin rooli <a href="https://github.com/Evolveum/midpoint/tree/master/samples/stories/unix-management">midPointin GitHubista</a>. Lisättiin xml-tiedosto, joka lisää "advanced scenarios" ominaisuuksia. Configuration -> Import Objects -> Choose File -> resource-unix-advanced.xml -> Import Object (On hyvä pistää "check" -merkki ennen lisäystä kohtiin "Keep oid" ja "Overwrite existing object".
+
+Sitten lisäsimme metaroolin midPoint roolille. Tämä lisää ryhmänteko mahdollisuuden kohde Linux-koneelle. Configuration -> Import Objects -> Choose File -> role-assignment-inducement-metarole.xml -> Import Object.
+ 
+Loimme seuraavaksi midPointtiin roolin pääkäyttäjiä varten nimeltään "sudo" ja peruskäyttäjiä varten nimeltään "user".
 
 Aloitimme tekemään ensimmäiseksi "sudo" -roolin. Valitsimme midPointin vasemmasta valikosta ```Roles -> New role```.
 
@@ -3113,6 +3455,10 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
 1. Käyttöliittymän vasemman puoleisesta valikosta valittiin ```Users -> New user```
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(1).png)
+    <br>
+    Kuva 117: Ruudunkaappaus valikosta.
+    <br>
+    <br>
  
 2. Määriteltiin ruudussa näkyviin kohtiin ainakin seuraavat kohdat:
 
@@ -3131,6 +3477,10 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
     | Telephone (Puhelinnumero) | +358123456789 |
      
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(2).png)
+    <br>
+    Kuva 118: Ruudunkaappaus määrityksistä (1/2).
+    <br>
+    <br>
      
 
     Activation
@@ -3154,18 +3504,33 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
     | Execute after all approvals (Suorita kaikkien suoritusten jälkeen) | <Rasti boksissa>
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(3).png)
+    <br>
+    Kuva 119: Ruudunkaappaus määrityksistä (2/2).
+    <br>
+    <br>
 
 3. Katsottiin tehtävät muutokset painamalla "Preview changes". Muutokset vaikuttivat ihan ok. 
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(4).png)
+    <br>
+    Kuva 120: Ruudunkaappaus esikatselusta (1/2).
+    <br>
+    <br>
     Lopuksi painettiin sivun alhaalta "Save".
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(5).png)
+    <br>
+    Kuva 121: Ruudunkaappaus esikatselusta (2/2).
+    <br>
+    <br>
  
     Ullan käyttäjätunnus luotiin onnistuneesti!
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(6).png)
- 
+    <br>
+    Kuva 122: Ruudunkaappaus ilmoituksesta.
+    <br>
+    <br> 
 
 Teimme Matti Nimeiselle tunnukset samalla tavalla paitsi kohta 2 tehtiin seuraavanlaisesti:
 
@@ -3214,18 +3579,34 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 2. Käyttäjälistauksesta valittiin "ullanieminen"
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
+    <br>
+    Kuva 123: Ruudunkaappaus listauksesta.
+    <br>
+    <br> 
 
 3. Valittiin välilehdestä "Projections" (1.). Tämän jälkeen painettiin rattaan kuvaa (2.) ja lopuksi "Add projection" (3.).
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(8).png)
+    <br>
+    Kuva 124: Ruudunkaappaus.
+    <br>
+    <br> 
  
 4. Valittiin avautuneesta "Choose object" -ikkunasta "Medusa Active Directory (LDAP) (1.) ja kuitattiin valinta painamalla "Add" (2.).
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(9).png)
+    <br>
+    Kuva 125: Ruudunkaappaus listauksesta.
+    <br>
+    <br> 
  
 5. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty Active Directoryn piiriin onnistuneesti!
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+    <br>
+    Kuva 126: Ruudunkaappaus kohdasta.
+    <br>
+    <br> 
 
 Matti Nieminen liitettiin samalla tavalla Active Directoryyn.
  <br>
@@ -3239,6 +3620,10 @@ Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen pääkäyttäjäksi ja Matti Ni
 2. Käyttäjälistauksesta valittiin "ullanieminen"
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
+    <br>
+    Kuva 127: Ruudunkaappaus listauksesta.
+    <br>
+    <br> 
  
 3. Valittiin välilehdestä "Assignments".
  
@@ -3249,6 +3634,10 @@ Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen pääkäyttäjäksi ja Matti Ni
 6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty TESTIPALVELIN -palvelimen käyttäjäksi onnistuneesti!
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+    <br>
+    Kuva 128: Ruudunkaappaus kohdasta.
+    <br>
+    <br> 
 
 Matti Nieminen lisättiin peruskäyttäjäksi samalla tavalla paitsi kohdassa 5 valittiin sen sijaan rooliksi "user".
  
@@ -3263,6 +3652,10 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 2. Käyttäjälistauksesta valittiin "ullanieminen"
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
+    <br>
+    Kuva 129: Ruudunkaappaus listauksesta.
+    <br>
+    <br> 
  
 3. Valittiin välilehdestä "Assignments".
  
@@ -3273,6 +3666,10 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.).
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+    <br>
+    Kuva 130: Ruudunkaappaus kohdasta.
+    <br>
+    <br> 
  
 7. Valittiin uudelleen käyttäjälistauksesta "ullanieminen"
  
@@ -3320,6 +3717,10 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 12. Käyttäjälistauksesta valittiin "ullanieminen"
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
+    <br>
+    Kuva 131: Ruudunkaappaus listasta.
+    <br>
+    <br> 
  
 13. Valittiin välilehdestä "Assignments".
  
@@ -3330,6 +3731,10 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 16. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjä oli liitetty OpenLDAP -palvelimen käyttäjäksi onnistuneesti!
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+    <br>
+    Kuva 132: Ruudunkaappaus kohdasta.
+    <br>
+    <br> 
 
 Matti Nieminen lisättiin peruskäyttäjäksi samalla tavalla paitsi kohdassa 5 valittiin sen sijaan rooliksi "openldap_basic_users_unix", kohta 10 oli seuraava:
 
@@ -3381,6 +3786,10 @@ Teimme tämän seuraavanlaisesti:
 6. Katsottiin että "Options" -kohdassa on samat valittuna mitä kuvan kohdassa 1. Lopuksi valittiin "Save" (2.). Nyt käyttäjälle oli määritetty oikeanlaiset käyttöoikeudet midPointin käyttöliittymään.
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
+    <br>
+    Kuva 133: Ruudunkaappaus kohdasta.
+    <br>
+    <br> 
      
 <br>
 
@@ -3393,30 +3802,50 @@ Jos nimessä on ääkkösiä, ne eivät näy nimessä LDAP-käyttäjien osalta. 
 Kokeilimme käyttäjätunnuksen jäädytyksen vaikutuksia kohdejärjestelmin kirjautumisiin. Jäädytimme Ulla Niemisen tunnukset menemällä midPointin vasemmassa valikosta valitsemalla ```Users -> List users```. Etsimme käyttäjälistauksesta Ullan ja painoimme alinapista (1.) ja valitsimme "Disable" (2.). 
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(11).png)
+<br>
+Kuva 134: Ruudunkaappaus listasta.
+<br>
+<br> 
  
-Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ja TESTIPC1:seen ei onnistunut, kirjautuminen TESTIPC2:seen kuitenkin onnistui. Tämä siksi, koska OpenLDAP:ssa ei ole tunnusten jäädytysmahdollisuutta. Tämä ongelma on myös midPointin kehittäjän <a href=""https://wiki.evolveum.com/display/midPoint/LDAP+Servers+Summary>Evolveumin tiedossa.</a> Tässä tapauksessa kannattaa poistaa käyttäjältä OpenLDAP:n roolit kohdasta "Assignments". ei myöskään pääse kirjautumaan jäädytyksen jälkeen sisälle.
+Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ja TESTIPC1:seen ei onnistunut, kirjautuminen TESTIPC2:seen kuitenkin onnistui. Tämä siksi, koska OpenLDAP:ssa ei ole tunnusten jäädytysmahdollisuutta. Tämä ongelma on myös midPointin kehittäjän <a href="https://wiki.evolveum.com/display/midPoint/LDAP+Servers+Summary">Evolveumin tiedossa.</a> Tässä tapauksessa kannattaa poistaa käyttäjältä OpenLDAP:n roolit kohdasta "Assignments". ei myöskään pääse kirjautumaan jäädytyksen jälkeen sisälle.
  
 <br>
 
-<h3 id="Lokitus">Lokitus</h3>
+<h3 id="lokitus">Lokitus</h3>
+ 
+Seuraavaksi tutkimme midPointin lokitusta.
+ 
+<br>
 
-<h4 id="Eclipse midPoint Log Viewer">Log Viewer</h4>
+<h4 id="eclipse-midPoint-log-viewer">Log Viewer</h4>
 
 MidPoint on kehittänyt työkalun nimeltä <a href="https://wiki.evolveum.com/display/midPoint/Log+Viewer">"Log Viewer"</a>, jolla pystyy helposti tutkimaan suuria lokitiedostoja. Log Viewer on Eclipse plugini, joka näyttää loki tiedostot hyvin järjestettynä, käyttämällä Eclipse "Outline" ja "Problems" näkymiä.
 
 Eclipse midPoint Log Viewerin ominaisuuksiin kuuluu mm. "Showing log outline", "Showing error, warning and information messages", "Folding (collapse + expand)", "Permanently removing unnecessary lines", "Objects and threads dictionary", "OID highlighting and associated information display", "Logfile preprocessing: LogTrimmer tool", "Logfile erasing: Tuncater tool", "Performance tuning".
+ 
+<br>
 
-<h4 id="Audit Log Viewer">Audit Log Viewer</h4>
+<h4 id="audit-log-viewer">Audit Log Viewer</h4>
 
 ![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer1.PNG?raw=true)
+<br>
+Kuva 135: Audit Log Viewer.
+<br>
+<br>
 
 MidPointista löytyy "Audit Log Viewer" -näkymä, jossa näkee kaikki midPointin lokit. Lokeja pystyy suodattamaan mm. ajakajakson, tapahtumatyypin, kohteen, aloittajan yms. mukaan.
 
 ![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer2.PNG?raw=true)
+<br>
+Kuva 136: Audit Log Viewer.
+<br>
+<br>
 
 Lokit voi avata, jolloin niistä saa  tarkempaa tietoa. Mm. Timestamp, Event identifier, Event Type, Event Stage, Initiator, Target ref., Outcome, Session Identifier, Resource name, Object Name, Execution result jne.
 
 Lokeista näkyy mm. käyttäjien luonnit/poistamiset, roolien lisäykset, tehtävänannot, istunnot jne.
+ 
+<br>
  
 <h3 id="yhteenveto">Yhteenveto</h3>
 
@@ -3425,8 +3854,11 @@ Projekti oli mielestämme haastava omiin taitotasoihimme nähden. Opimme paljon 
 Projektia varten Haaga-Helia tarjosi meille fyysiset palvelinkoneet Servulasta, joita saimme käyttää vapaasti. Kaikki projektissa käyttämämme resurssit saimme ilmaiseksi ja käytimme Ubuntu Server 16.04.5 LTS, Ubuntu Desktop 16.04.5 LTS & 18.04.1 LTS, Windows Server 2016 Datacenter ja Windows 10 Pro -käyttöjärjestelmiä. Kaikki käyttöjärjestelmäversiot olivat 64-bittisiä. Testasimme aina aluksi midPoint -järjestelmää virtuaaliympäristössä, jonka jälkeen toteutimme saman fyysiselle palvelinkoneelle. Projektissa käyttämämme midPoint IdM-järjestelmä on yrityskäyttöön. MidPointin kehittäjän mukaan järjestelmä soveltuu hyvinkin suurelle yritykselle (jopa 100 000 käyttäjää). Mielestämme midPointissa on potentiaalia soveltua yrityksen IdM-järjestelmäksi, mutta riippuen yrityksen koosta midPoint IdM-järjestelmän ylläpitäminen vaatisi monia työntekijöitä, koska projektin perusteella midPoint IdM-järjestelmä ei vaikuta kovin yksinkertaiselta ja helpolta käyttää. Saimme projektin aikana suojattua kaikki yhteydet midPoint IdM-järjestelmän ja connectoreiden välillä (Unix/Linux, Active Directory, OpenLDAP) itseallekirjoitetulla SSL-sertifikaatilla. Jos halutaan muussa kuin kokeilumielessä käyttää midPoint IdM-järjestelmää niin silloin tulisi ostaa virallinen SSL-sertifikaatti. Myös verkkotunnus on järkevää hankkia, jotta midPointin osoite on helppo muistaa. Kaikin puolin projekti midPoint IdM-järjestelmän oli jokaiselle projektiryhmän jäsenelle erittäin opettavainen, josta on varmasti hyötyä myös tulevaisuudessa.
 
 ![Järjestelmäkartta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/J%C3%A4rjestelm%C3%A4kartta.jpg?raw=true)
- 
 <br>
+Kuva 137: Järjestelmäkartta projektista.
+<br>
+<br>
+
  
 <h3 id="lahteet">Lähteet</h3>
  
