@@ -97,7 +97,8 @@ vertailla niiden ominaisuuksia sekä laatua. Laatua päästiin kokeilemaan esime
 
 Projektimme tehtävänä oli vertaa avoimen lähdekoodin Identiteetinhallintajärjestelmiä, joista valitsemme parhaan ja testata sen toimivuutta testiympäristössä.
 
-Asetimme projektille seuraavat tavoitteet: 
+Asetimme projektille seuraavat tavoitteet:
+ 
 - IdM-järjestelmä on toimiva ja luotettava. Testaamme järjestelmää testiympäristössä.
 Lopputuloksena on asennettu IdM-järjestelmän Master-kone
 sekä muutamat testikoneet.
@@ -106,8 +107,9 @@ sekä muutamat testikoneet.
 huomioon vaatimukset. Lopputuloksena vertailusta Excel-taulukko
 sekä lista ennalta määritellyistä vaatimuksista.
  
+<br> 
+Asetimme myös seuraavia oppimistavoitteita:
  
-Asetimme myös oppimistavoitteita, jotka olivat seuraavat:
 - Oppia IdM-järjestelmistä sekä niiden yhteyksistä muihin järjestelmiin
 ja rajapintoihin.
 - Kuinka asennetaan IdM-järjestelmä ja kuinka se saadaan käyttövalmiiksi.
@@ -118,7 +120,7 @@ ja rajapintoihin.
 
 <h2 id="yleista-idm-jarjestelmista-identity-management-system">Yleistä IdM-järjestelmistä (Identity Management System)</h2>
  
-IdM-järjestelmä (Englanniksi: Identity Management System, Suomeksi: Identiteetinhallintajärjestelmä) on järjestelmä, jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä, palveluita, tietokantoja, ohjelmistoja sekä ohjelmien käyttöoikeuksia että pääsynhallintaa. IdM:n ansiosta yritys pystyy helposti pitämään huolen siitä ketkä työntekijät pääsevät käyttämään mitäkin tietojärjestelmiä sekä palveluita ja ketkä taas eivät. IdM-järjestelmiä on hyvin erilaisia ja hyvin erilaisina kokonaisuuksina.
+IdM-järjestelmä (Englanniksi: Identity Management System, Suomeksi: Identiteetinhallintajärjestelmä) on järjestelmä, jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä, palveluita, tietokantoja, ohjelmistoja sekä ohjelmien käyttöoikeuksia että pääsynhallintaa. IdM:n ansiosta yritys pystyy helposti pitämään huolen siitä ketkä työntekijät pääsevät käyttämään mitäkin tietojärjestelmiä sekä palveluita ja ketkä taas eivät. IdM-järjestelmiä on olemassa hyvin erilaisia ja hyvin erilaisina kokonaisuuksina.
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/IdM_esimerkki.jpg)
 Kuva 1: Havainnollistava esimerkki Indentiteetinhallintajärjestelmästä (IdM)
@@ -137,6 +139,7 @@ IdM-järjestelmiä löytyy markkinoilta sekä maksullisia että maksuttomia. Mak
  
 Havaintojemme perusteella monissa yrityksissä on käytössä maksullisia IdM -järjestelmiä, koska niiden laatu on erittäin hyvä sekä yritykset saavat käyttöönsä reaaliaikaisen teknisen tuen halutessan, jos tulee jotain ongelmia tai kysymyksiä käytössä olevaan IdM-järjestelmään liittyen. 
 
+<br>
 
 Maksuttomia, avoimen lähdekoodin IdM-järjestelmiä tarjoaa muun muassa seuraavat valmistajat:
 
@@ -146,8 +149,8 @@ Maksuttomia, avoimen lähdekoodin IdM-järjestelmiä tarjoaa muun muassa seuraav
 | Evolveum | midPoint | https://evolveum.com/midpoint/ |
 | ForgeRock | OpenIDM | https://www.forgerock.com/platform/identity-management |
 <br>
-Lisää avoimen lähdekoodin IdM-järjestelmistä sekä niiden vertailusta löytyy Kappaleesta 3: "IdM-järjestelmien vertailu" .
-
+Lisää avoimen lähdekoodin IdM-järjestelmistä sekä niiden vertailusta löytyy Kappaleesta 3: <a href="#idm-jarjestelmien-vertailu">"IdM-järjestelmien vertailu"</a> .
+<br>
 Monissa avoimen lähdekoodin järjestelmistä on myös tarjolla myös maksullisia vaihtoehtoja, joiden tarkoitus on yleensä tuoda kyseiseen IdM-järjestelmään enemmän ominaisuuksia sekä reaaliaikaisen teknisen tuen.
 
 Tässä projektissa keskitymme ainoastaan niihin IdM-järjestelmiin, jotka eivät maksa mitään ja joiden lähdekoodi on vapasti saatavilla.
@@ -156,19 +159,19 @@ Tässä projektissa keskitymme ainoastaan niihin IdM-järjestelmiin, jotka eivä
 <h2 id="idm-jarjestelmien-vertailu">IdM-järjestelmien vertailu</h2>
 
 Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme vertailuun seuraavat, joita löysimme:
-<li><a href="https://syncope.apache.org/">Apache Syncope</a></li>
-<li><a href="https://evolveum.com/midpoint/">MidPoint</a></li>
-<li><a href="https://backstage.forgerock.com/docs/idm">OpenIDM</a></li>
-<li><a href="http://www.soffid.com/">Soffid</a></li>
-<li><a href="https://www.keycloak.org/">Keycloak</a></li>
-<li><a href="http://www.unity-idm.eu/">Unity</a></li>
-<li><a href="https://www.openiam.com/">OpenIAM</a></li>
-<li><a href="https://www.shibboleth.net/">Shibboleth</a></li>
-<li><a href="https://wso2.com/identity-and-access-management/">WSO2 Identity Server</a></li>
-<li><a href="https://www.gluu.org/">Gluu</a></li>
-<li><a href="http://www.josso.org/install.html">Josso</a></li>
-<li><a href="https://www.freeipa.org/page/Main_Page">FreeIPA</a></li>
-<li><a href="http://aerobase.org/">Aerobase</a></li>
+- <a href="https://syncope.apache.org/">Apache Syncope</a><br>
+- <a href="https://evolveum.com/midpoint/">MidPoint</a></li>
+- <a href="https://backstage.forgerock.com/docs/idm">OpenIDM</a></li>
+- <a href="http://www.soffid.com/">Soffid</a></li>
+- <a href="https://www.keycloak.org/">Keycloak</a></li>
+- <a href="http://www.unity-idm.eu/">Unity</a></li>
+- <a href="https://www.openiam.com/">OpenIAM</a></li>
+- <a href="https://www.shibboleth.net/">Shibboleth</a></li>
+- <a href="https://wso2.com/identity-and-access-management/">WSO2 Identity Server</a></li>
+- <a href="https://www.gluu.org/">Gluu</a></li>
+- <a href="http://www.josso.org/install.html">Josso</a></li>
+- <a href="https://www.freeipa.org/page/Main_Page">FreeIPA</a></li>
+- <a href="http://aerobase.org/">Aerobase</a></li>
 
 
 <br>
@@ -176,19 +179,19 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 
 <h3 id="idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</h3>
  
-<li>Apache Syncope:<a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
-<li>MidPoint:<a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a></li>
-<li>OpenIDM:<a href="https://backstage.forgerock.com/docs/idm">https://backstage.forgerock.com/docs/idm</a></li>
-<li>Soffid:<a href="http://www.soffid.com/products-and-services/open-source-sso-and-identity-and-access-management/">http://www.soffid.com/products-and-services/open-source-sso-and-identity-and-access-management/</a></li>
-<li>Keycloak:<a href="https://www.keycloak.org/documentation.html">https://www.keycloak.org/documentation.html</a></li>
-<li>Unity:<a href="http://www.unity-idm.eu/documentation/unity-2.6.2/manual.html">http://www.unity-idm.eu/documentation/unity-2.6.2/manual.html</a></li>
-<li>OpenIAM:<a href="http://docs41.openiam.com/">http://docs41.openiam.com/</a></li>
-<li>Shibboleth:<a href="https://wiki.shibboleth.net/confluence/#all-updates">https://wiki.shibboleth.net/confluence/#all-updates</a></li>
-<li>WSO2 Identity Server:<a href="https://github.com/wso2/product-is/">https://github.com/wso2/product-is/</a></li>
-<li>Gluu:<a href="https://gluu.org/docs/">https://gluu.org/docs/</a></li>
-<li>Josso:<a href="http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/html/en-US/JOSSO_Reference.html">http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/html/en-US/JOSSO_Reference.html</a></li>
-<li>FreeIPA:<a href="https://www.freeipa.org/page/Documentation">https://www.freeipa.org/page/Documentation</a></li>
-<li>Aerobase:<a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a></li>
+- Apache Syncope:<a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a></li>
+- MidPoint:<a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a></li>
+- OpenIDM:<a href="https://backstage.forgerock.com/docs/idm">https://backstage.forgerock.com/docs/idm</a></li>
+- Soffid:<a href="http://www.soffid.com/products-and-services/open-source-sso-and-identity-and-access-management/">http://www.soffid.com/products-and-services/open-source-sso-and-identity-and-access-management/</a></li>
+- Keycloak:<a href="https://www.keycloak.org/documentation.html">https://www.keycloak.org/documentation.html</a></li>
+- Unity:<a href="http://www.unity-idm.eu/documentation/unity-2.6.2/manual.html">http://www.unity-idm.eu/documentation/unity-2.6.2/manual.html</a></li>
+- OpenIAM:<a href="http://docs41.openiam.com/">http://docs41.openiam.com/</a></li>
+- Shibboleth:<a href="https://wiki.shibboleth.net/confluence/#all-updates">https://wiki.shibboleth.net/confluence/#all-updates</a></li>
+- WSO2 Identity Server:<a href="https://github.com/wso2/product-is/">https://github.com/wso2/product-is/</a></li>
+- Gluu:<a href="https://gluu.org/docs/">https://gluu.org/docs/</a></li>
+- Josso:<a href="http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/html/en-US/JOSSO_Reference.html">http://docs.atricore.com/josso2/2.4.0/josso-reference-guide/html/en-US/JOSSO_Reference.html</a></li>
+- FreeIPA:<a href="https://www.freeipa.org/page/Documentation">https://www.freeipa.org/page/Documentation</a></li>
+- Aerobase:<a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a></li>
 
 
 <h3 id="avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit">Avoimen lähdekoodin IdM-järjestelmien valintakriteerit</h3>
