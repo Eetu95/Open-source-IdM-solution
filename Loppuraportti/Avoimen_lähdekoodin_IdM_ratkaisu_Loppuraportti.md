@@ -59,30 +59,33 @@ Päivämäärä: 28.11.2018
                 <span>4.3.2.1. </span><a href="#active-directory-connector">Active Directory connector</a><br>
                 <span>4.3.2.2. </span><a href="#ldap-connector">LDAP-connector</a><br>
                 <span>4.3.2.3. </span><a href="#unix-connector">Unix-connector</a><br>
-                <span>4.3.2.4. </span><a href="#csv-connector">CSV-connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
           <span>4.3.4. </span><a href="#roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</a><br>
           <ol>
                 <span>4.3.4.1 </span><a href="#openldap">OpenLDAP</a><br>
-                <span>4.3.4.2 </span><a href="#unix">Unix (Unix -connector)</a><br>
+                <span>4.3.4.2 </span><a href="#unix">Unix (Unix-connector)</a><br>
           </ol>
       </ol>
  <span>5. </span><a href="#testaus">Testaus</a><br>
  <ol>
-        <span>5.1 </span><a href="#kayttajien-luonti-midpointtiin">Käyttäjien luonti midPointtiin</a><br>
-        <span>5.2 </span><a href="#kayttajan-liittaminen-active-directoryn-kayttajaksi">Käyttäjän liittäminen Active Directoryn käyttäjäksi</a><br>
-        <span>5.3 </span><a href="#kayttajan-liittaminen-testipalvelin-palvelimeen-unix-connector">Käyttäjän liittäminen TESTIPALVELIN -palvelimeen (Unix Connector)</a><br>
-        <span>5.4 </span><a href="#kayttajan-liittaminen-openldapn-kayttajaksi">Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</a><br>
-        <span>5.5 </span><a href="#kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin kayttöliittymään</a><br>
-        <span>5.6 </span><a href="#havaintoja-testauksesta">Havaintoja testauksesta</a><br>
+        <span>5.1. </span><a href="#kayttajien-luonti-midpointtiin">Käyttäjien luonti midPointtiin</a><br>
+        <span>5.2. </span><a href="#kayttajan-liittaminen-active-directoryn-kayttajaksi">Käyttäjän liittäminen Active Directoryn käyttäjäksi</a><br>
+        <span>5.3. </span><a href="#kayttajan-liittaminen-testipalvelin-palvelimeen-unix-connector">Käyttäjän liittäminen TESTIPALVELIN -palvelimeen (Unix Connector)</a><br>
+        <span>5.4. </span><a href="#kayttajan-liittaminen-openldapn-kayttajaksi">Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</a><br>
+        <span>5.5. </span><a href="#kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin kayttöliittymään</a><br>
+        <span>5.6. </span><a href="#havaintoja-testauksesta">Havaintoja testauksesta</a><br>
  </ol>
  <span>6. </span><a href="#lokitus">Lokitus</a><br>
+ <ol>
+		<span>6.1 <a href="#eclipse-midPoint-log-viewer">Log Viewer</a><br>
+		<span>6.2 <a href="#audit-log-viewer">Audit Log Viewer</a><br>
+</ol>
  <span>7. </span><a href="#yhteenveto">Yhteenveto</a><br>
  <span>8. </span><a href="#lahteet">Lähteet</a><br>
 </ol>
 
-<h2 id="johdanto">Johdanto</h2>
+<h2 id="johdanto">1. Johdanto</h2>
  
 Tässä raportissa kerromme kuinka avoimen lähdekoodiin perustuvan Identiteetinhallintajärjestelmän saa käyttöön (asennus ja määritys) sekä kuinka sillä voidaan hallita Unix/Linux -palvelimien, OpenLDAP-palvelimen sekä Windows -domainin käyttäjiä. Käytämme projektissa Evolveumin <a href="https://evolveum.com/midpoint/">"midPoint"</a> nimistä avoimen lähdekoodin identiteetinhallintajärjestelmää.
 
@@ -116,7 +119,7 @@ ja rajapintoihin.
 - Opitaan pitämään projektin aikataulusta huolta ja pitämään kiinni työaikakirjauksesta.
 
 
-<h2 id="yleista-idm-jarjestelmista-identity-management-system">Yleistä IdM-järjestelmistä (Identity Management System)</h2>
+<h2 id="yleista-idm-jarjestelmista-identity-management-system">2. Yleistä IdM-järjestelmistä (Identity Management System)</h2>
  
 IdM-järjestelmä (Englanniksi: Identity Management System, Suomeksi: Identiteetinhallintajärjestelmä) on järjestelmä, jonka avulla voidaan keskitetysti hallita yrityksen eri tietojärjestelmiä, palveluita, tietokantoja, ohjelmistoja sekä ohjelmien käyttöoikeuksia että pääsynhallintaa. IdM:n ansiosta yritys pystyy helposti pitämään huolen siitä ketkä työntekijät pääsevät käyttämään mitäkin tietojärjestelmiä sekä palveluita ja ketkä taas eivät. IdM-järjestelmiä on olemassa hyvin erilaisia ja hyvin erilaisina kokonaisuuksina.
 
@@ -159,7 +162,7 @@ Monissa avoimen lähdekoodin järjestelmistä on myös tarjolla myös maksullisi
 Tässä projektissa keskitymme ainoastaan niihin IdM-järjestelmiin, jotka eivät maksa mitään ja joiden lähdekoodi on vapasti saatavilla.
 
 
-<h2 id="idm-jarjestelmien-vertailu">IdM-järjestelmien vertailu</h2>
+<h2 id="idm-jarjestelmien-vertailu">3. IdM-järjestelmien vertailu</h2>
 
 Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme vertailuun seuraavat, joita löysimme:
 - <a href="https://syncope.apache.org/">Apache Syncope</a>
@@ -180,7 +183,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 <br>
 
 
-<h3 id="idm-jarjestelmien-dokumentaatiot">IdM-järjestelmien dokumentaatiot</h3>
+<h3 id="idm-jarjestelmien-dokumentaatiot">3.1. IdM-järjestelmien dokumentaatiot</h3>
  
 - Apache Syncope:<a href="https://syncope.apache.org/docs/">https://syncope.apache.org/docs/</a>
 - MidPoint:<a href="https://wiki.evolveum.com/display/midPoint/Documentation">https://wiki.evolveum.com/display/midPoint/Documentation</a>
@@ -197,7 +200,7 @@ Etsimme ensin Googlettamalla avoimen lähdekoodin IdM-järjestelmiä. Otimme ver
 - Aerobase:<a href="http://aerobase.org/documentation">http://aerobase.org/documentation</a>
 
 
-<h3 id="avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit">Avoimen lähdekoodin IdM-järjestelmien valintakriteerit</h3>
+<h3 id="avoimen-lahdekoodin-idm-jarjestelmien-valintakriteerit">3.2. Avoimen lähdekoodin IdM-järjestelmien valintakriteerit</h3>
 
 Katsoimme kyseisten avoimen lähdekoodin IdM-järjestelmien lisenssit läpi. Laitoimme ne ylös vertailudokumenttiin ja selitimme ne. Lisäsimme lähteet, joista ilmenee lisenssit ja mitä ne pitävät sisällään.
 
@@ -255,7 +258,7 @@ Lisäsimme vertailuumme löytämämme uuden avoimen lähdekoodin IdM-järjestelm
 
 Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM-järjestelmille. Löydettiin myös suomalaisia yrityksiä ja järjestöjä, jotka käyttävät joitakin vertailussamme olevista IdM-järjestelmistä. Löydettiin mm. että <a href="http://www.tirasa.net/customer/university-of-helsinki.html">Helsingin Yliopisto käyttää Apache Syncopea</a>
 
-<h3 id="alustavat-vaatimukset">Alustavat vaatimukset</h3>
+<h3 id="alustavat-vaatimukset">3.3. Alustavat vaatimukset</h3>
 
 | Vaatimus  |  Lisätietoja   |
 |---|---|
@@ -278,7 +281,7 @@ Etsimme muita referenssejä vertailun kohteena oleville avoimen lähdekoodin IdM
 |Mahdollisuus manuaaliprovisiointiin   |Tukeeko valittavat mahdollisuudet esimerkiksi radiobuttoneita, checkboxeja jne.   |
 |Soveltuu myös suureen yritykseen   |  Käyttöoikeuksia voi olla esimerkiksi yli 7000  |
 
-<h3 id="vertailu-ja-aputaulukko">Vertailu- ja aputaulukko</h3>
+<h3 id="vertailu-ja-aputaulukko">3.4. Vertailu- ja aputaulukko</h3>
 
 ![vertailutaulukko](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Vertailu/vertailutaulukko.jpg?raw=true)
 
@@ -293,7 +296,7 @@ Kuva 3: Aputaulukko.
  
 Aputaulukko selventää vertailutaulukon lukua. Lataa PDF <a href="https://opensourceidm.files.wordpress.com/2018/10/aputaulukko.pdf">tästä</a>.
 
-<h2 id="midpoint">Midpoint</h2>
+<h2 id="midpoint"4. >Midpoint</h2>
 
 Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuksia ja pisteitä omisti midPoint IdM-järjestelmä, mistä syystä päädyimme juuri tähän järjestelmään. Vahvaksi toiseksi ehdokkaaksi valiutui Apache Syncope, joka muuten midPointin kanssa sisälsi melkein identtiset ominaisuudet kuin midPoint, mutta midPoint IdM-järjestelmä tuki enemmän muita järjestelmiä ja rajapintoja. Järjestelmät ja rajapinnat, joita midPoint tukee ovat:
 - Active Directory
@@ -311,7 +314,7 @@ Vertailtuamme IdM-järjestelmiä ja kriteereidemme perusteella eniten ominaisuuk
 
 Tosin kaikissa connectoreissa ja rajapinnoissa käyttäjätietojen synkronointi ei valmistajan mukaan toimi esimerkiksi Atlassian tuotteiden ja Oraclen kanssa. Omien connectoreiden teko on myös mahdollista midPontissa. Tämän projektin aikana kokeilimme Active Directory, Unix/Linux ja LDAP connectoreita.
  
-<h3 id="esivalmistelut">Esivalmistelut</h3>
+<h3 id="esivalmistelut">4.1. Esivalmistelut</h3>
 
 Valittuamme midPoint IdM-järjestelmän, ryhdyimme tekemään esivalmisteluja IdM-järjestelmää varten. Tarkoituksena oli, että kokeilemme mahdollisimman montaa connectoria. Tätä varten tarvitsimme sekä Linux että Windows käyttöjärjestelmillä varustetut työasemat ja palvelimet. Aluksi kokeilimme midPointin käyttöä sekä työasemien asennusta ja konfigurointia virtuaaliympäristössä. Käytössämme oli Oracle VM VirtualBox, jonne loimme virtuaalikoneita testauksia varten. Myöhemmin kuitenkin teimme samat muutokset fyysisellä työasemalla, johon midPoint IdM-järjestelmä asennettiin, kun virtuaaliympäristössä saatiin haluttu lopputulos toimimaan. 
 
@@ -343,7 +346,7 @@ Tämän lisäksi asenamme WINDOWSSERVER -palvelimeen OpenLDAP -virtuaalipalvelim
  
 <br> 
  
-<h4 id="ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön</h4>
+<h4 id="ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">4.1.1. Ubuntu Server asennus ja konfigurointi "MIDPOINTIDM" -keskusyksikköön</h4>
 
 Ensimmäisenä esivalmisteluvaiheena oli Linux palvelimen käyttöjärjestelmän asennus ja konfigurointi. MidPoint järjestelmä asennetaan tähän käyttöjärjestelmään. Valitsimme palvelimeksi Ubuntu Server 16.04.5 LTS 64-bittisen version. Asensimme käyttöjärjestelmän fyysiselle tietokoneelle USB-livetikun avulla. Valitsimme tietokoneesta käynnistystavaksi USB boottauksen, jolloin pääsimme asentamaan käyttöjärjestelmää.
 
@@ -582,7 +585,7 @@ Kuva 33: "Interfaces" -määritykset.
  
 <br>
  
-<h4 id="windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon">Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -keskusyksikköön</h4>
+<h4 id="windows-server-2016-asennus-ja-konfigurointi-windowsserver-keskusyksikkoon">4.1.2. Windows Server 2016 asennus ja konfigurointi "WINDOWSERVER" -keskusyksikköön</h4>
 
 Seuraavaksi asensimme Windows Server 2016 Datacenter, 64-bittisen version fyysiselle tietokoneelle, jota tarvisimme, jotta saamme tähän koneeseen tehtyä Active Directoryn ja yhdistettyä sen midPointiin. Kokeilimme aluksi Windows Serverin asennusta Oraclen VM VirtuaBoxiin, jotta voisimme testata sitä Windows Serveriä sitä kautta. Ilmeni kuitenkin ongelmia Windowsin aktivoinnin kanssa myöhemmin. Kun veimme (export) valmiin VirtualBoxin Windows Serverin imagen talteen, johon oli liitetty tuoteavain huomattiin, että kun tuotiin (import) levykuva takaisin VirtualBoxiin niin Windowsia ei oltu enää aktivoitu ja piti hankkia uusi tuoteavain. Tästä syystä on aihetta välttää Windowsin käyttöä virtuaaliympäristössä ainakin niiltä osin, jos tuodaan ja viedään VirtualBoxin levykuvia. Virtuaalikoneita voidaan käyttää kuitenkin esimerkiksi VirtualBox -palvelimella, jolloin vältytään levykuvien tuomisesta ja viemisestä. 
  
@@ -628,7 +631,7 @@ Seuraavaksi piti valita levy, jolle käyttöjärjestelmä asennetaan (tässä ei
  
 <br>
  
-<h5 id="windows-palvelimen-perusmaaritykset">Windows -palvelimen perusmääritykset</h5>
+<h5 id="windows-palvelimen-perusmaaritykset">4.1.2.1. Windows -palvelimen perusmääritykset</h5>
 
 Asennettuamme Windows Server 2016 Datacenter 64-bittisen version fyysiselle koneelle, aktivoimme aluksi Windowsin. Windowsin voi aktivoida seuraavasti antamalla tuoteavaimen:
 ```
@@ -782,7 +785,7 @@ Kuva 54: Edellytykset (AD DS).
 <br>
 Seuraavaksi määritysohjelma tarkisti edellytykset AD DS:n määritykseen. Edellytykset olivat OK. Klikkasimme Install. Asennuksen jälkeen tietokone käynnistyi uudelleen ja käynnistyksen yhteydessä huomattiin, että tietokone on nyt liitetty Domainiin.
  
-<h5 id="hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">Hyper-V:n sekä uuden virtuaalipalvelimen asennus</h5>
+<h5 id="hyper-vn-seka-uuden-virtuaalipalvelimen-asennus">4.1.2.2. Hyper-V:n sekä uuden virtuaalipalvelimen asennus</h5>
  
 Halusimme laittaa Windows Serveriin OpenLDAP -palvelimen, joka asennetaan siihen virtuaalipalvelimena. Jotta virtuaalipalvelimen käyttö on mahdollista, lisäsimme Windows Serveriin Hyper-V:n. Sitä ennen latasimme <a href"http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso">64-bittisen Ubuntu Server 16.04.5 LTS:n levykuvan</a> talteen Windows -palvelimelle.
  
@@ -925,7 +928,7 @@ Kirjauduimme asennuksen jälkeen sisälle tunnuksilla, jotka asennusvaiheessa te
  
 <br>
  
-<h5 id="openldap-serverin-asennus-ja-konfigurointi-hyper-vn-virtuaalipalvelimeen">OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</h5>
+<h5 id="openldap-serverin-asennus-ja-konfigurointi-hyper-vn-virtuaalipalvelimeen">4.1.2.3. OpenLDAP serverin asennus ja konfigurointi Hyper-V:n virtuaalipalvelimeen</h5>
 
 Asensimme OpenLDAP:n tyhjälle virtuaalipalvelimelle seuraavanlaisesti:
 
@@ -1176,7 +1179,7 @@ Koska emme halua käyttää suojaamatonta LDAP-yhteyttä, pakotamme käyttämä�
  
 <br>
  
-<h5 id="phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</h5>
+<h5 id="phpLDAPadmin-web-kayttoliittyman-asennus-ja-konfigurointi">4.1.2.4. phpLDAPadmin -web-käyttöliittymän asennus ja konfigurointi</h5>
  
 Asensimme phpLDAPadmin -web-käyttöliittymän OpenLDAP-palvelimelle, jotta siihen pääsee näppärästi käsiksi graaffisen käyttöliittymän kautta.
 
@@ -1232,7 +1235,7 @@ Nyt kun menemme sivulle http://<ip-osoite>/phpldapadmin, pääsemme web-käyttö
  
 <br>
  
-<h5 id="ryhmien-luonti-openldap-palvelimeen">Ryhmien luonti OpenLDAP-palvelimeen</h5>
+<h5 id="ryhmien-luonti-openldap-palvelimeen">4.1.2.5. Ryhmien luonti OpenLDAP-palvelimeen</h5>
 
  
 Jotta OpenLDAP -palvelimen määritys sekä sen liittäminen midPointtiin olisi mahdollisimman helppoa, lisäsimme valmiiksi tarvittavat ryhmät OpenLDAP -palvelimeen graaffisen web-käyttöliittymän kautta. Meidän täytyi luoda seuraavat ryhmät:
@@ -1280,7 +1283,7 @@ Teimme tarvittavat toimenpiteet seuraavasti:
  
 <br>
  
-<h5 id="openldap-palvelimen-maaritys-midpointtia-varten">OpenLDAP -palvelimen määritys midPointtia varten</h5>
+<h5 id="openldap-palvelimen-maaritys-midpointtia-varten">4.1.2.6. OpenLDAP -palvelimen määritys midPointtia varten</h5>
 
  
 MidPointin yhteyttä varten jouduimme tekemään vielä lisäkonfiguraatiota OpenLDAP-palvelimeen (OPENLDAPSERVER):
@@ -1455,7 +1458,7 @@ OpenLDAP -palvelimelle suositeltiin kanssa lisätä uusi skeematiedosto ```midpo
  
 <br>
  
-<h5 id="suojatun-web-yhteyden-maaritys-https1">Suojatun web-yhteyden määritys (https)</h5>
+<h5 id="suojatun-web-yhteyden-maaritys-https1">4.1.2.7. Suojatun web-yhteyden määritys (https)</h5>
  
 Suojattua yhteyttä tarvitaan, jotta  tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta web-käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
 
@@ -1502,7 +1505,7 @@ sertifikaatin allekirjoitus pyyntö.
 - "-nodes" = Kertoo OpenSSL:lle että se voi ohittaa sertifikaatin suojauksen tunnuslauseen. Apachen pitää pystyä
 lukemaan tiedosto ilman, että käyttäjä puuttuu siihen silloin kun palvelin käynnistyy. Tunnuslause (passphrase)
 estäisi tämän toteutumisen, koska meidän pitäisi aina syöttää se jokaisen uudelleenkäynnistyksen yhteydessä.
-' "-days 365" = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
+- "-days 365" = Tämä asettaa sertifikaatin voimassaolo ajan 365 päiväksi.
 - "-newkey rsa:2048" =Tällä määritellään uuden sertifikaatin ja avaimen luonti samaan aikaan. Rsa:2048 kertoo että pitää
 tehdä RSA avain, joka on 2048 bittiä pitkä.
 - "-keyout" = Kertoo OpenSSL:lle minne luotu yksityinen avaintiedosto pistetään.
@@ -1604,7 +1607,7 @@ Kuva 58: Sertifikaattivaroitus (Chrome).
  
 <br>
  
-<h4 id="virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</h4>
+<h4 id="virtualbox-palvelimen-asennus-ja-konfigurointi-vmserver-keskusyksikkoon">4.1.3. VirtualBox -palvelimen asennus ja konfigurointi "VMSERVER" -keskusyksikköön</h4>
 
 Asensimme "VMSERVER" -keskusyksikköön Linux -käyttöjärjestelmään pohjautuvan 64-bittisen Ubuntu Server 16.04.5 LTS -käyttöjärjestelmän samalla tavalla kuten se asennettiin "MIDPOINTIDM" -keskusyksikköön <a href="#ubuntu-server-asennus-ja-konfigurointi-midpointidm-keskusyksikkoon">aiemmassa kappaleessa</a>. Muuten tehdään siis samalla tavalla mutta asennusvaiheessa annetaan palvelimen nimeksi "VMSERVER" eikä "MIDPOINTIDM". Loimme myös samat käyttäjätunnukset asennusvaiheessa. Suositeltavaa tosin olisi tehdä erit käyttäjätunnukset.
 
@@ -1769,7 +1772,7 @@ Teimme VirtualBoxin asennuksen seuraavanlaisesti:
 
 <br> 
  
-<h4 id="phpvirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi">phpVirtualBox -web-käyttöliittymän asennus ja konfigurointi</h4>
+<h4 id="phpvirtualbox-web-kayttöliittyman-asennus-ja-konfigurointi">4.1.3.1. phpVirtualBox -web-käyttöliittymän asennus ja konfigurointi</h4>
 
 Jotta pystymme hallitsemaan VirtualBoxia graaffisesti, jouduimme asentamaan ja määrittämään palvelimelle phpVirtualBoxin. Tämän ansiosta voimme hallita palvelimelle asennettua VirtualBoxia graaffisesti suoraan verkkoselaimelta käsin mistä vain. Jotta phpVirtualBox toimisi, jouduimme myös asentamaan palvelimelle Apachen2:sen sekä PHP:n.
 
@@ -1880,7 +1883,7 @@ Kuva 60: Salasanan vaihto (phpVirtualbox).
  
 <br>
  
-<h5 id="suojatun-yhteyden-maaritys-https2">Suojatun web-yhteyden määritys (https)</h5>
+<h5 id="suojatun-yhteyden-maaritys-https2">4.1.3.2. Suojatun web-yhteyden määritys (https)</h5>
  
 Suojattua yhteyttä tarvitaan, jotta  tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta web-käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
 
@@ -2025,11 +2028,11 @@ Kuva 61: Sertifikaattivaroitus (Chrome)
  
 <br>
  
-<h4 id="testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi">Testityöasemien sekä testipalvelimen asennus ja konfigurointi</h4>
+<h4 id="testityoasemien-seka-testipalvelimen-asennus-ja-konfigurointi">4.1.4. Testityöasemien sekä testipalvelimen asennus ja konfigurointi</h4>
  
 Seuraavaksi aloimme asentelemaan ja konfiguroimaan testityöasemia ja palvelimia VirtualBox-palvelimelle.
 
-<h5 id="windows-10-testipc1">Windows 10 (TESTIPC1)</h5>
+<h5 id="windows-10-testipc1">4.1.4.1. Windows 10 (TESTIPC1)</h5>
  
 Testityöasemia käytimme meidän omassa VirtualBox-palvelimessa. Latasimme Windows 10 virtuaalikoneen <a href="modern.ie"> modern.ie sivustolta</a>, joka toimii 90 päivän lisenssillä. Kyseinen virtuaalikone toimii testityöasemana ja on nimeltään "TESTIPC1".
 
@@ -2096,7 +2099,7 @@ Käyttäjän luonti-ikkunaan kirjoitimme käyttäjätunnuksen ja tietoja käytt�
  
 <br>
  
-<h5 id="ubuntu-desktop-18041-lts-testipc2">Ubuntu Desktop 18.04.1 LTS (TESTIPC2)</h5>
+<h5 id="ubuntu-desktop-18041-lts-testipc2">4.1.4.2. Ubuntu Desktop 18.04.1 LTS (TESTIPC2)</h5>
  
 Linux-ympäristöä varten tarvitsimme Linux-käyttöjärjestelmällä varustetun koneen. Aiomme myös myöhemmin liittää tämän testityöaseman OpenLDAP-palvelimen piiriin. Päätimme valita testiä varten Ubuntu Desktop 18.04.1 LTS 64-bittisen version. Samalla tavoin lisäsimme tämän testityöaseman VirtualBoxiinVirtualBox -palvelimeen (VMSERVER). Ladattiin tätä varten .ISO tiedosto netistä: (Komentokehotteessa saa sen helposti ladattua komennolla ```wget http://releases.ubuntu.com/18.04.1/ubuntu-18.04.1-desktop-amd64.iso```). Levykuvan siirto ```vbox``` käyttäjän kotihakemistoon tapahtuu samalla tavalla miten edellisessä kappaleessa tehtiin. VMSERVERillä loimme virtuaalikoneen:
 
@@ -2360,13 +2363,13 @@ Tulokseksi tuli ```anonymous```. Yhteys siis toimii.
  
 <br>
  
-<h5 id="ubuntu-server-16045-lts-testipalvelin">Ubuntu Server 16.04.5 LTS</h5>
+<h5 id="ubuntu-server-16045-lts-testipalvelin">4.1.4.3. Ubuntu Server 16.04.5 LTS</h5>
 
 Asensimme testipalvelimen myös VirtualBox -palvelimelle (VMSERVER). Testipalvelimen asennusprosessi on muuten sama kuin fyysisen palvelimen kanssa, mutta ero on ainoastaan se, että testipalvelin on VirtualBox -palvelimella. Käyttöjärjestelmä oli sama kuin fyysisellä tietokoneella: Ubuntu Server 16.04.5 LTS 64-bit. Asetimme myös tässäkin verkkokortin siltaavaksi kuten myös muiden testikoneiden osalta.
  
 <br>
  
-<h3 id="asennus">Asennus</h3>
+<h3 id="asennus">4.2. Asennus</h3>
 
 1. Asennettiin openjdk8:
     ```
@@ -2441,13 +2444,13 @@ Tämän jälkeen midPoint oli asennettu.
 <br>
  
 
-<h3 id="konfigurointi">Konfigurointi</h3>
+<h3 id="konfigurointi">4.3. Konfigurointi</h3>
  
 Seuraavaksi aloimme konfiguroimaan midPointtia käyttövalmiiksi.
  
 <br>
  
-<h4 id="tietokannan-maarittaminen">Tietokannan määrittäminen</h4>
+<h4 id="tietokannan-maarittaminen">4.3.1. Tietokannan määrittäminen</h4>
  
 Päätimme liittää fyysiselle midPoint palvelimellemme MariaDB tietokannan. Kokeilimme aluksi liittämistä virtuaalitestipalvelimella, jonka jälkeen liitimme sen fyysiselle palvelimelle. MidPointissa tulee mukana sulautettu tietokanta H2, jota suositellaan käytettävän vain testaukseen. Tästä syystä päätimme valita MariaDB tietokannan, sillä osaamme jo muutenkin hieman MySQL:ää. Toinen vaihtoehto olisi ollut PostgreSQL, mutta päädyimme MariDB:seen edellä mainitusta syystä. 
 Aluksi palvelimelle tulee asentaa MariaDB:
@@ -2526,13 +2529,13 @@ Käyttäjien lisäys onnistui ja ne löytyvät MariaDB tietokannasta.
  
 <br>
  
-<h4 id="connectoreiden-maarittaminen">Connectoreiden määrittäminen</h4>
+<h4 id="connectoreiden-maarittaminen">4.3.2. Connectoreiden määrittäminen</h4>
  
 Jotta yrityksen järjestelmä voidaan tuoda IdM:n piirii, pitää se lisätä käyttämällä välikappaletta (Englanniksi: Connector). Välikappale (tai kuten viittaamme myöhemmin sanalla connector) ei ole fyysinen vaan koodattu pikku ohjelma. Seuraavassa kohdassa kerromme, kuinka lisäsimme TESTIPALVELIN, OPENLDAPSERVER sekä WINDOWSSERVER midPointin piiriin. Liitimme TESTIPALVELIN -palvelimen käyttämällä Unix-connectoria, OPENLDAPSERVERin sekä WINDOWSSERVERin käyttämällä LDAP-connectoria.
  
 <br>
 
-<h5 id="active-directory-connector">Active Directory connector</h5>
+<h5 id="active-directory-connector">4.3.2.1. Active Directory connector</h5>
 
 Active Directory connectorin avulla saadaan yhdistettyä midPoint Windows -käyttöjärjestelmän koneisiin. Active Directory connectoria varten tulee olla määritetty Windows Server, jossa on asennettuna Active Directory Domain services eli aktiivihakemisto. Active Directory asennus tehtiin jo Windows Serverin [esivalmisteluvaiheessa](#windows-palvelimen-perusmaaritykset). MidPointissa Active Directory connector oli jo valmiina asennettuna toisin kuin esimerkiksi Unix connectorissa. Ennen Active Directory connectorin toimivuutta tuli varmistaa, että Windows Serverin LDAP yhteys on suojattu. LDAP protokollaa käytetään Active Directoryn tiedonsiirroissa, josta suojattu protokolla on LDAPS. LDAP toimii portissa 389 ja LDAPS portissa 636. LDAPS suojasta varten pitää asentaa konfiguroida Active Directory Lightweight Directory Services (AD LDS) sekä luoda sertifikaatti Certification Authority roolin avulla. 
 
@@ -2878,7 +2881,7 @@ Kuva 105: Connection OK.
  
 <br>
  
-<h5 id="ldap-connector">LDAP-connector</h5>
+<h5 id="ldap-connector">4.3.2.2. LDAP-connector</h5>
  
 LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin käyttöliittymässä pääkäyttäjätunnuksilla:
  
@@ -2964,7 +2967,7 @@ LDAP-palvelimen liittäminen midPointtiin onnistui seuraavanlaisesti midpointin 
  
 <br>
 
-<h5 id="unix-connector">Unix-connector</h5>
+<h5 id="unix-connector">4.3.2.3. Unix-connector</h5>
  
 Seuraavaksi aloimme asentamaan ja määrittämään Unix-connectoria TESTIPALVELIN -testipalvelimen liittäistä varten.
 
@@ -3027,7 +3030,7 @@ Yhteys toimi!
  
 <br>
  
-<h4 id="suojatun-web-yhteyden-maaritys-https3">Suojatun web-yhteyden määritys (https)</h4>
+<h4 id="suojatun-web-yhteyden-maaritys-https3">4.3.3. Suojatun web-yhteyden määritys (https)</h4>
 
 Suojattua yhteyttä tarvitaan, jotta midPointin tietojen eheys ja luottamuksellisuus pysyy turvassa käyttäjän ja sivuston eli midPointin välillä. Otimme HTTPS suojauksen käyttöön midPoint palvelimella, jotta midPointin käyttöliittymä on suojattu. Suojauksen huomaa selaimella siitä, että selain käyttää https:// yhteyttä osoitepalkissa.
 
@@ -3208,13 +3211,13 @@ Uudelleenohjaus toimi. Selain uudelleenohjasi suojattuun midPointin kirjautumisr
  
 <br>
  
-<h4 id="roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</h4>
+<h4 id="roolien-seka-muiden-objektien-lisaaminen">4.3.4. Roolien sekä muiden objektien lisääminen</h4>
  
 Nyt kun midPointin sekä kohdejärjestelmien välinen yhteys toimii, pitää meidän seuraavaksi määritellä midPointtiin roolit sekä muut tarvittavat objektit, joiden ansiosta provisiointi eli muutoksien ajaminen midPointista kohdejärjestelmiin onnistuu.
  
 <br>
  
-<h5 id="openldap">OpenLDAP</h5>
+<h5 id="openldap">4.3.4.1. OpenLDAP</h5>
  
 Jouduimme tuomaan midPointtiin seuraavat tiedostot (nämä löytyvät myös meidän GitHub -sivuilta):
 
@@ -3369,7 +3372,7 @@ Painoimme lopuksi "Preview changes" ja sitten "Save". Ryhmä oli luotu.
 
 <br>
 
-<h5 id="unix">Unix (Unix -connector)</h5>
+<h5 id="unix">4.3.4.2. Unix (Unix -connector)</h5>
  
 Toimme ensiksi roolin, jonka avulla voimme myöhemmin tehdä roolit pää- ja peruskäyttäjiä varten.
  
@@ -3438,7 +3441,7 @@ Lisättiin ryhmä "Assignemnt & Inducement UNIX Group Metarole" -ryhmä painamal
  
 <br>
 
-<h2 id="testaus">Testaus</h2>
+<h2 id="testaus">5. Testaus</h2>
  
 Aloitimme testaamisen luomalla ensimmäiseksi käyttäjätunnuksen, sekä henkilökohtaisen käyttäjäryhmän midPointtiin. Tämän jälkeen liitimme sen aiemmin luotuihin connectoreiden rooleihin. Tämän jälkeen kokeilimme kirjautumista kohdejärjestelmiin.
 
@@ -3448,7 +3451,7 @@ Kirjauduimme sisään midPointtiin verkkoselaimen kautta pääkäyttäjän tunnu
  
 <br>
  
-<h3 id="kayttajien-luonti-midpointtiin">Käyttäjien luonti midPointtiin</h3>
+<h3 id="kayttajien-luonti-midpointtiin">5.1. Käyttäjien luonti midPointtiin</h3>
  
 Käyttäjät luotiin midPointtiin seuraavalaisesti:
  
@@ -3570,7 +3573,7 @@ Options
 
 <br>
  
-<h3 id="kayttajan-liittaminen-active-directoryn-kayttajaksi">Käyttäjän liittäminen Active Directoryn käyttäjäksi</h3>
+<h3 id="kayttajan-liittaminen-active-directoryn-kayttajaksi">5.2. Käyttäjän liittäminen Active Directoryn käyttäjäksi</h3>
 
 Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seuraavanlaisesti:
  
@@ -3611,7 +3614,7 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 Matti Nieminen liitettiin samalla tavalla Active Directoryyn.
  <br>
 
-<h3 id="kayttajan-liittaminen-testipalvelin-palvelimeen-unix-connector">Käyttäjän liittäminen TESTIPALVELIN -palvelimeen (Unix Connector)</h3>
+<h3 id="kayttajan-liittaminen-testipalvelin-palvelimeen-unix-connector">5.3. Käyttäjän liittäminen TESTIPALVELIN -palvelimeen (Unix Connector)</h3>
  
 Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen pääkäyttäjäksi ja Matti Niemisen seuraavanlaisesti:
  
@@ -3643,7 +3646,7 @@ Matti Nieminen lisättiin peruskäyttäjäksi samalla tavalla paitsi kohdassa 5 
  
 <br>
  
-<h3 id="kayttajan-liittaminen-openldapn-kayttajaksi">Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</h3>
+<h3 id="kayttajan-liittaminen-openldapn-kayttajaksi">5.4. Käyttäjän liittäminen OpenLDAP:n käyttäjäksi</h3>
  
 Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
  
@@ -3767,7 +3770,7 @@ Kohta 15:ssa Matti liitettiin ryhmään "mattinieminen".
 
 <br>
 
-<h3 id="kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">Käyttäjän käyttöoikeudet midPointin käyttöliittymään</h3>
+<h3 id="kayttajan-kayttooikeudet-midpointin-kayttoliittymaan">5.5. Käyttäjän käyttöoikeudet midPointin käyttöliittymään</h3>
  
 Määritimme Ulalle ja Matille oikeudet midPointin käyttöliittymän osalta. Emme haluneet heistä pääkäyttäjiä siihen, koska silloin kummatkin pystyisivät hallitsemaan myös muita käyttäjiä. Teimme heistä sen sijaan loppukäyttäjän (End user). Tällöin kummatkin pääsevät ainoastaan vaihtamaan salasanan, jättämään pääkäyttäjälle pyynnön saada käyttö-oikeus tiettyyn järjestelmän sekä näkemään kumpiekin tämän hetkiset oikeudet järjestelmiin ilman mahdollisuutta muokata niitä.
 
@@ -3793,7 +3796,7 @@ Teimme tämän seuraavanlaisesti:
      
 <br>
 
-<h3 id="havaintoja-testauksesta">Havaintoja testauksesta</h3>
+<h3 id="havaintoja-testauksesta">5.6. Havaintoja testauksesta</h3>
  
 Kaikkiin haluttuihin järjestelmiin pääsi kirjautumaan sisälle määritellyillä oikeuksilla lukuun ottamatta Active Directory. Siinä emme kerenneet aikataulullisista syistä tekemään roolia, joka tekee järjestelmänvalvojan tunnukset joten AD:lle määrittyy ainoastaan käyttäjä perusoikeuksilla. 
 
@@ -3811,13 +3814,13 @@ Jäädyttämisen jälkeen kirjautuminen TESTIPALVELIN -palvelimeen ja TESTIPC1:s
  
 <br>
 
-<h3 id="lokitus">Lokitus</h3>
+<h3 id="lokitus">6. Lokitus</h3>
  
 Seuraavaksi tutkimme midPointin lokitusta.
  
 <br>
 
-<h4 id="eclipse-midPoint-log-viewer">Log Viewer</h4>
+<h4 id="eclipse-midPoint-log-viewer">6.1. Log Viewer</h4>
 
 MidPoint on kehittänyt työkalun nimeltä <a href="https://wiki.evolveum.com/display/midPoint/Log+Viewer">"Log Viewer"</a>, jolla pystyy helposti tutkimaan suuria lokitiedostoja. Log Viewer on Eclipse plugini, joka näyttää loki tiedostot hyvin järjestettynä, käyttämällä Eclipse "Outline" ja "Problems" näkymiä.
 
@@ -3825,7 +3828,7 @@ Eclipse midPoint Log Viewerin ominaisuuksiin kuuluu mm. "Showing log outline", "
  
 <br>
 
-<h4 id="audit-log-viewer">Audit Log Viewer</h4>
+<h4 id="audit-log-viewer">6.2. Audit Log Viewer</h4>
 
 ![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer1.PNG?raw=true)
 <br>
@@ -3847,7 +3850,7 @@ Lokeista näkyy mm. käyttäjien luonnit/poistamiset, roolien lisäykset, tehtä
  
 <br>
  
-<h3 id="yhteenveto">Yhteenveto</h3>
+<h3 id="yhteenveto">7. Yhteenveto</h3>
 
 Projekti oli mielestämme haastava omiin taitotasoihimme nähden. Opimme paljon IdM-järjestelmän toiminnallisuuksista ja sen toteutuksesta. IdM-järjestelmät ennen projektia olivat tuttuja vain pintapuolisesta aiemman työkokemuksen kautta muutamalle projektiryhmän jäsenelle. Jokainen projektiryhmän jäsen käytti projektin tekoon noin 170 tuntia. Projektin suunnittelua ei otettu huomioon. Projekti lähti vauhdikkaasti liikkeelle aluksi eri avoimen lähdekoodin IdM-järjestelmien vertailuissa. Kun saimme valittua parhaimman IdM-järjestelmän eli midPointin vertailujen perusteella, niin projektin tahti hidastui. IdM-järjestelmän toteutuksessa ja connectoreiden liittämisessä midPoint järjestelmään tuotti lukuisia ongelmia. Osasyynä tähän oli muun muassa midPointin kehittäjän dokumentaation laadun sekä ajantasaisuuden puute. Ongelmatilanteisiin saimme apua etsimällä tietoa Internetistä sekä jossakin määrin midPointin postituslistalta. Emme mielestämme ehtineet saada kaikkea irti midPoint IdM-järjestelmästä, mitä olimme suunnitelleet, koska suuri osa ajasta kului ongelmien ratkaisemiseen. Esimerkiksi Active Directory connector ei toimi vieläkään odotetulla tavalla, mutta toimii kuitenkin riittävissä määrin. On vaikea sanoa, jos olisimme valinneet toisen IdM-järjestelmä midPointin sijaan, niin olisiko toteutus ollut vaivattomampaa. Projektin alkuvaiheessa kokeilimme rinnakkain midPoint ja Apache Syncope IdM-järjestelmiä, mutta päädyimme lopulta midPoint IdM-järjestelmää, koska se tuki enemmän ominaisuuksia. Apache Syncope vaikutti jossakin määrin helpommalta toteuttaa, mutta ilman ongelmia ei olisi siitäkään selvitty.
 
@@ -3860,7 +3863,7 @@ Kuva 137: Järjestelmäkartta projektista.
 <br>
 
  
-<h3 id="lahteet">Lähteet</h3>
+<h3 id="lahteet">8. Lähteet</h3>
  
 Ask Ubuntu. 2016. How to find path to java?. Luettavissa: <a href="https://askubuntu.com/questions/772235/how-to-find-path-to-java">https://askubuntu.com/questions/772235/how-to-find-path-to-java</a>. Luettu: 29.10.2018
 
