@@ -97,8 +97,7 @@ vertailla niiden ominaisuuksia sekä laatua. Laatua päästiin kokeilemaan esime
 
 Projektimme tehtävänä oli vertaa avoimen lähdekoodin Identiteetinhallintajärjestelmiä, joista valitsemme parhaan ja testata sen toimivuutta testiympäristössä.
 
-Asetimme projektille seuraavat tavoitteet:
- 
+Asetimme projektille seuraavat tavoitteet: 
 - IdM-järjestelmä on toimiva ja luotettava. Testaamme järjestelmää testiympäristössä.
 Lopputuloksena on asennettu IdM-järjestelmän Master-kone
 sekä muutamat testikoneet.
@@ -108,8 +107,7 @@ huomioon vaatimukset. Lopputuloksena vertailusta Excel-taulukko
 sekä lista ennalta määritellyistä vaatimuksista.
  
 <br> 
-Asetimme myös seuraavia oppimistavoitteita:
- 
+Asetimme myös seuraavia oppimistavoitteita: 
 - Oppia IdM-järjestelmistä sekä niiden yhteyksistä muihin järjestelmiin
 ja rajapintoihin.
 - Kuinka asennetaan IdM-järjestelmä ja kuinka se saadaan käyttövalmiiksi.
@@ -150,9 +148,13 @@ Maksuttomia, avoimen lähdekoodin IdM-järjestelmiä tarjoaa muun muassa seuraav
 | ForgeRock | OpenIDM | https://www.forgerock.com/platform/identity-management |
 <br>
 Lisää avoimen lähdekoodin IdM-järjestelmistä sekä niiden vertailusta löytyy Kappaleesta 3: <a href="#idm-jarjestelmien-vertailu">"IdM-järjestelmien vertailu"</a> .
+ 
 <br>
+ 
 Monissa avoimen lähdekoodin järjestelmistä on myös tarjolla myös maksullisia vaihtoehtoja, joiden tarkoitus on yleensä tuoda kyseiseen IdM-järjestelmään enemmän ominaisuuksia sekä reaaliaikaisen teknisen tuen.
-
+ 
+<br>
+ 
 Tässä projektissa keskitymme ainoastaan niihin IdM-järjestelmiin, jotka eivät maksa mitään ja joiden lähdekoodi on vapasti saatavilla.
 
 
