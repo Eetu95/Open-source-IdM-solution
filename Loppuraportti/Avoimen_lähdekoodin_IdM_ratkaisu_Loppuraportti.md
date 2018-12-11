@@ -3031,7 +3031,7 @@ Yhteys toimi!
  
 <br>
 
-<h5 id="csv-connector">CSV-connector</h5>
+<h5 id="csv-connector">4.3.2.4.CSV-connector</h5>
 
 CSV-connectorin avulla voidaan lisätä paljon käyttäjiä nopeasti midPoint IdM-järjestelmän piiriin. CSV connector lisättiin midPointiin XML-tiedoston avulla. MidPointin GitHubista hain CSV-connectorin XML-tiedoston ja kopioin sen leikepöydälle: https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/resource-csv-hr.xml
 Seuraavaksi liitin kopioidun midPointin käyttöliittymään. klikattiin Import object - Embedded editor, johon sitten liitettiin XML-tiedoston sisältö. Kun XML-tiedosto oli liitetty tekstikenttään, klikattiin Import object.
