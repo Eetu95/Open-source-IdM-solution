@@ -59,6 +59,7 @@ Päivämäärä: 28.11.2018
                 <span>4.3.2.1. </span><a href="#active-directory-connector">Active Directory connector</a><br>
                 <span>4.3.2.2. </span><a href="#ldap-connector">LDAP-connector</a><br>
                 <span>4.3.2.3. </span><a href="#unix-connector">Unix-connector</a><br>
+		<span>4.3.2.4. </span><a href="#csv-connector">CSV-connector</a><br>
           </ol>
           <span>4.3.3. </span><a href="#suojatun-web-yhteyden-maaritys-https3">Suojatun yhteyden määritys (https)</a><br>
           <span>4.3.4. </span><a href="#roolien-seka-muiden-objektien-lisaaminen">Roolien sekä muiden objektien lisääminen</a><br>
@@ -3029,6 +3030,68 @@ Kuva 115: Unix -connectorin yhetyden testaus.
 Yhteys toimi!
  
 <br>
+
+<h5 id="csv-connector">CSV-connector</h5>
+
+CSV-connectorin avulla voidaan lisätä paljon käyttäjiä nopeasti midPoint IdM-järjestelmän piiriin. CSV connector lisättiin midPointiin XML-tiedoston avulla. MidPointin GitHubista hain CSV-connectorin XML-tiedoston ja kopioin sen leikepöydälle: https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/resource-csv-hr.xml
+Seuraavaksi liitin kopioidun midPointin käyttöliittymään. klikattiin Import object - Embedded editor, johon sitten liitettiin XML-tiedoston sisältö. Kun XML-tiedosto oli liitetty tekstikenttään, klikattiin Import object.
+Resources kohdasta näkyy nyt, että CSV-connector on lisätty, nimi on HR System. Tämän jälkeen haettiin esimerkki CSV-tiedosto midPoint palvelimelle (MIDPOINTIDM), midPointin kotikansioon.
+ 1. Otettiin SSH-yhteys MIDPOINTIDM palvelimelle.
+ 2. Mentiin midPointin kotikansioon: 
+ 
+```
+$ cd /opt/midpoint/var
+```
+
+ 3. Haettiin esimerkki CSV-tiedosto wget-komennolla:
+ 
+```
+$ sudo wget https://raw.githubusercontent.com/Evolveum/midpoint/master/samples/book/2/hr.csv
+```
+
+ 4. Kopioitiin tiedostopolku, johon CSV-tiedosto vietiin:
+ 
+```
+$ pwd
+ /opt/midpoint/var
+```
+
+ 5. Muokattiin HR System resurssia midPointin käyttöliittymässä. Mentiin kohtaan Recourses - HR System - Edit configuration.
+ 6. Edit configutration kohdasta muutettiin tiedostopolku (File Path):
+ 
+ ```
+/opt/midpoint/var
+```
+
+ ![HR Sytem konfiguraatio](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_configuration.PNG?raw=true)
+<br>
+Kuva 116: HR System konfiguraatio.
+<br>
+
+ 7. Tallennettiin konfiguraatio ja testattiin yhteys. Klikattiiin Save and Test Connection. Tämän jälkeen klikattiin Finish.
+ ![HR System yhteys ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_connection_ok.PNG?raw=true)
+<br>
+Kuva 117: HR System yhteys ok.
+<br>
+ 
+ 8. HR System resurssin välilehdeltä Accounts - Repository päästään lisämään käyttäjiä CSV-tiedostosta midPointin käyttöliittymään. Klikattiin esimerkkikäyttäjän asetuksia ja valittiin Import.
+ ![HR System import](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_import.PNG?raw=true)
+<br>
+Kuva 118: HR System import.
+<br>
+ 
+ 9. Importtauksen jälkeen tuli ilmoitus onnistuneesta viedystä käyttäjästä. Kyseinen käyttäjä muuttui myös LINKED tilaan.
+ ![HR System import ok](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_import_ok.PNG?raw=true)
+ <br>
+Kuva 119: HR System import ok.
+<br>
+ 
+ 10. Importattu käyttäjä näkyy nyt midPointin Users -kohdassa.
+ ![HR uusi käyttäjä](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/HR/hr_user.PNG?raw=true)
+<br>
+Kuva 120: HR uusi käyttäjä.
+<br>
+ 
  
 <h4 id="suojatun-web-yhteyden-maaritys-https3">4.3.3. Suojatun web-yhteyden määritys (https)</h4>
 
@@ -3056,7 +3119,7 @@ Komennon antamisen jälkeen painoimme Enter. Moduuli meni päälle.
 ```
 sudo service apache2 restart
 ```
-4. Luodaan uusi sijainti itseallekitjoitetulle sertifikaatille:
+4. Luodaan uusi sijainti itseallekirjoitetulle sertifikaatille:
 ```
 sudo mkdir /etc/apache2/ssl
 ```
@@ -3194,7 +3257,7 @@ https://*palvelimen IP-osoite*
 Tällöin tuli herja siitä, että sertifikaatti ei ole luotettava. Tämä johtuu siitä, koska sertifikaatti on itse allekirjoitettu eikä hankittu valtuutetulta taholta. Ohitettiin herja Chromessa vain klikkaamalla Advanced ja ``` Proceed to https://*palvelimen IP-osoite*```
 ![https Chrome](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/chrome_https.PNG?raw=true)
 <br>
-Kuva 116: Sertifikaattivaroitus (Chrome)
+Kuva 121: Sertifikaattivaroitus (Chrome)
 <br>
 <br>
 
@@ -3204,7 +3267,7 @@ Selain uudelleenohjasi suojattuun sivustoon: ```https://*palvelimen IP-osoite*``
 Avautui midPointin kirjautumisruutu.
 ![midPoint kirjautumisruutu](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/midPoint_kirjautumisruutu.PNG?raw=true)
 <br>
-Kuva 117: midPointin kirjautumisruutu.
+Kuva 122: midPointin kirjautumisruutu.
 <br>
 <br>
 Uudelleenohjaus toimi. Selain uudelleenohjasi suojattuun midPointin kirjautumisruutuun. Myöskin aiempi tapa miten midPointin käyttöliittymään kirjaudutaan ei enää toimi. Eli ```http://*palvelimen IP-osoite*:8080/midpoint/``` ei enää toimi.
@@ -3481,7 +3544,7 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
      
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(2).png)
     <br>
-    Kuva 118: Ruudunkaappaus määrityksistä (1/2).
+    Kuva 123: Ruudunkaappaus määrityksistä (1/2).
     <br>
     <br>
      
@@ -3508,7 +3571,7 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(3).png)
     <br>
-    Kuva 119: Ruudunkaappaus määrityksistä (2/2).
+    Kuva 124: Ruudunkaappaus määrityksistä (2/2).
     <br>
     <br>
 
@@ -3516,14 +3579,14 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(4).png)
     <br>
-    Kuva 120: Ruudunkaappaus esikatselusta (1/2).
+    Kuva 125: Ruudunkaappaus esikatselusta (1/2).
     <br>
     <br>
     Lopuksi painettiin sivun alhaalta "Save".
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(5).png)
     <br>
-    Kuva 121: Ruudunkaappaus esikatselusta (2/2).
+    Kuva 126: Ruudunkaappaus esikatselusta (2/2).
     <br>
     <br>
  
@@ -3531,7 +3594,7 @@ Käyttäjät luotiin midPointtiin seuraavalaisesti:
  
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(6).png)
     <br>
-    Kuva 122: Ruudunkaappaus ilmoituksesta.
+    Kuva 127: Ruudunkaappaus ilmoituksesta.
     <br>
     <br> 
 
@@ -3583,7 +3646,7 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
     <br>
-    Kuva 123: Ruudunkaappaus listauksesta.
+    Kuva 128: Ruudunkaappaus listauksesta.
     <br>
     <br> 
 
@@ -3591,7 +3654,7 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(8).png)
     <br>
-    Kuva 124: Ruudunkaappaus.
+    Kuva 129: Ruudunkaappaus.
     <br>
     <br> 
  
@@ -3599,7 +3662,7 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(9).png)
     <br>
-    Kuva 125: Ruudunkaappaus listauksesta.
+    Kuva 130: Ruudunkaappaus listauksesta.
     <br>
     <br> 
  
@@ -3607,7 +3670,7 @@ Uusi käyttäjä "Ulla Nieminen" liitettiin Active Directoryn käyttäjäksi seu
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 126: Ruudunkaappaus kohdasta.
+    Kuva 131: Ruudunkaappaus kohdasta.
     <br>
     <br> 
 
@@ -3624,7 +3687,7 @@ Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen pääkäyttäjäksi ja Matti Ni
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
     <br>
-    Kuva 127: Ruudunkaappaus listauksesta.
+    Kuva 132: Ruudunkaappaus listauksesta.
     <br>
     <br> 
  
@@ -3638,7 +3701,7 @@ Liitimme Ulla Niemisen TESTIPALVELIN -palvelimen pääkäyttäjäksi ja Matti Ni
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 128: Ruudunkaappaus kohdasta.
+    Kuva 133: Ruudunkaappaus kohdasta.
     <br>
     <br> 
 
@@ -3656,7 +3719,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
     <br>
-    Kuva 129: Ruudunkaappaus listauksesta.
+    Kuva 134: Ruudunkaappaus listauksesta.
     <br>
     <br> 
  
@@ -3670,7 +3733,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 130: Ruudunkaappaus kohdasta.
+    Kuva 135: Ruudunkaappaus kohdasta.
     <br>
     <br> 
  
@@ -3721,7 +3784,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(7).png)
     <br>
-    Kuva 131: Ruudunkaappaus listasta.
+    Kuva 136: Ruudunkaappaus listasta.
     <br>
     <br> 
  
@@ -3735,7 +3798,7 @@ Liitimme Ulla Niemisen OpenLDAP:n käyttäjäksi seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 132: Ruudunkaappaus kohdasta.
+    Kuva 137: Ruudunkaappaus kohdasta.
     <br>
     <br> 
 
@@ -3790,7 +3853,7 @@ Teimme tämän seuraavanlaisesti:
 
     ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(10).png)
     <br>
-    Kuva 133: Ruudunkaappaus kohdasta.
+    Kuva 138: Ruudunkaappaus kohdasta.
     <br>
     <br> 
      
@@ -3806,7 +3869,7 @@ Kokeilimme käyttäjätunnuksen jäädytyksen vaikutuksia kohdejärjestelmin kir
 
 ![](https://raw.githubusercontent.com/Eetu95/Open-source-IdM-solution/master/Kuvat/Testaus/Screenshot%20(11).png)
 <br>
-Kuva 134: Ruudunkaappaus listasta.
+Kuva 139: Ruudunkaappaus listasta.
 <br>
 <br> 
  
@@ -3832,7 +3895,7 @@ Eclipse midPoint Log Viewerin ominaisuuksiin kuuluu mm. "Showing log outline", "
 
 ![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer1.PNG?raw=true)
 <br>
-Kuva 135: Audit Log Viewer.
+Kuva 140: Audit Log Viewer.
 <br>
 <br>
 
@@ -3840,7 +3903,7 @@ MidPointista löytyy "Audit Log Viewer" -näkymä, jossa näkee kaikki midPointi
 
 ![Audit Log Viewer](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint%20lokit/Audit_Log_Viewer2.PNG?raw=true)
 <br>
-Kuva 136: Audit Log Viewer.
+Kuva 141: Audit Log Viewer.
 <br>
 <br>
 
@@ -3858,7 +3921,7 @@ Projektia varten Haaga-Helia tarjosi meille fyysiset palvelinkoneet Servulasta, 
 
 ![Järjestelmäkartta](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/midPoint/J%C3%A4rjestelm%C3%A4kartta.jpg?raw=true)
 <br>
-Kuva 137: Järjestelmäkartta projektista.
+Kuva 142: Järjestelmäkartta projektista.
 <br>
 <br>
 
