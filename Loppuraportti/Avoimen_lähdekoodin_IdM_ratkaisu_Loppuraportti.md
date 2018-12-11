@@ -106,8 +106,8 @@ sekä muutamat testikoneet.
 huomioon vaatimukset. Lopputuloksena vertailusta Excel-taulukko
 sekä lista ennalta määritellyistä vaatimuksista.
  
-<br> 
-Asetimme myös seuraavia oppimistavoitteita: 
+ 
+Asetimme myös seuraavia oppimistavoitteita:  
 - Oppia IdM-järjestelmistä sekä niiden yhteyksistä muihin järjestelmiin
 ja rajapintoihin.
 - Kuinka asennetaan IdM-järjestelmä ja kuinka se saadaan käyttövalmiiksi.
