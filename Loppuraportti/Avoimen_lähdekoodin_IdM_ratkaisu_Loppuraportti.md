@@ -3023,7 +3023,7 @@ Sitten katsoimme asentuiko unix-connector oikein. Resource â†’ List Resources â†
 
 ![unix-connector-test-connection](https://github.com/Eetu95/Open-source-IdM-solution/blob/master/Kuvat/Unix-connector/Unix-connector-test-connection.PNG?raw=true)
 <br>
-Kuva 115: Unix -connectorin yhetyden testaus.
+Kuva 115: Unix -connectorin yhteyden testaus.
 <br>
 <br>
 
